@@ -71,13 +71,39 @@ class Sanitize
 	 *
 	 * Remove all characters except digits, plus and minus sign.
      *
-     * @param string $input
+     * @param mixed $input
      *
-     * @return string
+     * @return int
      */
     public static function int( $input )
     {
         return absint( filter_var( $input, FILTER_SANITIZE_NUMBER_INT ) );
+    }
+
+    /**
+     * Sanitize float number
+     *
+     * Remove all characters except digits, decimal point
+     *
+     * @param mixed $input
+     *
+     * @return float|null
+     */
+    public static function float( $input ) {
+        // Remove any non-numeric characters except for a single decimal point
+        $sanitized = preg_replace('/[^0-9.-]/', '', $input );
+
+        // Keep only one decimal point
+        $sanitized = preg_replace('/(\..*)\./', '$1', $sanitized );
+
+        // Convert to float
+        $floatValue = (float) $sanitized;
+
+        // Check if the conversion was successful
+        if ( is_numeric($sanitized) && $floatValue == $sanitized ) {
+            return $floatValue;
+        }
+        return null;
     }
 
     /**

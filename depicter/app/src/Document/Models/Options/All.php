@@ -12,6 +12,11 @@ class All
 	public $sectionLayout;
 
 	/**
+	 * @var bool|null
+	 */
+	public $stretch;
+
+	/**
 	 * @var object
 	 */
 	public $sectionTransition;

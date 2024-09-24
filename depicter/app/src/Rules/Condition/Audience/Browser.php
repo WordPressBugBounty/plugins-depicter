@@ -92,7 +92,7 @@ class Browser extends ConditionBase
 		$value = $value ?? $this->value;
 		$isIncluded = empty( $value );
 		if ( ! $isIncluded ) {
-			$userAgent = $_SERVER['HTTP_USER_AGENT'];
+			$userAgent = ! empty( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : '';
 			$browser = new BrowserDetection();
 			foreach( $value as $device ) {
 				$isIncluded = strtolower( $device ) == strtolower( $browser->getBrowser( $userAgent )['browser_name'] );

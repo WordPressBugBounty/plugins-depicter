@@ -52,7 +52,7 @@ class ImportService
 			$sliderID = $this->importSlider( $importedAssetIDs, $depicterUploadPath );
 
 			if ( $file instanceof UploadedFile ) {
-				unlink( $uploadedZipFilePath );
+				wp_delete_file( $uploadedZipFilePath );
 			}
 			$fileSystem->rmdir( $depicterUploadPath . $this->importFolderName, true );
 
@@ -126,7 +126,7 @@ class ImportService
 	 * @throws \Exception
 	 */
 	protected function importSlider( $importedIDs, $uploadPath ) {
-		$data = file_get_contents( $uploadPath . $this->importFolderName . '/data.json' );
+		$data = \Depicter::storage()->filesystem()->read( $uploadPath . $this->importFolderName . '/data.json' );
 		$dataArray = JSON::decode( $data, true );
 		$oldUploadURL = '';
 		$jsonAssets = "";

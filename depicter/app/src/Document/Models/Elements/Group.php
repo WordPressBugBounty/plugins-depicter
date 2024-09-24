@@ -38,6 +38,7 @@ class Group extends Models\Element
 		parent::getSelectorAndCssList();
 
 		foreach ( $this->childrenObjects as $element ) {
+			$element->isChild = true;
 			$this->selectorCssList = Arr::merge( $this->selectorCssList, $element->prepare()->getSelectorAndCssList() );
 		}
 

@@ -99,6 +99,16 @@ class ServiceProvider implements ServiceProviderInterface
 			return new GeoLocateService();
 		};
 		$app->alias( 'geoLocate', 'depicter.geo.locate.service' );
+
+		$container[ 'depicter.lead.service' ] = function () {
+			return new LeadService();
+		};
+		$app->alias( 'lead', 'depicter.lead.service' );
+
+		$container[ 'depicter.google.recaptcha' ] = function () {
+			return new GoogleRecaptchaV3();
+		};
+		$app->alias( 'recaptcha', 'depicter.google.recaptcha' );
 	}
 
 	/**

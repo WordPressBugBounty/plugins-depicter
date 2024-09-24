@@ -17,10 +17,17 @@ class Meta extends Model
 	 *
 	 * @var array
 	 */
-	protected $builtin = [ 'relation',
+	protected $builtin = [
+		'relation',
 		'relation_id',
 		'meta_key',
-		'meta_value' ];
+		'meta_value'
+	];
 
 	protected $guard = [ 'id' ];
+
+	public function document()
+    {
+        return $this->belongsTo(Document::class, 'relation_id', 'id');
+    }
 }

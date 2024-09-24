@@ -167,7 +167,8 @@ class AIWizardController {
 			}
 
 			if ( !empty( $result->image ) ) {
-				$previewImage = file_get_contents( $result->image );
+				$imageRequest = wp_remote_get( $result->image );
+				$previewImage = wp_remote_retrieve_body( $imageRequest );
 				\Depicter::storage()->filesystem()->write( \Depicter::documentRepository()->getPreviewImagePath( $document->getID() ) , $previewImage );
 			}
 

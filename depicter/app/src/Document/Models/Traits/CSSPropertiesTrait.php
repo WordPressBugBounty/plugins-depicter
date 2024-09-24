@@ -113,6 +113,56 @@ trait CSSPropertiesTrait
 	public $rotate;
 
 	/**
+	 * @var int|null
+	 */
+	public $rotateX;
+
+	/**
+	 * @var int|null
+	 */
+	public $rotateY;
+
+	/**
+	 * @var int|null
+	 */
+	public $rotateZ;
+
+	/**
+	 * @var object|null
+	 */
+	public $x;
+
+	/**
+	 * @var object|null
+	 */
+	public $y;
+
+	/**
+	 * @var object|null
+	 */
+	public $z;
+
+	/**
+	 * @var object|null
+	 */
+	public $strokeWidth;
+
+	/**
+	 * @var object|null
+	 */
+	public $perspective;
+
+	/**
+	 * @var string|null
+	 */
+	public $origin;
+
+	/**
+	 * @var string|null
+	 */
+	public $preset;
+
+	/**
 	 * @var float|null
 	 */
 	public $opacity;
@@ -191,4 +241,7 @@ trait CSSPropertiesTrait
 	 * @var int|null
 	 */
 	public $flex;
+
+	public $value;
+	public $unit;
 }

@@ -117,4 +117,23 @@ class Arr
 		return null;
 	}
 
+    /**
+     * Ensures the value in $args[ $key ] is array
+     *
+     * @param array  $args
+     * @param string $key        The key of array to be checked
+     * @param mixed  $default    The default value if item was not set in the array. Pass null to skip setting a value.
+     * @param string $separator  Separator in text-separated string
+     * @return void
+     */
+    public static function ensureItemIsArray( &$args, $key, $default = null, $separator = ',' ){
+        if ( isset( $args[ $key ] ) ) {
+            if ( !is_array( $args[ $key ] ) ) {
+                $args[ $key ] = Str::toArray( $args[ $key ], $separator );
+            }
+        } elseif( ! is_null( $default ) ) {
+            $args[ $key ] = $default;
+        }
+    }
+
 }

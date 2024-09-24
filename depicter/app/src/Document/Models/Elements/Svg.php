@@ -13,7 +13,7 @@ class Svg extends Models\Element
 		if( ! empty( $this->options->content ) ){
 			$shapeContent = $this->options->content;
 		} elseif ( ! empty( $this->options->source ) && $shapeUrl = wp_get_attachment_url( $this->options->source ) ) {
-			$shapeContent = file_get_contents( $shapeUrl );
+			$shapeContent = \Depicter::storage()->filesystem()->read( $shapeUrl );
 		}
 
 		$args = $this->getDefaultAttributes();

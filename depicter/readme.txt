@@ -2,9 +2,9 @@
 Contributors: averta, averta_support, depicter1slider1support, depicter1carousel1popup1support
 Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.3.0
-Tested up to: WordPress 6.6.1
+Tested up to: WordPress 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 3.2.2
+Stable tag: 3.5.0
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,17 +69,25 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 
 == Changelog ==
 
-###3.2.2
-- *Released: 2024-08-13*
+###3.5.0
+- *Released: 2024-09-22*
 - **Added**
-- Added a new option for enabling upload of SVG and Json files.  
+**🧾 Forms**: Easily create forms and gather data from your visitors.
+**📐 Auto Layout**: Design more flexible, dynamic, and content-responsive layouts.
+**🔁 Loop Animations**: Make your elements more engaging with continuous loop animations.
+**⭐️ Icons**: Browse thousands of icons and drag them directly into your content from the assets panel.
+**📊 Leads Page**: View and export data collected from your forms directly on the dashboard’s leads page.
+**🏷️ Coupon Box Element**: Now you can effortlessly add coupon boxes to your content.
+**🔧 Shortcode Element**: Easily insert any WordPress shortcode into your content.
+- **Improved**
+- Enhanced carousel item layout for better design flow
+- **Fixed**
+- Fixed a security vulnerability.
 
 ###3.2.1
-- *Released: 2024-08-10*
-- **Improved**
-- Improved showing and editing Ken-burns effect on the slide background in the editor.
+- *Released: 2024-08-06*
 - **Fixed**
-- Fixed an issue where the background video was not playing on mobile devices.
+- Fixed an issue with Ken-burns effect.
 
 ###3.2.0
 - *Released: 2024-08-05*

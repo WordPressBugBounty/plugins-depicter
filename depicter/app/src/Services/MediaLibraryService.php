@@ -53,7 +53,7 @@ class MediaLibraryService
 				];
 
 				if ( $mimType == 'image/svg+xml' ) {
-					$fileContent = @file_get_contents(get_attached_file( $attachment->ID ));
+					$fileContent = Depicter::storage()->filesystem()->read( get_attached_file( $attachment->ID ) );
 					if( empty( trim( $fileContent ) ) ){
 						continue;
 					}

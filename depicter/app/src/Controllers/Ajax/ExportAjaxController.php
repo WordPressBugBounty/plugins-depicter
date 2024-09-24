@@ -1,6 +1,7 @@
 <?php
 namespace Depicter\Controllers\Ajax;
 
+use Averta\WordPress\File\FileSystem;
 use Depicter\Utility\Sanitize;
 use WPEmerge\Requests\RequestInterface;
 
@@ -38,7 +39,7 @@ class ExportAjaxController
 			    header('Cache-Control: must-revalidate');
 			    header('Pragma: public');
 			    header('Content-Length: ' . filesize($zip));
-			    readfile($zip);
+				echo \Depicter::storage()->filesystem()->read($zip);
 				exit;
 			}
 

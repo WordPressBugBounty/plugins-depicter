@@ -186,13 +186,15 @@ class DocumentRepository
 				throw new Exception('Revision ID does not belong to this document.');
 			}
 			// Set revision editor data for document
-			$parentDocument->save( ['content' => $lastRevision->content() ] );
+			$lastRevisionContent = \Depicter::document()->migrations()->apply( $lastRevision->content() );
+			$parentDocument->save( ['content' => $lastRevisionContent ] );
 
 		} else {
 			throw new Exception("Couldn't revert to the revision. No revision found for this checkpoint.");
 		}
 
-		return $lastRevision;
+		$hits = Arr::camelizeKeys( $lastRevision->getApiProperties(), '_' );
+		return [ "hits" => $hits ];
 	}
 
 	/**
@@ -234,10 +236,20 @@ class DocumentRepository
 	{
 		$columnsName = !empty( $fields ) ? $fields : ['id', 'name', 'slug', 'type', 'author', 'sections_count', 'created_at', 'modified_at', 'thumbnail', 'status'];
 		$numberOfPages = '';
+
+		$documents = $this->select( $columnsName );
+
+		// if 'has' filter is set. valid values for 'has': form, shortcode
+		if ( is_array( $args['has'] ) ) {
+			if( in_array( 'form', $args['has'] ) ){
+				$documents = $documents->withMeta()->whereMeta('hasForm', "1");
+			} elseif( in_array( 'shortcode', $args['has'] ) ){
+				$documents = $documents->withMeta()->whereMeta('hasShortcode', "1");
+			}
+		}
+
 		if ( !empty( $args['orderBy'] )  && !empty( $args['order'] ) ) {
-			$documents = $this->select( $columnsName )->orderBy( $args['orderBy'], $args['order'] );
-		} else {
-			$documents = $this->select( $columnsName );
+			$documents = $documents->orderBy( $args['orderBy'], $args['order'] );
 		}
 
 		if ( !empty( $args['s'] ) ) {
@@ -254,7 +266,7 @@ class DocumentRepository
 			}
 
 		} else {
-			$documents = $documents->findAll()->get();
+			$documents = $documents->get();
 		}
 
 
@@ -263,6 +275,14 @@ class DocumentRepository
 		if ( $documents && empty( $fields ) ) {
 			$uploadDir = wp_upload_dir();
 			foreach ( $documents as $key => $document ) {
+				$documents[ $key ]['has'] = [];
+				if ( Depicter::metaRepository()->get( $document['id'], 'hasForm', false ) ) {
+					$documents[ $key ]['has'][] = 'form';
+				}
+				if ( Depicter::metaRepository()->get( $document['id'], 'hasShortcode', false ) ) {
+					$documents[ $key ]['has'][] = 'shortcode';
+				}
+
 				$documents[ $key ]['publishedAt'] = $this->getLastPublishedAt( $document );
 
 				if ( is_file( $uploadDir['basedir'] . '/depicter/preview-images/' . $document['id'] . '.png' ) ) {
@@ -296,8 +316,7 @@ class DocumentRepository
 	public function select( array $fields = [] )
 	{
 		$columnsName = !empty( $fields ) ? $fields : ['id', 'name', 'slug', 'author', 'sections_count', 'created_at', 'modified_at', 'thumbnail', 'status'];
-		return $this->document()->reselect( $columnsName )
-			->where('parent', '0');
+		return $this->document()->reselect( $columnsName )->parents();
 	}
 
 	/**
@@ -437,7 +456,15 @@ class DocumentRepository
 				unset( $fields['thumbnail'] );
 			}
 
+			if ( !empty( $fields['content'] ) ) {
+				$fields['content'] = \Depicter::document()->migrations()->apply( $fields['content'] );
+			}
+
+			$metaRelationID = ! empty( $fields['parent'] ) ? $fields['parent'] : $id;
+			$fields['parent'] = 0;
+
 			$newId = $this->findOrCreate( 0, $fields );
+			Depicter::metaRepository()->duplicateAllMetaByRelationID( $metaRelationID, $newId );
 
 			return $this->document()->findById( $newId );
 		}
@@ -606,17 +633,17 @@ class DocumentRepository
 	public function defaultFields()
 	{
 		return [
-			'name'           => __('Untitled Slider'),
-			'slug'			 => '',
-			'type'           => 'slider',
-			'author'         => 0,
-			'parent'         => 0,
-			'created_at'     => $this->document->getDateTime(),
-			'sections_count' => 0,
-			'thumbnail'      => '',
-			'content' 		 => '',
-			'password' 		 => '',
-			'status'         => 'draft'
+			'name'          => __('Untitled Slider'),
+			'slug'          => '',
+			'type'          => 'slider',
+			'author'        => 0,
+			'parent'        => 0,
+			'created_at'    => $this->document->getDateTime(),
+			'sections_count'=> 0,
+			'thumbnail'     => '',
+			'content'       => '',
+			'password'      => '',
+			'status'        => 'draft'
 		];
 
 	}
@@ -772,7 +799,7 @@ class DocumentRepository
 	 *
 	 * @param int $documentId
 	 *
-	 * @return bool|Document
+	 * @return bool
 	 * @throws Exception
 	 */
 	public function isPublished( $documentId ){
@@ -803,6 +830,7 @@ class DocumentRepository
 	 * @param int $documentId
 	 *
 	 * @return string
+	 * @throws Exception
 	 */
 	public function getStatus( $documentId ) {
 		if( $document = $this->findById( $documentId ) ){
@@ -874,11 +902,11 @@ class DocumentRepository
 		try{
 			// get all main documents with conditional friendly types
 			$parents = $this->document()
-			                ->reselect(['id'])
-			                ->appendRawWhere( 'and', " `type` in ('popup', 'banner-bar')" )
-			                ->where('status', 'publish')
-			                ->where('parent', '0')
-			                ->get();
+				->reselect(['id'])
+				->appendRawWhere( 'and', " `type` in ('popup', 'banner-bar')" )
+				->where('status', 'publish')
+				->where('parent', '0')
+				->get();
 			$parents = $parents ? $parents->toArray() : [];
 
 			$parents = array_map( function( $record ){
@@ -887,11 +915,11 @@ class DocumentRepository
 
 			// get published revisions with conditional friendly types
 			$revisions = $this->document()
-			                  ->reselect(['parent'])
-			                  ->appendRawWhere( 'and', " `type` in ('popup', 'banner-bar')" )
-			                  ->where('status', 'publish')
-			                  ->where('parent', 'NOT LIKE', '0' )
-			                  ->get();
+				->reselect(['parent'])
+				->appendRawWhere( 'and', " `type` in ('popup', 'banner-bar')" )
+				->where('status', 'publish')
+				->where('parent', 'NOT LIKE', '0' )
+				->get();
 
 			$revisions = $revisions ? $revisions->toArray() : [];
 			$revisionParents = array_map( function( $record ){

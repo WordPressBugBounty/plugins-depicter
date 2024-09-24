@@ -84,7 +84,7 @@ class CuratedAPIAjaxController
 			if ( $directory == 4 ) {
 				shuffle( $result['hits'] );
 			}
-			
+
 			return \Depicter::json( $result );
 
 		} catch ( \Exception  $exception ) {
@@ -219,7 +219,8 @@ class CuratedAPIAjaxController
 					$updateData['type'] = $result->type;
 				}
 				if ( !empty( $result->image ) ) {
-					$previewImage = file_get_contents( $result->image );
+					$imageRequest = wp_remote_get( $result->image );
+					$previewImage = wp_remote_retrieve_body( $imageRequest );
 					\Depicter::storage()->filesystem()->write( \Depicter::documentRepository()->getPreviewImagePath( $document->getID() ) , $previewImage );
 				}
 

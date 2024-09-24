@@ -96,6 +96,16 @@ class Styles
 	 */
 	public $flex;
 
+	/**
+	 * @var Styles\Width
+	 */
+	public $width;
+
+	/**
+	 * @var Styles\Height
+	 */
+	public $height;
+
 
 	/**
 	 * Retrieves list of fonts used in typography options
@@ -120,6 +130,8 @@ class Styles
 	 */
 	public function getGeneralCss( $states = 'all' ) {
 		$cssModules = [
+			'width',
+			'height',
 			'filter',
 			'textShadow',
 			'opacity',
@@ -309,6 +321,26 @@ class Styles
 	 */
 	public function getBlendingModeStyle(): array{
 		return $this->generateCssForModules(['blendingMode']);
+	}
+
+	/**
+	 * Get align self flex styles
+	 *
+	 * @return array
+	 */
+	public function getFlexAlignStyle(): array{
+		$css = $this->generateCssForModules(['flex']);
+		$devices = Breakpoints::names();
+		// We implement this functionality to prevent additional flex styles defined in component elements from being applied to the frame element when the component is a child of a group element.
+		foreach ( $devices as $device ){
+			foreach( $css[ $device ] as $cssProperty => $value ){
+				if ( 'align-self' != $cssProperty ){
+					unset( $css[ $device ][ $cssProperty ] );
+				}
+			}
+		}
+
+		return $css;
 	}
 
 }

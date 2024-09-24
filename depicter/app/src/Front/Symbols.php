@@ -47,7 +47,7 @@ class Symbols
         if ( !empty( $this->symbols ) ) {
             foreach ( $this->symbols as $key => $symbolID ) {
             	if ( file_exists( DEPICTER_PLUGIN_PATH .'/resources/scripts/svg-symbols/' . $symbolID . '.svg' ) ) {
-            		$symbolsContent .= file_get_contents( DEPICTER_PLUGIN_PATH .'/resources/scripts/svg-symbols/' . $symbolID . '.svg' );
+            		$symbolsContent .= \Depicter::storage()->filesystem()->read( DEPICTER_PLUGIN_PATH .'/resources/scripts/svg-symbols/' . $symbolID . '.svg' );
 	            }
             }
 
@@ -57,7 +57,7 @@ class Symbols
 	    if ( !empty( $this->clipPathIDs ) ) {
 		    foreach ( $this->clipPathIDs as $key => $clipPathID ) {
 			    if ( file_exists( DEPICTER_PLUGIN_PATH .'/resources/scripts/svg-symbols/clipPaths/' . $clipPathID . '.svg' ) ) {
-				    $clipPathContent .= file_get_contents( DEPICTER_PLUGIN_PATH .'/resources/scripts/svg-symbols/clipPaths/' . $clipPathID . '.svg' ) . "\n";
+				    $clipPathContent .= \Depicter::storage()->filesystem()->read( DEPICTER_PLUGIN_PATH .'/resources/scripts/svg-symbols/clipPaths/' . $clipPathID . '.svg' ). "\n";
 			    }
 		    }
 

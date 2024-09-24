@@ -189,6 +189,18 @@ class Document extends Model
     }
 
 	/**
+     * Query parent or revision documents
+     *
+     * @param string $revisionOrParent Get revision or parent documents only
+     *
+     * @return $this
+     */
+    public function parents( $revisionOrParent = 0 )
+    {
+        return $this->where('parent', $revisionOrParent );
+    }
+
+	/**
 	 * Get public properties for API
 	 *
 	 * @return array
@@ -230,7 +242,41 @@ class Document extends Model
 	 * @throws \Exception
 	 */
     public function getLastPublishedAt(){
-		 return \Depicter::documentRepository()->getLastPublishedAt( $this->toArray() );
+		return \Depicter::documentRepository()->getLastPublishedAt( $this->toArray() );
 	}
 
+	/**
+	 * Joins meta table and reselects default or passed columns
+	 *
+	 * @return Document
+	 */
+	public function withMeta() {
+		global $wpdb;
+		return $this->join(
+			$wpdb->prefix . 'depicter_meta',
+			$wpdb->prefix . 'depicter_meta.relation_id',
+			$wpdb->prefix . $this->resource . '.' . $this->idColumn
+		)->where($wpdb->prefix . 'depicter_meta.relation', 'document' );
+	}
+
+	/**
+	 * Filters meta key and value
+	 *
+	 * @throws Document
+	 */
+	public function whereMeta( $metaKey, $metaValue ){
+		global $wpdb;
+		return $this
+			->where($wpdb->prefix . 'depicter_meta.meta_key', $metaKey )
+            ->where($wpdb->prefix . 'depicter_meta.meta_value', $metaValue );
+	}
+
+	/**
+	 * Retrieves related meta field models
+	 *
+	 * @return Meta|\TypeRocket\Models\Model|null
+	 */
+	public function meta(){
+        return $this->hasMany(Meta::class, 'relation_id', $this->idColumn );
+    }
 }

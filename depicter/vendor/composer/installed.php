@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'averta/core' => array(
-            'pretty_version' => '1.2.9',
-            'version' => '1.2.9.0',
-            'reference' => 'c4ca61bc373c64a87479ceaa0d2145afc3df44b8',
+            'pretty_version' => '1.2.12',
+            'version' => '1.2.12.0',
+            'reference' => '6c0decee494cc44879103e73f1d00b82cdadff4e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../averta/core',
             'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'averta/wordpress' => array(
-            'pretty_version' => '1.2.19',
-            'version' => '1.2.19.0',
-            'reference' => 'b07fe7f5bfaf01fa1134a8be4a9e2e7b3915a6b3',
+            'pretty_version' => '1.2.22',
+            'version' => '1.2.22.0',
+            'reference' => '5a870f891db2a45881b9680aa41e53334bf5be05',
             'type' => 'library',
             'install_path' => __DIR__ . '/../averta/wordpress',
             'aliases' => array(),

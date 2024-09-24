@@ -115,6 +115,28 @@ class Document implements HydratableInterface
 	 */
 	public $isBuildWithAI = false;
 
+	/**
+	 * check if document has shortcode element or not
+	 *
+	 * @var boolean
+	 */
+	protected $hasShortcodeElement = false;
+
+
+	/**
+	 * list of IDs of Form elements in the slider
+	 *
+	 * @var array
+	 */
+	protected $formIDs = [];
+
+	/**
+	 * Show if recaptcha is enabled for this document or not
+	 *
+	 * @var bool
+	 */
+	protected $isRecaptchaEnabled = false;
+
 
 	/**
 	 * Extract values for this class
@@ -294,6 +316,20 @@ class Document implements HydratableInterface
 		foreach ( $this->sections as $section ) {
 			$this->html->nest( $section->render() . "\n" );
 			$this->stylesList = array_merge( $this->stylesList, $section->getCss() );
+
+			if ( $section->hasShortcode() ) {
+				$this->hasShortcodeElement = true;
+			}
+
+			$formIDs = $section->hasForm();
+			if ( $formIDs ) {
+				foreach( $formIDs as $formID ) {
+					$this->formIDs[] = $formID['id'];
+					if ( $formID['captcha'] ) {
+						$this->isRecaptchaEnabled = true;
+					}
+				}
+			}
 		}
 	}
 
@@ -774,6 +810,32 @@ class Document implements HydratableInterface
 	 */
 	public function printInitScriptTag() {
 		echo Sanitize::html( $this->getInitScriptTag() );
+	}
+
+	/**
+	 * Check if document model has shortcode element or not
+	 *
+	 * @return boolean
+	 */
+	public function hasShortcode() {
+		return $this->hasShortcodeElement;
+	}
+
+	/**
+	 * Return form ids used in this document
+	 *
+	 * @return array
+	 */
+	public function getFormIDs(): array{
+		return $this->formIDs;
+	}
+
+	/**
+	 * Check if form
+	 * @return bool
+	 */
+	public function isRecaptchaEnabled(): bool {
+		return $this->isRecaptchaEnabled;
 	}
 
 }

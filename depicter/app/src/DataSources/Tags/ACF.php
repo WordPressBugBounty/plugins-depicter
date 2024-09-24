@@ -208,7 +208,7 @@ class ACF extends TagBase implements TagInterface {
 	 */
 	public function date( $value, array $funcArgs = [], array $args = [] ){
 		$format = $funcArgs[0] ?? '';
-		return date( $format, strtotime( $value ) );
+		return gmdate( $format, strtotime( $value ) );
 	}
 
 

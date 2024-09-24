@@ -12,7 +12,7 @@ class Date extends Models\Element
 		$args = $this->getDefaultAttributes();
 
 		$time = strtotime( $this->getContent() );
-		$args['datetime'] = date( "Y-m-d H:i:s", $time );
+		$args['datetime'] = gmdate( "Y-m-d H:i:s", $time );
 		$args['data-use-relative'] = !empty( $this->options->date->useRelative ) ? 'true' : 'false';
 		$args['data-display-time'] = !empty( $this->options->date->displayTime ) ? 'true' : 'false';
 
@@ -20,7 +20,7 @@ class Date extends Models\Element
 			$args['data-format-style'] = $this->options->date->formatStyle;
 		}
 
-		$content = date( 'F d, Y', $time );
+		$content = gmdate( 'F d, Y', $time );
 		$output =  Html::time( $args, $content );
 		return $output . "\n";
 	}

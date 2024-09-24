@@ -13,14 +13,14 @@ class Products extends Posts implements DataSourceInterface {
 	 *
 	 * @var string
 	 */
-	protected $type = 'wooProducts';
+	protected string $type = 'wooProducts';
 
 	/**
 	 * DataSource properties
 	 *
 	 * @var array
 	 */
-	protected $properties = [
+	protected array $properties = [
 		'type'     => 'wooProducts',
 		'postType' => 'product'
 	];
@@ -30,7 +30,7 @@ class Products extends Posts implements DataSourceInterface {
 	 *
 	 * @var array
 	 */
-	protected $defaultInputParams = [
+	protected array $defaultInputParams = [
 		'postType' => 'product',
 		'perpage' => 5,
 		'excerptLength' => 100,
@@ -60,7 +60,7 @@ class Products extends Posts implements DataSourceInterface {
 	 *
 	 * @var array
 	 */
-	protected $assetGroupNames = [ 'post', 'product', 'taxonomy', 'acf', 'metaboxio' ];
+	protected array $assetGroupNames = [ 'post', 'product', 'taxonomy', 'acf', 'metaboxio' ];
 
     /**
 	 * Retrieves the list of records based on query params

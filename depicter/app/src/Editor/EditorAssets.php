@@ -1,7 +1,6 @@
 <?php
 namespace Depicter\Editor;
 
-use Averta\Core\Utility\Arr;
 use Averta\Core\Utility\Data;
 use Averta\WordPress\Utility\Escape;
 use Averta\WordPress\Utility\JSON;
@@ -46,7 +45,7 @@ class EditorAssets
 		);
 
 		$currentUser = wp_get_current_user();
-		$documentID = Data::cast( Sanitize::key( $_GET['document'] ), 'int' );
+		$documentID = ! empty( $_GET['document'] ) ? Data::cast( Sanitize::key( wp_unslash( $_GET['document'] ) ), 'int' ) : null;
 
 		try {
 			$googleClientId = UserAPIService::googleClientID()['clientId'] ?? '';
@@ -81,7 +80,8 @@ class EditorAssets
 				'tier'  => $this->getUserTier( $documentID ),
 				'name'  => Escape::html( $currentUser->display_name ),
 				'email' => Escape::html( $currentUser->user_email   ),
-				'joinedNewsletter' => !! \Depicter::options()->get('has_subscribed')
+				'joinedNewsletter' => !! \Depicter::options()->get('has_subscribed'),
+				'dataCollectionConsent' => \Depicter::options()->get('data_collect_consent', 'not-set')
 			],
 			'activation' => [
 				'status'       => \Depicter::auth()->getActivationStatus(),
@@ -99,7 +99,8 @@ class EditorAssets
 				'woocommerce' => [
 					'label' => __( 'WooCommerce Plugin', 'depicter' ),
 					'enabled' => Plugin::isActive( 'woocommerce/woocommerce.php' )
-				]
+				],
+                'googleReviews' => \Depicter::dataSource()->googlePlaces()->hasValidApiKey()
 			],
 			'googleClientId' => $googleClientId,
 			'tokens' => [
@@ -107,6 +108,9 @@ class EditorAssets
 				'accessToken'  => \Depicter::cache('base')->get( 'access_token' , null ),
 				'refreshToken' => \Depicter::cache('base')->get( 'refresh_token', null )
 			],
+            'routes'=>[
+                'settingPage' => Escape::url( add_query_arg( [ 'page' => 'depicter-settings', ], self_admin_url( 'admin.php' ) ) )
+            ]
 		];
 
 		$useGoogleFonts = \Depicter::options()->get('use_google_fonts', 'on');

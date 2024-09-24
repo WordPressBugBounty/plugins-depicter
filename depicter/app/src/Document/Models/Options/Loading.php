@@ -2,6 +2,7 @@
 namespace Depicter\Document\Models\Options;
 
 
+use Averta\WordPress\File\FileSystem;
 use Depicter\Document\CSS\Selector;
 use Depicter\Html\Html;
 
@@ -34,7 +35,7 @@ class Loading
 		$loadingPath = DEPICTER_PLUGIN_PATH . '/resources/scripts/loadings/snippets/'.$loadingSymbol[0].'/'.$loadingSymbol[1].'.html';
 
 		if ( in_array( $loadingSymbol[0], $this->loadingsList() ) && is_file( $loadingPath ) ) {
-			$loadingMarkup = file_get_contents( $loadingPath );
+			$loadingMarkup = \Depicter::storage()->filesystem()->read( $loadingPath );
 		}
 
 		return Html::div(

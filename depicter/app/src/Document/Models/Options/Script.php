@@ -200,6 +200,8 @@ class Script
 
 		$script .= "});\n";
 
+		$this->enqueueRecaptchaScript( $document );
+
 		return $script;
 	}
 
@@ -265,5 +267,25 @@ class Script
 		}
 
 		return $script;
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param Document $document
+	 *
+	 * @return void
+	 */
+	public function enqueueRecaptchaScript( $document ) {
+		if ( ! $document->isRecaptchaEnabled() ) {
+			return;
+		}
+
+		$clientKey = \Depicter::options()->get('google_recaptcha_client_key', false );
+		$secretKey = \Depicter::options()->get('google_recaptcha_secret_key', false );
+
+		if ( $clientKey && $secretKey ) {
+			wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . $clientKey );
+		}
 	}
 }

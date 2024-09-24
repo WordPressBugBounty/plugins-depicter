@@ -37,7 +37,8 @@ class PluginServiceProvider implements ServiceProviderInterface
 
 		add_action( 'plugins_loaded', [$this, 'loadTextDomain'] );
 		add_action( 'admin_init', [ $this, 'check_plugin_upgrade_via_upload' ] );
-		add_filter( 'update_plugin_complete_actions', [ $this, 'add_depicter_link_after_upgrade'], 10, 2);
+		add_action( 'admin_init', [ $this, 'check_redirect_process' ] );
+		add_filter( 'update_plugin_complete_actions', [ $this, 'add_depicter_link_after_upgrade'], 10, 1);
 
 		if ( defined('WP_CLI') && WP_CLI ) {
 			\WP_CLI::add_command( 'depicter', \Depicter::app()->cli() );
@@ -50,7 +51,7 @@ class PluginServiceProvider implements ServiceProviderInterface
 	 * @return void
 	 */
 	public function activate() {
-		// Nothing to do right now.
+		set_transient( 'depicter_do_activation_redirect', true, 60 );
 	}
 
 	/**
@@ -87,18 +88,29 @@ class PluginServiceProvider implements ServiceProviderInterface
 	 * Add go to depicter dashboard link after upgrade at bottom of upgrade page
 	 *
 	 * @param array $install_actions
-	 *
-	 * @return array
+	 * @return void
 	 */
-	public function add_depicter_link_after_upgrade( $install_actions, $plugin ){
-		if ( false !== strpos( $plugin, 'depicter') ) {
-			$install_actions['depicter_dashboard'] = sprintf(
-				'<a href="%s" target="_parent">%s</a>',
-				self_admin_url( 'admin.php?page=depicter-dashboard' ),
-				__( 'Go to Depicter', 'depicter' )
-			);
-		}
+	public function add_depicter_link_after_upgrade( $install_actions ){
+		$install_actions['depicter_dashboard'] = sprintf(
+			'<a href="%s" target="_parent">%s</a>',
+			admin_url( 'admin.php?page=depicter-dashboard' ),
+			__( 'Go to Depicter', 'depicter' )
+		);
 
 		return $install_actions;
+	}
+
+	public function check_redirect_process() {
+		// Check if the transient is set
+		if (  get_transient('depicter_do_activation_redirect') ) {
+			// Delete the transient to prevent repeated redirects
+			delete_transient('depicter_do_activation_redirect');
+
+			if ( \Depicter::client()->isNewClient() && ! wp_doing_ajax() ) {
+				// Redirect to the desired page
+				wp_safe_redirect( admin_url('admin.php?page=depicter-dashboard') );
+				exit;
+			}
+		}
 	}
 }

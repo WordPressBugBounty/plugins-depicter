@@ -22,6 +22,13 @@ class Animation
 	public $out;
 
 	/**
+	 * Animation loop phase
+	 *
+	 * @var object
+	 */
+	public $loop;
+
+	/**
 	 * @var bool|null
 	 */
 	public $waitForAction;
@@ -31,7 +38,7 @@ class Animation
 	 *
 	 * @var array
 	 */
-	protected $phases = ['in', 'out'];
+	protected $phases = ['in', 'out', 'loop'];
 
 
 	/**
@@ -76,6 +83,10 @@ class Animation
 				$breakpoint_prefix = $breakpoint == 'default' ? '' : $breakpoint_prefix;
 				if( $animation_value = $this->getAnimation( $phase, $breakpoint ) ){
 					$attrs[ 'data-'.  $breakpoint_prefix .'animation-' . $phase ] = $this->getAnimation( $phase, $breakpoint );
+				}
+
+				if ( $phase == 'loop' ) {
+					$attrs['data-between-in-out'] = !empty( $this->{$phase}->betweenInAndOut ) ? "true" : "false";
 				}
 			}
 		}

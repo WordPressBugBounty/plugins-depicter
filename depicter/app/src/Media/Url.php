@@ -41,10 +41,10 @@ class Url
 	 * @return bool
 	 */
 	public function isExternal( $url ) {
-		$siteUrl = parse_url( get_site_url() );
+		$siteUrl = wp_parse_url( get_site_url() );
 		$siteHost = !empty( $siteUrl['path'] ) ? $siteUrl['host'] . $siteUrl['path'] : $siteUrl['host'];
 
-		$urlHost = parse_url( $url, PHP_URL_HOST );
+		$urlHost = wp_parse_url( $url, PHP_URL_HOST );
 		// check for multisite that links are like subdirectory not subdomain
 		$urlHost = !empty( $siteUrl['path'] ) && strpos( $url, $urlHost . $siteUrl['path'] ) ? $urlHost . $siteUrl['path'] : $urlHost;
 

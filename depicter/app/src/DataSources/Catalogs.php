@@ -15,28 +15,28 @@ class Catalogs extends DataSourceBase implements DataSourceInterface
 	 *
 	 * @var string
 	 */
-	protected $type = 'catalogs';
+	protected string $type = 'catalogs';
 
 	/**
 	 * DataSource properties
 	 *
 	 * @var array
 	 */
-	protected $properties = [];
+	protected array $properties = [];
 
 	/**
 	 * Default input params for retrieving dataSource records
 	 *
 	 * @var array
 	 */
-	protected $defaultInputParams = [];
+	protected array $defaultInputParams = [];
 
 	/**
 	 * Asset groups of this DataSource
 	 *
 	 * @var array
 	 */
-	protected $assetGroupNames = [ 'catalog' ];
+	protected array $assetGroupNames = [ 'catalog' ];
 
 	/**
 	 * Retrieves the list of records based on query params

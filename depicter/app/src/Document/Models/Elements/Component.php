@@ -69,9 +69,12 @@ class Component extends Element
 				}
 
 				$generalCss = $innerStyles->{$cssSelector}->getGeneralCss('normal');
+				$hoverCss = $innerStyles->{$cssSelector}->getGeneralCss('hover');
+
 				// Add SVG selector and css
 				$svgCss = $this->getSvgCss( $cssSelector );
 				$this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . $this->camelCaseToHyphenated( $cssSelector ) ] = array_merge_recursive( $generalCss, $svgCss );
+				$this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . $this->camelCaseToHyphenated( $cssSelector ) . ":hover" ] = $hoverCss;
 			}
 		}
 

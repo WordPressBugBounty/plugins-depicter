@@ -27,7 +27,10 @@ class DashboardAjaxController {
 			'orderBy' => !empty( $request->query('orderBy' ) ) ? Sanitize::textfield( $request->query('orderBy') ) : 'modified_at',
 			'order' => !empty( $request->query('order' ) ) ? Sanitize::textfield( $request->query('order') ) : 'DESC',
 			's' => !empty( $request->query('s' ) ) ? Sanitize::textfield( $request->query('s') ) : '',
+			'has' => !empty( $request->query('has' ) ) ? Sanitize::textfield( $request->query('has') ) : '',
 		];
+
+		$args['has'] = $args['has'] ? explode(',', $args['has'] ) : '';
 
 		$results = \Depicter::documentRepository()->getList( [], $args );
 		$hits = $results['documents'] ?? $results;
@@ -91,7 +94,7 @@ class DashboardAjaxController {
 			if ( $isDeleted ) {
 				\Depicter::metaRepository()->deleteAllMetaByDocumentID( $_id );
 				$result['hits'][] = $_id;
-				unlink( \Depicter::storage()->getPluginUploadsDirectory() . '/preview-images/' . $_id . '.png' );
+				wp_delete_file( \Depicter::storage()->getPluginUploadsDirectory() . '/preview-images/' . $_id . '.png' );
 				// \Depicter::action()->do( 'depicter/dashboard/after/delete', $id, $properties, $result );
 				do_action( 'depicter/dashboard/after/delete', $_id );
 			} else {

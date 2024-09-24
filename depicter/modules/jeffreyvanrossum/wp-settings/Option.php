@@ -2,6 +2,8 @@
 
 namespace Depicter\Jeffreyvr\WPSettings;
 
+use Depicter\Jeffreyvr\WPSettings\Options\Password;
+use Depicter\Jeffreyvr\WPSettings\Options\Number;
 use Depicter\Jeffreyvr\WPSettings\Section;
 use Depicter\Jeffreyvr\WPSettings\Options\Text;
 use Depicter\Jeffreyvr\WPSettings\Options\Select;
@@ -25,16 +27,7 @@ class Option
         $this->type = $type;
         $this->args = $args;
 
-        $type_map = apply_filters('wp_settings_option_type_map', [
-            'text' => Text::class,
-            'checkbox' => Checkbox::class,
-            'choices' => Choices::class,
-            'textarea' => Textarea::class,
-            'wp-editor' => WPEditor::class,
-            'code-editor' => CodeEditor::class,
-            'select' => Select::class,
-            'select-multiple' => SelectMultiple::class
-        ]);
+        $type_map = apply_filters('wp_settings_option_type_map', []);
 
         $this->implementation = new $type_map[$this->type]($section, $args);
     }

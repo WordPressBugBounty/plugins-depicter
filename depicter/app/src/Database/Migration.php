@@ -33,7 +33,7 @@ class Migration extends BaseMigration {
 	/**
 	* Table names
 	*/
-	protected $table_names = [ 'documents', 'options', 'meta' ];
+	protected $table_names = [ 'documents', 'options', 'meta', 'leads', 'lead_fields' ];
 
 
 	/**
@@ -101,6 +101,52 @@ class Migration extends BaseMigration {
             meta_key varchar(30) NOT NULL DEFAULT '',
             meta_value text NOT NULL DEFAULT '',
             PRIMARY KEY  (id)
+        ) {$this->charset_collate()};\n";
+
+		$this->dbDelta( $sql_create_table );
+	}
+
+	/**
+	 * Create meta table
+	 *
+	 * @since 1.0
+	 * @return null
+	 */
+	public function create_table_leads() {
+
+		global $wpdb;
+
+		$sql_create_table = "CREATE TABLE {$this->leads} (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            source_id bigint(20) unsigned NOT NULL,
+			content_id bigint(20) NOT NULL,
+			content_name varchar(150) NOT NULL,
+            created_at  datetime DEFAULT NULL,
+            FOREIGN KEY (source_id) REFERENCES " . $wpdb->prefix . self::TABLE_PREFIX . "documents(id)
+        ) {$this->charset_collate()};\n";
+
+		$this->dbDelta( $sql_create_table );
+	}
+
+	/**
+	 * Create meta table
+	 *
+	 * @since 1.0
+	 * @return null
+	 */
+	public function create_table_lead_fields() {
+
+		global $wpdb;
+
+		$sql_create_table = "CREATE TABLE {$this->lead_fields} (
+            id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            lead_id bigint(20) unsigned NOT NULL,
+			name varchar(255) NOT NULL,
+            type varchar(50) NOT NULL DEFAULT '',
+			value text NOT NULL DEFAULT '',
+            created_at  datetime DEFAULT NULL,
+			updated_at  datetime DEFAULT NULL,
+            FOREIGN KEY (lead_id) REFERENCES " . $wpdb->prefix . self::TABLE_PREFIX . "leads(id) ON DELETE CASCADE
         ) {$this->charset_collate()};\n";
 
 		$this->dbDelta( $sql_create_table );

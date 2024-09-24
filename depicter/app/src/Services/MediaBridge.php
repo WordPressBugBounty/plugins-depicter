@@ -53,7 +53,7 @@ class MediaBridge
 		} else {
 			$size = is_array( $size ) ? 'large' : $size;
 
-			$mediaUrl = AssetsAPIService::getHotlink( $assetId, $size, Arr::merge( ['forcePreview' => $forcePreview ] ) );
+			$mediaUrl = AssetsAPIService::getHotlink( $assetId, $size, Arr::merge( ['forcePreview' => $forcePreview ], $args ) );
 		}
 
 		return $mediaUrl;

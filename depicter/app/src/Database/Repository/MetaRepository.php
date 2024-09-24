@@ -202,4 +202,33 @@ class MetaRepository
 
 		return $default;
 	}
+
+	/**
+	 * Duplicates all meta fields of a document.
+	 *
+	 * @param int $id
+	 * @param int $newRelationID
+	 *
+	 * @return bool
+	 * @throws Exception
+	 */
+	public function duplicateAllMetaByRelationID( int $id, int $newRelationID ): bool{
+		$metas =  $this->meta()->where([
+			[
+			  'column' => 'relation_id',
+			  'operator' => '=',
+			  'value' => $id
+			]
+        ])->get();
+		foreach( $metas as $meta ){
+			$meta = $meta->toArray();
+			unset($meta['id']);
+			$meta['relation_id'] = $newRelationID;
+			if ( ! $this->add( $newRelationID, $meta['meta_key'], $meta['meta_value'], $meta['relation'] ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

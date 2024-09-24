@@ -22,4 +22,9 @@ class Base
 	 * @var mixed
 	 */
 	public $z;
+
+	/**
+	 * @var mixed
+	 */
+	public $positionType;
 }

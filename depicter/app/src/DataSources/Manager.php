@@ -36,6 +36,15 @@ class Manager {
 	}
 
 	/**
+	 * Returns the instance of GooglePlacesReview class
+	 *
+	 * @return GooglePlaces
+	 */
+	public function googlePlaces(): GooglePlaces {
+		return \Depicter::resolve('depicter.dataSources.google.places');
+	}
+
+	/**
 	 * Returns the instance of tags Manager class
 	 *
 	 * @return TagsManager
@@ -71,6 +80,10 @@ class Manager {
 
 			case 'wooHandpicked':
 				$result = $this->handPickedProducts();
+				break;
+
+			case 'googlePlaces':
+				$result = $this->googlePlaces();
 				break;
 
 			case 'catalogs':

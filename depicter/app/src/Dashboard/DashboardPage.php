@@ -1,14 +1,14 @@
 <?php
 namespace Depicter\Dashboard;
 
-use Averta\Core\Utility\Arr;
+use Averta\Core\Utility\Data;
 use Averta\Core\Utility\Extract;
 use Averta\WordPress\Utility\Escape;
 use Averta\WordPress\Utility\JSON;
 use Averta\WordPress\Utility\Plugin;
+use Depicter\GuzzleHttp\Exception\GuzzleException;
 use Depicter\Security\CSRF;
 use Depicter\Services\UserAPIService;
-use Depicter\WordPress\Settings\Settings;
 
 class DashboardPage
 {
@@ -26,8 +26,6 @@ class DashboardPage
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueueScripts' ] );
 		add_action( 'admin_head', array( $this, 'disable_admin_notices' ) );
 		add_action( 'admin_init', [ $this, 'externalPageRedirect' ] );
-
-		$this->settingsPage();
 	}
 
 	/**
@@ -51,6 +49,15 @@ class DashboardPage
 			__( 'Dashboard', 'depicter' ),
 			'access_depicter',
 			self::PAGE_ID
+		);
+
+		add_submenu_page(
+			self::PAGE_ID,
+			__( 'Settings', 'depicter' ),
+			__( 'Settings', 'depicter' ),
+			'access_depicter',
+			'depicter-settings',
+			[ $this, 'printSettingsPage' ]
 		);
 
 		add_submenu_page(
@@ -95,77 +102,6 @@ class DashboardPage
 			wp_redirect( 'https://depicter.com/pricing?utm_source=depicter&utm_medium=depicter-free&utm_campaign=free-to-pro&utm_term=unlock-submenu' );
 			die;
 		}
-	}
-
-	/**
-	 * Settings page markup
-	 *
-	 * @return void
-	 */
-	public function settingsPage() {
-
-		$settings = new Settings(__('Settings', 'depicter'), 'depicter-settings');
-		$settings->set_option_name('depicter_options');
-		$settings->set_menu_parent_slug( self::PAGE_ID );
-
-		$settings->add_tab(__( 'General', 'depicter' ));
-		$settings->add_section( __( 'General Settings', 'depicter' ) );
-
-		$settings->add_option('nonce',[
-			'action' => 'depicter-settings',
-			'name' => '_depicter_settings_nonce'
-		]);
-
-		$settings->add_option('select', [
-			'name' => 'use_google_fonts',
-			'label' => __( 'Google Fonts', 'depicter' ),
-			'options' => [
-				'on' => __( 'Default (Enable)', 'depicter' ),
-				'off' => __( 'Disable', 'depicter' ),
-				'editor_only' => __( 'Load in Editor Only', 'depicter' ),
-				'save_locally' => __( 'Save Locally', 'depicter' )
-			],
-			'description' => __( 'Enable, disable, or save Google Fonts locally on your host.', 'depicter' )
-		]);
-
-		$settings->add_option('select', [
-			'name' => 'resource_preloading',
-			'label' => __( 'Resource Preloading', 'depicter' ),
-			'options' => [
-				'on' => __( 'Default (Enable)', 'depicter' ),
-				'off' => __( 'Disable', 'depicter' )
-			],
-			'description' => __( 'Enable or disable preloading of website resources (images and CSS) for faster page load speed.', 'depicter' )
-		]);
-
-		$settings->add_option('button', [
-			'name' => 'regenerate_css_flush_cache',
-			'label' => __( 'Regenerate CSS & Flush Cache', 'depicter' ),
-			'button_text' => __( 'Regenerate CSS & Flush Cache', 'depicter' ),
-			'class' => 'button button-secondary depicter-flush-cache',
-			'icon' => '<span class="dashicons dashicons-update" style="line-height:28px; margin-right:8px; height:28px;"></span>'
-		]);
-
-		$settings->add_option('select', [
-			'name' => 'allow_unfiltered_data_upload',
-			'label' => __( 'Allow Unfiltered File Upload?', 'depicter' ),
-			'options' => [
-				'off' => __( 'Disable', 'depicter' ),
-				'on'  => __( 'Enable', 'depicter' )
-			],
-			'description' => __( 'Attention! Allowing uploads of SVG or JSON files is a potential security risk.<br/>Although Depicter sanitizes such files, we recommend that you only enable this feature if you understand the security risks involved.', 'depicter' ),
-		]);
-
-		$settings->add_option('checkbox', [
-			'name' => 'always_load_assets',
-			'label' => __( 'Load assets on all pages?', 'depicter' ),
-			'description' => "<br><br>". __( 'By default, Depicter will load corresponding JavaScript and CSS files on demand. but if you need to load assets on all pages, check this option. <br>( For example, if you plan to load Depicter via Ajax, you need to enable this option )', 'depicter' ),
-		]);
-
-		$settings->set_menu_position( 1 );
-
-		$settings->make();
-
 	}
 
 	/**
@@ -226,11 +162,12 @@ class DashboardPage
 		);
 	}
 
-	/**
-	 * Print required scripts in Dashboard page
-	 *
-	 * @return void
-	 */
+    /**
+     * Print required scripts in Dashboard page
+     *
+     * @return void
+     * @throws GuzzleException
+     */
 	public function printScripts()
 	{
 		global $wp_version;
@@ -251,7 +188,7 @@ class DashboardPage
 		// retrieve refresh token
 		$refreshToken = \Depicter::cache('base')->get( 'refresh_token', null );
 		$refreshTokenPayload = Extract::JWTPayload( $refreshToken );
-		$displayReviewNotice = !empty( $refreshTokenPayload['ict'] ) && ( time() - date( $refreshTokenPayload['ict'] ) > 5 * DAY_IN_SECONDS );
+		$displayReviewNotice = !empty( $refreshTokenPayload['ict'] ) && ( time() - Data::cast( $refreshTokenPayload['ict'], 'int' ) > 5 * DAY_IN_SECONDS );
 
 		wp_add_inline_script('depicter--dashboard', 'window.depicterEnv = '. JSON::encode(
 		    [
@@ -273,8 +210,9 @@ class DashboardPage
 					'tier'  => \Depicter::auth()->getTier(),
 					'name'  => Escape::html( $currentUser->display_name ),
 					'email' => Escape::html( $currentUser->user_email   ),
-					'onboarding' => ! \Depicter::documentRepository()->all( [ 'id' ] ),
-					'joinedNewsletter' => !! \Depicter::options()->get('has_subscribed')
+					'onboarding' => \Depicter::client()->isNewClient(),
+					'joinedNewsletter' => !! \Depicter::options()->get('has_subscribed'),
+					'dataCollectionConsent' => \Depicter::options()->get('data_collect_consent', 'not-set')
 				],
 				'activation' => [
 					'status'       => \Depicter::auth()->getActivationStatus(),
@@ -292,7 +230,8 @@ class DashboardPage
 					'woocommerce' => [
 						'label' => __( 'WooCommerce Plugin', 'depicter' ),
 						'enabled' => Plugin::isActive( 'woocommerce/woocommerce.php' )
-					]
+					],
+                    'googleReviews' => \Depicter::dataSource()->googlePlaces()->hasValidApiKey()
 				],
 			    'AIWizard' =>  [
 					'introVideoSrc' => 'https://www.youtube.com/embed/kdR9Jw0yWjU?rel=0'
@@ -305,6 +244,9 @@ class DashboardPage
 				],
 				'display' => [
                     'reviewNotice' => $displayReviewNotice
+                ],
+                'routes'=>[
+                    'settingPage' => Escape::url( add_query_arg( [ 'page' => 'depicter-settings', ], self_admin_url( 'admin.php' ) ) )
                 ]
 			]
 		), 'before' );
@@ -320,6 +262,10 @@ class DashboardPage
 		if ( false === \Depicter::cache('base')->get( 'access_token' ) ) {
 			UserAPIService::renewTokens();
 		}
+	}
+
+	public function printSettingsPage() {
+		\Depicter::resolve('depicter.dashboard.settings')->render();
 	}
 
 }

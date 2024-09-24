@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "averta/core",
-            "version": "1.2.9",
-            "version_normalized": "1.2.9.0",
+            "version": "1.2.12",
+            "version_normalized": "1.2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/averta-lab/php-core.git",
-                "reference": "c4ca61bc373c64a87479ceaa0d2145afc3df44b8"
+                "reference": "6c0decee494cc44879103e73f1d00b82cdadff4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/averta-lab/php-core/zipball/c4ca61bc373c64a87479ceaa0d2145afc3df44b8",
-                "reference": "c4ca61bc373c64a87479ceaa0d2145afc3df44b8",
+                "url": "https://api.github.com/repos/averta-lab/php-core/zipball/6c0decee494cc44879103e73f1d00b82cdadff4e",
+                "reference": "6c0decee494cc44879103e73f1d00b82cdadff4e",
                 "shasum": ""
             },
             "require": {
@@ -24,7 +24,7 @@
             "require-dev": {
                 "composer/installers": "^1"
             },
-            "time": "2024-07-28T05:12:54+00:00",
+            "time": "2024-08-22T07:57:46+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -53,23 +53,23 @@
             "support": {
                 "docs": "https://averta.net",
                 "issues": "https://github.com/averta-lab/php-core/issues",
-                "source": "https://github.com/averta-lab/php-core/tree/1.2.9"
+                "source": "https://github.com/averta-lab/php-core/tree/1.2.12"
             },
             "install-path": "../averta/core"
         },
         {
             "name": "averta/wordpress",
-            "version": "1.2.19",
-            "version_normalized": "1.2.19.0",
+            "version": "1.2.22",
+            "version_normalized": "1.2.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/averta-lab/wordpress.git",
-                "reference": "b07fe7f5bfaf01fa1134a8be4a9e2e7b3915a6b3"
+                "reference": "5a870f891db2a45881b9680aa41e53334bf5be05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/averta-lab/wordpress/zipball/b07fe7f5bfaf01fa1134a8be4a9e2e7b3915a6b3",
-                "reference": "b07fe7f5bfaf01fa1134a8be4a9e2e7b3915a6b3",
+                "url": "https://api.github.com/repos/averta-lab/wordpress/zipball/5a870f891db2a45881b9680aa41e53334bf5be05",
+                "reference": "5a870f891db2a45881b9680aa41e53334bf5be05",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "roots/wordpress": "*",
                 "wp-coding-standards/wpcs": "^2.3"
             },
-            "time": "2024-07-24T08:42:44+00:00",
+            "time": "2024-08-28T13:45:03+00:00",
             "type": "library",
             "extra": {
                 "wordpress-install-dir": "vendor/wp-core"
@@ -119,7 +119,7 @@
             "support": {
                 "docs": "https://averta.net",
                 "issues": "https://github.com/averta-lab/wordpress/issues",
-                "source": "https://github.com/averta-lab/wordpress/tree/1.2.19"
+                "source": "https://github.com/averta-lab/wordpress/tree/1.2.22"
             },
             "install-path": "../averta/wordpress"
         },

@@ -5,6 +5,7 @@ use Averta\Core\Utility\Arr;
 use Depicter\Document\CSS\Breakpoints;
 use Depicter\Document\CSS\Selector;
 use Depicter\Document\Helper\Helper;
+use Depicter\Document\Models\Common\Layout\AutoLayout;
 use Depicter\Document\Models\Traits\HasDataSheetTrait;
 use Depicter\Document\Models\Traits\HasDocumentIdTrait;
 use Depicter\Editor\Models\Common\Size;
@@ -161,6 +162,15 @@ class Element
 	 */
 	protected $markup;
 
+	/**
+	 * @var \Depicter\Document\Models\Common\Layout\AutoLayout|null
+	 */
+	public $autoLayout;
+
+	/**
+	 * @var bool
+	 */
+	public $isChild = false;
 
 	/**
 	 * Element constructor.
@@ -247,6 +257,9 @@ class Element
 		if ( strpos( $this->type, 'dpc' ) !== false ) {
 			$this->componentType = $this->type;
 			$this->type = 'component';
+		} else if ( strpos( $this->type, 'form:' ) !== false ) {
+			$this->componentType = $this->type;
+			$this->type = 'form';
 		}
 
 		$className = '\\Depicter\\Document\\Models\\Elements\\' . ucfirst( $this->type );
@@ -324,14 +337,24 @@ class Element
 			'data-name'		 => $this->getName()
 		];
 
-		if( ! empty( $this->position->getOffset("default" ) ) ){
+		if( ! empty( $this->position->getOffset("default" ) ) && $this->position->getPositionType("default" ) != 'static' ){
 			$dataAttrs['data-offset'] = $this->position->getOffset("default" );
 		}
-		if( ! empty( $this->position->getOffset("tablet" ) ) ){
+		if( ! empty( $this->position->getOffset("tablet" ) ) && $this->position->getPositionType("tablet" ) != 'static' ){
 			$dataAttrs['data-tablet-offset'] = $this->position->getOffset("tablet" );
 		}
-		if( ! empty( $this->position->getOffset("mobile" ) ) ){
+		if( ! empty( $this->position->getOffset("mobile" ) ) && $this->position->getPositionType("mobile" ) != 'static' ){
 			$dataAttrs['data-mobile-offset'] = $this->position->getOffset("mobile" );
+		}
+
+		if( ! empty( $this->position->getPositionType("default" ) ) ){
+			$dataAttrs['data-position-type'] = $this->position->getPositionType("default" );
+		}
+		if( ! empty( $this->position->getPositionType("tablet" ) ) ){
+			$dataAttrs['data-tablet-position-type'] = $this->position->getPositionType("tablet" );
+		}
+		if( ! empty( $this->position->getPositionType("mobile" ) ) ){
+			$dataAttrs['data-mobile-position-type'] = $this->position->getPositionType("mobile" );
 		}
 
 		if( $this->hideOnSections && $hideOnSections = Helper::getInvisibleSectionsCssIdList( $this->hideOnSections, $this->getDocumentID() ) ){
@@ -360,7 +383,7 @@ class Element
 			$dataAttrs['data-hover-off' ] = implode( ',', $hoverOffDevices );
 		}
 
-		if ( ! empty( $this->prepare()->styles->blendingMode ) ) {
+		if ( ! empty( $this->prepare()->styles->blendingMode ) || ! empty( $this->prepare()->styles->flex ) ) {
 			$dataAttrs['data-frame-class'] = $this->getSelector() . '-frame' ;
 		}
 
@@ -485,6 +508,7 @@ class Element
 	 */
 	public function getSelectorAndCssList(){
 
+		$this->selectorCssList[ '.' . $this->getStyleSelector() ] = [];
 		if( ! empty( $this->prepare()->styles ) ){
 			$this->prepare()->styles->setDataSheet( $this->getDataSheet() );
 			$this->selectorCssList[ '.' . $this->getStyleSelector() ] = $this->prepare()->styles->getGeneralCss('normal');
@@ -498,10 +522,20 @@ class Element
 			if ( !empty( $this->prepare()->styles->blendingMode ) ) {
 				$this->selectorCssList[ '.' . $this->getFrameStyleSelector() ] = $this->prepare()->styles->getBlendingModeStyle();
 			}
+			if ( $this->isChild() && !empty( $this->prepare()->styles->flex ) ) {
+				$this->selectorCssList[ '.' . $this->getFrameStyleSelector() ] = $this->prepare()->styles->getFlexAlignStyle();
+			}
 		}
 
 		if ( $this->getCustomStyles() ) {
 			$this->selectorCssList[ '.' . $this->getStyleSelector() ]['customStyle'] = $this->getCustomStyles();
+		}
+
+		// add AutoLayout styles
+		if ( $this->autoLayout && !empty( $this->autoLayout->enable ) ) {
+			if( $styles = $this->autoLayout->getStyles() ){
+				$this->selectorCssList[ '.' . $this->getStyleSelector() ] = array_merge_recursive( $this->selectorCssList[ '.' . $this->getStyleSelector() ], $styles );
+			}
 		}
 
 		return $this->selectorCssList;
@@ -531,6 +565,14 @@ class Element
 			return $this->getPreloadMarkup();
 		}
 		return '';
+	}
+
+	/**
+	 * Check if element is child element of a group element or not
+	 * @return bool
+	 */
+	public function isChild(): bool{
+		return $this->isChild;
 	}
 
 }

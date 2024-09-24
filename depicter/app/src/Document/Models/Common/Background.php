@@ -167,6 +167,7 @@ class Background
 		$imageID = \Depicter::media()->getAttachmentId( $this->renderArgs['default']['assetId'] );
 
 		$imageUrl = \Depicter::media()->getSourceUrl( $this->renderArgs['default']['assetId'] );
+
 		$args = [
 			'src' =>  \Depicter::media()::IMAGE_PLACEHOLDER_SRC,
 			'alt' => is_numeric( $imageID ) ? \Depicter::media()->getAltText( $imageID ) : ''
@@ -213,9 +214,8 @@ class Background
 		$imageID = \Depicter::media()->getAttachmentId( $defaultBackgroundImageID );
 
 		$args = [
-			'class'             => 'depicter-bg',
-			'src'			    =>  \Depicter::media()::IMAGE_PLACEHOLDER_SRC,
-			'alt'               => is_numeric( $imageID ) ? \Depicter::media()->getAltText( $imageID ) : ''
+			'class' => 'depicter-bg',
+			'alt'   => is_numeric( $imageID ) ? \Depicter::media()->getAltText( $imageID ) : ''
 		];
 
 		if ( !empty( $this->image->alt ) ) {
@@ -558,7 +558,7 @@ class Background
 	 */
 	public function getContainerClassName() {
 		if ( !empty( $this->video->src ) && ( ( $this->video->type ?? '' ) !== "embedVideo" ) ) {
-			return Selector::prefixify('bg-video-container');
+			return Selector::prefixify('bg-video');
 		}
 
 		return Selector::prefixify('section-background');

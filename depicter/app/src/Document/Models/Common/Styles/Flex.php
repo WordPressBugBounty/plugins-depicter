@@ -16,6 +16,11 @@ class Flex extends States
 	 */
 	public $flex = 1;
 
+	/**
+	 * @var string|null
+	 */
+	public $alignSelf;
+
 	public function set( $css ) {
 		$devices = Breakpoints::names();
 		foreach ( $devices as $device ) {
@@ -30,6 +35,9 @@ class Flex extends States
 			}
 			if ( !empty( $this->{$device} ) && !empty( $this->{$device}->rowGap ) ) {
 				$css[ $device ]['row-gap'] = $this->{$device}->rowGap . 'px';
+			}
+			if ( !empty( $this->{$device}->alignSelf ) ) {
+				$css[ $device ]['align-self'] = $this->{$device}->alignSelf;
 			}
 		}
 

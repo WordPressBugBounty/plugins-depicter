@@ -4,6 +4,7 @@ namespace Depicter\Document;
 
 use Averta\WordPress\Utility\JSON;
 use Depicter\Database\Repository\DocumentRepository;
+use Depicter\Database\Repository\MetaRepository;
 use Depicter\Document\Models\Document;
 use Depicter\Exception\DocumentNoContentException;
 use Depicter\Exception\EntityException;
@@ -35,6 +36,16 @@ class Manager
 	public function repository()
 	{
 		return \Depicter::resolve('depicter.database.repository.document');
+	}
+
+	/**
+	 * Returns the instance of metaRepository class
+	 *
+	 * @return MetaRepository
+	 */
+	public function meta()
+	{
+		return \Depicter::resolve('depicter.database.repository.meta');
 	}
 
 	/**

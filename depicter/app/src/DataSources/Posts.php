@@ -14,14 +14,14 @@ class Posts extends DataSourceBase implements DataSourceInterface
 	 *
 	 * @var string
 	 */
-	protected $type = 'wpPost';
+	protected string $type = 'wpPost';
 
 	/**
 	 * DataSource properties
 	 *
 	 * @var array
 	 */
-	protected $properties = [
+	protected array $properties = [
 		'type'     => 'wpPost',
 		'postType' => 'post'
 	];
@@ -31,7 +31,7 @@ class Posts extends DataSourceBase implements DataSourceInterface
 	 *
 	 * @var array
 	 */
-	protected $defaultInputParams = [
+	protected array $defaultInputParams = [
 		'postType' => 'post',
 		'perpage' => 5,
 		'excerptLength' => 55,
@@ -53,7 +53,7 @@ class Posts extends DataSourceBase implements DataSourceInterface
 	 *
 	 * @var array
 	 */
-	protected $assetGroupNames = [ 'post', 'taxonomy', 'acf', 'metaboxio' ];
+	protected array $assetGroupNames = [ 'post', 'taxonomy', 'acf', 'metaboxio' ];
 
 	/**
 	 * Retrieves the list of records based on query params
@@ -414,24 +414,6 @@ class Posts extends DataSourceBase implements DataSourceInterface
 		}
 
 		return '';
-	}
-
-	/**
-	 * Get list of asset groups for this dataSource
-	 *
-	 * @param $args
-	 *
-	 * @return array
-	 */
-	public function getAssets( $args ){
-		$assetGroupNames = $this->getAssetGroupNames();
-
-		$groups = [];
-		foreach( $assetGroupNames as $assetGroupName ){
-			$groups[ $assetGroupName ] = $args;
-		}
-
-		return \Depicter::dataSource()->tagsManager()->getAssetsInGroups( $groups );
 	}
 
 }

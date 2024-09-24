@@ -9,6 +9,6 @@ abstract class OptionAbstract extends JeffreyvrOptionAbstract
 
     public function get_value_attribute()
     {
-        return get_option( $this->section->tab->settings->prefix . $this->get_arg('name') ) ?? null;
+        return get_option( $this->section->tab->settings->prefix . $this->get_arg('name'), $this->get_arg('default') ?? '' ) ?? null;
     }
 }

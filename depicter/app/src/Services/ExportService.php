@@ -30,13 +30,13 @@ class ExportService
 				if ( strpos( $attachmentName, ' ' ) !== false ) {
 					$attachmentUrl = str_replace( $attachmentName, rawurlencode( $attachmentName ), $attachmentUrl );
 				}
-				$zip->addFromString( 'assets/' . get_the_title( $assetID ) . '-' . $assetID . '.' . pathinfo( $attachmentUrl, PATHINFO_EXTENSION ), file_get_contents( $attachmentUrl ) );
+				$zip->addFromString( 'assets/' . get_the_title( $assetID ) . '-' . $assetID . '.' . pathinfo( $attachmentUrl, PATHINFO_EXTENSION ), \Depicter::storage()->filesystem()->read( $attachmentUrl ) );
 			}
 		}
 
 		if ( !empty( $sliderData['data']['jsonAssets'] ) ) {
 			foreach( $sliderData['data']['jsonAssets'] as $key => $jsonURL ) {
-				$zip->addFromString( 'assets/' . pathinfo( $jsonURL, PATHINFO_BASENAME ), file_get_contents( $jsonURL ) );
+				$zip->addFromString( 'assets/' . pathinfo( $jsonURL, PATHINFO_BASENAME ), \Depicter::storage()->filesystem()->read( $jsonURL ) );
 			}
 		}
 		$zip->close();

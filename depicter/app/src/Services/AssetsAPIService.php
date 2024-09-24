@@ -22,7 +22,7 @@ class AssetsAPIService
 	 */
 	public static function searchAssets( string $assetType = 'photos', array $options = [] )
 	{
-		$availableTypes = ['photos', 'videos', 'vectors'];
+		$availableTypes = ['photos', 'videos', 'vectors', 'icons'];
 		if ( !in_array( $assetType, $availableTypes ) ) {
 			return [];
 		}
@@ -63,6 +63,42 @@ class AssetsAPIService
 		}
 
 		return $endpoint;
+	}
+
+	/**
+	 * Get Asset Content
+	 *
+	 * @param string $id    Media ID
+	 * @param string $size  Media size to return
+	 *
+	 * @param array  $args
+	 *
+	 * @return mixed
+	 * @throws GuzzleException
+	 */
+	public static function getContent( $id, string $size = 'full', array $args = [] ){
+		$endpointNumber = 1;
+
+		/**
+		 * Regex to find possible endpoint number other than default one (1)
+		 *
+		 * @example if $id = @Fd2X@UnSiqwe8TLRnG8k, $endpointNumber is 2, and $id @UnSiqwe8TLRnG8k
+		 */
+		preg_match( '/^@Fd(\d{1,})X(.*)/', $id, $matches );
+		if( !empty( $matches[1] ) && !empty( $matches[2] ) ){
+			$endpointNumber = $matches[1];
+			$id = $matches[2]; // set extracted id
+		}
+
+		$endpoint = \Depicter::remote()->endpoint( $endpointNumber ) . 'v1/media-content/' . $id . '/';
+
+		if ( !empty( $args ) && is_array( $args ) ) {
+			$endpoint = add_query_arg( $args, $endpoint );
+		}
+
+		$response = \Depicter::remote()->get( $endpoint );
+
+		return $response->getBody();
 	}
 
 	/**

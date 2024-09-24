@@ -51,9 +51,6 @@ class Post
 
             // Clean post content
             $excerpt = strip_tags( Sanitize::stripShortcodes( $content, $excludeStripShortcodeTags ) );
-
-            // Remove special characters
-            $excerpt = preg_replace('/[^A-Za-z0-9\s]/', '', $excerpt );
         }
 
         $excerpt = !empty( $maxCharLength ) ? Str::trimByChars( $excerpt, $maxCharLength, $excerptMore ) : $excerpt;

@@ -10,28 +10,28 @@ class DataSourceBase
 	 *
 	 * @var string
 	 */
-	protected $type = 'base';
+	protected string $type = 'base';
 
 	/**
 	 * DataSource properties
 	 *
 	 * @var array
 	 */
-	protected $properties = [];
+	protected array $properties = [];
 
 	/**
 	 * Default input params for retrieving dataSource records
 	 *
 	 * @var array
 	 */
-	protected $defaultInputParams = [];
+	protected array $defaultInputParams = [];
 
 	/**
 	 * Asset groups of this DataSource
 	 *
 	 * @var array
 	 */
-	protected $assetGroupNames = [];
+	protected array $assetGroupNames = [];
 
 
 	/**
@@ -75,5 +75,22 @@ class DataSourceBase
 		return $this->assetGroupNames;
 	}
 
+	/**
+	 * Get list of asset groups for this dataSource
+	 *
+	 * @param $args
+	 *
+	 * @return array
+	 */
+	public function getAssets( $args ){
+		$assetGroupNames = $this->getAssetGroupNames();
+
+		$groups = [];
+		foreach( $assetGroupNames as $assetGroupName ){
+			$groups[ $assetGroupName ] = $args;
+		}
+
+		return \Depicter::dataSource()->tagsManager()->getAssetsInGroups( $groups );
+	}
 
 }

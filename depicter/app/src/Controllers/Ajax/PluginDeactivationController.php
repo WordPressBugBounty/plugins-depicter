@@ -21,8 +21,8 @@ class PluginDeactivationController
 
 		$feedback = [
 			'issueType'         => 'deactivation',
-			'issueRelatesTo'    => sanitize_text_field( $_POST['issueRelatesTo'] ),
-			'userDescription'   => !empty( $_POST['userDescription'] ) ? sanitize_text_field( $_POST['userDescription'] ) : ''
+			'issueRelatesTo'    => sanitize_text_field( wp_unslash( $_POST['issueRelatesTo'] ) ),
+			'userDescription'   => ! empty( $_POST['userDescription'] ) ? sanitize_text_field( wp_unslash( $_POST['userDescription'] ) ) : ''
 		];
 
 		try {

@@ -3,6 +3,8 @@ namespace Depicter\DataSources;
 
 use Depicter\DataSources\Tags\ACF;
 use Depicter\DataSources\Tags\Catalog;
+use Depicter\DataSources\Tags\GooglePlace;
+use Depicter\DataSources\Tags\GooglePlaceReview;
 use Depicter\DataSources\Tags\Legacy;
 use Depicter\DataSources\Tags\Post;
 use Depicter\DataSources\Tags\MetaBoxIO;
@@ -40,6 +42,11 @@ class ServiceProvider implements ServiceProviderInterface
 		// register handpicked products dataSource
 		$container[ 'depicter.dataSources.handPickedProducts' ] = function () {
 			return new HandPickedProducts();
+		};
+
+		// register Google Places Reviews dataSource
+		$container[ 'depicter.dataSources.google.places' ] = function () {
+			return new GooglePlaces();
 		};
 
 		// register catalog dataSource
@@ -82,6 +89,14 @@ class ServiceProvider implements ServiceProviderInterface
 
 		$container[ 'depicter.dataSources.tags.catalog' ] = function () {
 			return new Catalog();
+		};
+
+		$container[ 'depicter.dataSources.tags.googlePlace' ] = function () {
+			return new GooglePlace();
+		};
+
+		$container[ 'depicter.dataSources.tags.googlePlaceReview' ] = function () {
+			return new GooglePlaceReview();
 		};
 	}
 

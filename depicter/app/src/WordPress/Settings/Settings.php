@@ -2,6 +2,8 @@
 
 namespace Depicter\WordPress\Settings;
 
+use Depicter\WordPress\Settings\Options\Password;
+use Depicter\WordPress\Settings\Options\Number;
 use Depicter\WordPress\Settings\Options\Checkbox;
 use Depicter\WordPress\Settings\Options\Choices;
 use Depicter\WordPress\Settings\Options\CodeEditor;
@@ -18,12 +20,12 @@ class Settings extends WPSettings
 {
 
     public $prefix = 'depicter_';
-    
+
     public function __construct( $title, $slug = null, $prefix = 'depicter_')
     {
         $this->prefix = $prefix;
         add_filter( 'wp_settings_option_type_map', [ $this, 'change_options_handler' ] );
-        
+
         parent::__construct( $title, $slug );
     }
 
@@ -31,6 +33,7 @@ class Settings extends WPSettings
     {
         return [
             'text' => Text::class,
+	        'password' => Password::class,
             'checkbox' => Checkbox::class,
             'choices' => Choices::class,
             'textarea' => Textarea::class,
@@ -39,7 +42,8 @@ class Settings extends WPSettings
             'select' => Select::class,
             'select-multiple' => SelectMultiple::class,
             'nonce' => Nonce::class,
-            'button' => Button::class
+            'button' => Button::class,
+            'number' => Number::class,
         ];
     }
 
@@ -66,10 +70,10 @@ class Settings extends WPSettings
             return;
         }
 
-        $new_options = apply_filters('wp_settings_new_options', $_POST[$this->option_name] ?? [] );
+        $new_options = apply_filters('wp_settings_new_options', $_POST[$this->option_name] ? wp_unslash( $_POST[$this->option_name] ) : [] );
 
         if ( empty( $new_options['_depicter_settings_nonce'] ) || ! wp_verify_nonce( $new_options['_depicter_settings_nonce'], 'depicter-settings' ) ) {
-            wp_die(__('Permission Error!'));
+            wp_die(__('Insufficient permission for saving changes to setting options.'));
         }
 
         foreach ($new_options as $option => $value) {

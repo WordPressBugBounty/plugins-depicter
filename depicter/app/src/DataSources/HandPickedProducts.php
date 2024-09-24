@@ -10,14 +10,14 @@ class HandPickedProducts extends Products {
 	 *
 	 * @var string
 	 */
-	protected $type = 'wooHandpicks';
+	protected string $type = 'wooHandpicks';
 
 	/**
 	 * DataSource properties
 	 *
 	 * @var array
 	 */
-	protected $properties = [
+	protected array $properties = [
 		'type'     => 'wooHandpicks',
 		'postType' => 'product'
 	];
@@ -27,7 +27,7 @@ class HandPickedProducts extends Products {
 	 *
 	 * @var array
 	 */
-	protected $defaultInputParams = [
+	protected array $defaultInputParams = [
 		'postType' => 'product',
 		'excerptLength' => 100,
 		'linkSlides' => true,

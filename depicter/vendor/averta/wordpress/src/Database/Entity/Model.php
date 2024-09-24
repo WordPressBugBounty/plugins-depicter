@@ -14,6 +14,13 @@ class Model extends BaseModel
 	 */
 	protected $autoFill = [];
 
+    /**
+     * Determines add table fields
+     *
+     * @var array
+     */
+    protected $columnNames = [];
+
 	/**
      * Update resource fields
      *
@@ -106,6 +113,18 @@ class Model extends BaseModel
     public function setupQueryConnectionForModel(\wpdb $wpdb)
     {
         return (new Query)->setWpdb($wpdb);
+    }
+
+    /**
+     * Get all table columns
+     *
+     * @return array
+     */
+    public function getTableColumns(){
+        if( ! $this->columnNames ){
+            $this->columnNames = array_unique( array_merge( $this->getGuardFields(), $this->getBuiltinFields() ) );
+        }
+        return $this->columnNames;
     }
 
 }

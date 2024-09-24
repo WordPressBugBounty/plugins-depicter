@@ -231,6 +231,10 @@ class ClientService
 					\Depicter::options()->set('manual_renew', $info['data']['manual_renew'] );
 				}
 
+				if ( empty( \Depicter::options()->get('initial_date', '') ) && !empty( $info['data']['created_at'] ) ) {
+					\Depicter::options()->set('initial_date', $info['data']['created_at'] );
+				}
+
 				\Depicter::options()->set('user_tier', $info['data']['user_tier'] ?? '' );
 				\Depicter::options()->set('activation_error_message', '' );
 
@@ -248,6 +252,19 @@ class ClientService
 		} catch ( GuzzleException $exception ) {
 			\Depicter::options()->set('activation_error_message'  , $exception->getMessage() );
 			\Depicter::options()->set('connection_error_message'  , $exception->getMessage() );
+		}
+
+		return false;
+	}
+
+	/**
+	 * check if user is new or not
+	 * @return bool
+	 */
+	public function isNewClient() {
+		$initialDate = \Depicter::options()->get('initial_date', '');
+		if( empty( $initialDate ) || ( time() - strtotime( $initialDate ) <= 2 * DAY_IN_SECONDS ) ){
+			return empty( \Depicter::documentRepository()->all( [ 'id' ] ) );
 		}
 
 		return false;

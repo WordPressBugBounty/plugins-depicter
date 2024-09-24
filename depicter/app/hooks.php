@@ -120,7 +120,7 @@ function depicter_clear_cache() {
 function depicter_clear_cache_by_cache_enabler() {
 	$cacheEnabled =  !empty( $_GET['_cache'] ) && $_GET['_cache'] == 'cache-enabler' ? true : false;
 	$isClearAction = !empty( $_GET['_action'] ) && ( $_GET['_action'] == 'clear' || $_GET['_action'] == 'clearurl' );
-	if ( $cacheEnabled && $isClearAction && !empty( $_GET['_wpnonce'] ) && wp_verify_nonce( $_GET['_wpnonce'], 'cache_enabler_clear_cache_nonce' ) ) {
+	if ( $cacheEnabled && $isClearAction && !empty( $_GET['_wpnonce'] ) && wp_verify_nonce( wp_unslash( $_GET['_wpnonce'] ), 'cache_enabler_clear_cache_nonce' ) ) {
 		depicter_clear_cache();
 	}
 }
