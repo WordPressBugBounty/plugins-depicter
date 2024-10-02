@@ -51,6 +51,22 @@ class LeadFieldRepository
 	}
 
 	/**
+	 * Delete lead fields by lead id
+	 * @param $leadId
+	 *
+	 * @return void
+	 * @throws \Exception
+	 */
+	public function deleteByLeadId( $leadId ){
+		$leadFields = $this->leadField()->where( 'lead_id', $leadId )->findAll()->get();
+		if ( $leadFields ) {
+			foreach ( $leadFields as $leadField ) {
+				$leadField->delete();
+			}
+		}
+	}
+
+	/**
 	 * Create a lead record
 	 *
 	 * @param int $leadId

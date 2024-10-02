@@ -4,7 +4,7 @@ Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.3.0
 Tested up to: WordPress 6.6.2
 Requires PHP: 7.4.0
-Stable tag: 3.5.0
+Stable tag: 3.5.1
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,8 +69,13 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 
 == Changelog ==
 
+###3.5.1
+- *Released: 2024-10-02*
+- **Fixed**
+- An issue with storing leads in database fixed.
+
 ###3.5.0
-- *Released: 2024-09-22*
+- *Released: 2024-09-24*
 - **Added**
 **🧾 Forms**: Easily create forms and gather data from your visitors.
 **📐 Auto Layout**: Design more flexible, dynamic, and content-responsive layouts.
@@ -81,8 +86,6 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 **🔧 Shortcode Element**: Easily insert any WordPress shortcode into your content.
 - **Improved**
 - Enhanced carousel item layout for better design flow
-- **Fixed**
-- Fixed a security vulnerability.
 
 ###3.2.1
 - *Released: 2024-08-06*

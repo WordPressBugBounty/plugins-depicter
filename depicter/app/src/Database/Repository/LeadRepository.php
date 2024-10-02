@@ -82,6 +82,7 @@ class LeadRepository
 			$id = Sanitize::int( $id );
 			if( $lead = $this->lead()->findById( $id ) ){
 				$lead->delete();
+				\Depicter::leadFieldRepository()->deleteByLeadId( $id );
 				$succeed = true;
 			}
 		}
