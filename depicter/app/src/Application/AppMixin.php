@@ -32,6 +32,7 @@ use Depicter\Services\RemoteAPIService;
 use Depicter\Services\StorageService;
 use Depicter\Services\AuthorizationService;
 use Depicter\Services\AuthenticationService;
+use Depicter\Services\UsageService;
 use Depicter\WordPress\DeactivationFeedbackService;
 use Depicter\WordPress\SchedulingService;
 use Depicter\WordPress\FileUploaderService;
@@ -237,4 +238,9 @@ final class AppMixin
 	 * @return GoogleRecaptchaV3
 	 */
 	public static function recaptcha(): GoogleRecaptchaV3 {}
+
+	/**
+	 * @return UsageService
+	 */
+	public static function usageService(): UsageService {}
 }

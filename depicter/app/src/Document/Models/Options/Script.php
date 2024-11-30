@@ -180,6 +180,10 @@ class Script
 			}
 		}
 
+		if ( ! empty( $document->options->navigation->deepLink->enable ) ) {
+			$attributes['deepLink'] = $document->options->navigation->deepLink;
+		}
+
 		$attributes['useWatermark'] = \Depicter::auth()->isSubscriptionExpired();
 
 		$basePath = \Depicter::core()->assets()->getUrl() . '/resources/scripts/player/';

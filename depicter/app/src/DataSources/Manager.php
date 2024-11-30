@@ -82,7 +82,7 @@ class Manager {
 				$result = $this->handPickedProducts();
 				break;
 
-			case 'googlePlaces':
+			case 'googlePlaceReview':
 				$result = $this->googlePlaces();
 				break;
 

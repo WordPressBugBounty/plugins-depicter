@@ -26,6 +26,11 @@ class PluginServiceProvider implements ServiceProviderInterface
 		};
 		$app->alias( 'cli', 'depicter.wp.cli.service' );
 
+		$container[ 'depicter.admin.bar.service' ] = function () {
+			return new AdminBarService();
+		};
+		$app->alias( 'adminBar', 'depicter.admin.bar.service' );
+
 	}
 
 	/**
@@ -40,9 +45,15 @@ class PluginServiceProvider implements ServiceProviderInterface
 		add_action( 'admin_init', [ $this, 'check_redirect_process' ] );
 		add_filter( 'update_plugin_complete_actions', [ $this, 'add_depicter_link_after_upgrade'], 10, 1);
 
+        add_action('admin_bar_menu', function( $wpAdminBar ){
+            \Depicter::adminBar()->init($wpAdminBar);
+        }, 99);
+
 		if ( defined('WP_CLI') && WP_CLI ) {
 			\WP_CLI::add_command( 'depicter', \Depicter::app()->cli() );
 		}
+
+
 	}
 
 	/**

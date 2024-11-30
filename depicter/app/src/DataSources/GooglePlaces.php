@@ -60,7 +60,9 @@ class GooglePlaces extends DataSourceBase implements DataSourceInterface
      */
     public function getDataSheetArgs( array $args = [] )
     {
-        return $this->getRecords( $this->prepare( $args ) );
+        $result = $this->getRecords( $this->prepare( $args ) );
+
+        return ! empty( $result['success'] ) ? $result['hits'] : [];
     }
 
     /**
@@ -186,6 +188,7 @@ class GooglePlaces extends DataSourceBase implements DataSourceInterface
      * @param $args
      *
      * @return array
+     * @throws \Exception
      */
     private function getReviews( $args = [] )
     {
@@ -198,8 +201,8 @@ class GooglePlaces extends DataSourceBase implements DataSourceInterface
             ];
         }
 
-	    $cacheKey = 'g_place_reviews_' . $args['id'];
-		if ( ! $reviews = \Depicter::cache( 'base' )->get( $cacheKey ) ) {
+	    $cacheKey = 'g_place_' . $args['id'];
+		if ( ! $place = \Depicter::cache( 'base' )->get( $cacheKey ) ) {
 			$client = new Client();
 
 			try{
@@ -213,9 +216,7 @@ class GooglePlaces extends DataSourceBase implements DataSourceInterface
 
 				if ( $response->getStatusCode() == 200 ) {
 					$place = JSON::decode( $response->getBody()->getContents(), true );
-
-					$reviews = $place['reviews'] ?? [];
-					\Depicter::cache( 'base' )->set( $cacheKey, $reviews, DAY_IN_SECONDS );
+					\Depicter::cache( 'base' )->set( $cacheKey, $place, DAY_IN_SECONDS );
 				} else {
 					return [
 						'success' => false,
@@ -237,6 +238,7 @@ class GooglePlaces extends DataSourceBase implements DataSourceInterface
 		}
 
 	    $hits    = [];
+        $reviews = $place['reviews'] ?? [];
 	    foreach ( $reviews as $review ) {
 		    // skip the review if rating is less than minRating
 		    $reviewRating = (float) ( $review['rating'] ?? 0 );
@@ -269,7 +271,11 @@ class GooglePlaces extends DataSourceBase implements DataSourceInterface
 			    'author'             => [
 				    'name' => $review['authorAttribution']['displayName'],
 				    'url'  => $review['authorAttribution']['uri'],
-				    'src'  => $authorSrc
+                    'photo' => [
+				        'src'  => $authorSrc,
+                        'width' => 400,
+                        'height' => 400
+                    ]
 			    ]
 		    ];
 	    }

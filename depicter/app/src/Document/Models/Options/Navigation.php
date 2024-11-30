@@ -56,7 +56,7 @@ class Navigation
 	/**
 	 * @var mixed
 	 */
-	public $deeplink;
+	public $deepLink;
 
 	/**
 	 * @var object

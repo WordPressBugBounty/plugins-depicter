@@ -2,9 +2,9 @@
 Contributors: averta, averta_support, depicter1slider1support, depicter1carousel1popup1support
 Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.3.0
-Tested up to: WordPress 6.6.2
+Tested up to: WordPress 6.7.1
 Requires PHP: 7.4.0
-Stable tag: 3.5.1
+Stable tag: 3.6.0
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,23 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 
 
 == Changelog ==
+
+
+###3.6.0
+- *Released: 2024-12-01*
+- **Added**
+- **⭐️ Google Reviews data source**: Now you can create dynamic reviews/testimonial carousel from your Google Reviews data.
+- **🎨 Custom SVG color**: Now you can customize svg colors directly inside the editor!
+- **🔄 Publish history**: With publish history feature, you can now see the history of your published versions and revert to any of them.
+- **🔗 Deep-linking**: Make your slides or carousel items accessible via a unique URL.
+- ** Admin bar**: Quickly access for editing inserted sliders/carousels in a page using new admin bar. 
+- **Improved**
+- Enhanced overall performance of the editor.
+- Improved the before and after element behavior plus, added a new option to control the page scrolling while dragging the handle.
+- **Fixed**
+- Fixed an issue where elements appeared overlapped in preview when the sliding direction was set to vertical.
+- Fixed an issue with the coupon box element button hover styles.
+- Fixed an issue with changing the element positions on tablet and mobile breakpoints that caused the editor to crash.
 
 ###3.5.1
 - *Released: 2024-10-02*

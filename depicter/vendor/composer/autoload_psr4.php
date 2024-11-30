@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'WPEmerge\\' => array($vendorDir . '/averta/wpemerge/src'),
     'WPEmergeTestTools\\' => array($vendorDir . '/averta/wpemerge/tests/tools'),
-    'WPEmergeAppCore\\' => array($baseDir . '/modules/wpemerge-app-core/src'),
+    'WPEmergeAppCore\\' => array($vendorDir . '/averta/wpemerge-app-core/src'),
     'TypeRocket\\' => array($vendorDir . '/typerocket/core/src'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Php73\\' => array($vendorDir . '/symfony/polyfill-php73'),

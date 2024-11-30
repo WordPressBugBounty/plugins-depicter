@@ -75,7 +75,12 @@ class Sanitize extends SanitizeBase {
 			'stroke-width',
 			'stroke-opacity',
 			'fill-opacity',
-			'transform'
+			'stop-color',
+			'transform',
+			'fill-rule',
+			'clip-rule',
+			'stroke-linejoin',
+			'stroke-miterlimit'
 		]);
 
 		return $properties;
@@ -93,7 +98,9 @@ class Sanitize extends SanitizeBase {
 
 		$allowedCssValues = [
 			'rotate',
-			'scale'
+			'scale',
+			'evenodd',
+			'round'
 		];
 
 		foreach( $allowedCssValues as $value ) {

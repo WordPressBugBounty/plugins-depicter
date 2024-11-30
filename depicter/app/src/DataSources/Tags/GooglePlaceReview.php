@@ -2,8 +2,6 @@
 
 namespace Depicter\DataSources\Tags;
 
-use Averta\WordPress\Utility\Plugin;
-
 /**
  * Asset Group for WooCommerce
  *
@@ -105,7 +103,7 @@ class GooglePlaceReview extends TagBase implements TagInterface {
 					'textSize' => 'regular',
 					'badge' => null
 				],
-				'type'  => 'dynamicText',
+				'type'  => 'dynamicDate',
 				'func'  => null,
 				'payload' => [
 					'source' => $this->wrapCurly( 'googlePlaceReview->date' )
@@ -137,7 +135,7 @@ class GooglePlaceReview extends TagBase implements TagInterface {
 				'sourceType' => 'image',
 				'func'  => null,
 				'payload' => [
-					'source' => $this->wrapCurly( 'googlePlaceReview->authorPhoto|toImage' ),
+					'source' => $this->wrapCurly( 'googlePlaceReview->author.photo' ),
 					'src'    => $this->wrapCurly( 'googlePlaceReview->author.src' )
 				]
             ]
@@ -164,7 +162,7 @@ class GooglePlaceReview extends TagBase implements TagInterface {
 		if ( $tagName == 'author.name' ) {
 			$result = $args['author']['name'];
 		} else if ( $tagName == 'author.photo' ) {
-			$result = $args['authorPhoto'];
+            $result = $args['author']['photo']['src'];
 		} elseif ( ! empty( $args[ $tagName ] ) ) {
 			$result = $args[ $tagName ];
 		}

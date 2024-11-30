@@ -5,7 +5,6 @@ use Averta\Core\Utility\Arr;
 use Depicter;
 use Depicter\Document\Models;
 use Depicter\Html\Html;
-use Depicter\Services\MediaBridge;
 
 class Video extends Models\Element
 {
@@ -64,9 +63,7 @@ class Video extends Models\Element
 			$elementsAttrs['data-height'] = 'auto,,';
 		}
 
-		error_log(print_r( $elementsAttrs, true ) , 0);
 		$div = Html::div( $elementsAttrs );
-
 
 		if ( false !== $a = $this->getLinkTag() ) {
 			return $a->nest( $div );

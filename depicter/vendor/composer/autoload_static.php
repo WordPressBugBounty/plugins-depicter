@@ -4,20 +4,20 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6c394b427f610b12d128da881cef2e5e
+class ComposerStaticInit593761bf067e995d32f66290091f1344
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'c55ed2bc0cb198953595e3e18cf4bb3e' => __DIR__ . '/..' . '/averta/wpemerge/config.php',
-        'd880d798b949e92a882509b43867c17a' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/config.php',
+        '6c96252e7b989a394a70d4b88fa1c6f5' => __DIR__ . '/..' . '/averta/wpemerge-app-core/config.php',
         '07099d07ceb58846f315742c3fc18434' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/helpers.php',
     );
 
@@ -83,7 +83,7 @@ class ComposerStaticInit6c394b427f610b12d128da881cef2e5e
         ),
         'WPEmergeAppCore\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src',
+            0 => __DIR__ . '/..' . '/averta/wpemerge-app-core/src',
         ),
         'TypeRocket\\' => 
         array (
@@ -200,6 +200,7 @@ class ComposerStaticInit6c394b427f610b12d128da881cef2e5e
         'Averta\\Core\\Utility\\Date' => __DIR__ . '/..' . '/averta/core/src/Utility/Date.php',
         'Averta\\Core\\Utility\\Embed' => __DIR__ . '/..' . '/averta/core/src/Utility/Embed.php',
         'Averta\\Core\\Utility\\Extract' => __DIR__ . '/..' . '/averta/core/src/Utility/Extract.php',
+        'Averta\\Core\\Utility\\Geo' => __DIR__ . '/..' . '/averta/core/src/Utility/Geo.php',
         'Averta\\Core\\Utility\\JSON' => __DIR__ . '/..' . '/averta/core/src/Utility/JSON.php',
         'Averta\\Core\\Utility\\Media' => __DIR__ . '/..' . '/averta/core/src/Utility/Media.php',
         'Averta\\Core\\Utility\\Str' => __DIR__ . '/..' . '/averta/core/src/Utility/Str.php',
@@ -466,6 +467,7 @@ class ComposerStaticInit6c394b427f610b12d128da881cef2e5e
         'Depicter\\Document\\Models\\Elements\\Symbol' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Symbol.php',
         'Depicter\\Document\\Models\\Elements\\TagList' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/TagList.php',
         'Depicter\\Document\\Models\\Elements\\Text' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Text.php',
+        'Depicter\\Document\\Models\\Elements\\Vector' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Vector.php',
         'Depicter\\Document\\Models\\Elements\\Video' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Video.php',
         'Depicter\\Document\\Models\\Elements\\WooStockStatus' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/WooStockStatus.php',
         'Depicter\\Document\\Models\\Elements\\WpShortcode' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/WpShortcode.php',
@@ -710,10 +712,12 @@ class ComposerStaticInit6c394b427f610b12d128da881cef2e5e
         'Depicter\\Services\\ServiceProvider' => __DIR__ . '/../..' . '/app/src/Services/ServiceProvider.php',
         'Depicter\\Services\\StorageService' => __DIR__ . '/../..' . '/app/src/Services/StorageService.php',
         'Depicter\\Services\\StyleGeneratorService' => __DIR__ . '/../..' . '/app/src/Services/StyleGeneratorService.php',
+        'Depicter\\Services\\UsageService' => __DIR__ . '/../..' . '/app/src/Services/UsageService.php',
         'Depicter\\Services\\UserAPIService' => __DIR__ . '/../..' . '/app/src/Services/UserAPIService.php',
         'Depicter\\Utility\\Http' => __DIR__ . '/../..' . '/app/src/Utility/Http.php',
         'Depicter\\Utility\\Sanitize' => __DIR__ . '/../..' . '/app/src/Utility/Sanitize.php',
         'Depicter\\View\\ViewServiceProvider' => __DIR__ . '/../..' . '/app/src/View/ViewServiceProvider.php',
+        'Depicter\\WordPress\\AdminBarService' => __DIR__ . '/../..' . '/app/src/WordPress/AdminBarService.php',
         'Depicter\\WordPress\\AdminServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/AdminServiceProvider.php',
         'Depicter\\WordPress\\AssetsServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/AssetsServiceProvider.php',
         'Depicter\\WordPress\\ContentTypesServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/ContentTypesServiceProvider.php',
@@ -1191,23 +1195,23 @@ class ComposerStaticInit6c394b427f610b12d128da881cef2e5e
         'TypeRocket\\Utility\\Value' => __DIR__ . '/..' . '/typerocket/core/src/Utility/Value.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-        'WPEmergeAppCore\\AppCore\\AppCore' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/AppCore/AppCore.php',
-        'WPEmergeAppCore\\AppCore\\AppCoreServiceProvider' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/AppCore/AppCoreServiceProvider.php',
-        'WPEmergeAppCore\\Application\\ApplicationMixin' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Application/ApplicationMixin.php',
-        'WPEmergeAppCore\\Assets\\Assets' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Assets/Assets.php',
-        'WPEmergeAppCore\\Assets\\AssetsServiceProvider' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Assets/AssetsServiceProvider.php',
-        'WPEmergeAppCore\\Assets\\Manifest' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Assets/Manifest.php',
-        'WPEmergeAppCore\\Avatar\\Avatar' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Avatar/Avatar.php',
-        'WPEmergeAppCore\\Avatar\\AvatarServiceProvider' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Avatar/AvatarServiceProvider.php',
-        'WPEmergeAppCore\\Concerns\\JsonFileInvalidException' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Concerns/JsonFileInvalidException.php',
-        'WPEmergeAppCore\\Concerns\\JsonFileNotFoundException' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Concerns/JsonFileNotFoundException.php',
-        'WPEmergeAppCore\\Concerns\\ReadsJsonTrait' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Concerns/ReadsJsonTrait.php',
-        'WPEmergeAppCore\\Config\\Config' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Config/Config.php',
-        'WPEmergeAppCore\\Config\\ConfigServiceProvider' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Config/ConfigServiceProvider.php',
-        'WPEmergeAppCore\\Image\\Image' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Image/Image.php',
-        'WPEmergeAppCore\\Image\\ImageServiceProvider' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Image/ImageServiceProvider.php',
-        'WPEmergeAppCore\\Sidebar\\Sidebar' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Sidebar/Sidebar.php',
-        'WPEmergeAppCore\\Sidebar\\SidebarServiceProvider' => __DIR__ . '/../..' . '/modules/wpemerge-app-core/src/Sidebar/SidebarServiceProvider.php',
+        'WPEmergeAppCore\\AppCore\\AppCore' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/AppCore/AppCore.php',
+        'WPEmergeAppCore\\AppCore\\AppCoreServiceProvider' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/AppCore/AppCoreServiceProvider.php',
+        'WPEmergeAppCore\\Application\\ApplicationMixin' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Application/ApplicationMixin.php',
+        'WPEmergeAppCore\\Assets\\Assets' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Assets/Assets.php',
+        'WPEmergeAppCore\\Assets\\AssetsServiceProvider' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Assets/AssetsServiceProvider.php',
+        'WPEmergeAppCore\\Assets\\Manifest' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Assets/Manifest.php',
+        'WPEmergeAppCore\\Avatar\\Avatar' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Avatar/Avatar.php',
+        'WPEmergeAppCore\\Avatar\\AvatarServiceProvider' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Avatar/AvatarServiceProvider.php',
+        'WPEmergeAppCore\\Concerns\\JsonFileInvalidException' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Concerns/JsonFileInvalidException.php',
+        'WPEmergeAppCore\\Concerns\\JsonFileNotFoundException' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Concerns/JsonFileNotFoundException.php',
+        'WPEmergeAppCore\\Concerns\\ReadsJsonTrait' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Concerns/ReadsJsonTrait.php',
+        'WPEmergeAppCore\\Config\\Config' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Config/Config.php',
+        'WPEmergeAppCore\\Config\\ConfigServiceProvider' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Config/ConfigServiceProvider.php',
+        'WPEmergeAppCore\\Image\\Image' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Image/Image.php',
+        'WPEmergeAppCore\\Image\\ImageServiceProvider' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Image/ImageServiceProvider.php',
+        'WPEmergeAppCore\\Sidebar\\Sidebar' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Sidebar/Sidebar.php',
+        'WPEmergeAppCore\\Sidebar\\SidebarServiceProvider' => __DIR__ . '/..' . '/averta/wpemerge-app-core/src/Sidebar/SidebarServiceProvider.php',
         'WPEmerge\\Application\\Application' => __DIR__ . '/..' . '/averta/wpemerge/src/Application/Application.php',
         'WPEmerge\\Application\\ApplicationMixin' => __DIR__ . '/..' . '/averta/wpemerge/src/Application/ApplicationMixin.php',
         'WPEmerge\\Application\\ApplicationServiceProvider' => __DIR__ . '/..' . '/averta/wpemerge/src/Application/ApplicationServiceProvider.php',
@@ -1315,10 +1319,10 @@ class ComposerStaticInit6c394b427f610b12d128da881cef2e5e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6c394b427f610b12d128da881cef2e5e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6c394b427f610b12d128da881cef2e5e::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6c394b427f610b12d128da881cef2e5e::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit6c394b427f610b12d128da881cef2e5e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit593761bf067e995d32f66290091f1344::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit593761bf067e995d32f66290091f1344::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit593761bf067e995d32f66290091f1344::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit593761bf067e995d32f66290091f1344::$classMap;
 
         }, null, ClassLoader::class);
     }

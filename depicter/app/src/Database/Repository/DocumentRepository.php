@@ -818,7 +818,7 @@ class DocumentRepository
 	 */
 	public function getFieldValue( $documentID, $fieldName = 'name' ){
 
-		if( $document = $this->document->findById( $documentID ) ){
+		if( $document = $this->document()->findById( $documentID ) ){
 			return $document->getFieldValue( $fieldName );
 		}
 		return null;

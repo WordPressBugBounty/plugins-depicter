@@ -54,6 +54,11 @@ trait CSSPropertiesTrait
 	/**
 	 * @var string|null
 	 */
+	public $stopColor;
+
+	/**
+	 * @var string|null
+	 */
 	public $stroke;
 
 	/**

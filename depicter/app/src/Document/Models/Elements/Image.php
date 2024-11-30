@@ -240,12 +240,23 @@ class Image extends Models\Element
 
 		$this->renderPictureWrapper();
 
-		if ( $this->hasFrame() ) {
-			Depicter::symbolsProvider()->addClipPath( $this->options->clipPath );
-		}
+		if ( false === strpos( $this->renderArgs['assetId'], 'http' ) ) {
 
-		$this->renderSourceTags();
-		$this->renderImageTag();
+			if ( $this->hasFrame() ) {
+				Depicter::symbolsProvider()->addClipPath( $this->options->clipPath );
+			}
+
+			$this->renderSourceTags();
+			$this->renderImageTag();
+
+		} else {
+			$img = Html::img( '', [
+				'src' => \Depicter::media()::IMAGE_PLACEHOLDER_SRC,
+				'data-depicter-src' => $this->renderArgs['assetId']
+			] );
+
+			$this->markup->nest( $img . "\n" );
+		}
 
 		return $this->markup;
 	}

@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "averta/core",
-            "version": "1.2.12",
-            "version_normalized": "1.2.12.0",
+            "version": "1.2.16",
+            "version_normalized": "1.2.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/averta-lab/php-core.git",
-                "reference": "6c0decee494cc44879103e73f1d00b82cdadff4e"
+                "reference": "4482d40fcbcc0ac1096a52cdd08404e55791f184"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/averta-lab/php-core/zipball/6c0decee494cc44879103e73f1d00b82cdadff4e",
-                "reference": "6c0decee494cc44879103e73f1d00b82cdadff4e",
+                "url": "https://api.github.com/repos/averta-lab/php-core/zipball/4482d40fcbcc0ac1096a52cdd08404e55791f184",
+                "reference": "4482d40fcbcc0ac1096a52cdd08404e55791f184",
                 "shasum": ""
             },
             "require": {
@@ -24,7 +24,7 @@
             "require-dev": {
                 "composer/installers": "^1"
             },
-            "time": "2024-08-22T07:57:46+00:00",
+            "time": "2024-10-01T10:46:53+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -53,23 +53,23 @@
             "support": {
                 "docs": "https://averta.net",
                 "issues": "https://github.com/averta-lab/php-core/issues",
-                "source": "https://github.com/averta-lab/php-core/tree/1.2.12"
+                "source": "https://github.com/averta-lab/php-core/tree/1.2.16"
             },
             "install-path": "../averta/core"
         },
         {
             "name": "averta/wordpress",
-            "version": "1.2.22",
-            "version_normalized": "1.2.22.0",
+            "version": "1.2.24",
+            "version_normalized": "1.2.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/averta-lab/wordpress.git",
-                "reference": "5a870f891db2a45881b9680aa41e53334bf5be05"
+                "reference": "e3afae7243760385c87f0ef96ead7838df87c1ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/averta-lab/wordpress/zipball/5a870f891db2a45881b9680aa41e53334bf5be05",
-                "reference": "5a870f891db2a45881b9680aa41e53334bf5be05",
+                "url": "https://api.github.com/repos/averta-lab/wordpress/zipball/e3afae7243760385c87f0ef96ead7838df87c1ba",
+                "reference": "e3afae7243760385c87f0ef96ead7838df87c1ba",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "roots/wordpress": "*",
                 "wp-coding-standards/wpcs": "^2.3"
             },
-            "time": "2024-08-28T13:45:03+00:00",
+            "time": "2024-11-26T10:15:03+00:00",
             "type": "library",
             "extra": {
                 "wordpress-install-dir": "vendor/wp-core"
@@ -119,14 +119,14 @@
             "support": {
                 "docs": "https://averta.net",
                 "issues": "https://github.com/averta-lab/wordpress/issues",
-                "source": "https://github.com/averta-lab/wordpress/tree/1.2.22"
+                "source": "https://github.com/averta-lab/wordpress/tree/1.2.24"
             },
             "install-path": "../averta/wordpress"
         },
         {
             "name": "averta/wpemerge",
-            "version": "0.9.4",
-            "version_normalized": "0.9.4.0",
+            "version": "0.9.5",
+            "version_normalized": "0.9.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/averta-lab/wpemerge.git",
@@ -204,6 +204,66 @@
                 "source": "https://github.com/htmlburger/wpemerge"
             },
             "install-path": "../averta/wpemerge"
+        },
+        {
+            "name": "averta/wpemerge-app-core",
+            "version": "0.18.0",
+            "version_normalized": "0.18.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/averta-lab/wpemerge-app-core.git",
+                "reference": "a2d6aa4e0a65c56426c68e9482e5039e996582e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/averta-lab/wpemerge-app-core/zipball/a2d6aa4e0a65c56426c68e9482e5039e996582e6",
+                "reference": "a2d6aa4e0a65c56426c68e9482e5039e996582e6",
+                "shasum": ""
+            },
+            "require": {
+                "averta/wpemerge": "~0.9.4"
+            },
+            "time": "2024-10-01T07:07:14+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "config.php"
+                ],
+                "psr-4": {
+                    "WPEmergeAppCore\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Averta",
+                    "homepage": "https://averta.net",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Atanas Angelov",
+                    "email": "hi@atanas.dev",
+                    "homepage": "https://atanas.dev/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "htmlBurger",
+                    "email": "info@htmlburger.com",
+                    "homepage": "http://htmlburger.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Core tools for the WP Emerge starter theme and plugin.",
+            "homepage": "https://wpemerge.com/",
+            "support": {
+                "issues": "https://github.com/averta-lab/wpemerge-app-core/issues",
+                "source": "https://github.com/averta-lab/wpemerge-app-core/tree/0.18.0"
+            },
+            "install-path": "../averta/wpemerge-app-core"
         },
         {
             "name": "composer/installers",
@@ -361,23 +421,23 @@
         },
         {
             "name": "foroco/php-browser-detection",
-            "version": "v2.7",
-            "version_normalized": "2.7.0.0",
+            "version": "v2.8",
+            "version_normalized": "2.8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/foroco/php-browser-detection.git",
-                "reference": "80d7bae823c150da82496b1bc94248febdd2c952"
+                "reference": "0a640254c6e61fe8e741d1e5c3495308cfec51c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/foroco/php-browser-detection/zipball/80d7bae823c150da82496b1bc94248febdd2c952",
-                "reference": "80d7bae823c150da82496b1bc94248febdd2c952",
+                "url": "https://api.github.com/repos/foroco/php-browser-detection/zipball/0a640254c6e61fe8e741d1e5c3495308cfec51c1",
+                "reference": "0a640254c6e61fe8e741d1e5c3495308cfec51c1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2023-04-27T13:56:18+00:00",
+            "time": "2024-09-03T14:39:47+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -409,7 +469,7 @@
             ],
             "support": {
                 "issues": "https://github.com/foroco/php-browser-detection/issues",
-                "source": "https://github.com/foroco/php-browser-detection/tree/v2.7"
+                "source": "https://github.com/foroco/php-browser-detection/tree/v2.8"
             },
             "install-path": "../foroco/php-browser-detection"
         },
@@ -534,17 +594,17 @@
         },
         {
             "name": "netresearch/jsonmapper",
-            "version": "v4.4.1",
-            "version_normalized": "4.4.1.0",
+            "version": "v5.0.0",
+            "version_normalized": "5.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cweiske/jsonmapper.git",
-                "reference": "132c75c7dd83e45353ebb9c6c9f591952995bbf0"
+                "reference": "8c64d8d444a5d764c641ebe97e0e3bc72b25bf6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/132c75c7dd83e45353ebb9c6c9f591952995bbf0",
-                "reference": "132c75c7dd83e45353ebb9c6c9f591952995bbf0",
+                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/8c64d8d444a5d764c641ebe97e0e3bc72b25bf6c",
+                "reference": "8c64d8d444a5d764c641ebe97e0e3bc72b25bf6c",
                 "shasum": ""
             },
             "require": {
@@ -558,7 +618,7 @@
                 "phpunit/phpunit": "~7.5 || ~8.0 || ~9.0 || ~10.0",
                 "squizlabs/php_codesniffer": "~3.5"
             },
-            "time": "2024-01-31T06:18:54+00:00",
+            "time": "2024-09-08T10:20:00+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -582,7 +642,7 @@
             "support": {
                 "email": "cweiske@cweiske.de",
                 "issues": "https://github.com/cweiske/jsonmapper/issues",
-                "source": "https://github.com/cweiske/jsonmapper/tree/v4.4.1"
+                "source": "https://github.com/cweiske/jsonmapper/tree/v5.0.0"
             },
             "install-path": "../netresearch/jsonmapper"
         },
@@ -915,17 +975,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.4.42",
-            "version_normalized": "5.4.42.0",
+            "version": "v5.4.47",
+            "version_normalized": "5.4.47.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "cef62396a0477e94fc52e87a17c6e5c32e226b7f"
+                "reference": "c4ba980ca61a9eb18ee6bcc73f28e475852bb1ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/cef62396a0477e94fc52e87a17c6e5c32e226b7f",
-                "reference": "cef62396a0477e94fc52e87a17c6e5c32e226b7f",
+                "url": "https://api.github.com/repos/symfony/console/zipball/c4ba980ca61a9eb18ee6bcc73f28e475852bb1ed",
+                "reference": "c4ba980ca61a9eb18ee6bcc73f28e475852bb1ed",
                 "shasum": ""
             },
             "require": {
@@ -963,7 +1023,7 @@
                 "symfony/lock": "",
                 "symfony/process": ""
             },
-            "time": "2024-07-26T12:21:55+00:00",
+            "time": "2024-11-06T11:30:55+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -997,7 +1057,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.4.42"
+                "source": "https://github.com/symfony/console/tree/v5.4.47"
             },
             "funding": [
                 {
@@ -1087,21 +1147,21 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.30.0",
-            "version_normalized": "1.30.0.0",
+            "version": "v1.31.0",
+            "version_normalized": "1.31.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "0424dff1c58f028c451efff2045f5d92410bd540"
+                "reference": "a3cc8b044a6ea513310cbd48ef7333b384945638"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/0424dff1c58f028c451efff2045f5d92410bd540",
-                "reference": "0424dff1c58f028c451efff2045f5d92410bd540",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/a3cc8b044a6ea513310cbd48ef7333b384945638",
+                "reference": "a3cc8b044a6ea513310cbd48ef7333b384945638",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "provide": {
                 "ext-ctype": "*"
@@ -1109,7 +1169,7 @@
             "suggest": {
                 "ext-ctype": "For best performance"
             },
-            "time": "2024-05-31T15:07:36+00:00",
+            "time": "2024-09-09T11:45:10+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1149,7 +1209,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -1169,26 +1229,26 @@
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
-            "version": "v1.30.0",
-            "version_normalized": "1.30.0.0",
+            "version": "v1.31.0",
+            "version_normalized": "1.31.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
-                "reference": "64647a7c30b2283f5d49b874d84a18fc22054b7a"
+                "reference": "b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/64647a7c30b2283f5d49b874d84a18fc22054b7a",
-                "reference": "64647a7c30b2283f5d49b874d84a18fc22054b7a",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe",
+                "reference": "b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "suggest": {
                 "ext-intl": "For best performance"
             },
-            "time": "2024-05-31T15:07:36+00:00",
+            "time": "2024-09-09T11:45:10+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1230,7 +1290,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -1250,26 +1310,26 @@
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.30.0",
-            "version_normalized": "1.30.0.0",
+            "version": "v1.31.0",
+            "version_normalized": "1.31.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
-                "reference": "a95281b0be0d9ab48050ebd988b967875cdb9fdb"
+                "reference": "3833d7255cc303546435cb650316bff708a1c75c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/a95281b0be0d9ab48050ebd988b967875cdb9fdb",
-                "reference": "a95281b0be0d9ab48050ebd988b967875cdb9fdb",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/3833d7255cc303546435cb650316bff708a1c75c",
+                "reference": "3833d7255cc303546435cb650316bff708a1c75c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "suggest": {
                 "ext-intl": "For best performance"
             },
-            "time": "2024-05-31T15:07:36+00:00",
+            "time": "2024-09-09T11:45:10+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1314,7 +1374,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -1334,21 +1394,21 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.30.0",
-            "version_normalized": "1.30.0.0",
+            "version": "v1.31.0",
+            "version_normalized": "1.31.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c"
+                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fd22ab50000ef01661e2a31d850ebaa297f8e03c",
-                "reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/85181ba99b2345b0ef10ce42ecac37612d9fd341",
+                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "provide": {
                 "ext-mbstring": "*"
@@ -1356,7 +1416,7 @@
             "suggest": {
                 "ext-mbstring": "For best performance"
             },
-            "time": "2024-06-19T12:30:46+00:00",
+            "time": "2024-09-09T11:45:10+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1397,7 +1457,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -1417,23 +1477,23 @@
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.30.0",
-            "version_normalized": "1.30.0.0",
+            "version": "v1.31.0",
+            "version_normalized": "1.31.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
-                "reference": "ec444d3f3f6505bb28d11afa41e75faadebc10a1"
+                "reference": "0f68c03565dcaaf25a890667542e8bd75fe7e5bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/ec444d3f3f6505bb28d11afa41e75faadebc10a1",
-                "reference": "ec444d3f3f6505bb28d11afa41e75faadebc10a1",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/0f68c03565dcaaf25a890667542e8bd75fe7e5bb",
+                "reference": "0f68c03565dcaaf25a890667542e8bd75fe7e5bb",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
-            "time": "2024-05-31T15:07:36+00:00",
+            "time": "2024-09-09T11:45:10+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1476,7 +1536,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php73/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-php73/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -1496,23 +1556,23 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.30.0",
-            "version_normalized": "1.30.0.0",
+            "version": "v1.31.0",
+            "version_normalized": "1.31.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433"
+                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/77fa7995ac1b21ab60769b7323d600a991a90433",
-                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
+                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
-            "time": "2024-05-31T15:07:36+00:00",
+            "time": "2024-09-09T11:45:10+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1559,7 +1619,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -1643,17 +1703,17 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.4.42",
-            "version_normalized": "5.4.42.0",
+            "version": "v5.4.47",
+            "version_normalized": "5.4.47.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "909cec913edea162a3b2836788228ad45fcab337"
+                "reference": "136ca7d72f72b599f2631aca474a4f8e26719799"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/909cec913edea162a3b2836788228ad45fcab337",
-                "reference": "909cec913edea162a3b2836788228ad45fcab337",
+                "url": "https://api.github.com/repos/symfony/string/zipball/136ca7d72f72b599f2631aca474a4f8e26719799",
+                "reference": "136ca7d72f72b599f2631aca474a4f8e26719799",
                 "shasum": ""
             },
             "require": {
@@ -1673,7 +1733,7 @@
                 "symfony/translation-contracts": "^1.1|^2",
                 "symfony/var-exporter": "^4.4|^5.0|^6.0"
             },
-            "time": "2024-07-20T18:38:32+00:00",
+            "time": "2024-11-10T20:33:58+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1712,7 +1772,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.4.42"
+                "source": "https://github.com/symfony/string/tree/v5.4.47"
             },
             "funding": [
                 {
@@ -1791,21 +1851,21 @@
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "3.8.1",
-            "version_normalized": "3.8.1.0",
+            "version": "3.9.0",
+            "version_normalized": "3.9.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "e331b534d7de10402d7545a0de50177b874c0779"
+                "reference": "90b98e6fe97d455679b1d288f050cad8f6f79771"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/e331b534d7de10402d7545a0de50177b874c0779",
-                "reference": "e331b534d7de10402d7545a0de50177b874c0779",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/90b98e6fe97d455679b1d288f050cad8f6f79771",
+                "reference": "90b98e6fe97d455679b1d288f050cad8f6f79771",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^7.5",
@@ -1813,7 +1873,7 @@
                 "wp-cli/wp-cli": "~2.5.0",
                 "yoast/phpunit-polyfills": "^2.0"
             },
-            "time": "2024-06-20T19:53:06+00:00",
+            "time": "2024-11-15T00:11:39+00:00",
             "type": "wordpress-plugin",
             "extra": {
                 "scripts-description": {
@@ -1831,7 +1891,7 @@
             "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.8.1"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.9.0"
             },
             "install-path": "../../wp-content/plugins/action-scheduler"
         }

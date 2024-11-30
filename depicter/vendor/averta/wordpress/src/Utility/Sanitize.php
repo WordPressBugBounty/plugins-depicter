@@ -424,7 +424,9 @@ class Sanitize
 	            'stroke-width' => [],
 	            'stroke' => [],
 	            'opacity' => [],
-                'style' => []
+                'style' => [],
+                'stroke-linecap' => [],
+                'stroke-linejoin' => []
 	        ],
 	        'g' => [
 	            'id' => [],
@@ -505,12 +507,15 @@ class Sanitize
 	            'y1'  => [],
 	            'y2'  => [],
 	            'spreadMethod'  => [],
-	            'gradientUnits' => []
+	            'gradientUnits' => [],
+                'gradienttransform' => [],
+                'xlink:href' => []
 	        ],
 	        'stop' => [
 	            'offset'     => [],
 	            'stop-color' => [],
-                'stop-opacity' => []
+                'stop-opacity' => [],
+                'class' => []
 	        ],
 	        'radialgradient' => [
                 'id' => [],
@@ -518,7 +523,8 @@ class Sanitize
                 'cy' => [],
                 'r'  => [],
                 'gradienttransform' => [],
-                'gradientunits' => []
+                'gradientunits' => [],
+                'xlink:href' => []
             ],
             'animate' => [
                 'attributename' => [],

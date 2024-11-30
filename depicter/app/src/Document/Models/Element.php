@@ -262,6 +262,10 @@ class Element
 			$this->type = 'form';
 		}
 
+		if ( $this->type == 'vector' && empty( $this->options->customColors ) ) {
+			$this->type = 'image';
+		}
+
 		$className = '\\Depicter\\Document\\Models\\Elements\\' . ucfirst( $this->type );
 		if ( class_exists( $className ) ) {
 			$mapper = new \JsonMapper();

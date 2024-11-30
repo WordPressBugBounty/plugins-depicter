@@ -5,7 +5,7 @@ use WPEmerge\ServiceProviders\ServiceProviderInterface;
 
 class WPCronServiceProvider implements ServiceProviderInterface
 {
- 
+
     /**
 	 * Register all dependencies in the IoC container.
 	 *
@@ -29,6 +29,7 @@ class WPCronServiceProvider implements ServiceProviderInterface
 
 		add_action( 'init', [ $this, 'set_cron_jobs' ] );
 		add_action( 'depicter_check_authorize', [ $this, 'check_user_authorize' ] );
+		add_action( 'depicter_collect_usage_data', [ $this, 'collectData' ], 10, 1 );
 	}
 
     /**
@@ -39,6 +40,10 @@ class WPCronServiceProvider implements ServiceProviderInterface
     public function set_cron_jobs() {
 		if ( ! wp_next_scheduled( 'depicter_check_authorize' ) ) {
 			wp_schedule_event( time(), 'twicedaily', 'depicter_check_authorize' );
+		}
+
+		if ( ! wp_next_scheduled( 'depicter_collect_usage_data' ) ) {
+			wp_schedule_event( time(), 'daily', 'depicter_collect_usage_data' );
 		}
 	}
 
@@ -60,4 +65,13 @@ class WPCronServiceProvider implements ServiceProviderInterface
         $timestamp = wp_next_scheduled( 'depicter_check_authorize' );
         wp_unschedule_event( $timestamp, 'depicter_check_authorize' );
     }
+
+	/**
+	 * Collect usage date if user accepts collecting data consent
+	 * @return void
+	 */
+	public function collectData() {
+		\Depicter::usageService()->collect();
+		\Depicter::usageService()->send();
+	}
 }

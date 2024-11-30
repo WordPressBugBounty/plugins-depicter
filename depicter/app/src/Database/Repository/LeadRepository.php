@@ -265,7 +265,7 @@ class LeadRepository
 
 		return [
 			'leads' => $leads,
-			'numberOfPages' => ceil( $numberOfLeads / $args['perPage'] ),
+			'numberOfPages' => !empty( $args['perPage'] ) ? ceil( $numberOfLeads / $args['perPage'] ) : 1,
 			'numberOfLeads' => $numberOfLeads,
 		];
 	}

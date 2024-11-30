@@ -21,6 +21,14 @@ class Svg extends States
 			if ( !empty( $this->{$device}->strokeWidth ) ) {
 				$css[ $device ][ 'stroke-width' ] = $this->{$device}->strokeWidth->value . $this->{$device}->strokeWidth->unit;
 			}
+
+			if ( !empty( $this->{$device}->color ) ) {
+				$css[ $device ][ 'color' ] = $this->{$device}->color;
+			}
+
+			if ( !empty( $this->{$device}->stopColor ) ) {
+				$css[ $device ][ 'stop-color' ] = $this->{$device}->stopColor;
+			}
 		}
 
 		return $css;

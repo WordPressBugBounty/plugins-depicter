@@ -2,8 +2,6 @@
 
 namespace Depicter\DataSources\Tags;
 
-use Averta\WordPress\Utility\Plugin;
-
 /**
  * Asset Group for WooCommerce
  *
@@ -23,7 +21,7 @@ class GooglePlace extends TagBase implements TagInterface {
 	 * @return string
 	 */
 	public function getName(){
-		return __( "Place", 'depicter' );
+		return __( "Place Details", 'depicter' );
 	}
 
 	/**

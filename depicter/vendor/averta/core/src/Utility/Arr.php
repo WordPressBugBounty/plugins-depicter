@@ -78,6 +78,28 @@ class Arr
 		return $args;
 	}
 
+    /**
+     * Merges the defined arguments into defaults array recursively.
+     *
+     * @param array $array    Value to merge with $defaults.
+     * @param array $defaults Array that serves as the defaults.
+     *
+     * @return array
+     */
+    public static function mergeDeep(array $array, array $defaults) {
+        $merged = $defaults;
+
+        foreach ($array as $key => $value) {
+            if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
+                $merged[$key] = static::mergeDeep($value, $merged[$key]);
+            } else {
+                $merged[$key] = $value;
+            }
+        }
+
+        return $merged;
+    }
+
 	/**
 	 *  Applies the callback to the elements of the given arrays recursively
 	 *

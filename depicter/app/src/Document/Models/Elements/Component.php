@@ -74,7 +74,7 @@ class Component extends Element
 				// Add SVG selector and css
 				$svgCss = $this->getSvgCss( $cssSelector );
 				$this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . $this->camelCaseToHyphenated( $cssSelector ) ] = array_merge_recursive( $generalCss, $svgCss );
-				$this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . $this->camelCaseToHyphenated( $cssSelector ) . ":hover" ] = $hoverCss;
+				$this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . $this->camelCaseToHyphenated( $cssSelector ) ]['hover'] = Arr::merge( $hoverCss['hover'] , $this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . $this->camelCaseToHyphenated( $cssSelector ) ]['hover']);
 			}
 		}
 

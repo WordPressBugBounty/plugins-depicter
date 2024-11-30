@@ -110,7 +110,7 @@ class Legacy extends TagBase implements TagInterface {
 				break;
 
 			case '{{{linkSlides}}}':
-				$result = !! $args['linkSlides'];
+				$result = ! empty( $args['linkSlides'] ) ? !! $args['linkSlides'] : true ;
 				break;
 
 			case '{{{url}}}':

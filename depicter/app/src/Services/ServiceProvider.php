@@ -109,6 +109,11 @@ class ServiceProvider implements ServiceProviderInterface
 			return new GoogleRecaptchaV3();
 		};
 		$app->alias( 'recaptcha', 'depicter.google.recaptcha' );
+
+		$container[ 'depicter.usage.service' ] = function () {
+			return new UsageService();
+		};
+		$app->alias( 'usageService', 'depicter.usage.service' );
 	}
 
 	/**
