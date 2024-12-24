@@ -152,7 +152,12 @@ class DocumentFontsV1Service
 		$fontsCss = "";
 
 		if( ! empty( $this->fonts[ $documentId ][ 'local' ] ) && is_array( $this->fonts[ $documentId ][ 'local' ] ) ){
-			foreach( $this->fonts[ $documentId ][ 'local' ] as $fontInfo ){
+			foreach( $this->fonts[ $documentId ][ 'local' ] as $key => $fontInfo ){
+				// Generate font face css style only for local/website fonts which used in the document
+				if ( ! empty( $this->fonts[ $documentId ]['google'] ) && ! in_array( $key, array_keys( $this->fonts[ $documentId ]['google'] ) ) ) {
+					continue;
+				}
+
 				if( is_array( $fontInfo['variants'] ) ){
 					foreach( $fontInfo['variants'] as $fontVariant ){
 						$fontsCss .= "@font-face{\n";

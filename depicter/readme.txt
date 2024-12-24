@@ -2,9 +2,9 @@
 Contributors: averta, averta_support, depicter1slider1support, depicter1carousel1popup1support
 Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.3.0
-Tested up to: WordPress 6.7.1
+Tested up to: WordPress 6.7.2
 Requires PHP: 7.4.0
-Stable tag: 3.6.0
+Stable tag: 3.6.1
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,16 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 
 == Changelog ==
 
+###3.6.1
+- *Released: 2024-12-24*
+- **Added**
+- Fixed an issue with opening the editor in the Safari browser.
+- An issue with changing the background image parallax effect parameters fixed.
+- Fixed an issue with displaying dynamic tags in post slider when autoLayout is enabled.   
+- **Improved**
+- Improved choosing the sliding transition experience in the editor.
+- Improved post slider functionality when "Include sticky posts" option is enabled.
+- Improved visibility schedule functionality for popup and notification bars.
 
 ###3.6.0
 - *Released: 2024-12-01*
@@ -77,7 +87,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - **🎨 Custom SVG color**: Now you can customize svg colors directly inside the editor!
 - **🔄 Publish history**: With publish history feature, you can now see the history of your published versions and revert to any of them.
 - **🔗 Deep-linking**: Make your slides or carousel items accessible via a unique URL.
-- ** Admin bar**: Quickly access for editing inserted sliders/carousels in a page using new admin bar. 
+- **Admin bar**: Quickly access for editing inserted sliders/carousels in a page using new admin bar. 
 - **Improved**
 - Enhanced overall performance of the editor.
 - Improved the before and after element behavior plus, added a new option to control the page scrolling while dragging the handle.

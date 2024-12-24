@@ -39,12 +39,21 @@ class UsageService {
 		$documents = \Depicter::documentRepository()->document()->where('parent', 0 )->get()->toArray();
 		$documentTypes = [];
 		$importantElements = [
-			'"type":"dpcCouponBox"' => 0,
-			'"type":"form"' => 0,
-			'"type":"wpShortcode"' => 0,
-			'"type":"dpcIframe"' => 0,
-			'"type":"dpcCountdown"' => 0,
-			'"datasource"' => 0
+			'"type":"dpcCouponBox"' => 'couponBox',
+			'"type":"form"' => 'form',
+			'"type":"wpShortcode"' => 'shortcode',
+			'"type":"dpcIframe"' => 'Iframe',
+			'"type":"dpcCountdown"' => 'countDown',
+			'"datasource"' => 'dataSource'
+		];
+
+		$importantElementsCount = [
+			'couponBox' => 0,
+			'form' => 0,
+			'shortcode' => 0,
+			'Iframe' => 0,
+			'countDown' => 0,
+			'dataSource' => 0
 		];
 
 		if ( !empty( $documents ) ) {
@@ -56,11 +65,13 @@ class UsageService {
 					$documentTypes[ $document['type'] ] = 1;
 				}
 
-				foreach( $importantElements as $element => $count ) {
-					$importantElements[ $element ] = $count + substr_count( $document['content'], $element );
+				foreach( $importantElements as $pattern => $element ) {
+					$importantElementsCount[ $element ] = $importantElementsCount[ $element ] + substr_count( $document['content'], $pattern );
 				}
 			}
 		}
+
+		$importantElementsCount = array_filter( $importantElementsCount );
 
 		$pageBuilders = [
 			'wpBakery' => 'Vc_Manager',
@@ -80,7 +91,7 @@ class UsageService {
 		$usage = [
 			'document_stat' => count( $documents ),
 			'document_types' => $documentTypes,
-			'important_elements' => $importantElements,
+			'important_elements' => $importantElementsCount,
 			'document_features' => '',
 			'wp_tools' => [
 				'themeName' => wp_get_theme()->get( 'Name' ),

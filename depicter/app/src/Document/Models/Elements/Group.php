@@ -18,6 +18,11 @@ class Group extends Models\Element
 
 		$div = Html::div( $args, "\n" );
 		foreach ( $this->childrenObjects as $element ) {
+			// if dataSheet is available for current group, assign it elements of this group as well
+			if( $this->getDataSheet() ){
+				$element->prepare()->setDataSheet( $this->getDataSheet() );
+			}
+
 			$div->nest( $element->prepare()->render() );
 		}
 

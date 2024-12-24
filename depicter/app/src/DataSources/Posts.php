@@ -75,7 +75,8 @@ class Posts extends DataSourceBase implements DataSourceInterface
 		    'post__not_in'    => $args['excludedIds'],
 		    'tax_query'       => [],
 			'meta_query'      => [],
-			'post_status'	  => 'publish'
+			'post_status'	  => 'publish',
+			'ignore_sticky_posts' => true
 	    ];
 
 		if( !empty( $args['s'] ) ){
@@ -109,25 +110,45 @@ class Posts extends DataSourceBase implements DataSourceInterface
 		    ];
 		}
 
-		if ( !empty( $args['sticky'] ) && Data::isTrue( $args['sticky'] ) && $queryArgs['post_type'] == 'post' ) {
-			$queryArgs['ignore_sticky_posts'] = false;
-		}
-
 		return new \WP_Query( $queryArgs );
 	}
 
 	public function previewRecords( array $args = [] ) {
 		$args = $this->prepare( $args );
-		$availableRecords = $this->getRecords( $args );
 
 		$records = [];
+		
+		// Check if user selects to include sticky posts then prepend them first because we ignore the sticky posts in the main query 
+		$stickyPostIDs = get_option('sticky_posts');
+		$includedIds = $args['includedIds'];
+		if ( !empty( $args['sticky'] ) && Data::isTrue( $args['sticky'] ) && ! empty( $stickyPostIDs ) && $args['postType'] == 'post' ) {
+			$args['includedIds'] = $stickyPostIDs;
+			$wp_query = $this->getRecords( $args );
+			$records = Arr::merge( $this->extractRecordsArray( $wp_query, $args ), $records );
 
-		if ( $availableRecords && $availableRecords->have_posts() ) {
+			// Modify query args to get remaining posts without considering sticky posts
+			$args['perpage'] = count( $stickyPostIDs ) >  $args['perpage'] ? 0 : $args['perpage'] - count( $stickyPostIDs);
+			$args['includedIds'] = $includedIds;
+			$args['excludedIds'] = Arr::merge( $stickyPostIDs, $args['excludedIds']);
+		}
+
+		if ( $args['perpage'] ) {
+			$wp_query = $this->getRecords( $args );
+			$records = Arr::merge( $this->extractRecordsArray( $wp_query, $args ), $records );
+		}
+
+		return $records;
+    }
+
+	public function extractRecordsArray( $wp_query, $args ) {
+		$records = [];
+
+		if ( $wp_query && $wp_query->have_posts() ) {
 			$acfModule = \Depicter::resolve( 'depicter.dataSources.tags.acf' );
 			$acfModuleAvailable = $acfModule->isAvailable();
 			$acfFields = $acfModule->getFieldGroups( $args );
 
-			foreach( $availableRecords->posts as $post ) {
+			foreach( $wp_query->posts as $post ) {
 				$featuredImage = null;
 				if( has_post_thumbnail( $post->ID ) ){
 					$featuredImageId = get_post_thumbnail_id( $post->ID );
@@ -214,7 +235,7 @@ class Posts extends DataSourceBase implements DataSourceInterface
 		}
 
 		return $records;
-    }
+	}
 
 	public function previewRecords2( array $args = [] ) {
 		$args = $this->prepare( $args );
@@ -282,17 +303,40 @@ class Posts extends DataSourceBase implements DataSourceInterface
 	 */
 	public function getDataSheetArgs( array $args = [] ){
 		$args = $this->prepare( $args );
-		$availableRecords = $this->getRecords( $args );
-
-		$dataSheetArgs = Arr::merge( $args, $this->properties );
 		$records = [];
 
-		if ( $availableRecords && $availableRecords->have_posts() ) {
+		// Check if user selects to include sticky posts then prepend them first because we ignore the sticky posts in the main query 
+		$stickyPostIDs = get_option('sticky_posts');
+		$includedIds = $args['includedIds'];
+		if ( !empty( $args['sticky'] ) && Data::isTrue( $args['sticky'] ) && ! empty( $stickyPostIDs ) && $args['postType'] == 'post' ) {
+			$args['includedIds'] = $stickyPostIDs;
+			$dataSheetArgs = Arr::merge( $args, $this->properties );
+			$wp_query = $this->getRecords( $args );
+			if ( $wp_query && $wp_query->have_posts() ) {
 
-			foreach( $availableRecords->posts as $post ) {
-				$postArgs = $dataSheetArgs;
-				$postArgs['post'] = $post;
-				$records[] = $postArgs;
+				foreach( $wp_query->posts as $post ) {
+					$postArgs = $dataSheetArgs;
+					$postArgs['post'] = $post;
+					$records[] = $postArgs;
+				}
+			}
+
+			// Modify query args to get remaining posts without considering sticky posts
+			$args['perpage'] = count( $stickyPostIDs ) >  $args['perpage'] ? 0 : $args['perpage'] - count( $stickyPostIDs);
+			$args['includedIds'] = $includedIds;
+			$args['excludedIds'] = Arr::merge( $stickyPostIDs, $args['excludedIds']);
+		}
+
+		if ( $args['perpage'] ) {
+			$wp_query = $this->getRecords( $args );
+			$dataSheetArgs = Arr::merge( $args, $this->properties );
+			if ( $wp_query && $wp_query->have_posts() ) {
+
+				foreach( $wp_query->posts as $post ) {
+					$postArgs = $dataSheetArgs;
+					$postArgs['post'] = $post;
+					$records[] = $postArgs;
+				}
 			}
 		}
 

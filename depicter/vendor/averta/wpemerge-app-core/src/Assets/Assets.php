@@ -181,7 +181,7 @@ class Assets {
 			$hot_url = wp_parse_url( $this->config->get( 'development.hotUrl', 'http://localhost/' ) );
 			$hot_port = $this->config->get( 'development.port', 3000 );
 
-			return "${hot_url['scheme']}://{$hot_url['host']}:{$hot_port}/{$url_path}{$suffix}{$extension}";
+			return "{$hot_url['scheme']}://{$hot_url['host']}:{$hot_port}/{$url_path}{$suffix}{$extension}";
 		}
 
 		return "{$this->getUrl()}/dist/{$url_path}{$suffix}{$extension}";

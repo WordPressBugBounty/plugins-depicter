@@ -21,6 +21,7 @@ use Depicter\Editor\EditorData;
 use Depicter\Front\Front;
 use Depicter\Front\Symbols;
 use Depicter\Modules\Modules;
+use Depicter\Services\BackgroundRemovalService;
 use Depicter\Services\ClientService;
 use Depicter\Services\ExportService;
 use Depicter\Services\GeoLocateService;
@@ -243,4 +244,9 @@ final class AppMixin
 	 * @return UsageService
 	 */
 	public static function usageService(): UsageService {}
+
+    /**
+     * @return BackgroundRemovalService
+     */
+    public static function backgroundRemoval(): BackgroundRemovalService {}
 }

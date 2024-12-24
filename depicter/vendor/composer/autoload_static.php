@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit593761bf067e995d32f66290091f1344
+class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -338,6 +338,7 @@ class ComposerStaticInit593761bf067e995d32f66290091f1344
         'Depicter\\Controllers\\Admin\\EditorController' => __DIR__ . '/../..' . '/app/src/Controllers/Admin/EditorController.php',
         'Depicter\\Controllers\\Ajax\\AIWizardController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/AIWizardController.php',
         'Depicter\\Controllers\\Ajax\\AppInfoAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/AppInfoAjaxController.php',
+        'Depicter\\Controllers\\Ajax\\BackgroundRemovalAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/BackgroundRemovalAjaxController.php',
         'Depicter\\Controllers\\Ajax\\CuratedAPIAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/CuratedAPIAjaxController.php',
         'Depicter\\Controllers\\Ajax\\DashboardAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/DashboardAjaxController.php',
         'Depicter\\Controllers\\Ajax\\DataCollectController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/DataCollectController.php',
@@ -696,6 +697,7 @@ class ComposerStaticInit593761bf067e995d32f66290091f1344
         'Depicter\\Services\\AssetsAPIService' => __DIR__ . '/../..' . '/app/src/Services/AssetsAPIService.php',
         'Depicter\\Services\\AuthenticationService' => __DIR__ . '/../..' . '/app/src/Services/AuthenticationService.php',
         'Depicter\\Services\\AuthorizationService' => __DIR__ . '/../..' . '/app/src/Services/AuthorizationService.php',
+        'Depicter\\Services\\BackgroundRemovalService' => __DIR__ . '/../..' . '/app/src/Services/BackgroundRemovalService.php',
         'Depicter\\Services\\ClientService' => __DIR__ . '/../..' . '/app/src/Services/ClientService.php',
         'Depicter\\Services\\DocumentFontsService' => __DIR__ . '/../..' . '/app/src/Services/DocumentFontsService.php',
         'Depicter\\Services\\DocumentFontsV1Service' => __DIR__ . '/../..' . '/app/src/Services/DocumentFontsV1Service.php',
@@ -1319,10 +1321,10 @@ class ComposerStaticInit593761bf067e995d32f66290091f1344
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit593761bf067e995d32f66290091f1344::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit593761bf067e995d32f66290091f1344::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit593761bf067e995d32f66290091f1344::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit593761bf067e995d32f66290091f1344::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1::$classMap;
 
         }, null, ClassLoader::class);
     }

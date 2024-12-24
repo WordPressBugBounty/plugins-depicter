@@ -74,7 +74,8 @@ class ImageEditor
 	 */
 	public static function originalFile( $file ) {
 		if ( is_numeric( $file ) ) {
-			return wp_get_attachment_image_src( $file, 'full')[0];
+			$attachment = wp_get_attachment_image_src( $file, 'full');
+			return $attachment ? $attachment[0] : '';
 		} else {
 			$urlHandler = new Url();
 			if ( $urlHandler->isUrl( $file ) ) {

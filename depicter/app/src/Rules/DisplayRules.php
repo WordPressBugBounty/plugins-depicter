@@ -166,7 +166,7 @@ class DisplayRules {
 	public function isVisible( $args = [] ){
 		$rules = $this->get();
 
-		if ( !empty( $args['isPrivilegedUser'] ) && !empty( $rules->visibilitySchedule ) && !empty( $rules->visibilitySchedule->enable ) ) {
+		if ( !empty( $rules->visibilitySchedule ) && !empty( $rules->visibilitySchedule->enable ) ) {
 			$visibilityTime = $rules->visibilitySchedule;
 			if ( !empty( $visibilityTime->start ) && ! \Depicter::schedule()->isDatePassed( $visibilityTime->start ) ) {
 				return false;

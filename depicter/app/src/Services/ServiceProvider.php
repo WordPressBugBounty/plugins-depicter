@@ -114,6 +114,11 @@ class ServiceProvider implements ServiceProviderInterface
 			return new UsageService();
 		};
 		$app->alias( 'usageService', 'depicter.usage.service' );
+
+        $container[ 'depicter.background.removal' ] = function () {
+            return new BackgroundRemovalService();
+        };
+        $app->alias( 'backgroundRemoval', 'depicter.background.removal' );
 	}
 
 	/**

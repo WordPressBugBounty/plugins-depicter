@@ -541,3 +541,15 @@ Depicter::route()->methods(['POST'])
         ->where('ajax', 'depicter-setting-update', true, true)
         ->middleware('csrf-api:depicter-editor|depicter-dashboard')
         ->handle('OptionsAjaxController@update');
+
+// Depicter background removal
+// ========================================================
+Depicter::route()->methods(['POST'])
+        ->where('ajax', 'depicter-background-removal-upload', true, true)
+        ->middleware('csrf-api:depicter-editor')
+        ->handle('BackgroundRemovalAjaxController@upload');
+
+Depicter::route()->methods(['GET'])
+        ->where('ajax', 'depicter-background-removal-check', true, true)
+        ->middleware('csrf-api:depicter-editor')
+        ->handle('BackgroundRemovalAjaxController@getRemovedBackgroundImage');
