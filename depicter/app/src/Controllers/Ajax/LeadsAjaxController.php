@@ -10,7 +10,7 @@ class LeadsAjaxController
     public function index(RequestInterface $request, $view)
     {
         $args = [
-            's'         => Sanitize::textfield($request->query('s', '')),
+            's'         => Sanitize::sql($request->query('s', '')),
             'sources'   => Sanitize::textfield($request->query('sources', '')),
             'dateStart' => Sanitize::textfield($request->query('dateStart', '')),
             'dateEnd'   => Sanitize::textfield($request->query('dateEnd', '')),
@@ -32,7 +32,7 @@ class LeadsAjaxController
     public function list(RequestInterface $request, $view)
     {
         $args = [
-            's'                => Sanitize::textfield($request->query('s', '')),
+            's'                => Sanitize::sql($request->query('s', '')),
             'ids'              => Sanitize::textfield($request->query('ids', '')),
             'sources'          => Sanitize::textfield($request->query('sources', '')),
             'dateStart'        => Sanitize::textfield($request->query('dateStart', '')),
@@ -162,7 +162,7 @@ class LeadsAjaxController
     public function export(RequestInterface $request, $view)
     {
         $args = [
-            's'                => Sanitize::textfield($request->query('s', '')),
+            's'                => Sanitize::sql($request->query('s', '')),
             'ids'              => Sanitize::textfield($request->query('ids', '')),
             'sources'          => Sanitize::textfield($request->query('sources', '')),
             'dateStart'        => Sanitize::textfield($request->query('dateStart', '')),

@@ -1,53 +1,46 @@
-=== Slider & Popup Builder by Depicter - Add Image Slider, Carousel Slider, Exit Intent Popup, Popup Modal, Coupon Popup, Post Slider Carousel ===
+=== Popup and Slider Builder by Depicter - Add Email collecting Popup, Popup Modal, Coupon Popup, Image Slider, Carousel Slider, Post Slider Carousel ===
+
 Contributors: averta, averta_support, depicter1slider1support, depicter1carousel1popup1support
 Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.3.0
-Tested up to: WordPress 6.7.2
+Tested up to: WordPress 6.8.1
 Requires PHP: 7.4.0
-Stable tag: 3.6.1
+Stable tag: 3.6.2
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
 
 == Description ==
-_Improve users engagement rate or sales by Depicter Slider and Popup builder._
-You can create engaging WordPress sliders, carousels, and slideshows like **layer slider, video slider, image slider, fullscreen slider, post slider, product slider, WooCommerce slider, testimonial slider, gallery slider and Elementor slider**. And, converting **Popup and Notification Bar**, like **Exit intent popup, promotion popup, cart-abandonment popup, campaign promoting notification bar**
-[Depicter Website](https://depicter.com/) | [Templates](https://depicter.com/templates/) | [YouTube](https://www.youtube.com/channel/UCUbrAq7xJAGqttWMC9SETkA) | [Support](https://wordpress.org/support/plugin/depicter "Depicter Slider Support") | [Test Drive](https://depicter.com/try "Depicter Slider Test Drive")
+
+_Improve users engagement rate or sales by Depicter **Popup**, **Notification Bar**, and Slider builder._
+
+You can create converting **Popup and Notification Bar**, like **Email subscription popup, Exit intent popup, promotion popup, cart‑abandonment popup, campaign promoting notification bar**. And you can also create engaging WordPress sliders, carousels, and slideshows like **layer slider, video slider, image slider, fullscreen slider, post slider, product slider, WooCommerce slider, testimonial slider, gallery slider and Elementor slider**.
+
+### Explore Popup, slider and more Templates
+- [Popup Templates](https://depicter.com/templates/#/popups/all-popups)
+- [Notification bar Templates](https://depicter.com/templates/#/notification-bars/all-notification-bars)
+- [Slider Templates](https://depicter.com/templates/#/sliders/all-sliders)
+- [Carousel Templates](https://depicter.com/templates/#/carousels/all-carousels)
+- [Hero Section Templates](https://depicter.com/templates/#/hero-sections/all-hero-sections)
 
 [youtube https://www.youtube.com/watch?v=YTf6kFyn52A&keywords=slider,popup,carousel,Exit-intent-popup,promotion-popup,cart-abandonment-popup,campaign-promoting-notification-bar,layer-slider,video-slider,image-slider,fullscreen-slider,post-slider,product-slider,WooCommerce-slider,testimonial-slider]
-Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.com/popup) | [Carousel](https://depicter.com/carousel) | [Notification bar](https://depicter.com/notification-bar) | [Hero Section](https://depicter.com/hero-section)
 
-### Explore Slider, Popup and more Templates
-- [Slider Templates](https://depicter.com/templates/#/sliders/all-sliders)
-- [Popup Templates](https://depicter.com/templates/#/popups/all-popups)
-- [Carousel Templates](https://depicter.com/templates/#/carousels/all-carousels)
-- [Notification bar Templates](https://depicter.com/templates/#/notification-bars/all-notification-bars)
-- [Hero Section Templates](https://depicter.com/templates/#/hero-sections/all-hero-sections)
-### Why Depicter?
+
+### Why Depicter is the best WordPress plugin for creating popups, sliders, and carousels?
+- **No limit on the number of popups, sliders, and carousels** — You can create unlimited popups, sliders, and carousels with Depicter.
+- **Massive Template Library** — It has a massive template library that allows you to create a popup, notification bar, slider, carousel, hero section and slideshow with just a few clicks.
 - **AI Powered** — It has AI, and it really works; you can create slider, popup _(soon)_, notification bar _(soon)_ with Depicter AI tool in seconds!
-  [youtube https://www.youtube.com/watch?v=kdR9Jw0yWjU&keywords=slider,popup,carousel,Exit-intent-popup,promotion-popup,cart-abandonment-popup,campaign-promoting-notification-bar,layer-slider,video-slider,image-slider,fullscreen-slider,post-slider,product-slider,WooCommerce-slider,testimonial-slider]
-- **Lightweight & SEO-Friendly** — It's super lightweight and dependency-free. Whether you create a slider, slideshow, popup, or notification bar, it delivers content optimized for search engines.
-- **One plugin with many possibilities** — Don't blow up your WordPress website with tons of plugins! This is a slider, popup builder, and notification bar builder plugin with countless possibilities to improve your WordPress website.
-- **Visual Builder** — Depicter comes with a professional, yet simple and intuitive visual builder that enables you to create sliders, popups, notification bars, carousels, hero section and slideshow.
-- **Asset optimization** - Depicter slider and Popup builder utilizes WebP, Adaptive images, lazy loading, and parallel loading to ensure quick loading of your slider, carousel or popup.
-- **Custom Fonts** - Using custom fonts on your website? Depicter editor takes care of them; you can access them with zero configurations to ensure your slider, popup, carousel content matches your site.
+- **Build in Form Builder** — It has a form builder that allow you to collect email, name, phone, and other information from your audience.
+- **Lightweight & SEO-Friendly** — It's super lightweight and dependency-free. Whether you create a popup, notification bar, slider, slideshow, or carousel, it delivers content optimized for search engines.
+- **One plugin with many possibilities** — Don't blow up your WordPress website with tons of plugins! This is a popup builder, notification bar builder, slider, and carousel plugin with countless possibilities to improve your WordPress website.
+- **Visual Builder** — Depicter comes with a professional, yet simple and intuitive visual builder that enables you to create popups, notification bars, sliders, carousels, hero section and slideshow.
+- **Asset optimization** — Depicter slider and Popup builder utilizes WebP, Adaptive images, lazy loading, and parallel loading to ensure quick loading of your popup, slider, carousel or notification bar.
+- **Custom Fonts** — Using custom fonts on your website? Depicter editor takes care of them; you can access them with zero configurations to ensure your popup, notification bar, slider, carousel content matches your site.
 
-[youtube https://www.youtube.com/watch?v=yi_NjXKlvmg&keywords=slider,popup,carousel,Exit-intent-popup,promotion-popup,cart-abandonment-popup,campaign-promoting-notification-bar,layer-slider,video-slider,image-slider,fullscreen-slider,post-slider,product-slider,WooCommerce-slider,testimonial-slider]
-### [Slider](https://depicter.com/slider) and [Carousel](https://depicter.net/carousel/) Features
-- **Responsive Slider and Carousel Layouts** - Ensure every slider and carousel is mobile-friendly and looks perfect on all devices.
-- **Slider and Carousel Animations** - Enhance sliders and carousels with engaging animations to capture user attention.
-- **Advanced Slider and Carousel Controls** - Equip sliders and carousels with comprehensive navigation options including arrows, bullets, and timers.
-- **Intuitive Slider and Carousel Navigation** - Depicter sliders and carousels support both touch swipe and mouse gestures for seamless interaction.
-- **Parallax Effects for Sliders and Carousels** - Apply scroll or 3D parallax effects to elements within sliders and carousels for dynamic visual impact.
-- **Fully Responsive Sliders and Carousels** - Optimize sliders and carousels for seamless display on desktops, tablets, or mobiles.
-- **Dynamic Slider and Carousel Content** - Create sliders and carousels with varied content, including post sliders, WooCommerce carousels, product sliders, and page carousels.
-- **WordPress Sliders and Carousels** - Build post sliders and carousels using WordPress posts or any custom post types for versatile content integration.
-- **Page builders compatibility** - Depicter slider, supports WordPress page builders so you can add a slider to the page with Elementor slider or carousel element, Divi Slider or carousel element, Beaver slider or carousel element, Oxygen slider or carousel element, and Depicter Slider or carousel Block.
-- **Video Backgrounds in Sliders and Carousels** - Incorporate Vimeo or YouTube videos as dynamic backgrounds in sliders and carousels.
-- **Slider and Carousel Scheduling** - Manage when sliders and carousels appear or are hidden on your site through precise scheduling.
 ### [Popup](https://depicter.com/popup) and [Notification Bar](https://depicter.com/notification-bar) Features
-- **Variety of [popup templates](https://depicter.com/templates/#/popups/all-popups) and [notification bar templates](https://depicter.com/templates/#/notification-bars/all-notification-bars)** - You can kickstart building popup and notification bar by using Depicter popup and notification bar templates.
+- **Variety of [popup templates](https://depicter.com/templates/#/popups/all-popups) and [notification bar templates](https://depicter.com/templates/#/notification-bars/all-notification-bars)**
+
+- You can kickstart building popup and notification bar by using Depicter popup and notification bar templates.
 - **Popup and notification bar display conditions** - With popup and notification bar display conditions, you can display targeted popups and notification bars to your audience based on their behavior and the pages they visit.
 - **Popup and notification bar audience targeting** - Target your popup and notification bar audience by device, browser, location, referral path, or custom cookie value.
 - **Popup and notification bar display scheduling** - Schedule the start and end time for your popup and notification bar display.
@@ -60,6 +53,26 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - **Mobile friendly popups and notification bars** - You have full control over any pieces of your popup and notification bar content responsively.
 - **Popup and notification bar with Animations And Effects** - Depicter popup and notification bar builder gives your the possibility of adding animation or parallax effect to any popup and notification bar element besides option of defining different popup and notification bar opening and closing animations.
 
+### [Slider](https://depicter.com/slider) and [Carousel](https://depicter.net/carousel/) Features
+- **Responsive Slider and Carousel Layouts** - Ensure every slider and carousel is mobile-friendly and looks perfect on all devices.
+- **Slider and Carousel Animations** - Enhance sliders and carousels with engaging animations to capture user attention.
+- **Advanced Slider and Carousel Controls** - Equip sliders and carousels with comprehensive navigation options including arrows, bullets, and timers.
+- **Intuitive Slider and Carousel Navigation** - Depicter sliders and carousels support both touch swipe and mouse gestures for seamless interaction.
+- **Parallax Effects for Sliders and Carousels** - Apply scroll or 3D parallax effects to elements within sliders and carousels for dynamic visual impact.
+- **Fully Responsive Sliders and Carousels** - Optimize sliders and carousels for seamless display on desktops, tablets, or mobiles.
+- **Dynamic Slider and Carousel Content** - Create sliders and carousels with varied content, including post sliders, WooCommerce carousels, product sliders, and page carousels.
+- **WordPress Sliders and Carousels** - Build post sliders and carousels using WordPress posts or any custom post types for versatile content integration.
+- **Page builders compatibility** - Depicter slider, supports WordPress page builders so you can add a slider to the page with Elementor slider or carousel element, Divi Slider or carousel element, Beaver slider or carousel element, Oxygen slider or carousel element, and Depicter Slider or carousel Block.
+- **Video Backgrounds in Sliders and Carousels** - Incorporate Vimeo or YouTube videos as dynamic backgrounds in sliders and carousels.
+- **Slider and Carousel Scheduling** - Manage when sliders and carousels appear or are hidden on your site through precise scheduling.
+
+**How to create a wordpress slider with Depicter**
+
+[youtube https://www.youtube.com/watch?v=yi_NjXKlvmg&keywords=slider,popup,carousel,Exit-intent-popup,promotion-popup,cart-abandonment-popup,campaign-promoting-notification-bar,layer-slider,video-slider,image-slider,fullscreen-slider,post-slider,product-slider,WooCommerce-slider,testimonial-slider]
+
+**Create a wordpress slider with AI in seconds**
+
+[youtube https://www.youtube.com/watch?v=kdR9Jw0yWjU&keywords=slider,popup,carousel,Exit-intent-popup,promotion-popup,cart-abandonment-popup,campaign-promoting-notification-bar,layer-slider,video-slider,image-slider,fullscreen-slider,post-slider,product-slider,WooCommerce-slider,testimonial-slider]
 
 == Screenshots ==
 
@@ -69,12 +82,17 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 
 == Changelog ==
 
+###3.6.2
+- *Released: 2025-05-05*
+- **Added**
+- Fixed a vulnerability issue.
+
 ###3.6.1
 - *Released: 2024-12-24*
 - **Added**
 - Fixed an issue with opening the editor in the Safari browser.
 - An issue with changing the background image parallax effect parameters fixed.
-- Fixed an issue with displaying dynamic tags in post slider when autoLayout is enabled.   
+- Fixed an issue with displaying dynamic tags in post slider when autoLayout is enabled.
 - **Improved**
 - Improved choosing the sliding transition experience in the editor.
 - Improved post slider functionality when "Include sticky posts" option is enabled.
@@ -87,7 +105,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - **🎨 Custom SVG color**: Now you can customize svg colors directly inside the editor!
 - **🔄 Publish history**: With publish history feature, you can now see the history of your published versions and revert to any of them.
 - **🔗 Deep-linking**: Make your slides or carousel items accessible via a unique URL.
-- **Admin bar**: Quickly access for editing inserted sliders/carousels in a page using new admin bar. 
+- **Admin bar**: Quickly access for editing inserted sliders/carousels in a page using new admin bar.
 - **Improved**
 - Enhanced overall performance of the editor.
 - Improved the before and after element behavior plus, added a new option to control the page scrolling while dragging the handle.
@@ -125,19 +143,19 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - Responsive background images: Now you can set different background images for different screen sizes.
 - **Improved**
 - Major improvement in the working with videos and their options.
-- **Fixed** 
+- **Fixed**
 - Fixed an issue where looped carousel items were not located correctly.
 - Fixed an issue with fade transition of slide.
 
 ###3.1.2
 - *Released: 2024-06-27*
-- **Fixed** 
+- **Fixed**
 - Fixed an issue where an unwanted notice appearing in WordPress admin.
 
 ###3.1.1
 - *Released: 2024-06-20*
 - **Added**
-- Flush Cache Option: Regenerate CSS and flush cache of sliders manually by new option added in Depicter setting page. 
+- Flush Cache Option: Regenerate CSS and flush cache of sliders manually by new option added in Depicter setting page.
 - **Fixed**
 - Fixed an issue where an unwanted watermark was appearing in the preview.
 
@@ -235,7 +253,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - Improved resizing elements by transform tool
 - Rendering text animations improved.
 - Improvement on text trim option of excerpt element for dynamic sliders applied.
-- Improvements for better compatibility with PHP 8.1+ applied.     
+- Improvements for better compatibility with PHP 8.1+ applied.
 - **Fixed**
 - Addressed a bug causing elements to disappear on Android browsers.
 - Resolved an issue with the layout of the templates list on the dashboard when viewed in Safari.
@@ -260,7 +278,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 ###2.0.2
 - *Released: 2023-11-24*
 - **Fixed**
-- A compatibility issue with Elementor while using shortcode with slug or alias fixed. 
+- A compatibility issue with Elementor while using shortcode with slug or alias fixed.
 
 ###2.0.0
 - *Released: 2023-11-22*
@@ -279,7 +297,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - **Improved**
 - Experience smoother project saving and loading in the editor, making your workflow more efficient.
 - Enjoy improved playback options with enhanced video elements for a more versatile viewing experience.
-- Get better search results while searching in your sliders in dashboard. 
+- Get better search results while searching in your sliders in dashboard.
 - Better support for system fonts is available now.
 - **Fixed**
 - An issue where applying custom styles to elements wasn’t working correctly has been resolved.
@@ -315,7 +333,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - *Released: 2023-06-10*
 - **Added**
 - Now you can enable, disable, or save Google Fonts locally on your host. (check plugin setting page).
-- Now you can enable or disable preloading of website resources (images and CSS) for faster page load speed. 
+- Now you can enable or disable preloading of website resources (images and CSS) for faster page load speed.
 - **Improved**
 - The swiping gesture and loop option are now turned off when only one slide is added to the slider.
 - Embedded videos now support lazy loading as well.
@@ -333,7 +351,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - **Added**
 - Depicter translated into Japanese and Dutch too.
 - **Fixed**
-- A medium-rated security vulnerability reported by Wordfence were fixed. 
+- A medium-rated security vulnerability reported by Wordfence were fixed.
 - An issue that caused the first slide of some sliders not to appear were fixed.
 - Some minor bugs were fixed.
 
@@ -376,7 +394,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 ###1.6.2
 - *Released: 2023-02-20*
 - **Improved**
-- Depicter is now fully compatible and integrated with Oxygen Builder plugin. 
+- Depicter is now fully compatible and integrated with Oxygen Builder plugin.
 
 ###1.6.0
 - *Released: 2023-02-09*
@@ -385,21 +403,21 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - Now you can add the Ken-burns effect to the slide background image (PRO).
 - Text animations are available now! You can add them to single and multiline text elements (PRO).
 - Introducing Clip and Reveal animation types (PRO).
-- Integration for Oxygen page builder applied. Now you can use Depicter element in Oxygen builder too. 
+- Integration for Oxygen page builder applied. Now you can use Depicter element in Oxygen builder too.
 - **Improved**
 - Generating thumbnails from slides are improved.
 - **Fixed**
 - A JS error on iOS 14 fixed.
 - An issue with border-radius and video elements on safari fixed.
 - An issue with applying vertical parallax effect fixed.
-- An issue with previewing slider on Nginx web server fixed. 
+- An issue with previewing slider on Nginx web server fixed.
 - An issue with the localization of the editor fixed.
 - An issue with disabling the hover effect on tablet and mobile breakpoints fixed.
 
 ###1.5.5
 - *Released: 2022-12-25*
 - **Added**
-- Introducing Handpicked Posts slider (PRO). Now you can handpick some posts to be displayed as a slider. 
+- Introducing Handpicked Posts slider (PRO). Now you can handpick some posts to be displayed as a slider.
 - Introducing WordPress Pages slider (PRO). Now you can display your website pages as a slider.
 - Introducing Handpicked Pages slider (PRO). Now you can handpick some pages to be displayed as a slider.
 - Introducing Handpicked Products slider (PRO). Now you can handpick some products to be displayed as a slider.
@@ -411,22 +429,22 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - An issue with responsive rotation of some elements fixed.
 - An issue with localization of Depicter Editor fixed.
 - **Improved**
-- Improvement for generating style for "In Stock Status" element applied. 
+- Improvement for generating style for "In Stock Status" element applied.
 
 ###1.5.2
-- *Released: 2022-12-11* 
+- *Released: 2022-12-11*
 - **Added**
 - New translations Dutch, Russian, and Chinese added.
 
 ###1.5.1
-- *Released: 2022-12-06* 
+- *Released: 2022-12-06*
 - **Added**
 - Now you can publish or open a slider in the editor from WordPress Blocks page.
 - **Fixed**
 - An issue with changing the slug of slider from editor fixed.
 
 ###1.5.0
-- *Released: 2022-11-24* 
+- *Released: 2022-11-24*
 - **Added**
 - More than 50 premium templates are available now
 - Now you can add parallax options to the elements and slide background (PRO).
@@ -438,15 +456,15 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - Overall performance of editor got improved.
 
 ###1.3.8
-- *Released: 2022-10-25* 
+- *Released: 2022-10-25*
 - **Added**
-- Now Depicter loads faster than ever before by parallel loading of slider assets. 
+- Now Depicter loads faster than ever before by parallel loading of slider assets.
 - New setting page and option added to load Depicter assets on entire pages of website.
 - **Improved**
 - Fullscreen laying out in mobile devices got improved.
 - Previewing slider changes in the editor got some improvements
 - Handing connection issues in the editor procedure improved.
-- List of sliders in page builder elements reordered by last modified date. 
+- List of sliders in page builder elements reordered by last modified date.
 - After importing a new slider the current breakpoint in the editor is always desktop.
 - Depicter markup is now completely valid for W3C standards.
 - **Fixed**
@@ -454,15 +472,15 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - Appearance of editor in RTL layout WordPress dashboards fixed.
 - An issue with loading i18n locale files fixed.
 - An issue with creating plugin tables after adding a new network site fixed.
-- Preventing errors if one of media files used in slider was deleted from media library. 
+- Preventing errors if one of media files used in slider was deleted from media library.
 - An issue with retrieving media links for websites with different uploads directory fixed.
 
 ###1.3.5
-- *Released: 2022-10-09* 
+- *Released: 2022-10-09*
 - **Added**
-- Depicter Element for Divi Page builder added. 
-- Now you can directly publish an unpublished slider in Divi page builder. 
-- Now you can directly publish an unpublished slider in WpBakery page builder. 
+- Depicter Element for Divi Page builder added.
+- Now you can directly publish an unpublished slider in Divi page builder.
+- Now you can directly publish an unpublished slider in WpBakery page builder.
 - **Improved**
 - Style and functionality of unpublished notice improved.
 - Fullscreen sizing in mobile screen sizes improved.
@@ -480,13 +498,13 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 ###1.3.2
 - *Released: 2022-09-24*
 - **Fixed**
-- An issue with loading custom styles of slider fixed. 
+- An issue with loading custom styles of slider fixed.
 - An issue with the edit button of slider in Elementor page builder fixed.
 
 ###1.3.1
 - *Released: 2022-09-21*
 - **Fixed**
-- An issue with loading styles of slider on some page builders fixed. 
+- An issue with loading styles of slider on some page builders fixed.
 - A minor error while using Depicter along with Elementor fixed.
 
 ###1.3.0
@@ -508,7 +526,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - Improved keyboard navigation behavior.
 - Page speed improvements for slider applied.
 - **Fixed**
-- SSL certificate error while importing templates fixed. 
+- SSL certificate error while importing templates fixed.
 - An issue with rending self-hosted videos cover photo on the editor.
 - Fixed an issue with overlapping slider preview with the preview modal.
 
@@ -529,7 +547,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 ###1.1.9
 - *Released: 2022-08-27*
 - **Fixed**
-- A conflict with WPBakery page builder fixed. 
+- A conflict with WPBakery page builder fixed.
 
 ###1.1.8
 - *Released: 2022-08-22*
@@ -588,7 +606,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - An issue with hiding children elements of a group element.
 - An issue with importing SVG files while importing a slider fixed.
 - An issue with "inherit" option of font family for text element fixed.
-- An issue with text letter-spacing with value of 0 fixed. 
+- An issue with text letter-spacing with value of 0 fixed.
 
 ###1.1.2
 - *Released: 2022-06-26*
@@ -699,7 +717,7 @@ Let's create: [Slider](https://depicter.com/slider) | [Popup](https://depicter.c
 - Out wrapper control elements were not clickable.
 - Foreground elements animation-in didn't play at initialization.
 - An issue with installations having old version of MySQL fixed.
-- An issue with wrong aspect ratio of uploaded images was fixed. 
+- An issue with wrong aspect ratio of uploaded images was fixed.
 - An issue with using `<?php depicter(); ?>` function fixed.
 
 ###0.9.4

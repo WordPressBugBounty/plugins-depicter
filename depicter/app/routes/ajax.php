@@ -501,10 +501,12 @@ Depicter::route()->methods(['GET'])
 // ========================================================
 Depicter::route()->methods(['GET'])
     ->where('ajax', 'depicter-lead-index', true, true)
+    ->middleware('csrf-api:depicter-dashboard')
     ->handle('LeadsAjaxController@index');
 
 Depicter::route()->methods(['GET'])
         ->where('ajax', 'depicter-lead-list', true, true)
+        ->middleware('csrf-api:depicter-dashboard')
         ->handle('LeadsAjaxController@list');
 
 Depicter::route()->methods(['POST'])
