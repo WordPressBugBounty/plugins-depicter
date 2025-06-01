@@ -152,6 +152,23 @@ class ImportService
 			}
 		}
 
+		preg_match_all( '/"src":\{[^\}]+\}/', $content, $backgroundImages, PREG_SET_ORDER );
+		if ( ! empty( $backgroundImages ) ) {
+			foreach( $backgroundImages as $backgroundImage ) {
+				if ( ! empty( $backgroundImage[0] ) ) {
+					$newBackgroundImage = $backgroundImage[0];
+					$patterns = [ '"default":"(\d+)"','"tablet":"(\d+)"','"mobile":"(\d+)"'];
+					foreach( $patterns as $pattern ) {
+						if ( preg_match( '/' . $pattern . '/', $backgroundImage[0], $asset ) ) {
+							$convertMedia = str_replace( $asset[1], $importedIDs[ $asset[1] ], $asset[0] );
+							$newBackgroundImage = str_replace( $asset[0], $convertMedia, $newBackgroundImage);
+						}
+					}
+					$content = str_replace( $backgroundImage[0], $newBackgroundImage, $content );
+				}
+			}
+		}
+
 		if ( !empty( $oldUploadURL ) && ! empty( $jsonAssets ) ) {
 			$oldUploadURL = str_replace( "/", "\\\\\\/", $oldUploadURL );
 			$pattern = "/$oldUploadURL\\\\\\/\\d+\\\\\\/\\d+\d+/";

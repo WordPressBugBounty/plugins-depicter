@@ -4,14 +4,17 @@ namespace Depicter\Document\Models;
 use Averta\Core\Utility\Arr;
 use Depicter\Document\CSS\Selector;
 use Depicter\Document\Helper\Helper;
+use Depicter\Document\Models\Elements\Form;
 use Depicter\Document\Models\Traits\HasDataSheetTrait;
 use Depicter\Document\Models\Traits\HasDocumentIdTrait;
+use Depicter\Document\Models\Traits\HasDocumentTypeTrait;
 use Depicter\Html\Html;
 
 class Section
 {
 	use HasDocumentIdTrait;
 	use HasDataSheetTrait;
+    use HasDocumentTypeTrait;
 
 	/**
 	 * @var string
@@ -22,6 +25,13 @@ class Section
 	 * @var string
 	 */
 	public $name;
+
+    /**
+     * Index|order of the section
+     *
+     * @var int|null
+     */
+    public $index;
 
 	/**
 	 * List of belonging element ids (assigns with jsonMapper)
@@ -217,7 +227,8 @@ class Section
 		$args = [
 			'id'          => $this->getCssID(),
 			'class'	      => $this->getClassNames(),
-			'data-name'   => $this->getName()
+			'data-name'   => $this->getName(),
+            'data-local-id' => $this->id
 		];
 
 		if ( !empty( $this->wrapperSize ) ) {
@@ -290,6 +301,13 @@ class Section
 		$this->styleList = Arr::merge( $this->styleList, $this->getSelectorAndCssList() );
 
 		if ( !empty( $this->elementObjects ) ) {
+
+            // adds a form tag on first section for survey document type
+			if ( $this->index === 0 && $this->isDocumentType('survey') ) {
+				$form = $this->renderSurveyForm();
+				$div->nest( "\n" . $form );
+			}
+
 			foreach ( $this->elementObjects as $elementObject ) {
 				// if dataSheet is available for current section, assign it elements of this section as well
 				if( $this->getDataSheet() ){
@@ -506,5 +524,35 @@ class Section
 		}
 
 		return ! empty( $formIDs ) ? $formIDs :  false;
+	}
+
+	/**
+	 * Render survey form
+	 *
+	 * @return string
+	 */
+	public function renderSurveyForm() {
+		$args = [
+			'data-wrap' => "false",
+			"data-responsive-scale" => "true,,",
+			"data-name" => "",
+			"data-local-id" => ""
+		];
+		$args['id'] = 'depicter-survey-form-' . $this->getDocumentID();
+		$args['class'] = "depicter-element depicter-layer depicter-label-top depicter-survey-form";
+		$args['class'] = str_replace('depicter- ', '', $args['class']);
+		$args['data-type'] = 'survey:form';
+
+		$formContent  = Html::input( 'hidden', 'action', 'depicter-lead-submit') . "\n";
+		$formContent .= Html::input( 'hidden', '_sourceId', $this->getDocumentID() ) . "\n";
+
+		$formContent .= Html::input( 'hidden', '_contentId', $this->getID() ) . "\n";
+		$formContent .= Html::input( 'hidden', '_contentName', $this->getName() ) . "\n";
+
+		$formContent .= Html::input( 'hidden', '_csrfToken', wp_create_nonce( 'depicter-csrf-lead-' . $this->getDocumentID() ) ) . "\n\n";
+
+		$form = Html::form( trim( wp_parse_url( self_admin_url( 'admin-ajax.php' ), PHP_URL_PATH ) ), 'post', $args, "\n" . $formContent );
+
+		return $form;
 	}
 }

@@ -106,7 +106,7 @@ class EditorAjaxController implements RestMethodsInterface
             }
 
             if (!empty($properties['editor'])) {
-                $documentHasForm = strpos($properties['editor'], '"type":"form"') ? 1 : 0;
+                $documentHasForm = strpos($properties['editor'], '"type":"form"') || strpos( $properties['editor'], '"documentType":"survey"') ? 1 : 0;
                 Depicter::document()->meta()->update($id, 'hasForm', $documentHasForm);
 
                 $documentHasShortcode = strpos($properties['editor'], '"type":"wpShortcode"') ? 1 : 0;
@@ -115,7 +115,7 @@ class EditorAjaxController implements RestMethodsInterface
 
             $result = Depicter::documentRepository()->saveEditorData($id, $properties);
 
-            if (false === $result) {
+            if (false === $result['result']) {
                 return Depicter::json(['errors' => ['Document does not exist.', $result]])->withStatus(404);
             }
 
@@ -264,7 +264,7 @@ class EditorAjaxController implements RestMethodsInterface
         // Get document ID
         $slug = Sanitize::textfield($request->body('slug'));
 
-        if (is_null($slug)) {
+        if (empty($slug)) {
             return Depicter::json(['errors' => ['Document slug is required.']])->withStatus(400);
         }
 

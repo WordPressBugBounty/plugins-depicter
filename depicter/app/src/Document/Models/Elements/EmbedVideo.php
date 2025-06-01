@@ -52,7 +52,7 @@ class EmbedVideo extends Models\Element{
 			$elementsAttrs['data-ending-time'] = $this->options->endingTime ?? "null";
 		}
 
-		$elementsAttrs['data-controls'] = esc_attr( $this->options->controls ) ?? "true";
+		$elementsAttrs['data-controls'] = isset( $this->options->controls ) ? esc_attr( $this->options->controls ) : "true";
 
 		$elementsAttrs['data-video-src'] = $this->options->source;
 		if ( $elementsAttrs['data-player-type'] == 'youtube' ) {

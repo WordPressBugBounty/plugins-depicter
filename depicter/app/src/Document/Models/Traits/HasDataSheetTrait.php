@@ -87,7 +87,7 @@ trait HasDataSheetTrait {
 	 * @return false
 	 */
 	public function isLinkedToDataSheet(){
-		return $this->maybeReplaceDataSheetTags('{{{linkSlides}}}', false) && $this->dataSource->type !== 'googlePlaceReview';
+		return $this->maybeReplaceDataSheetTags('{{{linkSlides}}}', false);
 	}
 
 	/**

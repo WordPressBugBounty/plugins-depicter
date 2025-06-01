@@ -5,7 +5,7 @@ Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.3.0
 Tested up to: WordPress 6.8.1
 Requires PHP: 7.4.0
-Stable tag: 3.6.2
+Stable tag: 4.0.0
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
@@ -66,11 +66,11 @@ You can create converting **Popup and Notification Bar**, like **Email subscript
 - **Video Backgrounds in Sliders and Carousels** - Incorporate Vimeo or YouTube videos as dynamic backgrounds in sliders and carousels.
 - **Slider and Carousel Scheduling** - Manage when sliders and carousels appear or are hidden on your site through precise scheduling.
 
-**How to create a wordpress slider with Depicter**
+**How to create a WordPress slider with Depicter**
 
 [youtube https://www.youtube.com/watch?v=yi_NjXKlvmg&keywords=slider,popup,carousel,Exit-intent-popup,promotion-popup,cart-abandonment-popup,campaign-promoting-notification-bar,layer-slider,video-slider,image-slider,fullscreen-slider,post-slider,product-slider,WooCommerce-slider,testimonial-slider]
 
-**Create a wordpress slider with AI in seconds**
+**Create a WordPress slider with AI in seconds**
 
 [youtube https://www.youtube.com/watch?v=kdR9Jw0yWjU&keywords=slider,popup,carousel,Exit-intent-popup,promotion-popup,cart-abandonment-popup,campaign-promoting-notification-bar,layer-slider,video-slider,image-slider,fullscreen-slider,post-slider,product-slider,WooCommerce-slider,testimonial-slider]
 
@@ -82,21 +82,41 @@ You can create converting **Popup and Notification Bar**, like **Email subscript
 
 == Changelog ==
 
-###3.6.2
-- *Released: 2025-05-05*
+###4.0.0
+- *Released: 2025-06-01*
 - **Added**
-- Fixed a vulnerability issue.
+- 📊 Introducing survey documents: Now you can create interactive surveys and collect valuable data from your visitors.
+- 🏞️ Introducing remove background feature: Easily remove the background of your photos with just one click.
+- 🎛️ Introducing layers panel: Now you can manage your elements layers easily.
+- Introducing hover switch element: Create image elements that change on hover (perfect for product images).
+- 🛒 Introducing add to cart element: Add an “Add to Cart” button on your WooCommerce sliders—supports both AJAX and non-AJAX.
+- Introducing hover slide action triggers: Trigger element actions simply by hovering over slide elements.
+- 🏷️ Sale badge element: Highlight discounts by adding sale badges to your WooCommerce sliders.
+- New display rules for popup & notification bar elements: Show or hide popups/notification bars based on user login status and language.
+- On form submit trigger to the submit element. Now you can bind any action to the form submit event through the submit button.
+- **Improved**
+- Improved player script performance: Enjoy faster loading and smoother functionality.
+- Improved rendering of carousels: Experience smoother transitions and better responsiveness.
+- Improved story progress indicator: Enhanced behavior for a more intuitive user experience.
+- Improved browser native scroll navigation behavior. Now it should work even the page body element has overflow hidden property.
+- Improved working with forms and group elements.
+- Improved editor auto document recovery. Now it considers auto patching on document to recover damaged documents.
+- **Fixed**
+- Fixed an issue with defining popup/notification bar click trigger on dynamically created elements like buttons in another slider.
+- Fixed an issue with using stock photos as ken-burns effect background.
+- Fixed an issue with "Best selling" filter for WooCommerce dataSource.
+- Fixed a security vulnerability.
 
 ###3.6.1
 - *Released: 2024-12-24*
-- **Added**
-- Fixed an issue with opening the editor in the Safari browser.
-- An issue with changing the background image parallax effect parameters fixed.
-- Fixed an issue with displaying dynamic tags in post slider when autoLayout is enabled.
 - **Improved**
 - Improved choosing the sliding transition experience in the editor.
 - Improved post slider functionality when "Include sticky posts" option is enabled.
 - Improved visibility schedule functionality for popup and notification bars.
+- **Fixed**
+- Fixed an issue with opening the editor in the Safari browser.
+- An issue with changing the background image parallax effect parameters fixed.
+- Fixed an issue with displaying dynamic tags in post slider when autoLayout is enabled.
 
 ###3.6.0
 - *Released: 2024-12-01*

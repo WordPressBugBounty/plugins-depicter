@@ -66,7 +66,7 @@ class MediaLibraryService
 					$hits[ $key ] = Arr::merge( $hits[ $key ], [
 						'width'  => $attachmentMeta['width'],
 						'height' => $attachmentMeta['height'],
-						"thumb"  => wp_get_attachment_image_src( $attachment->ID, 'depicter-thumbnail' )[0]
+						"thumb"  => wp_get_attachment_image_src( $attachment->ID, 'depicter-thumbnail' )[0] ?? ''
 					]);
 				}
 			}

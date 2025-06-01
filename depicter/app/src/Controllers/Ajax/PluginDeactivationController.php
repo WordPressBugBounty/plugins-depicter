@@ -3,6 +3,7 @@ namespace Depicter\Controllers\Ajax;
 
 use Depicter\GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
+use WPEmerge\Requests\RequestInterface;
 
 class PluginDeactivationController
 {
@@ -11,9 +12,9 @@ class PluginDeactivationController
 	 *
 	 * @return ResponseInterface
 	 */
-	public function sendFeedback(){
+	public function sendFeedback( RequestInterface $request, $view){
 
-		if ( empty( $_POST['issueRelatesTo'] ) ) {
+		if ( empty( $request->body('issueRelatesTo', '') ) ) {
 			return \Depicter::json([
 				'errors'   => "Empty deactivation reason"
 			])->withStatus(400 );
@@ -21,8 +22,8 @@ class PluginDeactivationController
 
 		$feedback = [
 			'issueType'         => 'deactivation',
-			'issueRelatesTo'    => sanitize_text_field( wp_unslash( $_POST['issueRelatesTo'] ) ),
-			'userDescription'   => ! empty( $_POST['userDescription'] ) ? sanitize_text_field( wp_unslash( $_POST['userDescription'] ) ) : ''
+			'issueRelatesTo'    => sanitize_text_field( wp_unslash( $request->body('issueRelatesTo', '') ) ),
+			'userDescription'   => ! empty( $request->body('userDescription', '') ) ? sanitize_text_field( wp_unslash( $request->body('userDescription', '') ) ) : ''
 		];
 
 		try {

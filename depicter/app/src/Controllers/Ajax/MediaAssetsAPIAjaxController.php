@@ -86,6 +86,12 @@ class MediaAssetsAPIAjaxController
 		$id   = ! empty( $request->query('id'  ) ) ? Sanitize::textfield( $request->query('id'  ) ) : '';
 		$size = ! empty( $request->query('size') ) ? Sanitize::textfield( $request->query('size') ) : 'medium';
 
+		if ( empty( $id ) ) {
+			return Depicter::json([
+				'errors' => [ __('id is empty', 'depicter' )]
+			])->withStatus(400);
+		}
+		
 		$args = [ 'event' => 'download' ];
 
 		if( ! empty( $request->query('w8') ) ){
@@ -128,6 +134,12 @@ class MediaAssetsAPIAjaxController
 		$id   = ! empty( $request->query('id'  ) ) ? Sanitize::textfield( $request->query('id'  ) ) : '';
 		$size = ! empty( $request->query('size') ) ? Sanitize::textfield( $request->query('size') ) : '';
 
+		if ( empty( $id ) ) {
+			return Depicter::json([
+				'errors' => [ __('id is empty', 'depicter' )]
+			])->withStatus(400);
+		}
+
 		$args = [];
 		if ( ! empty( $request->query('style') ) ) {
 			$args['style'] = Sanitize::textfield( $request->query('style') );
@@ -162,6 +174,12 @@ class MediaAssetsAPIAjaxController
 		$id   = ! empty( $request->query('id'  ) ) ? Sanitize::textfield( $request->query('id'  ) ) : '';
 		$size = ! empty( $request->query('size') ) ? Sanitize::textfield( $request->query('size') ) : 'large';
 
+		if ( empty( $id ) ) {
+			return Depicter::json([
+				'errors' => [ __('id is empty', 'depicter' )]
+			])->withStatus(400);
+		}
+		
 		try {
 			$mediaHotlinkUrl = \Depicter::media()->getSourceUrl( $id, $size );
 			return \Depicter::json([ 'url'=> $mediaHotlinkUrl ]);

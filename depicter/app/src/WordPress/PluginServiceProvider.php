@@ -26,10 +26,10 @@ class PluginServiceProvider implements ServiceProviderInterface
 		};
 		$app->alias( 'cli', 'depicter.wp.cli.service' );
 
-		$container[ 'depicter.admin.bar.service' ] = function () {
-			return new AdminBarService();
+		$container[ 'depicter.document.detector.service' ] = function () {
+			return new DocumentDetectorService();
 		};
-		$app->alias( 'adminBar', 'depicter.admin.bar.service' );
+		$app->alias( 'documentDetector', 'depicter.document.detector.service' );
 
 	}
 
@@ -45,9 +45,9 @@ class PluginServiceProvider implements ServiceProviderInterface
 		add_action( 'admin_init', [ $this, 'check_redirect_process' ] );
 		add_filter( 'update_plugin_complete_actions', [ $this, 'add_depicter_link_after_upgrade'], 10, 1);
 
-        add_action('admin_bar_menu', function( $wpAdminBar ){
-            \Depicter::adminBar()->init($wpAdminBar);
-        }, 99);
+		add_action('wp_enqueue_scripts', [ $this, 'enqueueGlobalScripts'], 99 );
+
+        add_action('admin_bar_menu', [ $this, 'initAdminBarMenu'], 99);
 
 		if ( defined('WP_CLI') && WP_CLI ) {
 			\WP_CLI::add_command( 'depicter', \Depicter::app()->cli() );
@@ -121,6 +121,33 @@ class PluginServiceProvider implements ServiceProviderInterface
 				// Redirect to the desired page
 				wp_safe_redirect( admin_url('admin.php?page=depicter-dashboard') );
 				exit;
+			}
+		}
+	}
+
+	public function enqueueGlobalScripts() {
+		if ( \Depicter::documentDetector()->hasAnyDocument() ) {
+			wp_add_inline_script( 'depicter--player', "window.depicterConfig = " . wp_json_encode([
+				"ajaxApiUrl" => esc_url( admin_url( 'admin-ajax.php' ) )
+			]), "before");
+		}
+	}
+
+	public function initAdminBarMenu( $wpAdminBar ){
+
+		if ( \Depicter::documentDetector()->hasAnyDocument() ) {
+			$wpAdminBar->add_node([
+				'id'    => 'depicter-menu',
+				'title' => __( 'Depicter', 'depicter' ),
+				'href'  => '#',
+			]);
+			foreach ( \Depicter::documentDetector()->getDocumentsList() as $documentID ) {
+				$wpAdminBar->add_node([
+					'id'    => 'depicter-submenu-' . $documentID,
+					'title' => \Depicter::documentRepository()->getFieldValue( $documentID, 'name' ),
+					'parent' => 'depicter-menu',
+					'href'  => admin_url('post.php?document=' . $documentID . '&action=depicter')
+				]);
 			}
 		}
 	}

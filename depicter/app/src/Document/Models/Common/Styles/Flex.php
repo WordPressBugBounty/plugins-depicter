@@ -39,6 +39,7 @@ class Flex extends States
 			if ( !empty( $this->{$device}->alignSelf ) ) {
 				$css[ $device ]['align-self'] = $this->{$device}->alignSelf;
 			}
+
 		}
 
 		return $css;

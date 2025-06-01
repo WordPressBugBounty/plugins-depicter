@@ -70,6 +70,7 @@ class RemoteAPIService
 				'Authorization'   => 'Bearer ' . $token
 			]
 		];
+
 	}
 
 	/**

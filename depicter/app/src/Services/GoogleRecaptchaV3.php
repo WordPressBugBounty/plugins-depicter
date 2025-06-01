@@ -51,7 +51,7 @@ class GoogleRecaptchaV3
 				return [
 					'success' => false,
 					'data'    => [
-						'score' => $result['score'],
+						'score' => $result['score'] ?? 0,
 						'host'  => $result['hostname'] ?? ''
 					],
 					'message' => $failMessage

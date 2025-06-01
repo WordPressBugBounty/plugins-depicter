@@ -206,4 +206,13 @@ class Base {
 				return false;
 		}
 	}
+
+	/**
+	 * Check if condition is visible or not
+	 *
+	 * @return boolean
+	 */
+	public function isVisible() {
+		return true;
+	}
 }

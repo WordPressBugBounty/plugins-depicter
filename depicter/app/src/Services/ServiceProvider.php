@@ -119,6 +119,11 @@ class ServiceProvider implements ServiceProviderInterface
             return new BackgroundRemovalService();
         };
         $app->alias( 'backgroundRemoval', 'depicter.background.removal' );
+
+        $container[ 'depicter.settings.manager' ] = function () {
+            return new SettingsManagerService();
+        };
+        $app->alias( 'settings', 'depicter.settings.manager' );
 	}
 
 	/**

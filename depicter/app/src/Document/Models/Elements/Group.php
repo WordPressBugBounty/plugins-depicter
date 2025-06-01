@@ -58,13 +58,42 @@ class Group extends Models\Element
 	 */
 	public function getFontsList()
 	{
+		$fontsList = parent::getFontsList();
 		if ( empty( $this->childrenObjects ) ) {
 			return '';
 		}
 
 		foreach ( $this->childrenObjects as $element ) {
-			$fontsList = ! empty( $element->prepare()->styles ) ? $element->prepare()->styles->getFontsList() : [];
-			\Depicter::app()->documentFonts()->addFonts( $element->getDocumentID(), $fontsList, 'google' );
+			if ( $this->type == 'group' ) {
+				$elementFontsList = $this->getGroupFonts($element);
+				$fontsList = Arr::merge( $elementFontsList, $fontsList);
+				continue;
+			}
+
+			$elementFontsList = ! empty( $element->prepare()->styles ) ? $element->prepare()->styles->getFontsList() : [];
+			\Depicter::app()->documentFonts()->addFonts( $element->getDocumentID(), $elementFontsList, 'google' );
+			$fontsList = Arr::merge( $elementFontsList, $fontsList);
+		}
+
+		return $fontsList;
+	}
+
+	public function getGroupFonts($element) {
+		$fontsList = [];
+		$element = $element->prepare();
+		if ( empty( $element->childrenObjects ) ) {
+			return '';
+		}
+
+		foreach ( $element->childrenObjects as $innerElement ) {
+			if ( $innerElement->type == 'group') {
+				$innerElementFontsList = $this->getGroupFonts($innerElement);
+				$fontsList = Arr::merge( $innerElementFontsList, $fontsList);
+				continue;
+			}
+
+			$innerElementFontsList = ! empty( $innerElement->prepare()->styles ) ? $innerElement->prepare()->styles->getFontsList() : [];
+			\Depicter::app()->documentFonts()->addFonts( $innerElement->getDocumentID(), $innerElementFontsList, 'google' );
 		}
 
 		return $fontsList;

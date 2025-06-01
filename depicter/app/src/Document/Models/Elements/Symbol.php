@@ -15,6 +15,15 @@ class Symbol extends Models\Element
 		}
 
 		$args = $this->getDefaultAttributes();
+
+		if ( ! empty( $this->options->disableOnFirst ) ) {
+			$args['data-disable-on-first'] = 'true';
+		}
+
+		if ( ! empty( $this->options->disableOnLast ) ) {
+			$args['data-disable-on-last'] = 'true';
+		}
+		
 		$div = Html::div( $args, "\n\t" . $symbolContent . "\n" );
 
 		if ( false !== $a = $this->getLinkTag() ) {

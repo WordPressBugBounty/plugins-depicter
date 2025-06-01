@@ -220,12 +220,14 @@ class MetaRepository
 			  'value' => $id
 			]
         ])->get();
-		foreach( $metas as $meta ){
-			$meta = $meta->toArray();
-			unset($meta['id']);
-			$meta['relation_id'] = $newRelationID;
-			if ( ! $this->add( $newRelationID, $meta['meta_key'], $meta['meta_value'], $meta['relation'] ) ) {
-				return false;
+		if ( ! empty( $metas ) ) {
+			foreach( $metas as $meta ){
+				$meta = $meta->toArray();
+				unset($meta['id']);
+				$meta['relation_id'] = $newRelationID;
+				if ( ! $this->add( $newRelationID, $meta['meta_key'], $meta['meta_value'], $meta['relation'] ) ) {
+					return false;
+				}
 			}
 		}
 

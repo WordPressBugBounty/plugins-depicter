@@ -87,7 +87,11 @@ class AutoLayout {
 			}
 
 			if ( !empty( $this->gap->{$device} ) ) {
-				$css[ $device ]['gap'] = is_numeric( $this->gap->{$device} ) ? $this->gap->{$device} . 'px' : $this->gap->{$device};
+				if ( is_numeric( $this->gap->{$device} ) ) {
+					$css[ $device ]['gap'] = $this->gap->{$device} . 'px';
+				} else if ( $this->gap->{$device} == 'auto' ) {
+					$css[ $device ]['justify-content'] = 'space-between';
+				}
 			}
 
 			if ( !empty( $this->wrap->{$device} ) ) {

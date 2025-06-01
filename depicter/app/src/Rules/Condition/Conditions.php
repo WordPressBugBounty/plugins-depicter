@@ -29,6 +29,7 @@ class Conditions {
 		'WordPress_InCategory',
 		'WordPress_HasTag',
 		'WordPress_IsAuthor',
+		'WordPress_IsLanguage',
 		'CPT_IsSingle',
 		'CPT_IsArchive',
 		'CPT_IsTax',
@@ -43,6 +44,7 @@ class Conditions {
 		'Audience_Device',
 		'Audience_Browser',
 		'Audience_Country',
+        'Audience_AuthenticatedStatus',
 		'Advanced_Cookie',
 		'Advanced_Referrer',
 		'Advanced_URL'
@@ -196,7 +198,9 @@ class Conditions {
 
 		foreach( $this->getIDs() as $conditionSlug ){
 			if( $conditionInstance = $this->find( $conditionSlug ) ){
-				$this->items[ $conditionSlug ] = $conditionInstance;
+				if ( $conditionInstance->isVisible() ) {
+					$this->items[ $conditionSlug ] = $conditionInstance;
+				}
 			}
 		}
 

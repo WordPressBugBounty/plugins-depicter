@@ -30,7 +30,7 @@ class HandPickedProducts extends Products {
 	protected array $defaultInputParams = [
 		'postType' => 'product',
 		'excerptLength' => 100,
-		'linkSlides' => true,
+		'linkSlides' => false,
 		'orderBy' => 'post__in',
 		'order' => 'DESC',
 		'imageSource' => 'featured',

@@ -56,6 +56,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         ),
         'D' => 
         array (
+            'Depicter\\Test\\' => 14,
             'Depicter\\Psr\\' => 13,
             'Depicter\\Jeffreyvr\\WPSettings\\' => 30,
             'Depicter\\GuzzleHttp\\' => 20,
@@ -131,8 +132,8 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Container\\' => 
         array (
@@ -141,6 +142,10 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'Depicter\\Test\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
         ),
         'Depicter\\Psr\\' => 
         array (
@@ -360,6 +365,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Controllers\\Ajax\\RulesAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/RulesAjaxController.php',
         'Depicter\\Controllers\\Ajax\\SubscriberAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/SubscriberAjaxController.php',
         'Depicter\\Controllers\\Ajax\\UserAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/UserAjaxController.php',
+        'Depicter\\Controllers\\Ajax\\WooCommerceAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/WooCommerceAjaxController.php',
         'Depicter\\Dashboard\\DashboardPage' => __DIR__ . '/../..' . '/app/src/Dashboard/DashboardPage.php',
         'Depicter\\Dashboard\\DashboardServiceProvider' => __DIR__ . '/../..' . '/app/src/Dashboard/DashboardServiceProvider.php',
         'Depicter\\Dashboard\\DashboardSettings' => __DIR__ . '/../..' . '/app/src/Dashboard/DashboardSettings.php',
@@ -457,6 +463,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Document\\Models\\Elements\\EmbedVideo' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/EmbedVideo.php',
         'Depicter\\Document\\Models\\Elements\\Form' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Form.php',
         'Depicter\\Document\\Models\\Elements\\Group' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Group.php',
+        'Depicter\\Document\\Models\\Elements\\HoverSwitchImage' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/HoverSwitchImage.php',
         'Depicter\\Document\\Models\\Elements\\Icon' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Icon.php',
         'Depicter\\Document\\Models\\Elements\\Image' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Image.php',
         'Depicter\\Document\\Models\\Elements\\LineTimer' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/LineTimer.php',
@@ -464,12 +471,15 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Document\\Models\\Elements\\Rating' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Rating.php',
         'Depicter\\Document\\Models\\Elements\\Scroll' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Scroll.php',
         'Depicter\\Document\\Models\\Elements\\Shape' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Shape.php',
+        'Depicter\\Document\\Models\\Elements\\Survey' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Survey.php',
         'Depicter\\Document\\Models\\Elements\\Svg' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Svg.php',
         'Depicter\\Document\\Models\\Elements\\Symbol' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Symbol.php',
         'Depicter\\Document\\Models\\Elements\\TagList' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/TagList.php',
         'Depicter\\Document\\Models\\Elements\\Text' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Text.php',
         'Depicter\\Document\\Models\\Elements\\Vector' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Vector.php',
         'Depicter\\Document\\Models\\Elements\\Video' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/Video.php',
+        'Depicter\\Document\\Models\\Elements\\WooAddToCart' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/WooAddToCart.php',
+        'Depicter\\Document\\Models\\Elements\\WooSaleBadge' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/WooSaleBadge.php',
         'Depicter\\Document\\Models\\Elements\\WooStockStatus' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/WooStockStatus.php',
         'Depicter\\Document\\Models\\Elements\\WpShortcode' => __DIR__ . '/../..' . '/app/src/Document/Models/Elements/WpShortcode.php',
         'Depicter\\Document\\Models\\Options\\Advanced' => __DIR__ . '/../..' . '/app/src/Document/Models/Options/Advanced.php',
@@ -489,6 +499,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Document\\Models\\Traits\\EntityPropertiesTrait' => __DIR__ . '/../..' . '/app/src/Document/Models/Traits/EntityPropertiesTrait.php',
         'Depicter\\Document\\Models\\Traits\\HasDataSheetTrait' => __DIR__ . '/../..' . '/app/src/Document/Models/Traits/HasDataSheetTrait.php',
         'Depicter\\Document\\Models\\Traits\\HasDocumentIdTrait' => __DIR__ . '/../..' . '/app/src/Document/Models/Traits/HasDocumentIdTrait.php',
+        'Depicter\\Document\\Models\\Traits\\HasDocumentTypeTrait' => __DIR__ . '/../..' . '/app/src/Document/Models/Traits/HasDocumentTypeTrait.php',
         'Depicter\\Document\\Models\\Traits\\HoverAbleStyleTrait' => __DIR__ . '/../..' . '/app/src/Document/Models/Traits/HoverAbleStyleTrait.php',
         'Depicter\\Document\\Models\\Traits\\MediaSourceTrait' => __DIR__ . '/../..' . '/app/src/Document/Models/Traits/MediaSourceTrait.php',
         'Depicter\\Document\\ServiceProvider' => __DIR__ . '/../..' . '/app/src/Document/ServiceProvider.php',
@@ -636,6 +647,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Modules\\Elementor\\SliderWidget' => __DIR__ . '/../..' . '/app/src/Modules/Elementor/SliderWidget.php',
         'Depicter\\Modules\\Modules' => __DIR__ . '/../..' . '/app/src/Modules/Modules.php',
         'Depicter\\Modules\\ModulesServiceProvider' => __DIR__ . '/../..' . '/app/src/Modules/ModulesServiceProvider.php',
+        'Depicter\\Modules\\WooCommerce\\Module' => __DIR__ . '/../..' . '/app/src/Modules/WooCommerce/Module.php',
         'Depicter\\Psr\\Http\\Client\\ClientExceptionInterface' => __DIR__ . '/../..' . '/modules/Psr/Http/Client/ClientExceptionInterface.php',
         'Depicter\\Psr\\Http\\Client\\ClientInterface' => __DIR__ . '/../..' . '/modules/Psr/Http/Client/ClientInterface.php',
         'Depicter\\Psr\\Http\\Client\\NetworkExceptionInterface' => __DIR__ . '/../..' . '/modules/Psr/Http/Client/NetworkExceptionInterface.php',
@@ -659,6 +671,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Rules\\Condition\\Advanced\\Cookie' => __DIR__ . '/../..' . '/app/src/Rules/Condition/Advanced/Cookie.php',
         'Depicter\\Rules\\Condition\\Advanced\\Referrer' => __DIR__ . '/../..' . '/app/src/Rules/Condition/Advanced/Referrer.php',
         'Depicter\\Rules\\Condition\\Advanced\\URL' => __DIR__ . '/../..' . '/app/src/Rules/Condition/Advanced/URL.php',
+        'Depicter\\Rules\\Condition\\Audience\\AuthenticatedStatus' => __DIR__ . '/../..' . '/app/src/Rules/Condition/Audience/AuthenticatedStatus.php',
         'Depicter\\Rules\\Condition\\Audience\\Browser' => __DIR__ . '/../..' . '/app/src/Rules/Condition/Audience/Browser.php',
         'Depicter\\Rules\\Condition\\Audience\\Country' => __DIR__ . '/../..' . '/app/src/Rules/Condition/Audience/Country.php',
         'Depicter\\Rules\\Condition\\Audience\\Device' => __DIR__ . '/../..' . '/app/src/Rules/Condition/Audience/Device.php',
@@ -683,6 +696,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Rules\\Condition\\WordPress\\IsArchive' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WordPress/IsArchive.php',
         'Depicter\\Rules\\Condition\\WordPress\\IsAuthor' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WordPress/IsAuthor.php',
         'Depicter\\Rules\\Condition\\WordPress\\IsCategory' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WordPress/IsCategory.php',
+        'Depicter\\Rules\\Condition\\WordPress\\IsLanguage' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WordPress/IsLanguage.php',
         'Depicter\\Rules\\Condition\\WordPress\\IsTag' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WordPress/IsTag.php',
         'Depicter\\Rules\\Condition\\WordPress\\Page' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WordPress/Page.php',
         'Depicter\\Rules\\Condition\\WordPress\\Post' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WordPress/Post.php',
@@ -712,6 +726,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Services\\MediaLibraryService' => __DIR__ . '/../..' . '/app/src/Services/MediaLibraryService.php',
         'Depicter\\Services\\RemoteAPIService' => __DIR__ . '/../..' . '/app/src/Services/RemoteAPIService.php',
         'Depicter\\Services\\ServiceProvider' => __DIR__ . '/../..' . '/app/src/Services/ServiceProvider.php',
+        'Depicter\\Services\\SettingsManagerService' => __DIR__ . '/../..' . '/app/src/Services/SettingsManagerService.php',
         'Depicter\\Services\\StorageService' => __DIR__ . '/../..' . '/app/src/Services/StorageService.php',
         'Depicter\\Services\\StyleGeneratorService' => __DIR__ . '/../..' . '/app/src/Services/StyleGeneratorService.php',
         'Depicter\\Services\\UsageService' => __DIR__ . '/../..' . '/app/src/Services/UsageService.php',
@@ -719,11 +734,11 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Utility\\Http' => __DIR__ . '/../..' . '/app/src/Utility/Http.php',
         'Depicter\\Utility\\Sanitize' => __DIR__ . '/../..' . '/app/src/Utility/Sanitize.php',
         'Depicter\\View\\ViewServiceProvider' => __DIR__ . '/../..' . '/app/src/View/ViewServiceProvider.php',
-        'Depicter\\WordPress\\AdminBarService' => __DIR__ . '/../..' . '/app/src/WordPress/AdminBarService.php',
         'Depicter\\WordPress\\AdminServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/AdminServiceProvider.php',
         'Depicter\\WordPress\\AssetsServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/AssetsServiceProvider.php',
         'Depicter\\WordPress\\ContentTypesServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/ContentTypesServiceProvider.php',
         'Depicter\\WordPress\\DeactivationFeedbackService' => __DIR__ . '/../..' . '/app/src/WordPress/DeactivationFeedbackService.php',
+        'Depicter\\WordPress\\DocumentDetectorService' => __DIR__ . '/../..' . '/app/src/WordPress/DocumentDetectorService.php',
         'Depicter\\WordPress\\EventsServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/EventsServiceProvider.php',
         'Depicter\\WordPress\\FileUploaderService' => __DIR__ . '/../..' . '/app/src/WordPress/FileUploaderService.php',
         'Depicter\\WordPress\\PermissionsServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/PermissionsServiceProvider.php',

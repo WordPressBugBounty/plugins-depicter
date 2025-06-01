@@ -387,7 +387,7 @@ class Document implements HydratableInterface
 		$this->stylesList[ '.'. $this->getStyleSelector() ]['beforeInitStyle'] = [
 			'.'. $this->getStyleSelector() => $this->options->getStyles(),
 			'.'. $this->getStyleSelector( true ) . ':not(.depicter-ready)' => $this->options->getBeforeInitStyles(), // styles to prevent FOUC. It should not have depicter-revert class in selector
-			'.'. $this->getStyleSelector() . ' .depicter-primary-container' => $this->options->getPrimaryContainerStyles(),
+			'.'. $this->getStyleSelector() => $this->options->getPrimaryContainerStyles(),
 		];
 
 		return $this->stylesList;
@@ -626,9 +626,15 @@ class Document implements HydratableInterface
 	 * Here Objects can be element or section
 	 */
 	protected function setElementsForObjects(){
+        $index = 0;
 		foreach ( $this->sections as $section ){
 			// Assign document ID to all sections
 			$section->setDocumentID( $this->getDocumentID() );
+            $section->setDocumentType( $this->getType() );
+            // set index (order) for this section
+            $section->index = $index;
+            $index++;
+            // set elements for this section
 			$this->setElementsForOneObjects( $section );
 		}
 

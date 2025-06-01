@@ -35,7 +35,7 @@ class Products extends Posts implements DataSourceInterface {
 		'perpage' => 5,
 		'excerptLength' => 100,
 		'offset' => 0,
-		'linkSlides' => true,
+		'linkSlides' => false,
 		'orderBy' => 'date',
 		'order' => 'DESC',
 		'imageSource' => 'featured',
@@ -123,6 +123,7 @@ class Products extends Posts implements DataSourceInterface {
                     break;
 
                 case 'best-selling':
+					$queryArgs['meta_key'] = 'total_sales';
                     $queryArgs['orderby'] = 'meta_value_num';
                     break;
 
@@ -336,6 +337,7 @@ class Products extends Posts implements DataSourceInterface {
 					'regularPrice' => wc_price( $product->get_regular_price() ) . $product->get_price_suffix(),
 					'salePrice' => $product->is_on_sale() ? wc_price( $product->get_sale_price() ) . $product->get_price_suffix() : '',
 					'onSale' => $product->is_on_sale(),
+                    'onSaleText' => $product->is_on_sale() ? __( 'Sale', 'depicter' ) : '',
 					'rating' => $product->get_average_rating(),
 					'ratingCount' => $product->get_rating_count(),
 					'reviewCount' => $product->get_review_count(),
@@ -343,7 +345,15 @@ class Products extends Posts implements DataSourceInterface {
 					'stockStatus'  => $this->getStockStatus( $product ),
 					'stockStatusClass' => $product->is_in_stock() ? 'in-stock' : 'out-of-stock',
 					'isInStock'    => $product->is_in_stock(),
-					'stockQuantity'=> $product->get_stock_quantity()
+					'stockQuantity'=> $product->get_stock_quantity(),
+                    'isPurchasable'=> $product->is_purchasable(),
+                    'addToCart' => [
+                        'url' => esc_url( $product->add_to_cart_url() ),
+                        'text' => null !== $product->add_to_cart_text() ? $product->add_to_cart_text() : __( 'Add to cart', 'depicter' ),
+                        'cartUrl' => esc_url( apply_filters( 'woocommerce_add_to_cart_redirect', wc_get_cart_url(), null ) ),
+                        'purchasable' => $product->is_purchasable() && $product->is_in_stock(),
+                        'canUseAjax' => $this->productSupportsAjaxAddToCart( $product ),
+                    ],
 				];
 
 				$taxonomies = get_object_taxonomies( $args['postType'], 'objects' );
@@ -395,4 +405,15 @@ class Products extends Posts implements DataSourceInterface {
 		}
 		return apply_filters( 'woocommerce_admin_stock_html', $stock_html, $product );
 	}
+
+    /**
+     * Whether product can be added to cart via ajax or not
+     *
+     * @param $product
+     *
+     * @return bool
+     */
+    protected function productSupportsAjaxAddToCart( $product ) {
+        return (get_option( 'woocommerce_enable_ajax_add_to_cart' ) === 'yes') && $product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock();
+    }
 }

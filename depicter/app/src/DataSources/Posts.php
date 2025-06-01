@@ -36,7 +36,7 @@ class Posts extends DataSourceBase implements DataSourceInterface
 		'perpage' => 5,
 		'excerptLength' => 55,
 		'offset' => 0,
-		'linkSlides' => true,
+		'linkSlides' => false,
 		'orderBy' => 'post__in',
 		'order' => 'DESC',
 		'imageSource' => 'featured',

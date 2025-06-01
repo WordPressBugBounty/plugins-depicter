@@ -65,8 +65,11 @@ class Bullet extends Models\Element
 				$styles[ $device ]['border-radius'] = $this->getBulletItemBorderRadius( $this->options->bullet->styles->corner->{$device} );
 			}
 
-			if ( isset( $this->options->bullet->styles->size->{$device} ) ) {
+			if ( isset( $this->options->bullet->styles->size->{$device} ) && isset( $this->options->bullet->styles->size->{$device}->width ) ) {
 				$styles[ $device ]['width']  = $this->options->bullet->styles->size->{$device}->width->value . $this->options->bullet->styles->size->{$device}->width->unit;
+			}
+
+			if ( isset( $this->options->bullet->styles->size->{$device} ) && isset( $this->options->bullet->styles->size->{$device}->height ) ) {
 				$styles[ $device ]['height'] = $this->options->bullet->styles->size->{$device}->height->value . $this->options->bullet->styles->size->{$device}->height->unit;
 			}
 		}

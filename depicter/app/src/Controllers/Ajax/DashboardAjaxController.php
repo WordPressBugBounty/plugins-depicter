@@ -28,6 +28,7 @@ class DashboardAjaxController {
 			'order' => !empty( $request->query('order' ) ) ? Sanitize::textfield( $request->query('order') ) : 'DESC',
 			's' => !empty( $request->query('s' ) ) ? Sanitize::textfield( $request->query('s') ) : '',
 			'has' => !empty( $request->query('has' ) ) ? Sanitize::textfield( $request->query('has') ) : '',
+			'types' => !empty( $request->query('types' ) ) ? Sanitize::textfield( $request->query('types') ) : '',
 		];
 
 		$args['has'] = $args['has'] ? explode(',', $args['has'] ) : '';

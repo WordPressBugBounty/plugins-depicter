@@ -3,6 +3,7 @@ namespace Depicter\Document\Models\Elements;
 
 use Averta\Core\Utility\Arr;
 use Depicter\Document\CSS\Selector;
+use Depicter\Document\Helper\Helper;
 use Depicter\Document\Models;
 use Depicter\Document\Models\Common\Styles;
 use Depicter\Html\Html;
@@ -187,30 +188,7 @@ class Form extends Models\Element
 			$this->selectorCssList = Arr::merge( $this->selectorCssList, $element->prepare()->getSelectorAndCssList() );
 		}
 
-		$innerStyles = $this->prepare()->innerStyles;
-		if ( !empty( $innerStyles ) ) {
-
-			foreach( $innerStyles as $cssSelector => $styles ){
-				if ( empty( $styles ) || ! $styles instanceof Styles ) {
-					continue;
-				}
-
-				$generalCss = $innerStyles->{$cssSelector}->getGeneralCss('normal');
-				$this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . $this->camelCaseToHyphenated( $cssSelector ) ] = $generalCss;
-			}
-		}
-
 		return $this->selectorCssList;
-	}
-
-	/**
-	 * change a string from camelCase style to hyphenated style
-	 * @param $inputString
-	 *
-	 * @return string
-	 */
-	public function camelCaseToHyphenated( $inputString ) {
-		return strtolower( preg_replace('/(?<!^)[A-Z]/', '-$0', $inputString ) );
 	}
 
 	/**
@@ -218,7 +196,7 @@ class Form extends Models\Element
 	 *
 	 * @return string
 	 */
-	protected function getSubmitPath(){
+	public function getSubmitPath(){
 		return trim( wp_parse_url( self_admin_url( 'admin-ajax.php' ), PHP_URL_PATH ) );
 	}
 }

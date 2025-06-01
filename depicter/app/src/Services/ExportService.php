@@ -65,6 +65,20 @@ class ExportService
 			}
 		}
 
+		preg_match_all( '/"src":\{[^\}]+\}/', $jsonContent, $backgroundImages, PREG_SET_ORDER );
+		if ( ! empty( $backgroundImages ) ) {
+			foreach( $backgroundImages as $backgroundImage ) {
+				if ( ! empty( $backgroundImage[0] ) ) {
+					$patterns = [ '"default":"(\d+)"','"tablet":"(\d+)"','"mobile":"(\d+)"'];
+					foreach( $patterns as $pattern ) {
+						if ( preg_match( '/' . $pattern . '/', $backgroundImage[0], $asset ) ) {
+							$assetIDs[] = $asset[1];
+						}	
+					}
+				}
+			}
+		}
+
 		$jsonAssets = [];
 		if ( strpos( $jsonContent, 'dpcLottie') ) {
 			preg_match_all( '/"src":"(http[^"]+?.json)/', $jsonContent, $jsonFiles, PREG_SET_ORDER );

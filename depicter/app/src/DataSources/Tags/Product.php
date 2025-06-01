@@ -62,6 +62,24 @@ class Product extends TagBase implements TagInterface {
 					'src'    => $this->wrapCurly( 'product->secondaryImage.src' )
 				]
 			],
+            [
+                'id'    => 'addToCart',
+                'title' => __( 'Add to cart button', 'depicter' ),
+                'previewOptions' => [
+                    "size" => 50,
+                    'variant' => 'woo',
+                    'buttonText' => __( 'Add to Cart', 'depicter' ),
+                    'badge' => null
+                ],
+                'type'  => 'dynamicAddToCart',
+                'func'  => null,
+                'payload' => [
+                    'url' => $this->wrapCurly( 'product->addToCart.url' ),
+                    'source' => $this->wrapCurly( 'product->addToCart.text' ),
+                    'purchasable' => $this->wrapCurly( 'product->addToCart.purchasable' ),
+                    'canUseAjax' => $this->wrapCurly( 'product->addToCart.canUseAjax' ),
+                ]
+            ],
 			[
 				'id'    => 'price',
 				'title' => __( 'Product price', 'depicter' ),
@@ -137,6 +155,22 @@ class Product extends TagBase implements TagInterface {
 					'source' => $this->wrapCurly( 'product->ratingCount' )
 				]
 			],
+            [
+                'id'    => 'saleBadge',
+                'title' => __( 'Sale badge', 'depicter' ),
+                'previewOptions' => [
+                    "size" => 50,
+                    'multiline' => false,
+                    'textSize' => 'regular',
+                    'badge' => null,
+                    'variant' => 'saleBadge'
+                ],
+                'type'  => 'dynamicText',
+                'func'  => null,
+                'payload' => [
+                    'source' => $this->wrapCurly( 'product->onSaleText' )
+                ]
+            ],
 			[
 				'id'    => 'shortDescription',
 				'title' => __( 'Short description', 'depicter' ),
@@ -261,6 +295,10 @@ class Product extends TagBase implements TagInterface {
 				$result = $product->get_rating_count();
 				break;
 
+            case 'onSaleText':
+                $result = $product->is_on_sale() ? __( 'Sale', 'depicter' ) : '';
+                break;
+
 			case 'shortDescription':
 				$result = $product->get_short_description();
 				break;
@@ -268,6 +306,26 @@ class Product extends TagBase implements TagInterface {
 			case 'stockStatus':
 				$result = $this->getStockStatus( $product );
 				break;
+
+            case 'addToCart.url':
+                $result = esc_url( $product->add_to_cart_url() );
+                break;
+
+            case 'addToCart.text':
+                $result = null !== $product->add_to_cart_text() ? $product->add_to_cart_text() : __( 'Add to cart', 'depicter' );
+                break;
+
+            case 'addToCart.cartUrl':
+                $result = esc_url( apply_filters( 'woocommerce_add_to_cart_redirect', wc_get_cart_url(), null ) );
+                break;
+
+            case 'addToCart.purchasable':
+                $result = $product->is_purchasable() && $product->is_in_stock();
+                break;
+
+            case 'addToCart.canUseAjax':
+                $result = (get_option( 'woocommerce_enable_ajax_add_to_cart' ) === 'yes') && $product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock();
+                break;
 
 			case 'stockStatusClass':
 				$result = $product->is_in_stock() ? 'in-stock' : 'out-of-stock';

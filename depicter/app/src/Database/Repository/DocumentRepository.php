@@ -44,6 +44,11 @@ class DocumentRepository
 	 */
 	public function saveEditorData( int $id = 0, array $properties = [] )
 	{
+
+		if ( $id && $document = $this->document()->findById( $id ) ) {
+			$this->document = $document;
+		}
+		
 		if( isset( $properties['editor'] ) ){
 			$editor = $properties['editor'];
 			unset( $properties['editor'] );
@@ -88,8 +93,8 @@ class DocumentRepository
 
 		return [
 			'result' => $result,
-			'modifiedAt'    => $this->document->getApiProperties()['modified_at'],
-			'publishedAt'    => $this->document->getLastPublishedAt()
+			'modifiedAt'    => $result ? $this->document->getApiProperties()['modified_at'] : "",
+			'publishedAt'    => $result ? $this->document->getLastPublishedAt() : ""
 		];
 	}
 
@@ -256,6 +261,34 @@ class DocumentRepository
 			$documents = $documents->where( 'name', 'like', '%' . $args['s'] . '%' );
 		}
 
+		if ( !empty( $args['types'] ) ) {
+            $types = explode( ',', $args['types'] );
+            $where = [];
+            foreach( $types as $type ) {
+                $where[] = [
+                    'column' => 'type',
+                    'operator' => '=',
+                    'value' => $type
+                ];
+
+                $where[] = 'OR';
+
+                if ( $type == 'slider' ) {
+                    $where[] = [
+                        'column' => 'type',
+                        'operator' => '=',
+                        'value' => 'custom'
+                    ];
+
+                    $where[] = 'OR';
+                }
+            }
+
+            array_pop( $where );
+
+            $documents = $documents->where( $where );
+		}
+
 		if ( !empty( $args['page'] ) && !empty( $args['perPage'] ) ) {
 			$pager = $documents->paginate( $args['perPage'], $args['page'] );
 			if ( $pager ) {
@@ -344,7 +377,7 @@ class DocumentRepository
 	 */
 	public function update( int $id = 0, array $fields = [], bool $parentOnly = false )
 	{
-		if( $document = $this->document->findById( $id ) ){
+		if( $document = $this->document()->findById( $id ) ){
 			if( $parentOnly && $document->getFieldValue('parent') != 0 ){
 				throw new Exception('Updating revision is not allowed.');
 			}
@@ -390,7 +423,7 @@ class DocumentRepository
 	 */
 	public function rename( $id, $name )
 	{
-		if( $document = $this->document->findById( $id ) ){
+		if( $document = $this->document()->findById( $id ) ){
 			return $document->rename( $name );
 		}
 		return false;
@@ -410,7 +443,7 @@ class DocumentRepository
 		if( $this->checkSlug( $slug ) ){
 			throw new Exception("The slug is already in use.");
 		}
-		if( $document = $this->document->findById( $id ) ){
+		if( $document = $this->document()->findById( $id ) ){
 			return $document->changeSlug( $slug );
 		}
 		return false;
@@ -428,7 +461,7 @@ class DocumentRepository
 	 */
 	public function duplicate( int $id, bool $returnNew = false )
 	{
-		if( $document = $this->document->findById( $id ) ){
+		if( $document = $this->document()->findById( $id ) ){
 			$fields = $document->getProperties();
 
 			unset( $fields['id'] );
@@ -603,7 +636,8 @@ class DocumentRepository
 			'woo-slider'  => __( 'Product Slider', 'depicter' ),
 			'banner-bar'  => __( 'Notification Bar', 'depicter' ),
 			'carousel'    => __( 'Carousel', 'depicter' ),
-			'hero-section'=> __( 'Hero Section', 'depicter' )
+			'hero-section'=> __( 'Hero Section', 'depicter' ),
+			'survey'	  => __( 'Survey', 'depicter' )
 		];
 
 		$typeLabel = !empty( $typesDictionary[ $type ] ) ? $typesDictionary[ $type ] : __('Slider', 'depicter' );

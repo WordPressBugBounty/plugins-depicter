@@ -28,6 +28,7 @@ class Script
 			'layout'            => $document->options->getLayout(),
 			'rtl'               => $document->options->navigation->rtl ?? false,
 			'initAfterAppear'   => isset( $document->options->loading ) && !empty( $document->options->loading->initAfterAppear ),
+            'ajaxApiUrl'        => esc_url( admin_url( 'admin-ajax.php' ) )
 		];
 
 		if ( $document->isBuildWithAI ) {

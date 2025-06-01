@@ -37,6 +37,18 @@ class Component extends Element
 					$source = $this->hasDataSheet() ? $this->maybeReplaceDataSheetTags( $option ) : $option;
 					$options->$key = \Depicter::media()->getSourceUrl( $source );
 				}
+			} else if ( $key == 'choices' ) {
+				foreach( $option as $optionKey => $choice ) {
+					foreach ( $choice as $choiceKey => $value ) {
+						if ( strpos( $choiceKey, 'imageAsset' ) ) {
+							$source = $this->hasDataSheet() ? $this->maybeReplaceDataSheetTags( $value ) : $value;
+							$options->$key[ $optionKey ]->$choiceKey = [
+								'src' => \Depicter::media()->getSourceUrl( $source ),
+								'srcset' => \Depicter::media()->getSrcSet( $source )
+							];
+						}
+					}
+				}
 			}
 		}
 
@@ -49,57 +61,5 @@ class Component extends Element
 		];
 
 		return Arr::merge( $attrs, $parentAttrs );
-	}
-
-	/**
-	 * Get list of selector and CSS for element
-	 *
-	 * @return array
-	 * @throws \JsonMapper_Exception
-	 */
-	public function getSelectorAndCssList(){
-		$this->selectorCssList = parent::getSelectorAndCssList();
-
-		$innerStyles = $this->prepare()->innerStyles;
-		if ( !empty( $innerStyles ) ) {
-
-			foreach( $innerStyles as $cssSelector => $styles ){
-				if ( empty( $styles ) || ! $styles instanceof Styles ) {
-					continue;
-				}
-
-				$generalCss = $innerStyles->{$cssSelector}->getGeneralCss('normal');
-				$hoverCss = $innerStyles->{$cssSelector}->getGeneralCss('hover');
-
-				// Add SVG selector and css
-				$svgCss = $this->getSvgCss( $cssSelector );
-				$this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . $this->camelCaseToHyphenated( $cssSelector ) ] = array_merge_recursive( $generalCss, $svgCss );
-				$this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . $this->camelCaseToHyphenated( $cssSelector ) ]['hover'] = Arr::merge( $hoverCss['hover'] , $this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . $this->camelCaseToHyphenated( $cssSelector ) ]['hover']);
-			}
-		}
-
-		return $this->selectorCssList;
-	}
-
-	/**
-	 * change a string from camelCase style to hyphenated style
-	 * @param $inputString
-	 *
-	 * @return string
-	 */
-	public function camelCaseToHyphenated( $inputString ) {
-		$hyphenatedString = strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $inputString));
-		return $hyphenatedString;
-	}
-
-	/**
-	 * Get styles of svg
-	 *
-	 * @return array|array[]
-	 * @throws \JsonMapper_Exception
-	 */
-	protected function getSvgCss( $cssSelector ) {
-		// Get styles list from styles property
-		return ! empty( $this->innerStyles->{$cssSelector} ) ? $this->innerStyles->{$cssSelector}->getSvgCss() : [];
 	}
 }

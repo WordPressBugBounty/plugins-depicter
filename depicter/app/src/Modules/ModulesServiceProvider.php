@@ -4,6 +4,7 @@ namespace Depicter\Modules;
 
 
 use Depicter\Modules\Elementor\SliderWidget;
+use Depicter\Modules\WooCommerce\Module;
 use WPEmerge\ServiceProviders\ServiceProviderInterface;
 
 /**
@@ -23,6 +24,11 @@ class ModulesServiceProvider implements ServiceProviderInterface {
 			return new Modules();
 		};
 		$app->alias( 'modules', 'depicter.modules.manager' );
+
+        $container[ 'depicter.modules.woocommerce' ] = function () {
+            return new Module();
+        };
+        $app->alias( 'WooCommerce', 'depicter.modules.woocommerce' );
 	}
 
 	public function elementorModulesLoaded() {

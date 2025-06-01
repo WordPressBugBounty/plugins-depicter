@@ -77,6 +77,20 @@ class BackgroundRemovalService
      */
     public function getRemovedBackgroundImage( $processID ): array
     {
+        if ( file_exists( \Depicter::storage()->uploads()->getPath() . '/' . $processID . '.png' ) ) {
+            $url = \Depicter::storage()->uploads()->getUrl() . '/' . $processID . '.png';
+            $attachmentID = attachment_url_to_postid( $url );
+            if ( $attachmentID ) {
+                return [
+                    'status' => 'done',
+                    'hits' => [
+                        'attachmentID' => $attachmentID,
+                        'attachmentURL' => $url
+                    ]
+                ];
+            }
+        }
+
         try {
             $response = \Depicter::remote()->post( 'v1/uploadcare/image/removebg', [
                 'form_params' => [
@@ -84,8 +98,8 @@ class BackgroundRemovalService
                 ]
             ] );
 
-            if ( $response->getHeader('Content-Type') == 'application/json' ) {
-                $response = JSON::decode( $response->getBody()->getContents() );
+            if ( $response->getHeader('Content-Type')[0] == 'application/json' ) {
+                $response = JSON::decode( $response->getBody()->getContents(), true );
                 if ( ! empty( $response['errors'] ) ) {
                     return [
                         'errors' => $response['errors']
@@ -100,7 +114,7 @@ class BackgroundRemovalService
                     ]
                 ];
             } else {
-                $body = $response->getBody();
+                $body = $response->getBody()->getContents();
                 $path = \Depicter::storage()->uploads()->getPath() . '/' . $processID . '.png';
                 \Depicter::storage()->filesystem()->write( $path, $body );
                 $attachmentID = \Depicter::media()->library()->insertAttachment( $processID, $path, 'image/png', $processID );

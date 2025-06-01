@@ -5,12 +5,11 @@ use Averta\Core\Utility\Arr;
 use Depicter\Document\CSS\Breakpoints;
 use Depicter\Document\CSS\Selector;
 use Depicter\Document\Helper\Helper;
-use Depicter\Document\Models\Common\Layout\AutoLayout;
+use Depicter\Document\Models\Common\Styles as CommonStyles;
 use Depicter\Document\Models\Traits\HasDataSheetTrait;
 use Depicter\Document\Models\Traits\HasDocumentIdTrait;
 use Depicter\Editor\Models\Common\Size;
 use Depicter\Editor\Models\Common\Styles;
-use \Depicter\Document\Models\Common\Styles as CommonStyles;
 use Depicter\Html\Html;
 
 class Element
@@ -260,6 +259,9 @@ class Element
 		} else if ( strpos( $this->type, 'form:' ) !== false ) {
 			$this->componentType = $this->type;
 			$this->type = 'form';
+		} else if ( strpos( $this->type, 'survey:' ) !== false ) {
+			$this->componentType = $this->type;
+			$this->type = $this->type == 'survey:submit' || $this->type == 'survey:next' || $this->type == 'survey:prev' ? 'button' : 'survey';
 		}
 
 		if ( $this->type == 'vector' && empty( $this->options->customColors ) ) {
@@ -333,65 +335,68 @@ class Element
 	 * @throws \JsonMapper_Exception
 	 */
 	public function getDefaultAttributes() {
-		$dataAttrs = [
+		$attrs = [
 			'id'             => $this->getCssID(),
 			'class'          => $this->getClassNames(),
 			'data-type'      => $this->type,
 			'data-wrap'      => !!$this->wrap ? "true" : "false",
-			'data-name'		 => $this->getName()
+			'data-name'		 => $this->getName(),
+            'data-local-id'  => $this->id
 		];
 
-		if( ! empty( $this->position->getOffset("default" ) ) && $this->position->getPositionType("default" ) != 'static' ){
-			$dataAttrs['data-offset'] = $this->position->getOffset("default" );
-		}
-		if( ! empty( $this->position->getOffset("tablet" ) ) && $this->position->getPositionType("tablet" ) != 'static' ){
-			$dataAttrs['data-tablet-offset'] = $this->position->getOffset("tablet" );
-		}
-		if( ! empty( $this->position->getOffset("mobile" ) ) && $this->position->getPositionType("mobile" ) != 'static' ){
-			$dataAttrs['data-mobile-offset'] = $this->position->getOffset("mobile" );
-		}
+        if ( !empty( $this->position ) ) {
+            if( ! empty( $this->position->getOffset("default" ) ) && $this->position->getPositionType("default" ) != 'static' ){
+                $attrs['data-offset'] = $this->position->getOffset("default" );
+            }
+            if( ! empty( $this->position->getOffset("tablet" ) ) && $this->position->getPositionType("tablet" ) != 'static' ){
+                $attrs['data-tablet-offset'] = $this->position->getOffset("tablet" );
+            }
+            if( ! empty( $this->position->getOffset("mobile" ) ) && $this->position->getPositionType("mobile" ) != 'static' ){
+                $attrs['data-mobile-offset'] = $this->position->getOffset("mobile" );
+            }
 
-		if( ! empty( $this->position->getPositionType("default" ) ) ){
-			$dataAttrs['data-position-type'] = $this->position->getPositionType("default" );
-		}
-		if( ! empty( $this->position->getPositionType("tablet" ) ) ){
-			$dataAttrs['data-tablet-position-type'] = $this->position->getPositionType("tablet" );
-		}
-		if( ! empty( $this->position->getPositionType("mobile" ) ) ){
-			$dataAttrs['data-mobile-position-type'] = $this->position->getPositionType("mobile" );
-		}
+            if( ! empty( $this->position->getPositionType("default" ) ) ){
+                $attrs['data-position-type'] = $this->position->getPositionType("default" );
+            }
+            if( ! empty( $this->position->getPositionType("tablet" ) ) ){
+                $attrs['data-tablet-position-type'] = $this->position->getPositionType("tablet" );
+            }
+            if( ! empty( $this->position->getPositionType("mobile" ) ) ){
+                $attrs['data-mobile-position-type'] = $this->position->getPositionType("mobile" );
+            }
+        }
 
 		if( $this->hideOnSections && $hideOnSections = Helper::getInvisibleSectionsCssIdList( $this->hideOnSections, $this->getDocumentID() ) ){
-			$dataAttrs['data-hide-on-sections'] = $hideOnSections;
+			$attrs['data-hide-on-sections'] = $hideOnSections;
 		}
 
 		if ( $actions = Helper::getActions( $this->actions ) ) {
-			$dataAttrs['data-actions'] = $actions;
+			$attrs['data-actions'] = $actions;
 		}
 		if ( $this->animation && false !== $animationData = $this->animation->getAnimationAttrs() ) {
-			$dataAttrs = Arr::merge( $dataAttrs, $animationData );
+			$attrs = Arr::merge( $attrs, $animationData );
 		}
 
 		if ( $this->parallax && false !== $parallaxData = $this->parallax->getParallaxAttrs() ) {
-			$dataAttrs = Arr::merge( $dataAttrs, $parallaxData );
+			$attrs = Arr::merge( $attrs, $parallaxData );
 		}
 
 		if( ! empty( $this->size ) ){
-			$dataAttrs['data-width' ] = implode( ',', $this->size->getResponsiveSizes( 'width' , true ) );
-			$dataAttrs['data-height'] = implode( ',', $this->size->getResponsiveSizes( 'height', true ) );
+			$attrs['data-width' ] = implode( ',', $this->size->getResponsiveSizes( 'width' , true ) );
+			$attrs['data-height'] = implode( ',', $this->size->getResponsiveSizes( 'height', true ) );
 		}
 
-		$dataAttrs['data-responsive-scale' ] = ! empty( $this->responsiveScale ) ? implode( ',', $this->responsiveScale->getResponsiveSizes() ) : 'true,,';
+		$attrs['data-responsive-scale' ] = ! empty( $this->responsiveScale ) ? implode( ',', $this->responsiveScale->getResponsiveSizes() ) : 'true,,';
 
 		if( ! empty( $this->prepare()->styles->hover ) && $hoverOffDevices = $this->prepare()->styles->hover->getDisabledDeviceList() ){
-			$dataAttrs['data-hover-off' ] = implode( ',', $hoverOffDevices );
+			$attrs['data-hover-off' ] = implode( ',', $hoverOffDevices );
 		}
 
 		if ( ! empty( $this->prepare()->styles->blendingMode ) || ! empty( $this->prepare()->styles->flex ) ) {
-			$dataAttrs['data-frame-class'] = $this->getSelector() . '-frame' ;
+			$attrs['data-frame-class'] = $this->getSelector() . '-frame' ;
 		}
 
-		return $dataAttrs;
+		return $attrs;
 	}
 
 	/**
@@ -413,7 +418,7 @@ class Element
 	public function getLinkTag() {
 		if ( !empty( $this->options->url->path ) ) {
 			$urlPath = $this->maybeReplaceDataSheetTags( $this->options->url->path );
-			$urlArgs = isset( $this->options->url->openInNewTab ) && empty( $this->options->url->openInNewTab ) ? [] : ['target' => '_blank'];
+			$urlArgs = (isset( $this->options->url->openInNewTab ) && empty( $this->options->url->openInNewTab )) || ! isset( $this->options->url->openInNewTab ) ? [] : ['target' => '_blank'];
 			return Html::a( '', $urlPath, $urlArgs );
 		}
 
@@ -542,8 +547,40 @@ class Element
 			}
 		}
 
+		$innerStyles = $this->prepare()->innerStyles;
+		if ( !empty( $innerStyles ) ) {
+
+			foreach( $innerStyles as $cssSelector => $styles ){
+				if ( empty( $styles ) || ! $styles instanceof CommonStyles ) {
+					continue;
+				}
+
+				$generalCss = $innerStyles->{$cssSelector}->getGeneralCss('normal');
+                // Add SVG selector and css
+                $svgCss = $this->getInnerSvgCss( $cssSelector );
+				$this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . Helper::camelCaseToHyphenated( $cssSelector ) ] = array_merge_recursive( $generalCss, $svgCss );
+
+                $hoverCss = $innerStyles->{$cssSelector}->getGeneralCss('hover');
+                if ( !empty( $hoverCss ) ) {
+                    $this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . Helper::camelCaseToHyphenated( $cssSelector ) ]['hover'] = Arr::merge( $hoverCss['hover'] , $this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . Helper::camelCaseToHyphenated( $cssSelector ) ]['hover']);
+                }
+			}
+		}
+
 		return $this->selectorCssList;
 	}
+
+    /**
+     * Get styles of svg
+     *
+     * @return array|array[]
+     * @throws \JsonMapper_Exception
+     */
+    protected function getInnerSvgCss( $cssSelector ): array
+    {
+        // Get styles list from styles property
+        return ! empty( $this->innerStyles->{$cssSelector} ) ? $this->innerStyles->{$cssSelector}->getSvgCss() : [];
+    }
 
 	/**
 	 * Retrieves custom styles of document

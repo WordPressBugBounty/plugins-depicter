@@ -304,4 +304,26 @@ class Helper
 			 'displayAgain' => $displayRule['afterClose']['displayAgain']
 		 ];
 	 }
+
+    /**
+     * change a string from camelCase style to hyphenated style
+     * @param $inputString
+     *
+     * @return string
+     */
+    public static function camelCaseToHyphenated( $inputString ): string
+    {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $inputString));
+    }
+
+	/**
+     * change a string from camelCase style to snake case style
+     * @param $inputString
+     *
+     * @return string
+     */
+    public static function camelCaseToSnakeCase( $inputString ): string
+    {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $inputString));
+    }
 }

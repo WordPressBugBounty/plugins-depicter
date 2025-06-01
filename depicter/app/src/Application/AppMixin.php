@@ -15,6 +15,7 @@ use Depicter\Database\Repository\MetaRepository;
 use Depicter\Document\Manager as DocumentManager;
 use Depicter\DataSources\Manager as DataSources;
 use Depicter\Document\Migrations\DocumentMigration;
+use Depicter\Modules\WooCommerce\Module as WooCommerceModule;
 use Depicter\Rules\Conditions\Manager as ConditionsManager;
 use Depicter\Editor\Editor;
 use Depicter\Editor\EditorData;
@@ -30,6 +31,7 @@ use Depicter\Services\ImportService;
 use Depicter\Services\LeadService;
 use Depicter\Services\MediaBridge;
 use Depicter\Services\RemoteAPIService;
+use Depicter\Services\SettingsManagerService;
 use Depicter\Services\StorageService;
 use Depicter\Services\AuthorizationService;
 use Depicter\Services\AuthenticationService;
@@ -249,4 +251,14 @@ final class AppMixin
      * @return BackgroundRemovalService
      */
     public static function backgroundRemoval(): BackgroundRemovalService {}
+
+    /**
+     * @return WooCommerceModule
+     */
+    public static function WooCommerce(): WooCommerceModule {}
+
+    /**
+     * @return SettingsManagerService
+     */
+    public static function settings(): SettingsManagerService {}
 }
