@@ -64,7 +64,7 @@ class Group extends Models\Element
 		}
 
 		foreach ( $this->childrenObjects as $element ) {
-			if ( $this->type == 'group' ) {
+			if ( $element->type == 'group' ) {
 				$elementFontsList = $this->getGroupFonts($element);
 				$fontsList = Arr::merge( $elementFontsList, $fontsList);
 				continue;
