@@ -127,6 +127,7 @@ class AIWizardController {
 
 		$data = $request->body('data');
 		$templateId = $request->body('ID', '');
+		$templateType = Sanitize::textfield( $request->body('type', 'slider') );
 
 		if ( empty( $templateId ) ) {
 			return \Depicter::json([
@@ -159,7 +160,7 @@ class AIWizardController {
 	        $editorData = JSON::encode( \Depicter::AIWizard()->updateEditorDataByAiContent( $editorData, $data ) );
 
 			$editorData = preg_replace( '/"activeBreakpoint":".+?"/', '"activeBreakpoint":"default"', $editorData );
-			$document = \Depicter::documentRepository()->create();
+			$document = \Depicter::documentRepository()->create( $templateType );
 
 			$updateData = [];
 			if ( !empty( $result->title ) ) {

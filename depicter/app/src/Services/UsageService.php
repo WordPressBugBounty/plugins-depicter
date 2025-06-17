@@ -88,6 +88,20 @@ class UsageService {
 			}
 		}
 
+		$leadPlugins = [
+			'wpforms-lite' => '\WPForms\WPForms',
+			'optinmonster' => '\OMAPI',
+			'popup-maker'  => '\Popup_Maker',
+			'popup-builder' => '\sgpb\PopupBuilderInit',
+			'smart-slider-3' => '\Nextend\SmartSlider3\Platform\SmartSlider3Platform'
+		];
+
+		foreach( $leadPlugins as $plugin => $condition ) {
+			if ( ! class_exists( $condition ) ) {
+				unset( $leadPlugins[ $plugin ] );
+			}
+		}
+
 		$usage = [
 			'document_stat' => count( $documents ),
 			'document_types' => $documentTypes,
@@ -96,6 +110,7 @@ class UsageService {
 			'wp_tools' => [
 				'themeName' => wp_get_theme()->get( 'Name' ),
 				'pageBuilders' => $pageBuilders,
+				'leadPlugins' => $leadPlugins
 			]
 		];
 

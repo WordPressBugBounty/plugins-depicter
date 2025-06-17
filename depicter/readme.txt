@@ -5,7 +5,7 @@ Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.3.0
 Tested up to: WordPress 6.8.1
 Requires PHP: 7.4.0
-Stable tag: 4.0.1
+Stable tag: 4.0.4
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
@@ -76,11 +76,35 @@ You can create converting **Popup and Notification Bar**, like **Email subscript
 
 == Screenshots ==
 
-1. Slider without thumbnail (light skin 1)
-2. Slider with thumbnail on bottom (light skin 1)
-
+1. Email subscription popup by Depicter – engage visitors and grow your list.
+2. Dynamic on-sale products popup by Depicter – target customers with custom display rules and boost e-commerce sales.
+3. WordPress hero section with lead capture form by Depicter – convert visitors into quality leads.
+4. Email capture popup with discount offer by Depicter – grow your list and boost conversions on WordPress.
+5. Sale notification popup with coupon code by Depicter – inform visitors and increase conversions on your WordPress site.
+6. Depicter dashboard – access all-in-one tools for popups, carousels, AI tools, and marketing content creation.
+7. Depicter visual no-code editor for WordPress – drag and drop animated elements to create stunning marketing content.
+8. Create animated marketing content with drag-and-drop and elements like coupons and more.
+9. Form builder for WordPress – design custom forms visually with the no-code editor for lead generation and engagement.
+10. Notification bar builder for WordPress – create announcement banners with the no-code visual editor.
+11. Multi-step content builder for WordPress – create interactive slides and sections to engage and convert visitors.
+12. Responsive carousel builder for WordPress – create dynamic, mobile-optimized carousels with modern layouts and no code.
+13. Customize navigation controls with an intuitive no-code UI.
+14. Depicter lead directory for WordPress – store, track, and sync captured leads with your favorite marketing tools.
+15. Popup display rules – set smart conditions to show popups or notification bars based on user behavior and targeting.
 
 == Changelog ==
+
+###4.0.4
+- *Released: 2025-06-16*
+- **Improved**
+- Now elements get highlighted when they are hovered in the layers panel.
+- Text animation combined with text shadow effect now works better.
+- Improved user experience with the before and after element, now it works better when it places beneath other elements.
+- Now you can see how many templates are available in each category in the templates list.
+- **Fixed**
+- Fixed an issue with displaying the forms message element after form submission.
+- Fixed an issue with editing button label text and other similar elements.
+- Fixed an issue with displaying the forms message element after form submission.
 
 ###4.0.0
 - *Released: 2025-06-01*

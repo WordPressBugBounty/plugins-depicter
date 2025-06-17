@@ -285,7 +285,13 @@ class Document implements HydratableInterface
 		$foregroundAttributes = [ 'class' => Selector::prefixify('overlay-layers') ];
 		$elementsMarkup = "";
 
+		// use the first data sheet for the foreground elements which are dataSource elements
+		$dataSheet = $this->getTheDataSourceDataSheet();
 		foreach ( $this->foregroundElementObjects as $element ) {
+			if ( $dataSheet ) {
+				$element->prepare()->setDataSheet( $dataSheet );
+			}
+			
 			$this->stylesList = array_merge( $this->stylesList, $element->prepare()->getSelectorAndCssList() );
 			$elementsMarkup .= $element->prepare()->render() . "\n";
 		}
@@ -842,6 +848,34 @@ class Document implements HydratableInterface
 	 */
 	public function isRecaptchaEnabled(): bool {
 		return $this->isRecaptchaEnabled;
+	}
+
+	/**
+	 * Get the first data sheet from a data source
+	 *
+	 * @return bool|null|array
+	 */
+	public function getTheDataSourceDataSheet() {
+		$dataSheet = false;
+		foreach( $this->sections as $section ) {
+			if ( $section->dataSource ) {
+				$dataSourceInstance = \Depicter::dataSource()->getByType( $section->dataSource->type );
+				if( $dataSourceInstance ){
+					$dataSheets = $dataSourceInstance->getDataSheetArgs( $section->dataSource->params );
+					foreach( $dataSheets as $dataSheet ){
+						$section->setDataSheet( $dataSheet );
+						break;
+					}
+					$dataSheet = $section->getDataSheet();
+				}
+			}
+
+			if ( $dataSheet ) {
+				break;
+			}
+		}
+
+		return $dataSheet;
 	}
 
 }
