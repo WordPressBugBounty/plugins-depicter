@@ -20,6 +20,7 @@ class FileUploaderService
 				$results[ $file->getClientFilename() ] = [
 					'attachment'    => 0,
 					'errors'        => [
+						/* translators: maximum file size allowed to upload */
 						sprintf( __( 'Cannot upload the file, because max permitted file upload size is %s.', 'depicter' ), ini_get('upload_max_filesize') )
 					]
 				];
@@ -32,6 +33,7 @@ class FileUploaderService
 				$results[ $file->getClientFilename() ] = [
 					'attachment'    => 0,
 					'errors'        => [
+						/* translators: mimType of uploading file */
 						sprintf( __( 'Cannot upload the file, uploading %s files are not allowed.', 'depicter' ), $file->getClientMediaType() )
 					]
 				];

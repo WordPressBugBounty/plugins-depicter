@@ -106,6 +106,7 @@ class OptionsAjaxController {
 		}
 
 		return \Depicter::json([
+			/* translators: failed option keys while saving */
 			'errors' => [ sprintf( __( 'Saving the following options failed: %s. Please try again!', 'depicter' ) , implode( ',', $failedJobs ) ) ]
 		])->withStatus(400);
 	}

@@ -7,6 +7,7 @@ use Depicter\Database\Repository\DocumentRepository;
 use Depicter\Database\Repository\LeadFieldRepository;
 use Depicter\Database\Repository\LeadRepository;
 use Depicter\Database\Repository\MetaRepository;
+use Depicter\Database\Repository\QueueJobRepository;
 use WPEmerge\ServiceProviders\ServiceProviderInterface;
 
 /**
@@ -41,11 +42,16 @@ class DatabaseServiceProvider implements ServiceProviderInterface {
 			return new LeadFieldRepository();
 		};
 
+        $container[ 'depicter.database.repository.queue.jobs' ] = function () {
+            return new QueueJobRepository();
+        };
+
 		$app = $container[ WPEMERGE_APPLICATION_KEY ];
 		$app->alias( 'documentRepository', 'depicter.database.repository.document' );
 		$app->alias( 'metaRepository', 'depicter.database.repository.meta' );
 		$app->alias( 'leadRepository', 'depicter.database.repository.lead' );
 		$app->alias( 'leadFieldRepository', 'depicter.database.repository.lead.field' );
+        $app->alias( 'queueJobsRepository', 'depicter.database.repository.queue.jobs' );
 	}
 
 	/**

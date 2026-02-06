@@ -1,11 +1,11 @@
-=== Popup and Slider Builder by Depicter - Add Email collecting Popup, Popup Modal, Coupon Popup, Image Slider, Carousel Slider, Post Slider Carousel ===
+=== Depicter — Popup & Slider Builder ===
 
 Contributors: averta, averta_support, depicter1slider1support, depicter1carousel1popup1support
 Tags: slider, carousel slider, popup, post slider, slideshow
-Requires at least: 5.3.0
-Tested up to: WordPress 6.8.1
+Requires at least: 5.9
+Tested up to: 6.9
 Requires PHP: 7.4.0
-Stable tag: 4.0.4
+Stable tag: 4.7.1
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
@@ -25,46 +25,37 @@ You can create converting **Popup and Notification Bar**, like **Email subscript
 
 [youtube https://www.youtube.com/watch?v=YTf6kFyn52A&keywords=slider,popup,carousel,Exit-intent-popup,promotion-popup,cart-abandonment-popup,campaign-promoting-notification-bar,layer-slider,video-slider,image-slider,fullscreen-slider,post-slider,product-slider,WooCommerce-slider,testimonial-slider]
 
+### Create popups, notification bars, sliders, and carousels with an intuitive visual builder
 
-### Why Depicter is the best WordPress plugin for creating popups, sliders, and carousels?
-- **No limit on the number of popups, sliders, and carousels** — You can create unlimited popups, sliders, and carousels with Depicter.
-- **Massive Template Library** — It has a massive template library that allows you to create a popup, notification bar, slider, carousel, hero section and slideshow with just a few clicks.
-- **AI Powered** — It has AI, and it really works; you can create slider, popup _(soon)_, notification bar _(soon)_ with Depicter AI tool in seconds!
-- **Build in Form Builder** — It has a form builder that allow you to collect email, name, phone, and other information from your audience.
-- **Lightweight & SEO-Friendly** — It's super lightweight and dependency-free. Whether you create a popup, notification bar, slider, slideshow, or carousel, it delivers content optimized for search engines.
-- **One plugin with many possibilities** — Don't blow up your WordPress website with tons of plugins! This is a popup builder, notification bar builder, slider, and carousel plugin with countless possibilities to improve your WordPress website.
-- **Visual Builder** — Depicter comes with a professional, yet simple and intuitive visual builder that enables you to create popups, notification bars, sliders, carousels, hero section and slideshow.
-- **Asset optimization** — Depicter slider and Popup builder utilizes WebP, Adaptive images, lazy loading, and parallel loading to ensure quick loading of your popup, slider, carousel or notification bar.
-- **Custom Fonts** — Using custom fonts on your website? Depicter editor takes care of them; you can access them with zero configurations to ensure your popup, notification bar, slider, carousel content matches your site.
+Depicter provides a flexible way to design and display interactive elements on your WordPress site. You can create popups, sliding banners, hero sections, carousels, and other visual components without writing code.
+
+### Key Features
+
+- **Unlimited items** — Create as many popups, notification bars, sliders, and carousels as needed.
+- **Template library** — Start quickly with a wide collection of pre-designed layouts for various use cases.
+- **AI tools** — Generate slider layouts or content using built-in AI features to speed up your workflow.
+- **Form builder** — Add built-in forms to collect email, name, phone number, and other information.
+- **Performance-friendly output** — Uses WebP, adaptive images, lazy loading, and optimized asset delivery.
+- **Visual editing** — Design content through a simple, responsive editor supporting animations, effects, and custom fonts.
 
 ### [Popup](https://depicter.com/popup) and [Notification Bar](https://depicter.com/notification-bar) Features
 - **Variety of [popup templates](https://depicter.com/templates/#/popups/all-popups) and [notification bar templates](https://depicter.com/templates/#/notification-bars/all-notification-bars)**
-
-- You can kickstart building popup and notification bar by using Depicter popup and notification bar templates.
-- **Popup and notification bar display conditions** - With popup and notification bar display conditions, you can display targeted popups and notification bars to your audience based on their behavior and the pages they visit.
-- **Popup and notification bar audience targeting** - Target your popup and notification bar audience by device, browser, location, referral path, or custom cookie value.
-- **Popup and notification bar display scheduling** - Schedule the start and end time for your popup and notification bar display.
-- **Popup and notification bar triggers** - Depicter popup and notification bar builder gives you variety of different popup and notification bar triggers: **Exit intent popup and notification bar trigger**, **Scroll popup and notification bar trigger**, **Time on Page Popup and notification bar Trigger**, **Inactive Time Popup and notification bar Trigger**, **User Action Popup and notification bar Trigger**
-- **Control when popup and notification bar should reopen** - Supports:
-  - Open popup and notification bar on every visit
-  - Open popup and notification bar once
-  - Open popup and notification bar after a period
-- **Stepped Popup and notification bar** - Popup and notification bar builder enables creation of popups and notification bars with multiple steps to add interactions to your popup and notification bar content.
-- **Mobile friendly popups and notification bars** - You have full control over any pieces of your popup and notification bar content responsively.
-- **Popup and notification bar with Animations And Effects** - Depicter popup and notification bar builder gives your the possibility of adding animation or parallax effect to any popup and notification bar element besides option of defining different popup and notification bar opening and closing animations.
+- Configure display conditions based on pages visited, device type, referrer, location, cookies, or user behavior.
+- Define scheduling rules for when a popup or notification bar should appear or expire.
+- Choose from multiple triggers: exit intent, scroll depth, time on page, inactivity, or user interactions.
+- Control reopening behavior: once per visitor, every visit, or after a specific delay.
+- Create multi-step popups for more complex interactions.
+- Customize mobile responsiveness and add animations or visual effects.
 
 ### [Slider](https://depicter.com/slider) and [Carousel](https://depicter.net/carousel/) Features
-- **Responsive Slider and Carousel Layouts** - Ensure every slider and carousel is mobile-friendly and looks perfect on all devices.
-- **Slider and Carousel Animations** - Enhance sliders and carousels with engaging animations to capture user attention.
-- **Advanced Slider and Carousel Controls** - Equip sliders and carousels with comprehensive navigation options including arrows, bullets, and timers.
-- **Intuitive Slider and Carousel Navigation** - Depicter sliders and carousels support both touch swipe and mouse gestures for seamless interaction.
-- **Parallax Effects for Sliders and Carousels** - Apply scroll or 3D parallax effects to elements within sliders and carousels for dynamic visual impact.
-- **Fully Responsive Sliders and Carousels** - Optimize sliders and carousels for seamless display on desktops, tablets, or mobiles.
-- **Dynamic Slider and Carousel Content** - Create sliders and carousels with varied content, including post sliders, WooCommerce carousels, product sliders, and page carousels.
-- **WordPress Sliders and Carousels** - Build post sliders and carousels using WordPress posts or any custom post types for versatile content integration.
-- **Page builders compatibility** - Depicter slider, supports WordPress page builders so you can add a slider to the page with Elementor slider or carousel element, Divi Slider or carousel element, Beaver slider or carousel element, Oxygen slider or carousel element, and Depicter Slider or carousel Block.
-- **Video Backgrounds in Sliders and Carousels** - Incorporate Vimeo or YouTube videos as dynamic backgrounds in sliders and carousels.
-- **Slider and Carousel Scheduling** - Manage when sliders and carousels appear or are hidden on your site through precise scheduling.
+
+- Create fully responsive sliders and carousels that adapt to all device sizes.
+- Add animations, transitions, and parallax effects to enhance visuals.
+- Use arrows, bullets, timers, and swipe navigation for a more interactive experience.
+- Populate sliders with dynamic content including posts, WooCommerce products, or custom post types.
+- Compatible with major page builders: Elementor, Divi, Beaver Builder, Oxygen, and the WordPress block editor.
+- Add video backgrounds from YouTube or Vimeo.
+- Set scheduling rules to control when sliders or carousels appear on the site.
 
 **How to create a WordPress slider with Depicter**
 
@@ -73,6 +64,13 @@ You can create converting **Popup and Notification Bar**, like **Email subscript
 **Create a WordPress slider with AI in seconds**
 
 [youtube https://www.youtube.com/watch?v=kdR9Jw0yWjU&keywords=slider,popup,carousel,Exit-intent-popup,promotion-popup,cart-abandonment-popup,campaign-promoting-notification-bar,layer-slider,video-slider,image-slider,fullscreen-slider,post-slider,product-slider,WooCommerce-slider,testimonial-slider]
+
+== Use of 3rd Party Services ==
+
+To improve the user experience, Depicter may use the following 3rd party services if the required feature is enabled:
+
+- Google Places and Recaptcha are used to display location, reviews and recaptcha. Google's [TOS](https://policies.google.com/terms) and [Privacy Policy](https://policies.google.com/privacy)
+- Some Depicter features and services required to contact depicter website. These features and services are not used for tracking unless explicitly mentioned, requiring your approval and manual opt-in. Learn more in our [TOS](https://depicter.com/terms-and-conditions/).
 
 == Screenshots ==
 
@@ -93,6 +91,32 @@ You can create converting **Popup and Notification Bar**, like **Email subscript
 15. Popup display rules – set smart conditions to show popups or notification bars based on user behavior and targeting.
 
 == Changelog ==
+
+###4.7.1
+- *Released: 2026-01-14
+- **Improved**
+- Improved icons collection.
+- Updated browser support information to the latest version.
+- Enabled backward compatibility for loading JavaScript modules on WordPress versions before 6.7.
+- **Fixed**
+- Fixed an issue with switching between animation wizard phases that caused the editor to crash.
+- Restored missing padding in the WordPress dashboard containers so content is no longer shifted left.
+
+###4.7.0
+- *Released: 2025-12-27
+- **Added**
+- ✨ Animation Wizard: Apply animations to content with one click.
+- 📢 Teaser: Create teaser content for popups with customizable settings.
+- 🖼️ New icon set: Refreshed collection with significantly improved performance.
+- 🔒 Hidden input fields: Forms now support hidden fields for advanced workflows and integrations.
+- 📨 Mailchimp integration: Send form submissions to Mailchimp.
+- 👥 Leads directory: View and manage project leads in the editor.
+- **Improved**
+- Display rules: More flexible controls for popups and notification bars.
+- Animations: Greater control over interactive and scroll-bound animations.
+- Groups: Better grouping, alignment, and layout behavior.elements.
+- **Fixed**
+- A security vulnerability fixed.
 
 ###4.0.4
 - *Released: 2025-06-16*

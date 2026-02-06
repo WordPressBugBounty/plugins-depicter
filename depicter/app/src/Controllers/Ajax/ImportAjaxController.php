@@ -26,7 +26,8 @@ class ImportAjaxController
 		if ( $zipFile->getError() ) {
 			return \Depicter::json([
                    'errors'        => [
-                       sprintf( __( 'Cannot upload the file, because max permitted file upload size is %s.', 'depicter' ), ini_get('upload_max_filesize') )
+						/* translators: maximum file size allowed to upload */
+                    	sprintf( __( 'Cannot upload the file, because max permitted file upload size is %s.', 'depicter' ), ini_get('upload_max_filesize') )
                    ]
 			]);
 		}

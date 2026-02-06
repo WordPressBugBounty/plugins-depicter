@@ -124,6 +124,11 @@ class ServiceProvider implements ServiceProviderInterface
             return new SettingsManagerService();
         };
         $app->alias( 'settings', 'depicter.settings.manager' );
+
+        $container['depicter.queue.service' ] = function () {
+            return new QueueService();
+        };
+        $app->alias( 'queue', 'depicter.queue.service' );
 	}
 
 	/**
@@ -133,6 +138,8 @@ class ServiceProvider implements ServiceProviderInterface
 		if ( is_admin() ) {
 			\Depicter::resolve('depicter.services.deactivation.feedback');
 		}
+
+        \Depicter::queue();
 	}
 
 }

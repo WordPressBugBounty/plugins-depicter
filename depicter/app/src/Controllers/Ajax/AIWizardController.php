@@ -101,7 +101,7 @@ class AIWizardController {
 		}
 
 		try {
-			$response = \Depicter::remote()->post( 'v1/ai/text/wizard/complete', [
+			$response = \Depicter::remote()->post( 'v2/ai/text/wizard/complete', [
 				'form_params' => $args
 			]);
 			$result = JSON::decode( $response->getBody(), true );
@@ -164,7 +164,7 @@ class AIWizardController {
 
 			$updateData = [];
 			if ( !empty( $result->title ) ) {
-				$updateData['name'] = __("AI-Aided Slider") . ' ' . $document->getID();
+				$updateData['name'] = __("AI-Aided Slider", 'depicter') . ' ' . $document->getID();
 			}
 
 			if ( !empty( $result->image ) ) {

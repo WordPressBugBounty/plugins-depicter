@@ -27,21 +27,17 @@ class EditorAssets
 			['jquery'],
 			true
 		);
+		\Depicter::core()->assets()->enqueueStyle(
+			'depicter-editor-style',
+			\Depicter::core()->assets()->getUrl() . '/resources/scripts/editor/depicter-editor-styles.css'
+		);
 
 		wp_enqueue_style('common');
 
 		// Enqueue scripts.
-		\Depicter::core()->assets()->enqueueScript(
-			'depicter-editor-vendors',
-			\Depicter::core()->assets()->getUrl() . '/resources/scripts/editor/vendors-main.js',
-			[],
-			true
-		);
-		\Depicter::core()->assets()->enqueueScript(
+		\Depicter::core()->assets()->enqueueScriptModule(
 			'depicter-editor-js',
-			\Depicter::core()->assets()->getUrl() . '/resources/scripts/editor/depicter-editor.js',
-			['depicter-editor-vendors'],
-			true
+			\Depicter::core()->assets()->getUrl() . '/resources/scripts/editor/depicter-editor.js'
 		);
 
 		$currentUser = wp_get_current_user();
@@ -121,7 +117,7 @@ class EditorAssets
 		}
 
 		// Add Environment variables
-		wp_add_inline_script( 'depicter-editor-vendors', 'window.depicterEnv = '. JSON::encode( $envData ), 'before' );
+		wp_print_inline_script_tag( 'window.depicterEnv = '. JSON::encode( $envData ) );
 
 	}
 

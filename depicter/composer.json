@@ -1,0 +1,69 @@
+{
+  "name": "averta/depicter",
+  "version": "1.2.0",
+  "description": "A modern WordPress slider and interactive content builder",
+  "type": "wordpress-plugin",
+  "keywords": [
+    "depicter",
+    "wordpress",
+    "slider",
+    "builder"
+  ],
+  "license": "GPL-2.0-only",
+  "homepage": "https://depciter.com/",
+  "authors": [
+    {
+      "name": "averta",
+      "email": "info@averta.net",
+      "homepage": "http://averta.net/",
+      "role": "owner"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org",
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
+    }
+  ],
+  "config": {
+    "platform": {
+      "php": "7.4"
+    },
+    "allow-plugins": {
+      "composer/installers": true,
+      "roots/wordpress-core-installer": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "require": {
+    "php": ">=7.4",
+    "composer/installers": "^1.4",
+    "averta/core": "*",
+    "averta/wordpress": "*",
+    "averta/wpemerge": "*",
+    "typerocket/core": "^5",
+    "netresearch/jsonmapper": "*",
+    "ext-simplexml": "*",
+    "ext-zip": "*",
+    "foroco/php-browser-detection": "^2.7",
+    "averta/wpemerge-app-core": "^0.18"
+  },
+  "require-dev": {},
+  "autoload": {
+    "classmap": [],
+    "psr-4": {
+      "Depicter\\": "app/src/",
+      "Depicter\\Test\\": "tests/",
+      "Depicter\\Psr\\": "modules/Psr",
+      "Depicter\\GuzzleHttp\\": "modules/GuzzleHttp",
+      "Depicter\\Jeffreyvr\\WPSettings\\": "modules/jeffreyvanrossum/wp-settings"
+    },
+    "files": [
+      "modules/jeffreyvanrossum/wp-settings/helpers.php"
+    ]
+  }
+}

@@ -37,6 +37,7 @@ class IsSingle extends CPTConditionBase
 
 		$singleOptions = array_map( function( $postType ){
 			return [
+				/* translators: singular name of post type */
 				'label' => sprintf( __( '%s Single Page', 'depicter' ), $postType->labels->singular_name ),
 				'value' => $postType->name
 			];

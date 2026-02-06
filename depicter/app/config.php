@@ -36,6 +36,7 @@ return [
 		\Depicter\Dashboard\DashboardServiceProvider::class,
 		\Depicter\Rules\ServiceProvider::class,
 		\Depicter\Front\ServiceProvider::class,
+		\Depicter\Integration\ServiceProvider::class,
 		\Depicter\View\ViewServiceProvider::class,
 		\Depicter\WordPress\RestApiServiceProvider::class,
 		\Depicter\WordPress\AdminServiceProvider::class,

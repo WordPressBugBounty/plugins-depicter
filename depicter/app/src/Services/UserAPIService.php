@@ -134,8 +134,6 @@ class UserAPIService {
 			throw new \Exception( $response['errors'][0] );
 		}
 
-		error_log( print_r( $response, true ) );
-
 		\Depicter::cache('base')->set( 'access_token', $response['accessToken'], DAY_IN_SECONDS );
 		//\Depicter::cache('base')->set( 'refresh_token', $response['refreshToken'], DAY_IN_SECONDS );
 		\Depicter::cache('base')->set( 'id_token', $response['idToken'], MONTH_IN_SECONDS );

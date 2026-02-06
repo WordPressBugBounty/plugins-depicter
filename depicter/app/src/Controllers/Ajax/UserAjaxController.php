@@ -123,7 +123,7 @@ class UserAjaxController {
 			}
 		} else {
 			return \Depicter::json([
-                'errors' => [ __( 'Token required!' ) ]
+                'errors' => [ __( 'Token required!', 'depicter' ) ]
             ])->withStatus(400);
 		}
 	}

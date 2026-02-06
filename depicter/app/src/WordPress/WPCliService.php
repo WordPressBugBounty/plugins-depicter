@@ -69,6 +69,7 @@ class WPCliService
 						\WP_CLI::warning( __( 'slider imported on the main site. To import template on specific site please provide the --site-id param.', 'depicter' ) );
 					}
 
+					/* translators: Imported slider id */
 					\WP_CLI::success(sprintf( __( 'Slider with ID of %s imported successfully', 'depicter' ), $templateID ) );
 				}
 			} catch( GuzzleException $e ) {

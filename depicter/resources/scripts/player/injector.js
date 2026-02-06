@@ -25,7 +25,7 @@ const fitToBox = (type, boxW, boxH, width, height) => {
 const parseJSONAttr = (value) => {
    try {
       return JSON.parse(value.replace(/'/g, '"'));
-   } catch (e) {
+   } catch {
       console.warn('Given data value is not a valid JSON, skipped. \n ' + value);
    }
 
@@ -74,6 +74,12 @@ const replaceImages = (pattern, targetElement) => {
          } else if (element.tagName === 'DIV' || element.classList.contains('depicter-section')) {
             const targetEl = element.querySelector('img.depicter-bg');
             if (targetEl) replaceImg(src, size, targetEl);
+
+            if (!targetEl) {
+               // check for background image
+               const bgEl = element.querySelector('picture.depicter-bg');
+               if (bgEl) replacePicture(src, size, bgEl);
+            }
          }
       });
    });

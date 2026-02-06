@@ -10,8 +10,16 @@ class AuthenticationService {
 	 * @return string
 	 */
 	public function getTier(){
-		$isEarly  = version_compare( \Depicter::options()->get('version_initial', '2.0.9'), '2.0.9', '<=' );
-		$baseTier = 'free-user'.($isEarly ? '+' :'');
+		$baseTier = 'free-user';
+		$baseVer  = '2.0.9';
+		$initialVersion = \Depicter::options()->get('version_initial', $baseVer);
+
+		if (version_compare($initialVersion, $baseVer, '<=')) {
+			$baseTier .= '+';
+		} elseif (version_compare($initialVersion, '4.0.5', '<=')) {
+			$baseTier .= '-';
+		}
+
 		return \Depicter::options()->get('user_tier', $baseTier ) ?: $baseTier;
 	}
 
@@ -21,7 +29,16 @@ class AuthenticationService {
 	 * @return bool
 	 */
 	public function isPaid(){
-		return $this->getTier() !== 'free-user' && $this->getTier() !== 'free-user+';
+		return false === strpos( $this->getTier(), 'free-user' );
+	}
+
+	/**
+	 * Whether client has not free tier or not
+	 *
+	 * @return bool
+	 */
+	public function isFreeTier($class = ''){
+		return $this->getTier() === 'free-user' . $class;
 	}
 
 	/**

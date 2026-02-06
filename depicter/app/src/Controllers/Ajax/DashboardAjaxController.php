@@ -29,6 +29,7 @@ class DashboardAjaxController {
 			's' => !empty( $request->query('s' ) ) ? Sanitize::textfield( $request->query('s') ) : '',
 			'has' => !empty( $request->query('has' ) ) ? Sanitize::textfield( $request->query('has') ) : '',
 			'types' => !empty( $request->query('types' ) ) ? Sanitize::textfield( $request->query('types') ) : '',
+			'status' => !empty( $request->query('status' ) ) ? Sanitize::textfield( $request->query('status') ) : '',
 		];
 
 		$args['has'] = $args['has'] ? explode(',', $args['has'] ) : '';
@@ -38,6 +39,8 @@ class DashboardAjaxController {
 
 		return \Depicter::json([
 			'hasMore' => isset( $results['numberOfPages'] ) && $results['numberOfPages'] > $results['page'],
+			'total' => $results['total'],
+			'published' => \Depicter::documentRepository()->getNumberOfPublishedDocuments(),
 			'hits'    => Arr::camelizeKeys( $hits, '_', [], true )
 		])->withStatus(200);
 	}

@@ -263,6 +263,25 @@ input[type="radio"]:checked + label + br + input[type="text"] {
   content: "\f147";
 }
 
+#adminmenu .depicter-notif-number {
+  animation: shake 3s infinite;
+}
+
+@keyframes shake {
+  0%, 33% {
+    transform: scale(1);
+  }
+  6.6%, 13.2% {
+    transform: scale(1.15);
+  }
+  19.8%, 26.4% {
+    transform: scale(0.9);
+  }
+  33%, 100% {
+    transform: scale(1);
+  }
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

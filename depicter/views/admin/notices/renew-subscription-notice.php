@@ -20,7 +20,7 @@ $renew_url = ! empty( $subscription_id ) ? "https://my.depicter.com/subscription
 .dep-renew-subscription-notice .wrap {
 	padding: 17px 42px 24px;
 	margin: 0;
-	background: #FFF7F7 url(<?php echo \Depicter::core()->assets()->getUrl() . '/resources/images/renew.png';?>);
+	background: #FFF7F7 url(<?php echo esc_url( \Depicter::core()->assets()->getUrl() . '/resources/images/renew.png' );?>);
 	background-size: 200px;
 	background-repeat: no-repeat;
 	background-position: calc(100% + 15px) -17px;
@@ -74,7 +74,7 @@ $renew_url = ! empty( $subscription_id ) ? "https://my.depicter.com/subscription
 <div class="notice dep-renew-subscription-notice is-dismissible">
 	<div class="wrap">
 		<h3><?php esc_html_e( 'Your Depicter Pro subscription has expired', 'depicter' ); ?></h3>
-		<p><?php echo sprintf( esc_html__( 'Renew now to restore full functionality. Enjoy a %s discount with code: %s', 'depicter' ), '20%', '<code>RENEW20</code>'); ?></p>
+		<p><?php echo sprintf( esc_html__( 'Renew now to restore full functionality. Enjoy a %1$s discount with code: %2$s', 'depicter' ), '20%', '<code>RENEW20</code>'); ?></p>
 		<a href="<?php echo esc_url( $renew_url );?>" target="_blank"><?php esc_html_e( 'Upgrade Now', 'depicter' ); ?></a>
 	</div>
 </div>

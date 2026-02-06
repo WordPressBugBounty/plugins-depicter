@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="depicter-survey-container">
 	<div class="depicter-survey-list">
 		<div class="depicter-logo">
-			<img src="<?php echo Depicter::core()->assets()->getUrl() . '/resources/images/svg/light-logo.svg'; ?>" alt="logo">
+			<img src="<?php echo esc_url( Depicter::core()->assets()->getUrl() . '/resources/images/svg/light-logo.svg' ); ?>" alt="logo">
 			<span class="depicter-close"></span>
 		</div>
 		<form action="#" method="post">

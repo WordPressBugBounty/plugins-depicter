@@ -18,7 +18,7 @@ class Migration extends BaseMigration {
 	/**
 	 * Current tables migration version
 	 */
-	const MIGRATION_VERSION = "0.4.6";
+	const MIGRATION_VERSION = "0.4.7";
 
 	/**
 	 * Prefix for version option name
@@ -33,7 +33,7 @@ class Migration extends BaseMigration {
 	/**
 	* Table names
 	*/
-	protected $table_names = [ 'documents', 'options', 'meta', 'leads', 'lead_fields' ];
+	protected $table_names = [ 'documents', 'options', 'meta', 'leads', 'lead_fields', 'queue_jobs' ];
 
 
 	/**
@@ -146,6 +146,24 @@ class Migration extends BaseMigration {
 		$this->dbDelta( $sql_create_table );
 	}
 
+    public function create_table_queue_jobs() {
+
+        $sql_create_table = "CREATE TABLE {$this->queue_jobs} (
+            id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            queue VARCHAR(50) NOT NULL DEFAULT 'default',
+            payload LONGTEXT NOT NULL,
+            attempts TINYINT UNSIGNED NOT NULL DEFAULT 0,
+            reserved_at DATETIME DEFAULT NULL,
+            available_at DATETIME NOT NULL,
+            created_at DATETIME NOT NULL,
+            status VARCHAR(20) NOT NULL DEFAULT 'pending', -- pending, processing, failed, completed
+            last_error TEXT DEFAULT NULL,
+            PRIMARY KEY  (id),
+            KEY status (status),
+            KEY available_at (available_at),
+            KEY queue (queue)
+        ) {$this->charset_collate()};\n";
+
+        $this->dbDelta($sql_create_table);
+    }
 }
-
-

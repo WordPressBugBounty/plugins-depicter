@@ -3,9 +3,7 @@ namespace Depicter\Document\Models\Elements;
 
 use Averta\Core\Utility\Arr;
 use Depicter\Document\CSS\Selector;
-use Depicter\Document\Helper\Helper;
 use Depicter\Document\Models;
-use Depicter\Document\Models\Common\Styles;
 use Depicter\Html\Html;
 
 class Form extends Models\Element
@@ -35,6 +33,10 @@ class Form extends Models\Element
 				case 'form:message':
 					$output = Html::div( $args, $this->getMessageContent() );
 					break;
+				case "hiddenInput":
+					$args['data-source'] = $this->options->source;
+					$args['data-source-key'] = $this->options->sourceKey;
+					$output = Html::div( $args, $this->getHiddenInputContent() );
 				default:
 					break;
 			}
@@ -102,7 +104,7 @@ class Form extends Models\Element
 		}
 		if ( ! empty( $this->options->label ) && ! empty( $this->options->showLabel ) ) {
 			$output .= Html::label([
-				'class' => Selector::prefixify( 'field-label' ),
+				'class' => $this->options->type === "checkbox" ? Selector::prefixify( 'choice-label' ) : Selector::prefixify( 'field-label' ),
 				'for' => $this->options->attributes->name
 			], $this->options->label ) . "\n";
 		}
@@ -174,6 +176,10 @@ class Form extends Models\Element
 		}
 
 		return $output;
+	}
+
+	protected function getHiddenInputContent(): string {
+		return Html::input( 'hidden', $this->options->name, '', [] );
 	}
 
 	/**

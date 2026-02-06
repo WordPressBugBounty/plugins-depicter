@@ -59,17 +59,17 @@
         },
         {
             "name": "averta/wordpress",
-            "version": "1.2.24",
-            "version_normalized": "1.2.24.0",
+            "version": "1.2.25",
+            "version_normalized": "1.2.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/averta-lab/wordpress.git",
-                "reference": "e3afae7243760385c87f0ef96ead7838df87c1ba"
+                "reference": "d1fe6d00bb8d18dfbe0f40257a8faa267441eb50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/averta-lab/wordpress/zipball/e3afae7243760385c87f0ef96ead7838df87c1ba",
-                "reference": "e3afae7243760385c87f0ef96ead7838df87c1ba",
+                "url": "https://api.github.com/repos/averta-lab/wordpress/zipball/d1fe6d00bb8d18dfbe0f40257a8faa267441eb50",
+                "reference": "d1fe6d00bb8d18dfbe0f40257a8faa267441eb50",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "roots/wordpress": "*",
                 "wp-coding-standards/wpcs": "^2.3"
             },
-            "time": "2024-11-26T10:15:03+00:00",
+            "time": "2025-08-25T08:15:02+00:00",
             "type": "library",
             "extra": {
                 "wordpress-install-dir": "vendor/wp-core"
@@ -119,23 +119,23 @@
             "support": {
                 "docs": "https://averta.net",
                 "issues": "https://github.com/averta-lab/wordpress/issues",
-                "source": "https://github.com/averta-lab/wordpress/tree/1.2.24"
+                "source": "https://github.com/averta-lab/wordpress/tree/1.2.25"
             },
             "install-path": "../averta/wordpress"
         },
         {
             "name": "averta/wpemerge",
-            "version": "0.9.5",
-            "version_normalized": "0.9.5.0",
+            "version": "0.9.6",
+            "version_normalized": "0.9.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/averta-lab/wpemerge.git",
-                "reference": "2c4d40f551d92aa690067274118a54f392630d5d"
+                "reference": "aa6b25d4381bf14e42f8c83859e06d6784f4c9ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/averta-lab/wpemerge/zipball/2c4d40f551d92aa690067274118a54f392630d5d",
-                "reference": "2c4d40f551d92aa690067274118a54f392630d5d",
+                "url": "https://api.github.com/repos/averta-lab/wpemerge/zipball/aa6b25d4381bf14e42f8c83859e06d6784f4c9ec",
+                "reference": "aa6b25d4381bf14e42f8c83859e06d6784f4c9ec",
                 "shasum": ""
             },
             "require": {
@@ -150,7 +150,7 @@
                 "phpcompatibility/php-compatibility": "^9",
                 "squizlabs/php_codesniffer": "^3"
             },
-            "time": "2024-02-15T10:07:52+00:00",
+            "time": "2025-08-19T09:20:03+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -207,23 +207,23 @@
         },
         {
             "name": "averta/wpemerge-app-core",
-            "version": "0.18.1",
-            "version_normalized": "0.18.1.0",
+            "version": "0.18.4",
+            "version_normalized": "0.18.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/averta-lab/wpemerge-app-core.git",
-                "reference": "8f324c45894b0eaff18c1dbc417a36fe47383e50"
+                "reference": "4f658cefb85872e6ae326427337ff53716e7053b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/averta-lab/wpemerge-app-core/zipball/8f324c45894b0eaff18c1dbc417a36fe47383e50",
-                "reference": "8f324c45894b0eaff18c1dbc417a36fe47383e50",
+                "url": "https://api.github.com/repos/averta-lab/wpemerge-app-core/zipball/4f658cefb85872e6ae326427337ff53716e7053b",
+                "reference": "4f658cefb85872e6ae326427337ff53716e7053b",
                 "shasum": ""
             },
             "require": {
                 "averta/wpemerge": "~0.9.4"
             },
-            "time": "2024-12-24T08:52:02+00:00",
+            "time": "2026-01-14T08:50:06+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -261,7 +261,7 @@
             "homepage": "https://wpemerge.com/",
             "support": {
                 "issues": "https://github.com/averta-lab/wpemerge-app-core/issues",
-                "source": "https://github.com/averta-lab/wpemerge-app-core/tree/0.18.1"
+                "source": "https://github.com/averta-lab/wpemerge-app-core/tree/0.18.4"
             },
             "install-path": "../averta/wpemerge-app-core"
         },
@@ -475,17 +475,17 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.7.0",
-            "version_normalized": "2.7.0.0",
+            "version": "2.8.0",
+            "version_normalized": "2.8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201"
+                "reference": "21dc724a0583619cd1652f673303492272778051"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
-                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/21dc724a0583619cd1652f673303492272778051",
+                "reference": "21dc724a0583619cd1652f673303492272778051",
                 "shasum": ""
             },
             "require": {
@@ -501,12 +501,12 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
                 "http-interop/http-factory-tests": "0.9.0",
-                "phpunit/phpunit": "^8.5.39 || ^9.6.20"
+                "phpunit/phpunit": "^8.5.44 || ^9.6.25"
             },
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
-            "time": "2024-07-18T11:15:46+00:00",
+            "time": "2025-08-23T21:21:41+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -574,7 +574,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.7.0"
+                "source": "https://github.com/guzzle/psr7/tree/2.8.0"
             },
             "funding": [
                 {
@@ -648,17 +648,17 @@
         },
         {
             "name": "pimple/pimple",
-            "version": "v3.5.0",
-            "version_normalized": "3.5.0.0",
+            "version": "v3.6.1",
+            "version_normalized": "3.6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "a94b3a4db7fb774b3d78dad2315ddc07629e1bed"
+                "reference": "020029849cc55ad360066844df8ed880fb20c5bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/a94b3a4db7fb774b3d78dad2315ddc07629e1bed",
-                "reference": "a94b3a4db7fb774b3d78dad2315ddc07629e1bed",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/020029849cc55ad360066844df8ed880fb20c5bb",
+                "reference": "020029849cc55ad360066844df8ed880fb20c5bb",
                 "shasum": ""
             },
             "require": {
@@ -666,9 +666,9 @@
                 "psr/container": "^1.1 || ^2.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^5.4@dev"
+                "phpunit/phpunit": "*"
             },
-            "time": "2021-10-28T11:13:42+00:00",
+            "time": "2025-12-31T08:24:29+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -698,7 +698,7 @@
                 "dependency injection"
             ],
             "support": {
-                "source": "https://github.com/silexphp/Pimple/tree/v3.5.0"
+                "source": "https://github.com/silexphp/Pimple/tree/v3.6.1"
             },
             "install-path": "../pimple/pimple"
         },
@@ -1096,12 +1096,12 @@
             "time": "2024-09-25T14:11:13+00:00",
             "type": "library",
             "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
                 "branch-alias": {
                     "dev-main": "2.5-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
                 }
             },
             "installation-source": "dist",
@@ -1147,8 +1147,8 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.31.0",
-            "version_normalized": "1.31.0.0",
+            "version": "v1.33.0",
+            "version_normalized": "1.33.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -1209,7 +1209,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -1221,6 +1221,10 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
@@ -1229,17 +1233,17 @@
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
-            "version": "v1.31.0",
-            "version_normalized": "1.31.0.0",
+            "version": "v1.33.0",
+            "version_normalized": "1.33.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
-                "reference": "b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe"
+                "reference": "380872130d3a5dd3ace2f4010d95125fde5d5c70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe",
-                "reference": "b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/380872130d3a5dd3ace2f4010d95125fde5d5c70",
+                "reference": "380872130d3a5dd3ace2f4010d95125fde5d5c70",
                 "shasum": ""
             },
             "require": {
@@ -1248,7 +1252,7 @@
             "suggest": {
                 "ext-intl": "For best performance"
             },
-            "time": "2024-09-09T11:45:10+00:00",
+            "time": "2025-06-27T09:58:17+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1290,7 +1294,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -1302,6 +1306,10 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
@@ -1310,8 +1318,8 @@
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.31.0",
-            "version_normalized": "1.31.0.0",
+            "version": "v1.33.0",
+            "version_normalized": "1.33.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
@@ -1374,7 +1382,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -1386,6 +1394,10 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
@@ -1394,20 +1406,21 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.31.0",
-            "version_normalized": "1.31.0.0",
+            "version": "v1.33.0",
+            "version_normalized": "1.33.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341"
+                "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/85181ba99b2345b0ef10ce42ecac37612d9fd341",
-                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6d857f4d76bd4b343eac26d6b539585d2bc56493",
+                "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493",
                 "shasum": ""
             },
             "require": {
+                "ext-iconv": "*",
                 "php": ">=7.2"
             },
             "provide": {
@@ -1416,7 +1429,7 @@
             "suggest": {
                 "ext-mbstring": "For best performance"
             },
-            "time": "2024-09-09T11:45:10+00:00",
+            "time": "2024-12-23T08:48:59+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1457,7 +1470,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -1469,6 +1482,10 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
@@ -1477,8 +1494,8 @@
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.31.0",
-            "version_normalized": "1.31.0.0",
+            "version": "v1.33.0",
+            "version_normalized": "1.33.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
@@ -1536,7 +1553,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php73/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-php73/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -1548,6 +1565,10 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
@@ -1556,23 +1577,23 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.31.0",
-            "version_normalized": "1.31.0.0",
+            "version": "v1.33.0",
+            "version_normalized": "1.33.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8"
+                "reference": "0cc9dd0f17f61d8131e7df6b84bd344899fe2608"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
-                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/0cc9dd0f17f61d8131e7df6b84bd344899fe2608",
+                "reference": "0cc9dd0f17f61d8131e7df6b84bd344899fe2608",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2"
             },
-            "time": "2024-09-09T11:45:10+00:00",
+            "time": "2025-01-02T08:10:11+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1619,7 +1640,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -1628,6 +1649,10 @@
                 },
                 {
                     "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
                     "type": "github"
                 },
                 {
@@ -1851,29 +1876,29 @@
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "3.9.0",
-            "version_normalized": "3.9.0.0",
+            "version": "3.9.3",
+            "version_normalized": "3.9.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "90b98e6fe97d455679b1d288f050cad8f6f79771"
+                "reference": "c58cdbab17651303d406cd3b22cf9d75c71c986c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/90b98e6fe97d455679b1d288f050cad8f6f79771",
-                "reference": "90b98e6fe97d455679b1d288f050cad8f6f79771",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/c58cdbab17651303d406cd3b22cf9d75c71c986c",
+                "reference": "c58cdbab17651303d406cd3b22cf9d75c71c986c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.5",
+                "phpunit/phpunit": "^8.5",
                 "woocommerce/woocommerce-sniffs": "0.1.0",
                 "wp-cli/wp-cli": "~2.5.0",
                 "yoast/phpunit-polyfills": "^2.0"
             },
-            "time": "2024-11-15T00:11:39+00:00",
+            "time": "2025-07-15T09:32:30+00:00",
             "type": "wordpress-plugin",
             "extra": {
                 "scripts-description": {
@@ -1891,7 +1916,7 @@
             "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.9.0"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.9.3"
             },
             "install-path": "../../wp-content/plugins/action-scheduler"
         }

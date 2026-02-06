@@ -40,6 +40,7 @@ class SingleType extends ConditionBase {
 	 * @inheritdoc
 	 */
 	public function getLabel(){
+		/* translators: singular name of post type */
 		return sprintf( __( "%s Page", 'depicter' ), $this->postType->labels->singular_name ?? $this->postType  );
 	}
 

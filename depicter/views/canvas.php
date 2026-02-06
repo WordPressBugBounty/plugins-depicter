@@ -45,7 +45,7 @@ if ( is_rtl() ) {
 		wp_head();
 	}
 	?>
-	<script>var ajaxurl = '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>';</script>
+	<script>var ajaxurl = '<?php echo esc_url_raw( admin_url( 'admin-ajax.php', 'relative' ) ); ?>';</script>
 </head>
 <body class="<?php echo Depicter\Utility\Sanitize::attribute( implode( ' ', $body_classes ) ); ?>">
 <?php echo \Depicter\Utility\Sanitize::html( $content, null, 'depicter/output' ); ?>
@@ -59,13 +59,23 @@ echo "<script>
 	window.addEventListener(\"message\", (event) => {
 		if (event.data === \"reopen\") {
 			const targetDisplayInstance = window.depicterInstances?.[0]?.display;
-			if (targetDisplayInstance?.displayController.isOpen) {
-				targetDisplayInstance?.close?.();
-				targetDisplayInstance?.once(\"close\", () => {
-				targetDisplayInstance?.open?.();
+			const displayType = targetDisplayInstance.options.get(\"type\");
+
+			const reopen = (displayInstance) => {
+			if (displayInstance?.displayController.isOpen) {
+				displayInstance?.close?.();
+				displayInstance?.once(\"close\", () => {
+					displayInstance?.open?.();
 				});
 			} else {
-				targetDisplayInstance?.open?.();
+				displayInstance?.open?.();
+			}
+			};
+
+			reopen(targetDisplayInstance);
+
+			if (displayType === \"teaser\") {
+			reopen(targetDisplayInstance.displayController.popup.display);
 			}
 		}
 	});

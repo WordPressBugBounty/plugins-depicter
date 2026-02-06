@@ -40,7 +40,6 @@ class PluginServiceProvider implements ServiceProviderInterface
 		register_activation_hook(  DEPICTER_PLUGIN_FILE, [ $this, 'activate'  ] );
 		register_deactivation_hook(DEPICTER_PLUGIN_FILE, [ $this, 'deactivate'] );
 
-		add_action( 'plugins_loaded', [$this, 'loadTextDomain'] );
 		add_action( 'admin_init', [ $this, 'check_plugin_upgrade_via_upload' ] );
 		add_action( 'admin_init', [ $this, 'check_redirect_process' ] );
 		add_filter( 'update_plugin_complete_actions', [ $this, 'add_depicter_link_after_upgrade'], 10, 1);
@@ -72,15 +71,6 @@ class PluginServiceProvider implements ServiceProviderInterface
 	 */
 	public function deactivate() {
 		// Nothing to do right now.
-	}
-
-	/**
-	 * Load text domain.
-	 *
-	 * @return void
-	 */
-	public function loadTextDomain() {
-		load_plugin_textdomain( 'depicter', false, basename( dirname( DEPICTER_PLUGIN_FILE ) ) . DIRECTORY_SEPARATOR . 'languages' );
 	}
 
 	/**

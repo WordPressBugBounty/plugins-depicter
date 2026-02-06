@@ -235,7 +235,7 @@ class FileEdit extends File implements FileEditInterface
 	 */
 	public function save( $filename = null, $mime_type = null ){
 		if( $this->isPaused ){
-			throw new ImageEditorException( __( 'File cannot be resized.' ) );
+			throw new ImageEditorException( __( 'File cannot be resized.', 'depicter' ) );
 		}
 		if( ! $filename ){
 			$filename = $this->generateFilename();

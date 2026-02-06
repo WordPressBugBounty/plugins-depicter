@@ -209,10 +209,12 @@ class LeadRepository
 		)->join( "{$this->leadField()->getTable()} AS lf", "{$leadTable}.id", "=", "lf.lead_id" );
 
 		if( ! empty( $args['dateStart'] ) ){
+			$args['dateStart'] = $this->normalizeDateTime( $args['dateStart'], 'start' );
 			$leads->where( "{$leadTable}.created_at", '>=', $args['dateStart'] );
 		}
 
 		if( ! empty( $args['dateEnd'] ) ){
+			$args['dateEnd'] = $this->normalizeDateTime( $args['dateEnd'], 'end' );
 			$leads->where( "{$leadTable}.created_at", '<=', $args['dateEnd'] );
 		}
 
@@ -238,6 +240,21 @@ class LeadRepository
 			'page' => $args['page'],
 			'leads' => $results['leads']->toArray()
 		] : [];
+	}
+
+	/**
+	 * Normalize date to include time
+	 *
+	 * @param string $date
+	 * @param string $type
+	 *
+	 * @return string
+	 */
+	public function normalizeDateTime( string $date, $type = 'start' ){
+		if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)){
+			return $date . ' ' . ($type === 'start' ? '00:00:00' : '23:59:59');
+		}
+		return $date;
 	}
 
 

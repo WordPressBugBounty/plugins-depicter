@@ -113,6 +113,10 @@ class Section
 	 */
 	public $visibilitySchedule;
 
+	/**
+	 * @var string
+	 */
+	public $type = 'section';
 
 	/**
 	 * get section ID
@@ -139,6 +143,15 @@ class Section
 	 */
 	public function getName() {
 		return $this->name ? $this->name : $this->id;
+	}
+
+	/**
+	 * Get section name
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return $this->type ?? "section";
 	}
 
 	/**
@@ -228,6 +241,7 @@ class Section
 			'id'          => $this->getCssID(),
 			'class'	      => $this->getClassNames(),
 			'data-name'   => $this->getName(),
+			'data-type'	  => $this->getType(),
             'data-local-id' => $this->id
 		];
 

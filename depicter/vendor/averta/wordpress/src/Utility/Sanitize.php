@@ -426,13 +426,17 @@ class Sanitize
 	            'opacity' => [],
                 'style' => [],
                 'stroke-linecap' => [],
-                'stroke-linejoin' => []
+                'stroke-linejoin' => [],
+                'stroke-dasharray' => [],
+                'stroke-dashoffset' => [],
+                'stroke-opacity' => []
 	        ],
 	        'g' => [
 	            'id' => [],
 	            'class' => [],
 	            'fill' => [],
                 'fill-rule' => [],
+                'fill-opacity' => [],
 	            'width' => [],
 	            'height' => [],
 	            'transform' => [],
@@ -440,7 +444,11 @@ class Sanitize
 	            'stroke-width' => [],
 	            'stroke' => [],
 	            'opacity' => [],
-                'style' => []
+                'style' => [],
+                'stroke-linecap' => [],
+                'stroke-linejoin' => [],
+                'stroke-dasharray' => [],
+                'stroke-dashoffset' => []
 	        ],
 	        'rect' => [
 	            'id' => [],
@@ -455,7 +463,8 @@ class Sanitize
 	            'y' => [],
 	            'rx' => [],
 	            'ry' => [],
-                'style' => []
+                'style' => [],
+                'mask' => []
 	        ],
 	        'circle' => [
 	            'id' => [],
@@ -527,6 +536,7 @@ class Sanitize
                 'xlink:href' => []
             ],
             'animate' => [
+                'id' => [],
                 'attributename' => [],
                 'begin' => [],
                 'dur' => [],
@@ -534,15 +544,27 @@ class Sanitize
                 'calcmode' => [],
                 'repeatcount' => [],
                 'keytimes' => [],
-                'keysplines' => []
+                'keysplines' => [],
+                'fill' => [],
             ],
             'animatetransform' => [
+                'id' => [],
+                'fill' => [],
                 'attributename' => [],
                 'type' => [],
+                'values' => [],
                 'from' => [],
+                'begin' => [],
                 'to' => [],
                 'dur' => [],
-                'repeatcount' => []
+                'repeatcount' => [],
+                'calcmode' => []
+            ],
+            'animatemotion' => [
+                'fill' => [],
+                'calcmode' => [],
+                'dur' => [],
+                'path' => []
             ],
 	        'defs' => [],
 	        'clippath' => [
@@ -576,6 +598,12 @@ class Sanitize
 	            'in' => [],
 	            'in2' => [],
 	        ],
+            'set' => [
+                'fill' => [],
+                'attributename' => [],
+                'begin' => [],
+                'to' => []
+            ],
             'symbol' => [
                 'id' => [],
                 'class' => [],

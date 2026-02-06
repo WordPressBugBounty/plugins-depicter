@@ -187,6 +187,24 @@ class Script
 
 		$attributes['useWatermark'] = \Depicter::auth()->isSubscriptionExpired();
 
+		if ( $document->hasTeaser() ) {
+			$attributes['teaser'] = [
+				'enabled' => true,
+				'placement' => $document->options->documentTypeOptions->teaser->placement,
+				'behavior' => $document->options->documentTypeOptions->teaser->behavior ?? "always",
+				'vSpace' => [
+					'value' => $document->options->documentTypeOptions->teaser->vSpace->value,
+					'unit' => $document->options->documentTypeOptions->teaser->vSpace->unit
+				],
+				'hSpace' => [
+					'value' => $document->options->documentTypeOptions->teaser->hSpace->value,
+					'unit' => $document->options->documentTypeOptions->teaser->hSpace->unit
+				]
+			];
+		}
+
+		$attributes = apply_filters( 'depicter/player/script/attributes', $attributes );
+
 		$basePath = \Depicter::core()->assets()->getUrl() . '/resources/scripts/player/';
 
 		$script  = "\n(window.depicterSetups = window.depicterSetups || []).push(function(){";

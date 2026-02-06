@@ -65,7 +65,6 @@ class CuratedAPIAjaxController
 		$perpage  = !empty( $request->query('perpage') ) ? Sanitize::int( $request->query('perpage') ) : 20;
 		$category = !empty( $request->query('category') ) ? Sanitize::textfield( $request->query('category') ) : '';
 		$search   = !empty( $request->query('s') ) ? Sanitize::textfield( $request->query('s') ) : '';
-		$version  = !empty( $request->query('v') ) ? Sanitize::textfield( $request->query('v') ) : '1';
 		$from     = !empty( $request->query('from') ) ? Sanitize::textfield( $request->query('from') ) : 'website';
 		$directory= !empty( $request->query('directory') ) ? Sanitize::textfield( $request->query('directory') ) : 2;
 
@@ -74,7 +73,6 @@ class CuratedAPIAjaxController
 			'perpage'   => $perpage,
 			'category'  => $category,
 			's'         => $search,
-			'v'         => $version,
 			'from'      => $from,
 			'directory' => $directory
 		];
@@ -112,7 +110,6 @@ class CuratedAPIAjaxController
 		$perpage  = !empty( $request->query('perpage') ) ? Sanitize::int( $request->query('perpage') ) : 20;
 		$group = !empty( $request->query('group') ) ? Sanitize::textfield( $request->query('group') ) : '';
 		$search   = !empty( $request->query('s') ) ? Sanitize::textfield( $request->query('s') ) : '';
-		$version  = !empty( $request->query('v') ) ? Sanitize::textfield( $request->query('v') ) : '1';
 		$from     = !empty( $request->query('from') ) ? Sanitize::textfield( $request->query('from') ) : 'website';
 		$directory= !empty( $request->query('directory') ) ? Sanitize::textfield( $request->query('directory') ) : 2;
 		$flush = !empty( $request->query('flush') );
@@ -122,7 +119,6 @@ class CuratedAPIAjaxController
 			'perpage'   => $perpage,
 			'group'  	=> $group,
 			's'         => $search,
-			'v'         => $version,
 			'from'      => $from,
 			'flush'		=> $flush,
 			'directory' => $directory

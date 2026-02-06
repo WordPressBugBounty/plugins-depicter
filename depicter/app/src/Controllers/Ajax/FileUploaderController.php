@@ -8,6 +8,13 @@ class FileUploaderController
 	public function uploadFile(RequestInterface $request, $view) {
 
 		try{
+
+			if ( ! current_user_can('upload_files') ) {
+				return \Depicter::json([
+					'errors' => [ __('You do not have permission to upload files.', 'depicter' ) ]
+				])->withStatus(400 );
+			}
+
 			$files = $request->files();
 
 			if ( empty( $files ) ) {

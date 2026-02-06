@@ -65,7 +65,8 @@ class Symbols
 		    $clipPathContent = Html::el('svg', [
 				//'xmlns' => "http://www.w3.org/2000/svg",
 			    'width' => '0',
-			    'height' => '0'
+			    'height' => '0',
+				'class' => 'depicter-svg-clip-paths'
 		    ], $clipPathContent . "\n" );
 	    }
 

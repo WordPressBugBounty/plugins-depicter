@@ -43,6 +43,9 @@ use Depicter\Services\AIWizardService;
 use WPEmergeAppCore\AppCore\AppCore;
 use Depicter\Services\GoogleFontsService;
 use Depicter\Rules\Condition\Conditions;
+use Depicter\Integration\Manager as IntegrationManager;
+use Depicter\Database\Repository\QueueJobRepository;
+use Depicter\Services\QueueService;
 
 /**
  * "@mixin" annotation for better IDE support.
@@ -261,4 +264,16 @@ final class AppMixin
      * @return SettingsManagerService
      */
     public static function settings(): SettingsManagerService {}
+
+	public static function integration(): IntegrationManager {}
+
+    /**
+     * @return QueueJobRepository
+     */
+    public static function queueJobsRepository(): QueueJobRepository {}
+
+    /**
+     * @return QueueService
+     */
+    public static function queue(): QueueService {}
 }

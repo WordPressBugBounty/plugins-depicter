@@ -34,13 +34,19 @@ class DashboardPage
 	 * @return void
 	 */
 	public function registerPage() {
+
+        $depicterMenuTitle = __( 'Depicter', 'depicter' );
+        $notifNumber        = $this->countOfUnreadNotifications();
+        $depicterMenuTitle = $notifNumber ? $depicterMenuTitle . " <span class='awaiting-mod depicter-notif-number'>" . $notifNumber . "</span>" : $depicterMenuTitle;
+
 		$this->hook_suffix = add_menu_page(
 			__('Depicter', 'depicter'),
-			__('Depicter', 'depicter'),
+			$depicterMenuTitle,
 			'access_depicter',
 			self::PAGE_ID,
 			[ $this, 'render' ], // called to output the content for this page
-			\Depicter::core()->assets()->getUrl() . '/resources/images/svg/wp-logo.svg'
+			\Depicter::core()->assets()->getUrl() . '/resources/images/svg/wp-logo.svg',
+			58
 		);
 
 		add_submenu_page(
@@ -49,15 +55,6 @@ class DashboardPage
 			__( 'Dashboard', 'depicter' ),
 			'access_depicter',
 			self::PAGE_ID
-		);
-
-		add_submenu_page(
-			self::PAGE_ID,
-			__( 'Settings', 'depicter' ),
-			__( 'Settings', 'depicter' ),
-			'access_depicter',
-			'depicter-settings',
-			[ $this, 'printSettingsPage' ]
 		);
 
 		add_submenu_page(
@@ -128,34 +125,22 @@ class DashboardPage
 	 */
 	public function enqueueScripts( $hook_suffix = '' ){
 
-		if( $hook_suffix !== $this->hook_suffix ){
-
-			if ( !empty( $_GET['page'] ) && $_GET['page'] == 'depicter-settings' ) {
-				\Depicter::core()->assets()->enqueueScript(
-					'depicter-admin',
-					\Depicter::core()->assets()->getUrl() . '/resources/scripts/admin/index.js',
-					['jquery'],
-					true
-				);
-
-				wp_localize_script( 'depicter-admin', 'depicterParams', [
-					'ajaxUrl' => admin_url('admin-ajax.php'),
-					'token' => \Depicter::csrf()->getToken( \Depicter\Security\CSRF::DASHBOARD_ACTION ),
-				]);
-			}
-
+		// If not dashboard page, don't load dashboard assets
+		if ( $hook_suffix !== $this->hook_suffix ) {
 			return;
 		}
 
 		// Enqueue scripts.
-		\Depicter::core()->assets()->enqueueScript(
+		\Depicter::core()->assets()->enqueueScriptModule(
 			'depicter--dashboard',
-			\Depicter::core()->assets()->getUrl() . '/resources/scripts/dashboard/depicter-dashboard.js',
-			[],
-			true
+			\Depicter::core()->assets()->getUrl() . '/resources/scripts/dashboard/depicter-dashboard.js'
 		);
 
 		// Enqueue styles.
+		\Depicter::core()->assets()->enqueueStyle(
+			'depicter-dashboard-styles',
+			\Depicter::core()->assets()->getUrl() . '/resources/scripts/dashboard/depicter-dashboard-styles.css'
+		);
 		\Depicter::core()->assets()->enqueueStyle(
 			'depicter-dashboard',
 			\Depicter::core()->assets()->getUrl() . '/resources/styles/dashboard/index.css'
@@ -190,7 +175,7 @@ class DashboardPage
 		$refreshTokenPayload = Extract::JWTPayload( $refreshToken );
 		$displayReviewNotice = !empty( $refreshTokenPayload['ict'] ) && ( time() - Data::cast( $refreshTokenPayload['ict'], 'int' ) > 5 * DAY_IN_SECONDS );
 
-		wp_add_inline_script('depicter--dashboard', 'window.depicterEnv = '. JSON::encode(
+		wp_print_inline_script_tag('window.depicterEnv = '. JSON::encode(
 		    [
 				'wpVersion'   => $wp_version,
 				"scriptsPath" => \Depicter::core()->assets()->getUrl(). '/resources/scripts/dashboard/',
@@ -244,12 +229,9 @@ class DashboardPage
 				],
 				'display' => [
                     'reviewNotice' => $displayReviewNotice
-                ],
-                'routes'=>[
-                    'settingPage' => Escape::url( add_query_arg( [ 'page' => 'depicter-settings', ], self_admin_url( 'admin.php' ) ) )
                 ]
 			]
-		), 'before' );
+		) );
 
 	}
 
@@ -264,8 +246,50 @@ class DashboardPage
 		}
 	}
 
-	public function printSettingsPage() {
-		\Depicter::resolve('depicter.dashboard.settings')->render();
-	}
+    public function get_notifications() {
+        if ( false === $notifications = \Depicter::cache()->get( 'retrievedNotifications' ) ) {
+            try{
+                $response = \Depicter::remote()->get( 'v1/core/notifications', [
+                    'query' => [
+                        'page' => 1,
+                        'perPage' => 20
+                    ]
+                ]);
 
+                if ($response->getStatusCode() === 200) {
+                    $notifications = $response->getBody()->getContents();
+                    \Depicter::cache()->set( 'retrievedNotifications', $notifications, 12 * HOUR_IN_SECONDS );
+                    return JSON::decode( $notifications, true );
+                }
+            } catch ( GuzzleException $e ){
+            }
+
+            return false;
+
+        }
+
+        return JSON::decode( $notifications, true );
+    }
+
+    protected function countOfUnreadNotifications(): ?int
+    {
+
+        if ( false === $notifications = $this->get_notifications() ) {
+            return 0;
+        }
+
+        if ( false === $lastSeenDate = \Depicter::options()->get('lastSeenNotificationDate', false) ) {
+            return count( $notifications['hits'] );
+        }
+
+        $unreadNotifications = 0;
+        $lastSeenDate = strtotime( $lastSeenDate );
+        foreach ( $notifications['hits'] as $notification ) {
+            if ( strtotime( $notification['date'] ) > $lastSeenDate ) {
+                $unreadNotifications++;
+            }
+        }
+
+        return $unreadNotifications;
+    }
 }

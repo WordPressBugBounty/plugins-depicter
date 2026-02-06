@@ -256,9 +256,9 @@ class Element
 		if ( strpos( $this->type, 'dpc' ) !== false ) {
 			$this->componentType = $this->type;
 			$this->type = 'component';
-		} else if ( strpos( $this->type, 'form:' ) !== false ) {
+		} else if ( strpos( $this->type, 'form:' ) !== false || $this->type === "hiddenInput" ) {
 			$this->componentType = $this->type;
-			$this->type = 'form';
+			$this->type = $this->type !== 'form:submit'? 'form' : 'button';
 		} else if ( strpos( $this->type, 'survey:' ) !== false ) {
 			$this->componentType = $this->type;
 			$this->type = $this->type == 'survey:submit' || $this->type == 'survey:next' || $this->type == 'survey:prev' ? 'button' : 'survey';
@@ -551,19 +551,31 @@ class Element
 		if ( !empty( $innerStyles ) ) {
 
 			foreach( $innerStyles as $cssSelector => $styles ){
-				if ( empty( $styles ) || ! $styles instanceof CommonStyles ) {
-					continue;
+				// Handle "dynamicStyleProperties" specially
+				$styleItems = $cssSelector === 'dynamicStyleProperties' ? (array) $styles : [$cssSelector => $styles];
+
+				foreach ($styleItems as $selector => $style) {
+					if (empty($style) || ! $style instanceof CommonStyles) {
+						continue;
+					}
+
+					$key = '.' . $this->getStyleSelector() . ' .' . Helper::camelCaseToHyphenated($selector);
+
+					// Normal CSS
+					$generalCss = $style->getGeneralCss('normal');
+					$svgCss     = $this->getInnerSvgCss($selector);
+
+					$this->selectorCssList[$key] = array_merge_recursive($generalCss, $svgCss);
+
+					// Hover CSS
+					$hoverCss = $style->getGeneralCss('hover');
+					if (!empty($hoverCss)) {
+						$this->selectorCssList[$key]['hover'] = Arr::merge(
+							$hoverCss['hover'],
+							$this->selectorCssList[$key]['hover']
+						);
+					}
 				}
-
-				$generalCss = $innerStyles->{$cssSelector}->getGeneralCss('normal');
-                // Add SVG selector and css
-                $svgCss = $this->getInnerSvgCss( $cssSelector );
-				$this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . Helper::camelCaseToHyphenated( $cssSelector ) ] = array_merge_recursive( $generalCss, $svgCss );
-
-                $hoverCss = $innerStyles->{$cssSelector}->getGeneralCss('hover');
-                if ( !empty( $hoverCss ) ) {
-                    $this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . Helper::camelCaseToHyphenated( $cssSelector ) ]['hover'] = Arr::merge( $hoverCss['hover'] , $this->selectorCssList[ '.' . $this->getStyleSelector() . ' .' . Helper::camelCaseToHyphenated( $cssSelector ) ]['hover']);
-                }
 			}
 		}
 
@@ -579,7 +591,13 @@ class Element
     protected function getInnerSvgCss( $cssSelector ): array
     {
         // Get styles list from styles property
-        return ! empty( $this->innerStyles->{$cssSelector} ) ? $this->innerStyles->{$cssSelector}->getSvgCss() : [];
+		if ( ! empty( $this->innerStyles->{$cssSelector} ) ) {
+			return $this->innerStyles->{$cssSelector}->getSvgCss();
+		} else if ( ! empty( $this->innerStyles->dynamicStyleProperties[ $cssSelector ] ) ) {
+			return $this->innerStyles->dynamicStyleProperties[ $cssSelector ]->getSvgCss();
+		}
+		
+        return [];
     }
 
 	/**

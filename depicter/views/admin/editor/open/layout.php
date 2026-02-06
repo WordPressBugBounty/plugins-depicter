@@ -28,7 +28,7 @@ if ( is_rtl() ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title><?php wp_title(); ?></title>
 	<?php wp_head(); ?>
-	<script>var ajaxurl = '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>';</script>
+	<script>var ajaxurl = '<?php echo esc_url_raw( admin_url( 'admin-ajax.php', 'relative' ) ); ?>';</script>
 </head>
 <body class="<?php echo \Averta\WordPress\Utility\Sanitize::attribute( implode( ' ', $body_classes ) ); ?>">
 

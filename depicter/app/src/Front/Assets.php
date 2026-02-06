@@ -110,6 +110,11 @@ class Assets
 			foreach( $documentIDs as $documentID ){
 				if( false !== $cssLinkToEnqueue = \Depicter::cache('document')->get( $documentID . '_css_files' ) ){
 					$cssLinksToEnqueue = $cssLinksToEnqueue + $cssLinkToEnqueue;
+				} else {
+					\Depicter::document()->cacheCustomStyles( $documentID );
+					if( false !== $cssLinkToEnqueue = \Depicter::cache('document')->get( $documentID . '_css_files' ) ){
+						$cssLinksToEnqueue = $cssLinksToEnqueue + $cssLinkToEnqueue;
+					}
 				}
 			}
 

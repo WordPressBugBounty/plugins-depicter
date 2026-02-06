@@ -51,6 +51,20 @@ class LeadService
                 }
             }
 
+            $analyticsMetadata = $this->extractAnalyticsMetaDataOfLead($request);
+            if ( !empty( $analyticsMetadata ) ) {
+                foreach ( $analyticsMetadata as $data ) {
+                    \Depicter::leadFieldRepository()->create(
+                        $leadId,
+                        $data['name'],
+                        $data['value'],
+                        $data['type']
+                    );
+                }
+            }
+
+            do_action( 'depicter/lead/created', $leadId, $sourceId, $contentId );
+
             return ['success' => true];
 
         } catch (\Exception $e) {
@@ -85,10 +99,20 @@ class LeadService
                     $document   = \Depicter::documentRepository()->select(['id', 'name', 'type'])->findById($lead['source_id']);
                     $leadFields = \Depicter::leadFieldRepository()->select(['name', 'value', 'type'])->where('lead_id', $lead['id'])->get();
                     $fields     = [];
+                    $metadata = [];
                     $identifier = '';
                     if (!empty($leadFields)) {
                         $leadFields = $leadFields->toArray();
                         foreach ($leadFields as $leadField) {
+
+                            if ( in_array( $leadField['name'], $this->getAnalyticsMetaDataKeys() ) ) {
+                                $metadata[] = [
+                                    'name'  => $leadField['name'],
+                                    'value' => $leadField['value'],
+                                    'type'  => $leadField['type']
+                                ];
+                                continue;
+                            }
                             $fields[] = [
                                 'name'  => $leadField['name'],
                                 'value' => $leadField['value'],
@@ -124,7 +148,8 @@ class LeadService
                             'id'   => $lead['content_id'],
                             'name' => $lead['content_name']
                         ],
-                        'fields' => $fields
+                        'fields' => $fields,
+                        'metadata' => $metadata
                     ];
                 }
             }
@@ -188,5 +213,96 @@ class LeadService
         }
 
         return $default;
+    }
+
+    /**
+     * Extracts analytics metadata of a lead from the request
+     *
+     * @param RequestInterface $request
+     *
+     * @return array
+     */
+    protected function extractAnalyticsMetaDataOfLead(RequestInterface $request) {
+        $fields = [
+            [
+                'name' => 'ipAddress',
+                'type' => 'text',
+                'value' => \Depicter::geoLocate()->getIP()
+            ],
+            [
+                'name' => 'country',
+                'type' => 'text',
+                'value' => \Depicter::geoLocate()->getCountry()
+            ],
+            [
+                'name' => 'submittedAtUtc',
+                'type' => 'date',
+                'value' => gmdate('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'timeZone',
+                'type' => 'text',
+                'value' => \Depicter::geoLocate()->getTimeZone()
+            ],
+            [
+                'name' => 'deviceType',
+                'type' => 'text',
+                'value' => wp_is_mobile() ? 'mobile' : 'desktop'
+            ]
+        ];
+
+        if ( ! $referrer = Sanitize::textfield( $request->query('referrerURL', '') ) ) {
+            $fields[] = [
+                'name' => 'referrerURL',
+                'type' => 'text',
+                'value' => $referrer
+            ];
+        }
+
+        if ( ! $pageURL = Sanitize::textfield( $request->query('pageURL', '') ) ) {
+            $fields[] = [
+                'name' => 'pageURL',
+                'type' => 'text',
+                'value' => $pageURL
+            ];
+        }
+
+        if ( !empty( $request->getHeaderLine('User-Agent') ) ) {
+            $fields[] = [
+                'name' => 'userAgent',
+                'type' => 'text',
+                'value' => $request->getHeaderLine('User-Agent')
+            ];
+        }
+
+        if ( !empty( $request->getHeaderLine('Accept-Language') ) ) {
+            $rawLocale = $request->getHeaderLine('Accept-Language'); // sth like: en-US,en;q=0.9,de;q=0.8,fr;q=0.7
+            $parts = explode(',', $rawLocale);
+            $locale = strtolower(trim($parts[0])); // e.g., "en-us"
+            if ( !empty( $locale ) ) {
+                $fields[] = [
+                    'name' => 'locale',
+                    'type' => 'text',
+                    'value' => $locale
+                ];
+            }
+        }
+
+        return $fields;
+    }
+
+    protected function getAnalyticsMetaDataKeys(): array
+    {
+        return [
+            'ipAddress',
+            'submittedAtUtc',
+            'country',
+            'referrerURL',
+            'pageURL',
+            'timeZone',
+            'deviceType',
+            'userAgent',
+            'locale'
+        ];
     }
 }

@@ -24,7 +24,7 @@ class Editor
 	{
 
 		if ( !current_user_can('access_depicter') ) {
-			wp_die( __( 'Sorry, you are not allowed to access this page.', 'depicter' ), __( 'Depicter Error', 'depicter' ), array(
+			wp_die( esc_html__( 'Sorry, you are not allowed to access this page.', 'depicter' ), esc_html__( 'Depicter Error', 'depicter' ), array(
 				'response' => 403,
 				'back_link' => false,
 			) );

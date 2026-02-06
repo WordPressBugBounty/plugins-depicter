@@ -39,8 +39,7 @@ class ModulesServiceProvider implements ServiceProviderInterface {
 
 	public function modulesLoaded(){
 
-		add_action( 'init', [ $this, 'initGutenbergBlock'] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'loadGutenbergWidgetScripts'] );
+		add_action( 'init', [ $this, 'loadGutenbergModule' ] );
 
 		add_action( 'init', [ $this, 'initBeaverModule' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'load_beaver_builder_widget_script'] );
@@ -88,63 +87,9 @@ class ModulesServiceProvider implements ServiceProviderInterface {
 		]);
 	}
 
-	public function loadGutenbergWidgetScripts() {
-
-		$current_screen = get_current_screen();
-		if ( !$current_screen->is_block_editor() ) {
-			return;
-		}
-
-		$list = [
-			[
-				'id' => "0",
-				'name' => __( 'Select Slider', 'depicter' )
-			]
-		];
-		$documents = \Depicter::documentRepository()->select( ['id', 'name'] )->orderBy('modified_at', 'DESC')->findAll()->get();
-		$list = $documents ? array_merge( $list, $documents->toArray() ) : $list;
-		if ( !empty( $list ) ) {
-			foreach ( $list as $key => $item ) {
-				$list[ $key ]['label'] = $item['name'];
-				unset( $list[ $key ]['name'] );
-
-				$list[ $key ]['value'] = $item['id'];
-				unset( $list[ $key ]['id'] );
-			}
-		}
-
-		// load common assets
-		\Depicter::front()->assets()->enqueueStyles();
-		\Depicter::front()->assets()->enqueueScripts(['player', 'iframe-resizer']);
-
-		wp_localize_script( 'wp-block-editor', 'depicterSliders',[
-			'list' => $list,
-			'ajax_url' => admin_url('admin-ajax.php'),
-			'editor_url' => \Depicter::editor()->getEditUrl('1'),
-			'token' => \Depicter::csrf()->getToken( \Depicter\Security\CSRF::EDITOR_ACTION ),
-			'publish_text' => esc_html__( 'Publish Slider', 'depicter' ),
-			'edit_text' => esc_html__( 'Edit Slider', 'depicter' )
-		]);
-
+	public function loadGutenbergModule() {
+		require_once 'Gutenberg/module.php';
 	}
-
-	public function initGutenbergBlock() {
-		register_block_type( __DIR__ . '/Gutenberg/build', [
-			'render_callback' => [ $this, 'renderGutenbergBlock' ]
-		] );
-	}
-
-	public function renderGutenbergBlock( $blockAttributes ) {
-
-		if ( !empty( $blockAttributes['id'] ) ) {
-			$id = (int) $blockAttributes['id'];
-			return depicter( $id, ['echo' => false ] );
-		} else {
-			echo esc_html__( 'Slider ID required', 'depicter' );
-		}
-
-	}
-
 
 	/**
 	 * Load beaver builder module

@@ -103,7 +103,7 @@ $renew_url = ! empty( $subscription_id ) ? "https://my.depicter.com/subscription
 <?php
         echo '<span>';
         echo sprintf(
-			esc_html__('Your Depicter Pro subscription has expired. Visible only to site admins. %sRenew%s to remove this message and restore functionality.', 'depicter' ),
+			esc_html__('Your Depicter Pro subscription has expired. Visible only to site admins. %1$sRenew%2$s to remove this message and restore functionality.', 'depicter' ),
 			'<a href="' . esc_url( $renew_url ) . '" target="_blank">', '</a>' ) . '<br>';
         echo '</span><span class="close-icon"></span>';
 ?>

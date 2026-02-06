@@ -43,6 +43,7 @@ class IsArchive extends CPTConditionBase
 			}
 
 			$archiveOptions[] = [
+				/* translators: singular name of post type */
 				'label' => sprintf( __( '%s Archive', 'depicter' ), $postType->labels->singular_name ),
 				'value' => $postType->name
 			];

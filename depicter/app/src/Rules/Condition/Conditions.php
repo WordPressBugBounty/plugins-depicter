@@ -41,6 +41,7 @@ class Conditions {
 		'WooCommerce_ByAuthor',
 		'WooCommerce_InChildProductCategory',
 		'WooCommerce_StaticPage',
+		'WooCommerce_Cart',
 		'Audience_Device',
 		'Audience_Browser',
 		'Audience_Country',

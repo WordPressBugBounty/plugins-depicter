@@ -48,7 +48,7 @@ class DocumentRepository
 		if ( $id && $document = $this->document()->findById( $id ) ) {
 			$this->document = $document;
 		}
-		
+
 		if( isset( $properties['editor'] ) ){
 			$editor = $properties['editor'];
 			unset( $properties['editor'] );
@@ -261,6 +261,10 @@ class DocumentRepository
 			$documents = $documents->where( 'name', 'like', '%' . $args['s'] . '%' );
 		}
 
+		if ( !empty( $args['status'] ) ) {
+			$documents = $documents->where( 'status', $args['status'] );
+		}
+
 		if ( !empty( $args['types'] ) ) {
             $types = explode( ',', $args['types'] );
             $where = [];
@@ -288,6 +292,8 @@ class DocumentRepository
 
             $documents = $documents->where( $where );
 		}
+
+		$total = $documents->count();
 
 		if ( !empty( $args['page'] ) && !empty( $args['perPage'] ) ) {
 			$pager = $documents->paginate( $args['perPage'], $args['page'] );
@@ -330,6 +336,7 @@ class DocumentRepository
 			return [
 				'page' => $args['page'],
 				'perPage' => $args['perPage'],
+				'total' => $total,
 				'numberOfPages' => $numberOfPages,
 				'documents' => $documents
 			];
@@ -643,7 +650,7 @@ class DocumentRepository
 		$typeLabel = !empty( $typesDictionary[ $type ] ) ? $typesDictionary[ $type ] : __('Slider', 'depicter' );
 
 		return [
-			'name'        => sprintf( __('%s', 'depicter' ), $typeLabel ),
+			'name'        => $typeLabel,
 			'status'      => 'draft',
 			'author'      => $this->getCurrentUserId()
 		];
@@ -667,7 +674,7 @@ class DocumentRepository
 	public function defaultFields()
 	{
 		return [
-			'name'          => __('Untitled Slider'),
+			'name'          => __('Untitled Slider', 'depicter'),
 			'slug'          => '',
 			'type'          => 'slider',
 			'author'        => 0,
@@ -966,4 +973,28 @@ class DocumentRepository
 			return [];
 		}
 	}
+
+	/**
+	 * Get number of published documents
+	 *
+	 * @return int
+	 */
+    public function getNumberOfPublishedDocuments(){
+        try{
+            $publishedDocuments = $this->document()->where( 'parent', '0' )->published()->count();
+            $draftDocuments = $this->document()->select('id')->where( 'parent', '0' )->draft()->findAll()->get();
+            if ( $draftDocuments ) {
+                $draftDocuments = $draftDocuments->toArray();
+                foreach ( $draftDocuments as $document ) {
+                    if ( $this->isPublishedBefore( $document['id'] ) ) {
+                        ++$publishedDocuments;
+                    }
+                }
+            }
+
+            return $publishedDocuments;
+        } catch ( Exception $e ){
+            return 0;
+        }
+    }
 }

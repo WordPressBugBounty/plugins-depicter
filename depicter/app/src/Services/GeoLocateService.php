@@ -81,4 +81,48 @@ class GeoLocateService
 
 		return $ip;
 	}
+
+	public function getTimezone(){
+        $ip = $this->getIP();
+        if ( ! $timezone = \Depicter::cache()->get( 'timezone_of_' . $ip ) ) {
+            $geoipServicesKeys = array_keys( $this->geoipApies );
+
+            shuffle( $geoipServicesKeys );
+
+            foreach ( $geoipServicesKeys as $serviceName ) {
+                $serviceEndpoint = $this->geoipApies[ $serviceName ];
+                try {
+                    $response = \Depicter::remote()->get( sprintf( $serviceEndpoint, $ip ) );
+                    $responseBody = $response->getBody()->getContents();
+                    if ( JSON::isJson( $responseBody ) ) {
+                        $data = JSON::decode( $responseBody );
+
+                        switch ( $serviceName ) {
+                            case 'ipinfo.io':
+                                $timezone = $data->timezone ?? '';
+                                break;
+                            case 'ip-api.com':
+                                $timezone = $data->timezone ?? ''; // @codingStandardsIgnoreLine
+                                break;
+                            case 'geoplugin.net':
+                                $timezone = $data->geoplugin_timezone ?? ''; // @codingStandardsIgnoreLine
+                                break;
+                            default:
+                                $timezone = '';
+                                break;
+                        }
+
+                        if ( $timezone ) {
+                            \Depicter::cache()->set( 'timezone_of_' . $ip, $timezone, DAY_IN_SECONDS );
+                            break;
+                        }
+                    }
+                } catch( GuzzleException $e ){
+                }
+
+            }
+        }
+
+        return $timezone;
+    }
 }

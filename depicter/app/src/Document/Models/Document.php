@@ -230,6 +230,15 @@ class Document implements HydratableInterface
 	}
 
 	/**
+	 * Check if document has teaser or not
+	 *
+	 * @return boolean
+	 */
+	public function hasTeaser(): bool {
+		return !empty( $this->options->documentTypeOptions->teaser->enabled );
+	}
+
+	/**
 	 * Render markup for possible notices
 	 *
 	 * @return void
@@ -320,6 +329,9 @@ class Document implements HydratableInterface
 	 */
 	protected function renderSectionsAndElements(){
 		foreach ( $this->sections as $section ) {
+			if ( $section->getType() == 'teaser' && ! $this->hasTeaser() ) {
+				continue;
+			}
 			$this->html->nest( $section->render() . "\n" );
 			$this->stylesList = array_merge( $this->stylesList, $section->getCss() );
 
@@ -391,9 +403,8 @@ class Document implements HydratableInterface
 
 		// add before init styles separately to style list as well
 		$this->stylesList[ '.'. $this->getStyleSelector() ]['beforeInitStyle'] = [
-			'.'. $this->getStyleSelector() => $this->options->getStyles(),
+			'.'. $this->getStyleSelector() => array_merge_recursive( $this->options->getStyles(), $this->options->getPrimaryContainerStyles() ),
 			'.'. $this->getStyleSelector( true ) . ':not(.depicter-ready)' => $this->options->getBeforeInitStyles(), // styles to prevent FOUC. It should not have depicter-revert class in selector
-			'.'. $this->getStyleSelector() => $this->options->getPrimaryContainerStyles(),
 		];
 
 		return $this->stylesList;

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
+class ComposerStaticInitb08b91585e04e27046d3f557a966edb8
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -18,7 +18,6 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'c55ed2bc0cb198953595e3e18cf4bb3e' => __DIR__ . '/..' . '/averta/wpemerge/config.php',
         '6c96252e7b989a394a70d4b88fa1c6f5' => __DIR__ . '/..' . '/averta/wpemerge-app-core/config.php',
-        '07099d07ceb58846f315742c3fc18434' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -58,7 +57,6 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         array (
             'Depicter\\Test\\' => 14,
             'Depicter\\Psr\\' => 13,
-            'Depicter\\Jeffreyvr\\WPSettings\\' => 30,
             'Depicter\\GuzzleHttp\\' => 20,
             'Depicter\\' => 9,
         ),
@@ -150,10 +148,6 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Psr\\' => 
         array (
             0 => __DIR__ . '/../..' . '/modules/Psr',
-        ),
-        'Depicter\\Jeffreyvr\\WPSettings\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings',
         ),
         'Depicter\\GuzzleHttp\\' => 
         array (
@@ -355,6 +349,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Controllers\\Ajax\\GoogleRecaptchaController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/GoogleRecaptchaController.php',
         'Depicter\\Controllers\\Ajax\\ImportAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/ImportAjaxController.php',
         'Depicter\\Controllers\\Ajax\\LeadsAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/LeadsAjaxController.php',
+        'Depicter\\Controllers\\Ajax\\MailChimpIntegrationAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/MailChimpIntegrationAjaxController.php',
         'Depicter\\Controllers\\Ajax\\MediaAssetsAPIAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/MediaAssetsAPIAjaxController.php',
         'Depicter\\Controllers\\Ajax\\MediaLibraryAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/MediaLibraryAjaxController.php',
         'Depicter\\Controllers\\Ajax\\OptionsAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/OptionsAjaxController.php',
@@ -368,7 +363,6 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Controllers\\Ajax\\WooCommerceAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/WooCommerceAjaxController.php',
         'Depicter\\Dashboard\\DashboardPage' => __DIR__ . '/../..' . '/app/src/Dashboard/DashboardPage.php',
         'Depicter\\Dashboard\\DashboardServiceProvider' => __DIR__ . '/../..' . '/app/src/Dashboard/DashboardServiceProvider.php',
-        'Depicter\\Dashboard\\DashboardSettings' => __DIR__ . '/../..' . '/app/src/Dashboard/DashboardSettings.php',
         'Depicter\\DataSources\\Catalogs' => __DIR__ . '/../..' . '/app/src/DataSources/Catalogs.php',
         'Depicter\\DataSources\\DataSourceBase' => __DIR__ . '/../..' . '/app/src/DataSources/DataSourceBase.php',
         'Depicter\\DataSources\\DataSourceInterface' => __DIR__ . '/../..' . '/app/src/DataSources/DataSourceInterface.php',
@@ -397,11 +391,13 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Database\\Entity\\LeadField' => __DIR__ . '/../..' . '/app/src/Database/Entity/LeadField.php',
         'Depicter\\Database\\Entity\\Meta' => __DIR__ . '/../..' . '/app/src/Database/Entity/Meta.php',
         'Depicter\\Database\\Entity\\Option' => __DIR__ . '/../..' . '/app/src/Database/Entity/Option.php',
+        'Depicter\\Database\\Entity\\QueueJob' => __DIR__ . '/../..' . '/app/src/Database/Entity/QueueJob.php',
         'Depicter\\Database\\Migration' => __DIR__ . '/../..' . '/app/src/Database/Migration.php',
         'Depicter\\Database\\Repository\\DocumentRepository' => __DIR__ . '/../..' . '/app/src/Database/Repository/DocumentRepository.php',
         'Depicter\\Database\\Repository\\LeadFieldRepository' => __DIR__ . '/../..' . '/app/src/Database/Repository/LeadFieldRepository.php',
         'Depicter\\Database\\Repository\\LeadRepository' => __DIR__ . '/../..' . '/app/src/Database/Repository/LeadRepository.php',
         'Depicter\\Database\\Repository\\MetaRepository' => __DIR__ . '/../..' . '/app/src/Database/Repository/MetaRepository.php',
+        'Depicter\\Database\\Repository\\QueueJobRepository' => __DIR__ . '/../..' . '/app/src/Database/Repository/QueueJobRepository.php',
         'Depicter\\Document\\CSS\\Breakpoints' => __DIR__ . '/../..' . '/app/src/Document/CSS/Breakpoints.php',
         'Depicter\\Document\\CSS\\Selector' => __DIR__ . '/../..' . '/app/src/Document/CSS/Selector.php',
         'Depicter\\Document\\Helper\\Helper' => __DIR__ . '/../..' . '/app/src/Document/Helper/Helper.php',
@@ -610,23 +606,9 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Html\\Canvas' => __DIR__ . '/../..' . '/app/src/Html/Canvas.php',
         'Depicter\\Html\\Html' => __DIR__ . '/../..' . '/app/src/Html/Html.php',
         'Depicter\\Html\\Tag' => __DIR__ . '/../..' . '/app/src/Html/Tag.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Error' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Error.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Flash' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Flash.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Option' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Option.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\Checkbox' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/Checkbox.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\Choices' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/Choices.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\CodeEditor' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/CodeEditor.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\Number' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/Number.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\OptionAbstract' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/OptionAbstract.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\Password' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/Password.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\Select' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/Select.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\SelectMultiple' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/SelectMultiple.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\Text' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/Text.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\Textarea' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/Textarea.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Options\\WPEditor' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Options/WPEditor.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Section' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Section.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\Tab' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/Tab.php',
-        'Depicter\\Jeffreyvr\\WPSettings\\WPSettings' => __DIR__ . '/../..' . '/modules/jeffreyvanrossum/wp-settings/WPSettings.php',
+        'Depicter\\Integration\\MailChimp\\MailChimp' => __DIR__ . '/../..' . '/app/src/Integration/MailChimp/MailChimp.php',
+        'Depicter\\Integration\\Manager' => __DIR__ . '/../..' . '/app/src/Integration/Manager.php',
+        'Depicter\\Integration\\ServiceProvider' => __DIR__ . '/../..' . '/app/src/Integration/ServiceProvider.php',
         'Depicter\\Media\\File' => __DIR__ . '/../..' . '/app/src/Media/File.php',
         'Depicter\\Media\\Image\\File' => __DIR__ . '/../..' . '/app/src/Media/Image/File.php',
         'Depicter\\Media\\Image\\FileEdit' => __DIR__ . '/../..' . '/app/src/Media/Image/FileEdit.php',
@@ -684,6 +666,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Rules\\Condition\\CPT\\SingleType' => __DIR__ . '/../..' . '/app/src/Rules/Condition/CPT/SingleType.php',
         'Depicter\\Rules\\Condition\\Conditions' => __DIR__ . '/../..' . '/app/src/Rules/Condition/Conditions.php',
         'Depicter\\Rules\\Condition\\WooCommerce\\ByAuthor' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WooCommerce/ByAuthor.php',
+        'Depicter\\Rules\\Condition\\WooCommerce\\Cart' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WooCommerce/Cart.php',
         'Depicter\\Rules\\Condition\\WooCommerce\\HasProductTag' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WooCommerce/HasProductTag.php',
         'Depicter\\Rules\\Condition\\WooCommerce\\InChildProductCategory' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WooCommerce/InChildProductCategory.php',
         'Depicter\\Rules\\Condition\\WooCommerce\\InProductCategory' => __DIR__ . '/../..' . '/app/src/Rules/Condition/WooCommerce/InProductCategory.php',
@@ -724,6 +707,7 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\Services\\LeadService' => __DIR__ . '/../..' . '/app/src/Services/LeadService.php',
         'Depicter\\Services\\MediaBridge' => __DIR__ . '/../..' . '/app/src/Services/MediaBridge.php',
         'Depicter\\Services\\MediaLibraryService' => __DIR__ . '/../..' . '/app/src/Services/MediaLibraryService.php',
+        'Depicter\\Services\\QueueService' => __DIR__ . '/../..' . '/app/src/Services/QueueService.php',
         'Depicter\\Services\\RemoteAPIService' => __DIR__ . '/../..' . '/app/src/Services/RemoteAPIService.php',
         'Depicter\\Services\\ServiceProvider' => __DIR__ . '/../..' . '/app/src/Services/ServiceProvider.php',
         'Depicter\\Services\\SettingsManagerService' => __DIR__ . '/../..' . '/app/src/Services/SettingsManagerService.php',
@@ -747,20 +731,6 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
         'Depicter\\WordPress\\SVGServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/SVGServiceProvider.php',
         'Depicter\\WordPress\\SchedulingService' => __DIR__ . '/../..' . '/app/src/WordPress/SchedulingService.php',
         'Depicter\\WordPress\\SessionServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/SessionServiceProvider.php',
-        'Depicter\\WordPress\\Settings\\Options\\Button' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/Button.php',
-        'Depicter\\WordPress\\Settings\\Options\\Checkbox' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/Checkbox.php',
-        'Depicter\\WordPress\\Settings\\Options\\Choices' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/Choices.php',
-        'Depicter\\WordPress\\Settings\\Options\\CodeEditor' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/CodeEditor.php',
-        'Depicter\\WordPress\\Settings\\Options\\Nonce' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/Nonce.php',
-        'Depicter\\WordPress\\Settings\\Options\\Number' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/Number.php',
-        'Depicter\\WordPress\\Settings\\Options\\OptionAbstract' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/OptionAbstract.php',
-        'Depicter\\WordPress\\Settings\\Options\\Password' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/Password.php',
-        'Depicter\\WordPress\\Settings\\Options\\Select' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/Select.php',
-        'Depicter\\WordPress\\Settings\\Options\\SelectMultiple' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/SelectMultiple.php',
-        'Depicter\\WordPress\\Settings\\Options\\Text' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/Text.php',
-        'Depicter\\WordPress\\Settings\\Options\\Textarea' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/Textarea.php',
-        'Depicter\\WordPress\\Settings\\Options\\WPEditor' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Options/WPEditor.php',
-        'Depicter\\WordPress\\Settings\\Settings' => __DIR__ . '/../..' . '/app/src/WordPress/Settings/Settings.php',
         'Depicter\\WordPress\\ShortcodesServiceProvider' => __DIR__ . '/../..' . '/app/src/WordPress/ShortcodesServiceProvider.php',
         'Depicter\\WordPress\\SystemCheckService' => __DIR__ . '/../..' . '/app/src/WordPress/SystemCheckService.php',
         'Depicter\\WordPress\\WPCliService' => __DIR__ . '/../..' . '/app/src/WordPress/WPCliService.php',
@@ -1336,10 +1306,10 @@ class ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit1efb35e5e40dfe4531c697de7c2de3d1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb08b91585e04e27046d3f557a966edb8::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb08b91585e04e27046d3f557a966edb8::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb08b91585e04e27046d3f557a966edb8::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitb08b91585e04e27046d3f557a966edb8::$classMap;
 
         }, null, ClassLoader::class);
     }

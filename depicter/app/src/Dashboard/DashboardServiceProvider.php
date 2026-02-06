@@ -18,10 +18,6 @@ class DashboardServiceProvider implements ServiceProviderInterface {
 		$container[ 'depicter.dashboard.page' ] = function () {
 			return new DashboardPage();
 		};
-
-		$container[ 'depicter.dashboard.settings' ] = function () {
-			return new DashboardSettings();
-		};
 	}
 
 	/**
@@ -29,7 +25,6 @@ class DashboardServiceProvider implements ServiceProviderInterface {
 	 */
 	public function bootstrap( $container ) {
 		\Depicter::resolve('depicter.dashboard.page')->bootstrap();
-		\Depicter::resolve('depicter.dashboard.settings');
 	}
 
 }

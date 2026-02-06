@@ -1,4 +1,1 @@
-.dep-widget-wrapper{align-items:center;box-shadow:0 1px 12px rgba(0,0,0,.314);display:flex;padding:10px}.dep-widget-wrapper img{width:60px}.components-panel__row.sliderBtns{justify-content:flex-start}
-body .wp-block-depicter-slider{max-width:1920px !important;border-top:18px solid transparent;border-bottom:28px solid transparent;margin-top:0 !important;margin-bottom:0 !important;}
-#dep-publish-slider-btn {margin-right:8px;}
-body.rtl #dep-publish-slider-btn {margin-left:8px;}
+.dep-widget-wrapper{align-items:center;box-shadow:0 1px 12px rgba(0,0,0,.314);display:flex;padding:10px}.dep-widget-wrapper img{width:60px}.components-panel__row.sliderBtns{justify-content:flex-start}body .wp-block-depicter-slider{max-width:1920px}#dep-publish-slider-btn{margin-right:8px}body.rtl #dep-publish-slider-btn{margin-left:8px}.dep-iframe-wrapper{position:relative}.dep-iframe-wrapper .dep-interactive-overlay{bottom:0;left:0;position:absolute;right:0;top:0}.dep-iframe-wrapper .dep-interactive-overlay.hide{height:0}

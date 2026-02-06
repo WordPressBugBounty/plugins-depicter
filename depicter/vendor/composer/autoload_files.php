@@ -17,5 +17,4 @@ return array(
     'b6b991a57620e2fb6b2f66f03fe9ddc2' => $vendorDir . '/symfony/string/Resources/functions.php',
     'c55ed2bc0cb198953595e3e18cf4bb3e' => $vendorDir . '/averta/wpemerge/config.php',
     '6c96252e7b989a394a70d4b88fa1c6f5' => $vendorDir . '/averta/wpemerge-app-core/config.php',
-    '07099d07ceb58846f315742c3fc18434' => $baseDir . '/modules/jeffreyvanrossum/wp-settings/helpers.php',
 );

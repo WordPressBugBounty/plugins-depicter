@@ -214,6 +214,36 @@ class Assets {
 	}
 
 	/**
+	 * Enqueue a script as module.
+	 *
+	 * @param  string        $handle
+	 * @param  string        $src
+	 * @param  array<string> $dependencies
+	 * @param  boolean       $in_footer
+	 * @return void
+	 */
+	public function enqueueScriptModule( $handle, $src, $dependencies = [], $version = null ) {
+		if ( function_exists('wp_enqueue_script_module') ) {
+            wp_enqueue_script_module( $handle, $src, $dependencies, $version );
+        } else {
+            wp_enqueue_script( $handle, $src, $dependencies, $version );
+
+            // Mark it as a module manually
+            add_filter(
+                'script_loader_tag',
+                function ( $tag, $current_handle, $script_src ) use ( $handle ) {
+                    if ( $current_handle === $handle ) {
+                        return '<script type="module" src="' . esc_url( $script_src ) . "\"></script>\n";
+                    }
+                    return $tag;
+                },
+                10,
+                3
+            );
+        }
+	}
+
+	/**
 	 * Add favicon meta.
 	 *
 	 * @return void

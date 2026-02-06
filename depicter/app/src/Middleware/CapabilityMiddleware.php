@@ -35,7 +35,7 @@ class CapabilityMiddleware {
 		// ignore the request if the current user doesn't have sufficient permissions
 		if ( ! current_user_can( $capability ) ) {
 			return $this->responseService->json([
-				'errors' => [ __( "Sorry, insufficient permission!", 'depicter' ) ]
+				'errors' => [ __( sprintf( "Sorry, insufficient permission to perform this action! '%s' capability is required!", $capability ), 'depicter' ) ]
 			])->withStatus(403);
 		}
 

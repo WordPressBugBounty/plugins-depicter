@@ -36,7 +36,7 @@ class NonceFieldMiddleware
 	 */
 	public function handle( RequestInterface $request, $next, string $action = 'depicter-nonce', string $nonce = '_wpnonce', string $method = 'post' ){
 		$nonce = $method == 'post' ? $request->body($nonce ) : $request->query($nonce);
-		if ( empty($nonce) || ! wp_verify_nonce( $nonce, $action ) ) {
+		if ( empty($nonce) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $nonce ) ), $action ) ) {
 			return $this->responseService->json([
 				'errors' => ['Nonce is invalid']
 			]);

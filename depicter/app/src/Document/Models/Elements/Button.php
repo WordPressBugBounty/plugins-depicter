@@ -1,9 +1,7 @@
 <?php
 namespace Depicter\Document\Models\Elements;
 
-use Averta\Core\Utility\Arr;
 use Depicter\Document\Models;
-use Depicter\Document\Models\Common\Styles;
 use Depicter\Html\Html;
 
 class Button extends Models\Element
@@ -13,7 +11,9 @@ class Button extends Models\Element
 
 		$args = $this->getDefaultAttributes();
 
-		if ( $this->componentType && ( $this->componentType == 'survey:submit' || $this->componentType == 'survey:next' || $this->componentType == 'survey:prev' ) ) {
+		if ( $this->componentType &&
+			 in_array( $this->componentType, ['form:submit', 'survey:submit', 'survey:next', 'survey:prev'] )
+		   ) {
 			$args['data-type'] = $this->componentType;
 		}
 
@@ -28,9 +28,9 @@ class Button extends Models\Element
 
 			if ( ! empty( $this->options->submitContent ) ) {
 				$args['data-submit-text'] = $this->options->submitContent;
-			} 
+			}
 		}
-		
+
 		if ( ! empty( $this->options->iconAlign ) && $this->options->iconAlign == 'right' )  {
 			$args['class'] .= ' dp-icon-right';
 		}
@@ -51,7 +51,7 @@ class Button extends Models\Element
 		}
 
 		$content = ! empty ( $this->options->iconOnly ) && $this->options->iconOnly ? "" : $this->maybeReplaceDataSheetTags( $this->options->content );
-		
+
 		$buttonContent = Html::span( [
 			'class' => 'dp-inner-content'
 		], $iconTag . $content);

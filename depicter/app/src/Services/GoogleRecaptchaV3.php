@@ -42,6 +42,7 @@ class GoogleRecaptchaV3
 					'data'    => [
 						'host'  => $result['hostname'] ?? ''
 					],
+					/* translators: recaptcha score */
 					'message' => sprintf( __( 'Recaptcha challenge passed successfully. [%s]', 'depicter' ), $result['score'] )
 				];
 

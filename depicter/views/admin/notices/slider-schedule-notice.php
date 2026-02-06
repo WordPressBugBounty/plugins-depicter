@@ -102,10 +102,10 @@ extract( $view_args );
 </style>
 
 <div class="depicter-notice-wrapper">
-    <span class="notice-icon"><img src="<?php echo Depicter::core()->assets()->getUrl() . '/resources/images/svg/clock.svg'; ?>"></span>
+    <span class="notice-icon"><img src="<?php echo esc_url( Depicter::core()->assets()->getUrl() . '/resources/images/svg/clock.svg' ); ?>"></span>
         <?php
         echo '<span>';
-        echo sprintf( esc_html__( 'It\'s currently hidden due to visibility scheduling settings. To change the settings, %s Open Depicter editor %s. Note that this message is only visible to you, not to visitors.', 'depicter'), '<a href="' . $editUrl . '" target="_blank">', '</a>' );
+        echo sprintf( esc_html__( 'It\'s currently hidden due to visibility scheduling settings. To change the settings, %1$s Open Depicter editor %2$s. Note that this message is only visible to you, not to visitors.', 'depicter'), '<a href="' . $editUrl . '" target="_blank">', '</a>' );
         echo '</span><span class="close-icon"></span>';
         ?>
 </div>

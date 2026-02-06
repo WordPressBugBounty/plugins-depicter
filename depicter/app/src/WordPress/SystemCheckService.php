@@ -35,7 +35,7 @@ class SystemCheckService {
 			'label'       => __( 'Connecting to depicter resources servers passed successfully', 'depicter' ),
 			'status'      => 'good',
 			'badge'       => array(
-				'label' => __( 'Performance' ),
+				'label' => __( 'Performance', 'depicter' ),
 				'color' => 'blue',
 			),
 			'actions'     => '',

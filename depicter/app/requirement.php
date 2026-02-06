@@ -28,6 +28,7 @@ if ( ! function_exists( 'depicter_requirements_satisfied' ) ) {
 		add_action(
 			'admin_notices',
 			function () use ( $name, $min ) {
+				/* translators: 1: name of plugin, 2: minimum php version required, 3: current php version */
 				$message = __( '%1$s plugin requires PHP version %2$s but current version is %3$s. Please contact your host provider and ask them to upgrade PHP version.', 'depicter' );
 				?>
 				<div class="notice notice-error">
@@ -73,6 +74,7 @@ if ( ! function_exists( 'depicter_requirements_satisfied' ) ) {
 				add_action(
 					'admin_notices',
 					function () use ( $name ) {
+						/* translators: 1: depicter plugin name */
 						$message = __( 'Your website uses OpCache but requires the "opcache.save_comments" option enabled for %1$s plugin to work correctly. Please ask your hosting provider to turn on this setting.', 'depicter' );
 ?>
 	<div class="notice notice-error">

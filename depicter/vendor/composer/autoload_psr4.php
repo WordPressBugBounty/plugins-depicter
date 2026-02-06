@@ -25,7 +25,6 @@ return array(
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'Depicter\\Test\\' => array($baseDir . '/tests'),
     'Depicter\\Psr\\' => array($baseDir . '/modules/Psr'),
-    'Depicter\\Jeffreyvr\\WPSettings\\' => array($baseDir . '/modules/jeffreyvanrossum/wp-settings'),
     'Depicter\\GuzzleHttp\\' => array($baseDir . '/modules/GuzzleHttp'),
     'Depicter\\' => array($baseDir . '/app/src'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
