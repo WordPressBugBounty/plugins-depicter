@@ -612,3 +612,29 @@ Depicter::route()->methods(['GET'])
         ->where('ajax', 'depicter-integration-mailchimp-audience-fields', true, true)
         ->middleware('csrf-api:depicter-editor')
         ->handle('MailChimpIntegrationAjaxController@audienceFields');
+
+// Analytics Endpoints
+// =========================================================
+Depicter::route()->methods(['POST'])
+        ->where('ajax', 'depicter-analytics-track', true, true)
+        ->handle('AnalyticsAjaxController@track');
+
+Depicter::route()->methods(['GET'])
+        ->where('ajax', 'depicter-analytics-get', true, true)
+        ->middleware('csrf-api:depicter-editor|depicter-dashboard')
+        ->handle('AnalyticsAjaxController@get');
+
+Depicter::route()->methods(['GET'])
+        ->where('ajax', 'depicter-analytics-stats', true, true)
+        ->middleware('csrf-api:depicter-editor|depicter-dashboard')
+        ->handle('AnalyticsAjaxController@stats');
+        
+Depicter::route()->methods(['POST'])
+        ->where('ajax', 'depicter-analytics-delete', true, true)
+        ->middleware('csrf-api:depicter-editor|depicter-dashboard')
+        ->handle('AnalyticsAjaxController@delete');
+
+Depicter::route()->methods(['GET'])
+        ->where('ajax', 'depicter-analytics-conversion-rate', true, true)
+        ->middleware('csrf-api:depicter-editor|depicter-dashboard')
+        ->handle('AnalyticsAjaxController@getConversionRate');

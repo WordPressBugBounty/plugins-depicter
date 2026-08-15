@@ -99,7 +99,7 @@ class EditorAjaxController implements RestMethodsInterface
                     throw new Exception(esc_html__('Media files cannot be published due to lack of proper file permissions for uploads directory.', 'depicter'));
                 }
 
-                if ( ! \Depicter::authorization()->userHasPublishQuota() ) {
+                if ( ! \Depicter::authorization()->userHasPublishQuota() && ! \Depicter::documentRepository()->isPublishedBefore($id) ) {
                     throw new Exception(esc_html__('You’ve reached your limit. On the free plan, you can publish up to 2 projects. To publish more, you can unpublish an existing project, or upgrade to PRO for unlimited publishing.', 'depicter'));
                 }
 

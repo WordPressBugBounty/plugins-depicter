@@ -42,7 +42,7 @@ class PluginServiceProvider implements ServiceProviderInterface
 
 		add_action( 'admin_init', [ $this, 'check_plugin_upgrade_via_upload' ] );
 		add_action( 'admin_init', [ $this, 'check_redirect_process' ] );
-		add_filter( 'update_plugin_complete_actions', [ $this, 'add_depicter_link_after_upgrade'], 10, 1);
+		add_filter( 'update_plugin_complete_actions', [ $this, 'add_depicter_link_after_upgrade'], 10, 2);
 
 		add_action('wp_enqueue_scripts', [ $this, 'enqueueGlobalScripts'], 99 );
 
@@ -91,7 +91,11 @@ class PluginServiceProvider implements ServiceProviderInterface
 	 * @param array $install_actions
 	 * @return void
 	 */
-	public function add_depicter_link_after_upgrade( $install_actions ){
+	public function add_depicter_link_after_upgrade( $install_actions, $plugin ){
+		if ( $plugin !== 'depicter/depicter.php' ) {
+			return $install_actions;
+		}
+		
 		$install_actions['depicter_dashboard'] = sprintf(
 			'<a href="%s" target="_parent">%s</a>',
 			admin_url( 'admin.php?page=depicter-dashboard' ),

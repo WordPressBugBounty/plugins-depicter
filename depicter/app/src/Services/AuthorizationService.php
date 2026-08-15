@@ -48,4 +48,19 @@ class AuthorizationService {
 
 		return true;
 	}
+
+	/**
+	 * Get user session
+	 *
+	 * @return string
+	 */
+	public function getUserSession(){
+		if ( !isset( $_COOKIE['depicter_session'] ) ) {
+			$session = wp_generate_uuid4();
+			setcookie( 'depicter_session', $session, 86400 * 30, '/' );
+			return $session;
+		}
+		
+		return $_COOKIE['depicter_session'];
+	}
 }

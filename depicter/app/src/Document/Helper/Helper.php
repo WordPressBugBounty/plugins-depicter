@@ -97,12 +97,13 @@ class Helper
 	}
 
 	/**
-	 * extract third party IDs from document content
+	 * extract third party and selfhosted asset IDs from document content
 	 * @param $content
+	 * @param bool $includeNumericalIds // get selfhosted asset IDs with numerical values
 	 *
 	 * @return array|void
 	 */
-	public static function extractAssetIds( $content) {
+	public static function extractAssetIds( $content, $includeNumericalIds = false) {
 
 		if ( empty( $content ) ) {
 			return;
@@ -121,7 +122,9 @@ class Helper
 			if ( !empty( $sources ) ) {
 				foreach ( $sources as $source ) {
 					// check if assetID if for third party libraries or not
-					if ( !empty( $source[1] ) && strpos( $source[1], '@') === 0 && false === strpos( $source[1], 'https' ) ) {
+					if ($includeNumericalIds && !empty( $source[1] ) && false === strpos( $source[1], 'https' ) && is_numeric($source[1])) {
+						$assetIDs[] = $source[1];
+					} else if ( !empty( $source[1] ) && strpos( $source[1], '@') === 0 && false === strpos( $source[1], 'https' ) ) {
 						$assetIDs[] = $source[1];
 					}
 					
@@ -130,7 +133,9 @@ class Helper
 						preg_match_all( '/' . $backgroundPatterns . '/', $source[1], $backgroundSources , PREG_SET_ORDER );
 						if ( !empty( $backgroundSources ) ) {
 							foreach ( $backgroundSources as $backgroundSource ) {
-								if ( !empty( $backgroundSource[1] ) && strpos( $backgroundSource[1], '@') === 0 && false === strpos( $backgroundSource[1], 'https' ) ) {
+								if ($includeNumericalIds && !empty( $backgroundSource[1] ) && false === strpos( $backgroundSource[1], 'https' ) && is_numeric($backgroundSource[1])) {
+									$assetIDs[] = $backgroundSource[1];
+								} else if ( !empty( $backgroundSource[1] ) && strpos( $backgroundSource[1], '@') === 0 && false === strpos( $backgroundSource[1], 'https' ) ) {
 									$assetIDs[] = $backgroundSource[1];
 								}
 							}
@@ -313,7 +318,13 @@ class Helper
      */
     public static function camelCaseToHyphenated( $inputString ): string
     {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $inputString));
+        $inputString = strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $inputString));
+		// Some times the second part of original hyphenated text that converted to camel case starts with numbber so when converting it back the hyphen character missed and we need to add it again here
+		if (strpos($inputString, 'depicter') !== false && strpos($inputString, 'depicter-') === false ) {
+			$inputString = str_replace('depicter', 'depicter-', $inputString);
+		}
+
+		return $inputString;
     }
 
 	/**
@@ -324,6 +335,33 @@ class Helper
      */
     public static function camelCaseToSnakeCase( $inputString ): string
     {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $inputString));
+        $inputString = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $inputString));
+		// Some times the second part of original hyphenated text that converted to camel case starts with numbber so when converting it back the underline character missed and we need to add it again here
+		if (strpos($inputString, 'depicter') !== false && strpos($inputString, 'depicter_') === false ) {
+			$inputString = str_replace('depicter', 'depicter_', $inputString);
+		}
+
+		return $inputString;
     }
+
+	/**
+	 * Return label for a document type
+	 * 
+	 */
+	public static function getDocumentTypeLabel( string $type ): string
+	{
+		$typesDictionary = [
+			'slider'      => __( 'Slider', 'depicter' ),
+			'custom'      => __( 'Slider', 'depicter' ),
+			'popup'       => __( 'Popup', 'depicter' ),
+			'post-slider' => __( 'Post Slider', 'depicter' ),
+			'woo-slider'  => __( 'Product Slider', 'depicter' ),
+			'banner-bar'  => __( 'Notification Bar', 'depicter' ),
+			'carousel'    => __( 'Carousel', 'depicter' ),
+			'hero-section'=> __( 'Hero Section', 'depicter' ),
+			'survey'	  => __( 'Survey', 'depicter' )
+		];
+
+		return !empty( $typesDictionary[ $type ] ) ? $typesDictionary[ $type ] : __('Slider', 'depicter' );		
+	}
 }

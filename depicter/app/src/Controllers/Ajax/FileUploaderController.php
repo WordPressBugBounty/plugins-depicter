@@ -9,9 +9,9 @@ class FileUploaderController
 
 		try{
 
-			if ( ! current_user_can('upload_files') ) {
+			if ( !current_user_can('upload_files')) {
 				return \Depicter::json([
-					'errors' => [ __('You do not have permission to upload files.', 'depicter' ) ]
+					'errors' => [ __('You do not have permission to upload files.', 'depicter') ]
 				])->withStatus(400 );
 			}
 

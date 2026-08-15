@@ -3,7 +3,7 @@
  * Plugin Name: Depicter — Popup & Slider Builder
  * Plugin URI: https://depicter.com
  * Description: Build stunning sliders, popups, carousels, video sliders, post sliders, and WooCommerce sliders fast and easy.
- * Version: 4.7.1
+ * Version: 4.8.0
  * Requires at least: 5.9
  * Requires PHP: 7.4.0
  * Author: Depicter Slider and Popup by Averta
@@ -17,10 +17,14 @@
  * @package Depicter
  */
 
-const DEPICTER_VERSION = '4.7.1';
+const DEPICTER_VERSION = '4.8.0';
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+}
+
+if (defined('WP_CLI') && WP_CLI) {
+    return;
 }
 
 $name = trim( get_file_data( __FILE__, [ 'Plugin Name' ] )[0] );

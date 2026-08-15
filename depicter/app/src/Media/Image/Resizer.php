@@ -67,6 +67,10 @@ class Resizer implements FileEditInterface
 			return '';
 		}
 
+		if ( false !== strpos( $this->file, 'http' ) ){
+			return $this->file;
+		}
+
 		$finder = new FileResizedFinder( $this->file );
 
 		// try to find the resized image from disk

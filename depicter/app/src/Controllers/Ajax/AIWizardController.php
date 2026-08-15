@@ -4,6 +4,7 @@ namespace Depicter\Controllers\Ajax;
 
 use Averta\Core\Utility\Data;
 use Averta\WordPress\Utility\JSON;
+use Depicter\Document\Helper\Helper;
 use Depicter\GuzzleHttp\Exception\GuzzleException;
 use Depicter\Services\AssetsAPIService;
 use Depicter\Utility\Http;
@@ -67,7 +68,9 @@ class AIWizardController {
 	 */
 	public function wizardComplete( RequestInterface $request, $view ) {
 
-		$args   = [];
+		$args   = [
+			"target" => ! Data::isNullOrEmptyStr( $request->body('target') ) ? Sanitize::textfield( $request->body('target') ) : 'slider',
+		];
 
 		if( ! Data::isNullOrEmptyStr( $request->body('category') ) ){
 			$args['category'] = Sanitize::textfield( $request->body('category') );
@@ -127,7 +130,6 @@ class AIWizardController {
 
 		$data = $request->body('data');
 		$templateId = $request->body('ID', '');
-		$templateType = Sanitize::textfield( $request->body('type', 'slider') );
 
 		if ( empty( $templateId ) ) {
 			return \Depicter::json([
@@ -160,11 +162,13 @@ class AIWizardController {
 	        $editorData = JSON::encode( \Depicter::AIWizard()->updateEditorDataByAiContent( $editorData, $data ) );
 
 			$editorData = preg_replace( '/"activeBreakpoint":".+?"/', '"activeBreakpoint":"default"', $editorData );
-			$document = \Depicter::documentRepository()->create( $templateType );
+			$document = \Depicter::documentRepository()->create( $result->type );
 
 			$updateData = [];
 			if ( !empty( $result->title ) ) {
-				$updateData['name'] = __("AI-Aided Slider", 'depicter') . ' ' . $document->getID();
+				$updateData['name'] = sprintf( __('AI-Aided %s', 'depicter'),
+					Helper::getDocumentTypeLabel( $document->type ) 
+				) . ' ' . $document->getID();
 			}
 
 			if ( !empty( $result->image ) ) {

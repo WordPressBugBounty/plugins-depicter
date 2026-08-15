@@ -67,13 +67,21 @@ class CsrfAPIMiddleware extends WPEmergeCsrfMiddleware
 			// Check if it's a logged-in user
 			if( $byLoggedInUser && ! is_user_logged_in() ){
 				return $this->responseService->json([
-					'errors' => 'Not an authorized user.'
+					'errors' => ['Not an authorized user.']
 				])->withStatus(401);
 			}
 
 			$actions = explode('|', $action );
 			// Authenticate request token
 			foreach( $actions as $csrfAction ){
+				if ($csrfAction == 'depicter-editor' || $csrfAction == 'depicter-dashboard'){
+					if (!current_user_can( 'access_depicter' )) {
+						return $this->responseService->json([
+							'errors' => ['Not an authorized user.']
+						])->withStatus(401);
+					}	
+				}
+
 				$isValidToken = $isValidToken || $this->csrf->isValidToken( $token, $csrfAction );
 			}
 		}

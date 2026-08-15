@@ -18,7 +18,7 @@ class Migration extends BaseMigration {
 	/**
 	 * Current tables migration version
 	 */
-	const MIGRATION_VERSION = "0.4.7";
+	const MIGRATION_VERSION = "0.4.9";
 
 	/**
 	 * Prefix for version option name
@@ -33,7 +33,7 @@ class Migration extends BaseMigration {
 	/**
 	* Table names
 	*/
-	protected $table_names = [ 'documents', 'options', 'meta', 'leads', 'lead_fields', 'queue_jobs' ];
+	protected $table_names = [ 'documents', 'options', 'meta', 'leads', 'lead_fields', 'queue_jobs', 'document_analytics' ];
 
 
 	/**
@@ -166,4 +166,32 @@ class Migration extends BaseMigration {
 
         $this->dbDelta($sql_create_table);
     }
+
+	/**
+	 * Create document_analytics_events table for tracking document impressions/submissions
+	 *
+	 * @since 1.0
+	 * @return null
+	 */
+	public function create_table_document_analytics() {
+
+		$sql_create_table = "CREATE TABLE {$this->document_analytics} (
+			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+			source_id BIGINT(20) UNSIGNED NOT NULL,
+			event_type VARCHAR(20) NOT NULL,
+			session_id CHAR(32) NOT NULL,
+			user_id BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
+			ip_address VARBINARY(16) NOT NULL,
+			created_at DATETIME NOT NULL,
+			PRIMARY KEY (id),
+			KEY idx_document_analytics_performance (source_id, event_type, created_at),
+			KEY idx_document_analytics_session (session_id, created_at),
+			CONSTRAINT fk_document_analytics_source
+            FOREIGN KEY (source_id)
+            REFERENCES {$this->documents} (id)
+            ON DELETE CASCADE
+		) {$this->charset_collate()};\n";
+
+		$this->dbDelta($sql_create_table);
+	}
 }

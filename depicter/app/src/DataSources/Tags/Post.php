@@ -203,7 +203,7 @@ class Post extends TagBase implements TagInterface {
 				break;
 
 			case 'content':
-				$result = get_the_content(null, false, $post->ID );
+				$result = wp_strip_all_tags(get_the_content(null, false, $post->ID ));
 				break;
 
 			default:

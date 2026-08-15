@@ -8,6 +8,7 @@ use Averta\WordPress\Event\Filter;
 use Averta\WordPress\Models\WPOptions;
 use Depicter;
 use Depicter\Database\DataMigration;
+use Depicter\Database\Repository\DocumentAnalyticsRepository;
 use Depicter\Database\Repository\DocumentRepository;
 use Depicter\Database\Repository\LeadFieldRepository;
 use Depicter\Database\Repository\LeadRepository;
@@ -46,6 +47,7 @@ use Depicter\Rules\Condition\Conditions;
 use Depicter\Integration\Manager as IntegrationManager;
 use Depicter\Database\Repository\QueueJobRepository;
 use Depicter\Services\QueueService;
+use Depicter\Services\AnalyticsService;
 
 /**
  * "@mixin" annotation for better IDE support.
@@ -276,4 +278,14 @@ final class AppMixin
      * @return QueueService
      */
     public static function queue(): QueueService {}
+
+	/**
+	 * @return AnalyticsService
+	 */
+	public static function analytics(): AnalyticsService {}
+
+	/**
+	 * @return DocumentAnalyticsRepository
+	 */
+	public static function documentAnalyticsRepository(): DocumentAnalyticsRepository {}
 }

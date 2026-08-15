@@ -228,7 +228,12 @@ class LeadRepository
 		}
 
 		if( ! empty( $args['orderBy'] ) && ! empty( $args['order'] ) ){
-			$leads->orderBy( $args['orderBy'], $args['order'] );
+			// Check if we are sorting by a known column in the main lead table
+			if ( in_array( $args['orderBy'], $this->lead()->getTableColumns() ) ) {
+				$leads->orderBy( "{$leadTable}.{$args['orderBy']}", $args['order'] );
+			} else {
+				$leads->orderBy( $args['orderBy'], $args['order'] );
+			}
 		}
 
 		$leads = $leads->groupBy("{$leadTable}.id");

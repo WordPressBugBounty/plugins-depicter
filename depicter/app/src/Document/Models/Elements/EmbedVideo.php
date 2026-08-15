@@ -54,9 +54,9 @@ class EmbedVideo extends Models\Element{
 
 		$elementsAttrs['data-controls'] = isset( $this->options->controls ) ? esc_attr( $this->options->controls ) : "true";
 
-		$elementsAttrs['data-video-src'] = $this->options->source;
-		if ( $elementsAttrs['data-player-type'] == 'youtube' ) {
-			$elementsAttrs['data-video-poster'] = Embed::getYouTubePosterUrl( $this->options->source );
+		$elementsAttrs['data-video-src'] = $videoUrl;
+		if ( $elementsAttrs['data-player-type'] == 'youtube' && !empty( $videoUrl ) ) {
+			$elementsAttrs['data-video-poster'] = Embed::getYouTubePosterUrl( $videoUrl );
 		}
 
 		$args = Arr::merge( $this->getDefaultAttributes(), $elementsAttrs );

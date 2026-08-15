@@ -17,12 +17,12 @@ class AIWizardService
 
 	/**
 	 * Make editor data array
-	 * @param $editorData
-	 * @param $data
+	 * @param array $editorData
+	 * @param array $AiGeneratedData
 	 *
 	 * @return array
 	 */
-    public function updateEditorDataByAiContent( $editorData, $AiGeneratedData ) {
+    public function updateEditorDataByAiContent( array $editorData, array $AiGeneratedData ) {
 		$numberOfSections = count( $AiGeneratedData['sections'] ?? [] );
 
 	    if ( $numberOfSections > 0 ) {
@@ -31,15 +31,35 @@ class AIWizardService
 
 			$i = 0;
 			foreach ( $editorData['sections'] as $section ) {
+				// inside the popup we have a teaser section so we need to skip it
+				if ( !empty( $section['type'] ) && $section['type'] != 'section' ) {
+					continue;
+				}
+
+				// replace featured photo for AI Popup documents inside each step
+				if ( !empty( $AiGeneratedData['featuredPhotoData'] ) ) {
+					$editorData['sections'][ $editorData['sectionsList'][ $i ] ] = $this->searchAndReplaceInObject( $editorData['sections'][ $editorData['sectionsList'][ $i ] ], [
+						'imageData' => $AiGeneratedData['featuredPhotoData']
+					] );
+				}
+
 				$editorData['sections'][ $editorData['sectionsList'][ $i ] ] = $this->searchAndReplaceInObject( $editorData['sections'][ $editorData['sectionsList'][ $i ] ], $AiGeneratedData['sections'][ $i ] );
 				foreach( $section['elements'] as $elementID ) {
 					if ( $editorData['elements'][ $elementID ]['type'] == 'image' ) {
 						if ( empty( $editorData['elements'][ $elementID ]['options']['className'] ) || false === strpos( $editorData['elements'][ $elementID ]['options']['className'], 'targetImage' ) ) {
 							continue;
 						}
+						
 					}
 
-					$editorData['elements'][ $elementID ] = $this->searchAndReplaceInObject( $editorData['elements'][ $elementID ], $AiGeneratedData['sections'][ $i ] );
+					// replace featured photo for AI Popup documents inside each element
+					if ( !empty( $AiGeneratedData['featuredPhotoData'] ) ) {
+						$this->recursiveSearchAndReplaceInElements( $elementID, $editorData['elements'], [
+							'imageData' => $AiGeneratedData['featuredPhotoData']
+						] );
+					}
+
+					$this->recursiveSearchAndReplaceInElements( $elementID, $editorData['elements'], $AiGeneratedData['sections'][ $i ] );
 				}
 				++$i;
 			}
@@ -59,6 +79,19 @@ class AIWizardService
 		return JSON::decode( $editorDataInString, true );
     }
 
+	private function recursiveSearchAndReplaceInElements( $elementID, &$elements, $aiSectionData ) {
+		// Apply search and replace on the current element
+		$elements[ $elementID ] = $this->searchAndReplaceInObject( $elements[ $elementID ], $aiSectionData );
+
+		// If it has children, recursively apply the same function to each child
+		if ( ! empty( $elements[ $elementID ]['children'] ) && is_array( $elements[ $elementID ]['children'] ) ) {
+			foreach ( $elements[ $elementID ]['children'] as $childID ) {
+				$this->recursiveSearchAndReplaceInElements( $childID, $elements, $aiSectionData );
+			}
+		}
+	}
+
+
 
 	/**
 	 * search and replace data in duplicated elements
@@ -73,7 +106,7 @@ class AIWizardService
 
         foreach ( $searchReplaceData as $search => $replace ) {
 			if ( $search == 'imageData' ) {
-				$assetIDs = Helper::extractAssetIds( $item );
+				$assetIDs = Helper::extractAssetIds( $item, true );
 				foreach( $assetIDs as $assetID ) {
 					$item = str_replace( $assetID, $replace['id'], $item );
 				}

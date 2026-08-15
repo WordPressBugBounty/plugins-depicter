@@ -129,6 +129,11 @@ class ServiceProvider implements ServiceProviderInterface
             return new QueueService();
         };
         $app->alias( 'queue', 'depicter.queue.service' );
+
+		$container['depicter.analytics.service' ] = function () {
+			return new AnalyticsService();
+		};
+		$app->alias( 'analytics', 'depicter.analytics.service' );
 	}
 
 	/**

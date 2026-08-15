@@ -3,9 +3,9 @@
 Contributors: averta, averta_support, depicter1slider1support, depicter1carousel1popup1support
 Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.9
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 4.7.1
+Stable tag: 4.8.0
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
@@ -91,6 +91,35 @@ To improve the user experience, Depicter may use the following 3rd party service
 15. Popup display rules – set smart conditions to show popups or notification bars based on user behavior and targeting.
 
 == Changelog ==
+
+###4.8.0
+- *Released: 2026-08-15*
+- **Added**
+- 🎉 Confetti element: Add celebratory confetti with customizable colors, shapes, spread, speed, and more.
+- Play confetti action: Trigger confetti from buttons and other interactions.
+- Marquee selection: Drag on the canvas to select multiple elements at once (hold Shift to add to your selection).
+- **Improved**
+- AI Wizard: Updated color presets and a smoother photo search experience.
+- AI Wizard: Moved to the new generation endpoints with dynamic tags, so generated content now fills groups, forms, and nested elements correctly.
+- AI-generated documents are now named after their type (for example "AI-Aided Popup") instead of always being labeled as sliders.
+- Subscription expiry is now re-checked on a schedule, so renewals and expirations are reflected more promptly.
+- Compatibility: Tested up to WordPress 7.0.
+- **Fixed**
+- Fixed a security vulnerability in project import that allowed unsafe file types and path traversal inside uploaded archives.
+- Fixed a security vulnerability by sanitizing user input and hardening CSRF validation on API requests.
+- Hardened output escaping in the Bricks and Oxygen builder modules and in several admin notices.
+- Fixed a fatal error when activating or deactivating plugins through WP-CLI.
+- Fixed a fatal error on the dashboard when no document has been created yet.
+- Fixed an issue that crashed the Dashboard and Editor pages when opening the Leads page.
+- Fixed an issue with post content not showing on data source sliders.
+- Fixed an error when a YouTube embed element has no video link.
+- Fixed an issue with publishing the latest changes of an already published document.
+- Fixed an issue where images could fail to resolve their URL on sites that serve media from an external source.
+- Fixed an issue with importing images while using the AI popup.
+- Fixed an issue with replacing content in AI-generated sliders.
+- Fixed AI Wizard popup flow so going back now returns to the correct previous step.
+- Fixed an issue with Vimeo videos not loading correctly in some cases.
+- Fixed an issue with slideshow pause and auto-advance behavior.
 
 ###4.7.1
 - *Released: 2026-01-14

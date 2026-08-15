@@ -21,17 +21,17 @@ class ComposerStaticInitb08b91585e04e27046d3f557a966edb8
     );
 
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'W' =>
         array (
             'WPEmerge\\' => 9,
             'WPEmergeTestTools\\' => 18,
             'WPEmergeAppCore\\' => 16,
         ),
-        'T' => 
+        'T' =>
         array (
             'TypeRocket\\' => 11,
         ),
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Php73\\' => 23,
@@ -43,28 +43,28 @@ class ComposerStaticInitb08b91585e04e27046d3f557a966edb8
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Console\\' => 26,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
         ),
-        'G' => 
+        'G' =>
         array (
             'GuzzleHttp\\Psr7\\' => 16,
         ),
-        'D' => 
+        'D' =>
         array (
             'Depicter\\Test\\' => 14,
             'Depicter\\Psr\\' => 13,
             'Depicter\\GuzzleHttp\\' => 20,
             'Depicter\\' => 9,
         ),
-        'C' => 
+        'C' =>
         array (
             'Composer\\Installers\\' => 20,
         ),
-        'A' => 
+        'A' =>
         array (
             'Averta\\WordPress\\' => 17,
             'Averta\\Core\\' => 12,
@@ -72,116 +72,116 @@ class ComposerStaticInitb08b91585e04e27046d3f557a966edb8
     );
 
     public static $prefixDirsPsr4 = array (
-        'WPEmerge\\' => 
+        'WPEmerge\\' =>
         array (
             0 => __DIR__ . '/..' . '/averta/wpemerge/src',
         ),
-        'WPEmergeTestTools\\' => 
+        'WPEmergeTestTools\\' =>
         array (
             0 => __DIR__ . '/..' . '/averta/wpemerge/tests/tools',
         ),
-        'WPEmergeAppCore\\' => 
+        'WPEmergeAppCore\\' =>
         array (
             0 => __DIR__ . '/..' . '/averta/wpemerge-app-core/src',
         ),
-        'TypeRocket\\' => 
+        'TypeRocket\\' =>
         array (
             0 => __DIR__ . '/..' . '/typerocket/core/src',
         ),
-        'Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Polyfill\\Php80\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'Symfony\\Polyfill\\Php73\\' => 
+        'Symfony\\Polyfill\\Php73\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
         ),
-        'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
+        'Symfony\\Polyfill\\Intl\\Grapheme\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
+        'Symfony\\Polyfill\\Ctype\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Symfony\\Contracts\\Service\\' => 
+        'Symfony\\Contracts\\Service\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
         ),
-        'Symfony\\Component\\String\\' => 
+        'Symfony\\Component\\String\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
         ),
-        'Symfony\\Component\\Console\\' => 
+        'Symfony\\Component\\Console\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
-        'Psr\\SimpleCache\\' => 
+        'Psr\\SimpleCache\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
-        'Psr\\Http\\Message\\' => 
+        'Psr\\Http\\Message\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Psr\\Container\\' => 
+        'Psr\\Container\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'GuzzleHttp\\Psr7\\' => 
+        'GuzzleHttp\\Psr7\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
-        'Depicter\\Test\\' => 
+        'Depicter\\Test\\' =>
         array (
             0 => __DIR__ . '/../..' . '/tests',
         ),
-        'Depicter\\Psr\\' => 
+        'Depicter\\Psr\\' =>
         array (
             0 => __DIR__ . '/../..' . '/modules/Psr',
         ),
-        'Depicter\\GuzzleHttp\\' => 
+        'Depicter\\GuzzleHttp\\' =>
         array (
             0 => __DIR__ . '/../..' . '/modules/GuzzleHttp',
         ),
-        'Depicter\\' => 
+        'Depicter\\' =>
         array (
             0 => __DIR__ . '/../..' . '/app/src',
         ),
-        'Composer\\Installers\\' => 
+        'Composer\\Installers\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
-        'Averta\\WordPress\\' => 
+        'Averta\\WordPress\\' =>
         array (
             0 => __DIR__ . '/..' . '/averta/wordpress/src',
         ),
-        'Averta\\Core\\' => 
+        'Averta\\Core\\' =>
         array (
             0 => __DIR__ . '/..' . '/averta/core/src',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'P' => 
+        'P' =>
         array (
-            'Pimple' => 
+            'Pimple' =>
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
         ),
-        'J' => 
+        'J' =>
         array (
-            'JsonMapper' => 
+            'JsonMapper' =>
             array (
                 0 => __DIR__ . '/..' . '/netresearch/jsonmapper/src',
             ),
@@ -336,6 +336,7 @@ class ComposerStaticInitb08b91585e04e27046d3f557a966edb8
         'Depicter\\Controllers\\Admin\\DashboardController' => __DIR__ . '/../..' . '/app/src/Controllers/Admin/DashboardController.php',
         'Depicter\\Controllers\\Admin\\EditorController' => __DIR__ . '/../..' . '/app/src/Controllers/Admin/EditorController.php',
         'Depicter\\Controllers\\Ajax\\AIWizardController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/AIWizardController.php',
+        'Depicter\\Controllers\\Ajax\\AnalyticsAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/AnalyticsAjaxController.php',
         'Depicter\\Controllers\\Ajax\\AppInfoAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/AppInfoAjaxController.php',
         'Depicter\\Controllers\\Ajax\\BackgroundRemovalAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/BackgroundRemovalAjaxController.php',
         'Depicter\\Controllers\\Ajax\\CuratedAPIAjaxController' => __DIR__ . '/../..' . '/app/src/Controllers/Ajax/CuratedAPIAjaxController.php',
@@ -387,12 +388,14 @@ class ComposerStaticInitb08b91585e04e27046d3f557a966edb8
         'Depicter\\DataSources\\Tags\\Taxonomy' => __DIR__ . '/../..' . '/app/src/DataSources/Tags/Taxonomy.php',
         'Depicter\\Database\\DatabaseServiceProvider' => __DIR__ . '/../..' . '/app/src/Database/DatabaseServiceProvider.php',
         'Depicter\\Database\\Entity\\Document' => __DIR__ . '/../..' . '/app/src/Database/Entity/Document.php',
+        'Depicter\\Database\\Entity\\DocumentAnalytics' => __DIR__ . '/../..' . '/app/src/Database/Entity/DocumentAnalytics.php',
         'Depicter\\Database\\Entity\\Lead' => __DIR__ . '/../..' . '/app/src/Database/Entity/Lead.php',
         'Depicter\\Database\\Entity\\LeadField' => __DIR__ . '/../..' . '/app/src/Database/Entity/LeadField.php',
         'Depicter\\Database\\Entity\\Meta' => __DIR__ . '/../..' . '/app/src/Database/Entity/Meta.php',
         'Depicter\\Database\\Entity\\Option' => __DIR__ . '/../..' . '/app/src/Database/Entity/Option.php',
         'Depicter\\Database\\Entity\\QueueJob' => __DIR__ . '/../..' . '/app/src/Database/Entity/QueueJob.php',
         'Depicter\\Database\\Migration' => __DIR__ . '/../..' . '/app/src/Database/Migration.php',
+        'Depicter\\Database\\Repository\\DocumentAnalyticsRepository' => __DIR__ . '/../..' . '/app/src/Database/Repository/DocumentAnalyticsRepository.php',
         'Depicter\\Database\\Repository\\DocumentRepository' => __DIR__ . '/../..' . '/app/src/Database/Repository/DocumentRepository.php',
         'Depicter\\Database\\Repository\\LeadFieldRepository' => __DIR__ . '/../..' . '/app/src/Database/Repository/LeadFieldRepository.php',
         'Depicter\\Database\\Repository\\LeadRepository' => __DIR__ . '/../..' . '/app/src/Database/Repository/LeadRepository.php',
@@ -691,6 +694,7 @@ class ComposerStaticInitb08b91585e04e27046d3f557a966edb8
         'Depicter\\Security\\CSRF' => __DIR__ . '/../..' . '/app/src/Security/CSRF.php',
         'Depicter\\Security\\SecurityServiceProvider' => __DIR__ . '/../..' . '/app/src/Security/SecurityServiceProvider.php',
         'Depicter\\Services\\AIWizardService' => __DIR__ . '/../..' . '/app/src/Services/AIWizardService.php',
+        'Depicter\\Services\\AnalyticsService' => __DIR__ . '/../..' . '/app/src/Services/AnalyticsService.php',
         'Depicter\\Services\\AssetsAPIService' => __DIR__ . '/../..' . '/app/src/Services/AssetsAPIService.php',
         'Depicter\\Services\\AuthenticationService' => __DIR__ . '/../..' . '/app/src/Services/AuthenticationService.php',
         'Depicter\\Services\\AuthorizationService' => __DIR__ . '/../..' . '/app/src/Services/AuthorizationService.php',

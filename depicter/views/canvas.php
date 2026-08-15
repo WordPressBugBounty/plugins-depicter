@@ -39,18 +39,18 @@ if ( is_rtl() ) {
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title><?php echo esc_html( $title ); ?></title>
-	<?php 
-	echo \Depicter\Utility\Sanitize::html( $head ); 
+	<?php
+	echo \Depicter\Utility\Sanitize::html( $head );
 	if ( $hasShortcode ) {
 		wp_head();
 	}
 	?>
-	<script>var ajaxurl = '<?php echo esc_url_raw( admin_url( 'admin-ajax.php', 'relative' ) ); ?>';</script>
+	<script>var ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php', 'relative' ) ); ?>';</script>
 </head>
 <body class="<?php echo Depicter\Utility\Sanitize::attribute( implode( ' ', $body_classes ) ); ?>">
 <?php echo \Depicter\Utility\Sanitize::html( $content, null, 'depicter/output' ); ?>
-<?php 
-echo \Depicter\Utility\Sanitize::html( $footer ); 
+<?php
+echo \Depicter\Utility\Sanitize::html( $footer );
 if ( $hasShortcode ) {
 	wp_footer();
 }

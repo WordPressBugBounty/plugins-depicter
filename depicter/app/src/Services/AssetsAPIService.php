@@ -141,6 +141,7 @@ class AssetsAPIService
 	 * @throws GuzzleException
 	 */
 	public static function searchDocumentTemplates( array $options = [] ) {
+		$options['plt'] = 'wordpress';
 		$response = \Depicter::remote()->get(
 			'v1/curated/document/templates',
 			[ 'query' => $options ],
@@ -253,6 +254,7 @@ class AssetsAPIService
 	 * @throws GuzzleException
 	 */
 	public static function getDocumentTemplateGroups( array $options = [] ) {
+		$options['plt'] = 'wordpress';
 		$response = \Depicter::remote()->get(
 			'v2/curated/document/templates/groups',
 			[ 'query' => $options ],
@@ -271,6 +273,7 @@ class AssetsAPIService
 	 * @throws GuzzleException
 	 */
 	public static function searchDocumentTemplatesV2( array $options = [] ) {
+		$options['plt'] = 'wordpress';
 		$response = \Depicter::remote()->get(
 			'v2/curated/document/templates',
 			[ 'query' => $options ],

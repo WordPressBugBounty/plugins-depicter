@@ -131,7 +131,8 @@ class SettingsManagerService
                 'id' => 'google_places_api_key',
                 'label' => __( 'Google Places Api key', 'depicter' ),
                 'description' => sprintf(
-                    __("To fetch and display reviews of a place on your website (Google Reviews), you need to provide %1\$s a valid Google Places API key%2\$s.", 'depicter' ),
+                    /* translators: 1: opening anchor tag, 2: closing anchor tag */
+                    __('To fetch and display reviews of a place on your website (Google Reviews), you need to provide %1$s a valid Google Places API key%2$s.', 'depicter' ),
                     '<a href="https://docs.depicter.com/article/290-google-places-api-key" target="_blank">',
                     '</a>'
                 )

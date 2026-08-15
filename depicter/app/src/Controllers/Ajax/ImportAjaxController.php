@@ -42,6 +42,15 @@ class ImportAjaxController
 			])->withStatus(400 );
 		}
 
+		$filename = $zipFile->getClientFilename();
+		$extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+		if ($extension !== 'zip') {
+			return \Depicter::json([
+                'errors' => [ __( 'Provided file must be zip file.', 'depicter') ]
+			])->withStatus(400 );
+		}
+
 		if ( ! class_exists('ZipArchive') ) {
 			return \Depicter::json([
                 'errors' => [ __( 'To import slider you need to enable "php-zip" module on your server.', 'depicter')]

@@ -36,7 +36,12 @@ class UsageService {
 			return;
 		}
 
-		$documents = \Depicter::documentRepository()->document()->where('parent', 0 )->get()->toArray();
+		$documents = \Depicter::documentRepository()->document()->where('parent', 0 )->get();
+		if ( empty( $documents ) ) {
+			return;
+		}
+		$documents = $documents->toArray();
+
 		$documentTypes = [];
 		$importantElements = [
 			'"type":"dpcCouponBox"' => 'couponBox',

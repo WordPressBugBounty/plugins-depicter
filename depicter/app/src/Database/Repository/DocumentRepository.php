@@ -5,6 +5,7 @@ use Averta\Core\Utility\Arr;
 use Averta\Core\Utility\JSON;
 use Depicter;
 use Depicter\Database\Entity\Document;
+use Depicter\Document\Helper\Helper;
 use Depicter\Exception\DocumentNotFoundException;
 use Exception;
 use TypeRocket\Database\Results;
@@ -635,22 +636,8 @@ class DocumentRepository
 	 */
 	public function draftFields( $type = '')
 	{
-		$typesDictionary = [
-			'slider'      => __( 'Slider', 'depicter' ),
-			'custom'      => __( 'Slider', 'depicter' ),
-			'popup'       => __( 'Popup', 'depicter' ),
-			'post-slider' => __( 'Post Slider', 'depicter' ),
-			'woo-slider'  => __( 'Product Slider', 'depicter' ),
-			'banner-bar'  => __( 'Notification Bar', 'depicter' ),
-			'carousel'    => __( 'Carousel', 'depicter' ),
-			'hero-section'=> __( 'Hero Section', 'depicter' ),
-			'survey'	  => __( 'Survey', 'depicter' )
-		];
-
-		$typeLabel = !empty( $typesDictionary[ $type ] ) ? $typesDictionary[ $type ] : __('Slider', 'depicter' );
-
 		return [
-			'name'        => $typeLabel,
+			'name'        => !empty($type) ? Helper::getDocumentTypeLabel( $type ) : __('Slider', 'depicter' ),
 			'status'      => 'draft',
 			'author'      => $this->getCurrentUserId()
 		];

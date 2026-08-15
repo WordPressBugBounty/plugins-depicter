@@ -23,17 +23,23 @@ class ImportService
 		$wp_upload_dir = \Depicter::storage()->uploads();
 		$fileSystem = \Depicter::storage()->filesystem();
 
+		// Generate a randomized and unpredictable folder name for temporary extraction
+		$randomFolder = 'temp_import_' . wp_generate_password( 16, false, false );
 		$depicterUploadPath = \Depicter::storage()->getPluginUploadsDirectory() . '/';
+		$extractPath = $depicterUploadPath . $randomFolder . '/';
 
-		try{
+		try {
 
 			if ( $file instanceof UploadedFile ) {
-				$uploadedZipFilePath = \Depicter::storage()->getPluginUploadsDirectory() . '/' . $file->getClientFilename();
+				// Assign a random filename to the uploaded zip file instead of client filename
+				$randomZipName = 'import_' . wp_generate_password( 12, false, false ) . '.zip';
+				$uploadedZipFilePath = $depicterUploadPath . $randomZipName;
+
 				if ( !is_dir( $depicterUploadPath ) ) {
 					$fileSystem->mkdir( $depicterUploadPath );
 				}
 
-				// move uploaded zip file from temp directory to depicter folder inside wp uploads directory and extract it
+				// Move uploaded zip file to destination directory
 				$file->moveTo( $uploadedZipFilePath );
 
 			} else {
@@ -43,18 +49,44 @@ class ImportService
 				}
 			}
 
+			if ( !is_dir( $extractPath ) ) {
+				$fileSystem->mkdir( $extractPath );
+			}
+
 			$zipFile = new \ZipArchive();
-			$zipFile->open( $uploadedZipFilePath );
-			$zipFile->extractTo($depicterUploadPath . $this->importFolderName );
-			$zipFile->close();
+			if ( $zipFile->open( $uploadedZipFilePath ) === true ) {
+				
+				// Secure extraction: prevents zip slip attacks and blocks dangerous file extensions
+				for ( $i = 0; $i < $zipFile->numFiles; $i++ ) {
+					$filename = $zipFile->getNameIndex( $i );
+					$ext = strtolower( pathinfo( $filename, PATHINFO_EXTENSION ) );
 
-			$importedAssetIDs = $this->importAssets( $fileSystem, $wp_upload_dir );
-			$sliderID = $this->importSlider( $importedAssetIDs, $depicterUploadPath );
+					// Ignore executable or dangerous files
+					if ( in_array( $ext, [ 'php', 'php3', 'php4', 'php5', 'phtml', 'htaccess', 'phar' ], true ) ) {
+						continue;
+					}
 
-			if ( $file instanceof UploadedFile ) {
+					// Prevent Zip Slip / Path Traversal vulnerability
+					if ( strstr( $filename, '../' ) !== false || strstr( $filename, '..\\' ) !== false ) {
+						continue;
+					}
+
+					$zipFile->extractTo( $extractPath, array( $filename ) );
+				}
+				
+				$zipFile->close();
+			} else {
+				throw new \Exception('Failed to open zip archive.');
+			}
+
+			$importedAssetIDs = $this->importAssets( $fileSystem, $wp_upload_dir, $extractPath );
+			$sliderID = $this->importSlider( $importedAssetIDs, $extractPath );
+
+			// Cleanup temporary zip file and extract directory
+			if ( $file instanceof UploadedFile && file_exists( $uploadedZipFilePath ) ) {
 				wp_delete_file( $uploadedZipFilePath );
 			}
-			$fileSystem->rmdir( $depicterUploadPath . $this->importFolderName, true );
+			$fileSystem->rmdir( $extractPath, true );
 
 			if ( \Depicter::options()->get('use_google_fonts', 'on') === 'save_locally' ) {
 				$documentModel = \Depicter::document()->getModel( $sliderID )->prepare();
@@ -64,6 +96,13 @@ class ImportService
 			return $sliderID;
 
 		} catch( \Exception $e ) {
+			// Ensure cleanup occurs even if an exception is thrown
+			if ( isset( $uploadedZipFilePath ) && $file instanceof UploadedFile && file_exists( $uploadedZipFilePath ) ) {
+				wp_delete_file( $uploadedZipFilePath );
+			}
+			if ( isset( $extractPath ) && is_dir( $extractPath ) ) {
+				$fileSystem->rmdir( $extractPath, true );
+			}
 			return false;
 		}
 	}
@@ -72,24 +111,27 @@ class ImportService
 	 * Import available assets inside assets directory
 	 * @param $fileSystem
 	 * @param $uploadDirectory
+	 * @param string $extractPath
 	 *
 	 * @return array $importedIDs
 	 */
-	protected function importAssets( $fileSystem, $uploadDirectory ) {
+	protected function importAssets( $fileSystem, $uploadDirectory, $extractPath = '' ) {
 		$allowedMimeTypes = array_values( get_allowed_mime_types() );
 		$importedIDs = [];
-		$uploadPath = \Depicter::storage()->getPluginUploadsDirectory() . '/';
 
-		// scan assets directory to import assets
-		$assets = $fileSystem->scan( $uploadPath . $this->importFolderName . '/' . $this->assetsFolderName );
+		$assetsDir = $extractPath . $this->assetsFolderName;
+
+		// Scan assets directory to import assets
+		$assets = $fileSystem->scan( $assetsDir );
 		if ( $assets ) {
 			foreach( $assets as $asset ) {
 				$assetMimeType = wp_check_filetype( $asset['name'] )['type'];
-				if ( !in_array( $assetMimeType, $allowedMimeTypes ) ) {
+				if ( !in_array( $assetMimeType, $allowedMimeTypes, true ) ) {
 					continue;
 				}
 				$sanitizedFileName = Sanitize::fileName( $asset['name'] );
-				$fileSystem->move( $uploadPath . $this->importFolderName . '/' . $this->assetsFolderName . '/' . $asset['name'], $uploadDirectory->getPath() . "/" . $sanitizedFileName );
+
+				$fileSystem->move( $assetsDir . '/' . $asset['name'], $uploadDirectory->getPath() . "/" . $sanitizedFileName );
 				$attachmentTitle = preg_replace( '/\.[^.]+$/', '', $sanitizedFileName );
 				$attachment = array(
 					'guid'           => $uploadDirectory->getUrl() . '/' . $sanitizedFileName,
@@ -99,9 +141,9 @@ class ImportService
 					'post_status'    => 'inherit'
 				);
 
-				$attachID = wp_insert_attachment( $attachment, $sanitizedFileName );
+				$attachID = wp_insert_attachment( $attachment, $uploadDirectory->getPath() . "/" . $sanitizedFileName );
 				if ( !is_wp_error( $attachID ) ) {
-					// generate meta data for the inserted attachment
+					// Generate meta data for the inserted attachment
 					$attachment_metadata = wp_generate_attachment_metadata( $attachID, $uploadDirectory->getPath() . "/" . $sanitizedFileName );
 					wp_update_attachment_metadata( $attachID, $attachment_metadata );
 					update_attached_file( $attachID, $uploadDirectory->getPath() . "/" . $sanitizedFileName );
@@ -120,13 +162,19 @@ class ImportService
 	 * Import Slider
 	 *
 	 * @param $importedIDs
-	 * @param $uploadPath
+	 * @param string $extractPath
 	 *
 	 * @return mixed|null
 	 * @throws \Exception
 	 */
-	protected function importSlider( $importedIDs, $uploadPath ) {
-		$data = \Depicter::storage()->filesystem()->read( $uploadPath . $this->importFolderName . '/data.json' );
+	protected function importSlider( $importedIDs, $extractPath = '' ) {
+		$dataPath = $extractPath . 'data.json';
+		
+		if ( !\Depicter::storage()->filesystem()->exists( $dataPath ) ) {
+			throw new \Exception('data.json not found in zip package.');
+		}
+
+		$data = \Depicter::storage()->filesystem()->read( $dataPath );
 		$dataArray = JSON::decode( $data, true );
 		$oldUploadURL = '';
 		$jsonAssets = "";

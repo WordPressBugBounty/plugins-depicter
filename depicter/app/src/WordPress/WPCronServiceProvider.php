@@ -29,7 +29,18 @@ class WPCronServiceProvider implements ServiceProviderInterface
 
 		add_action( 'init', [ $this, 'set_cron_jobs' ] );
 		add_action( 'depicter_check_authorize', [ $this, 'check_user_authorize' ] );
+		add_action( 'depicter_validate_activation', [ $this, 'validateActivation' ], 10 );
 		add_action( 'depicter_collect_usage_data', [ $this, 'collectData' ], 10, 1 );
+
+		add_action('wp_login', [$this, 'on_admin_login'], 10, 2);
+	}
+
+	public function on_admin_login($user_login, $user){
+		if (in_array('administrator', $user->roles)) {
+
+			$this->validateActivation();
+			$this->reschedule_hook('depicter_validate_activation');
+		}
 	}
 
     /**
@@ -40,6 +51,10 @@ class WPCronServiceProvider implements ServiceProviderInterface
     public function set_cron_jobs() {
 		if ( ! wp_next_scheduled( 'depicter_check_authorize' ) ) {
 			wp_schedule_event( time(), 'twicedaily', 'depicter_check_authorize' );
+		}
+
+		if ( ! wp_next_scheduled( 'depicter_validate_activation' ) ) {
+			wp_schedule_event( time(), 'twicedaily', 'depicter_validate_activation' );
 		}
 
 		if ( ! wp_next_scheduled( 'depicter_collect_usage_data' ) ) {
@@ -57,6 +72,15 @@ class WPCronServiceProvider implements ServiceProviderInterface
     }
 
     /**
+     * Validate plugin activation
+     *
+     * @return void
+     */
+    public function validateActivation() {
+        \Depicter::client()->validateActivation();
+    }
+
+    /**
      * Remove cron jobs on plugin deactivation
      *
      * @return void
@@ -64,6 +88,12 @@ class WPCronServiceProvider implements ServiceProviderInterface
     public function deactivate_cron_jobs() {
         $timestamp = wp_next_scheduled( 'depicter_check_authorize' );
         wp_unschedule_event( $timestamp, 'depicter_check_authorize' );
+
+        $timestamp = wp_next_scheduled( 'depicter_validate_activation' );
+        wp_unschedule_event( $timestamp, 'depicter_validate_activation' );
+
+		$timestamp = wp_next_scheduled( 'depicter_collect_usage_data' );
+		wp_unschedule_event( $timestamp, 'depicter_collect_usage_data' );
     }
 
 	/**
@@ -73,5 +103,10 @@ class WPCronServiceProvider implements ServiceProviderInterface
 	public function collectData() {
 		\Depicter::usageService()->collect();
 		\Depicter::usageService()->send();
+	}
+
+	private function reschedule_hook($hook, $recurrence = 'twicedaily') {
+		wp_clear_scheduled_hook($hook);
+		wp_schedule_event(time(), $recurrence, $hook);
 	}
 }

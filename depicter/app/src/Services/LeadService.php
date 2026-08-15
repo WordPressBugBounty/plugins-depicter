@@ -29,6 +29,8 @@ class LeadService
                 ];
             }
 
+            \Depicter::analytics()->track( $sourceId, 'submission' );
+
             $formFields = $request->getParsedBody();
 
             foreach ($formFields as $fieldName => $fieldValue) {
@@ -38,8 +40,8 @@ class LeadService
 
                 $leadFields = \Depicter::leadFieldRepository()->create(
                     $leadId,
-                    $fieldName,
-                    $fieldValue,
+                    Sanitize::textfield($fieldName),
+                    Sanitize::textfield($fieldValue),
                     $this->getFieldType($fieldName, $fieldValue)
                 );
 
@@ -56,9 +58,9 @@ class LeadService
                 foreach ( $analyticsMetadata as $data ) {
                     \Depicter::leadFieldRepository()->create(
                         $leadId,
-                        $data['name'],
-                        $data['value'],
-                        $data['type']
+                        Sanitize::textfield($data['name']),
+                        Sanitize::textfield($data['value']),
+                        Sanitize::textfield($data['type'])
                     );
                 }
             }

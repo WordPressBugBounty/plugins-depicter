@@ -3,6 +3,7 @@
 namespace Depicter\Database;
 
 use Averta\WordPress\Database\ORM\ORM;
+use Depicter\Database\Repository\DocumentAnalyticsRepository;
 use Depicter\Database\Repository\DocumentRepository;
 use Depicter\Database\Repository\LeadFieldRepository;
 use Depicter\Database\Repository\LeadRepository;
@@ -46,12 +47,17 @@ class DatabaseServiceProvider implements ServiceProviderInterface {
             return new QueueJobRepository();
         };
 
+		$container[ 'depicter.database.repository.document.analytics' ] = function () {
+			return new DocumentAnalyticsRepository();
+		};
+
 		$app = $container[ WPEMERGE_APPLICATION_KEY ];
 		$app->alias( 'documentRepository', 'depicter.database.repository.document' );
 		$app->alias( 'metaRepository', 'depicter.database.repository.meta' );
 		$app->alias( 'leadRepository', 'depicter.database.repository.lead' );
 		$app->alias( 'leadFieldRepository', 'depicter.database.repository.lead.field' );
         $app->alias( 'queueJobsRepository', 'depicter.database.repository.queue.jobs' );
+		$app->alias( 'documentAnalyticsRepository', 'depicter.database.repository.document.analytics' );
 	}
 
 	/**
