@@ -42,6 +42,8 @@ class AnalyticsAjaxController
 				$sanitizedMeta[Sanitize::textfield($key)] = Sanitize::textfield($value);
 			}
 			$metaData = $sanitizedMeta;
+		} else {
+			$metaData = [];
 		}
 
 		try {

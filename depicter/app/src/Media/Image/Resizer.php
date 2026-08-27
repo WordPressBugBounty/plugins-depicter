@@ -67,7 +67,7 @@ class Resizer implements FileEditInterface
 			return '';
 		}
 
-		if ( false !== strpos( $this->file, 'http' ) ){
+		if ( false !== strpos( $this->file, 'http' ) && strpos($this->file, 'http') === 0 ){
 			return $this->file;
 		}
 

@@ -150,7 +150,8 @@ class Background
 
 		if ( !empty( $this->video->src ) ) {
 			$sourceID = \Depicter::media()->getAttachmentId( $this->video->src );
-			$url = $sourceID ? \Depicter::media()->getSourceUrl( $sourceID ) : $this->video->src;
+			$sourceID = $sourceID ?? $this->video->src;
+            $url = false === strpos($sourceID, 'http') ? \Depicter::media()->getSourceUrl($this->video->src) : $this->video->src;
 			$this->markup .= $this->renderVideo( $url );
 		}
 

@@ -13,6 +13,15 @@ use TypeRocket\Models\Model;
 
 class DocumentRepository
 {
+
+	/**
+	 * Columns that the document list may be sorted by.
+	 */
+	private const ALLOWED_ORDER_BY = [
+		'id', 'name', 'slug', 'type', 'author',
+		'sections_count', 'created_at', 'modified_at', 'status', 'parent'
+	];
+
 	/**
 	 * @var Document
 	 */
@@ -255,7 +264,11 @@ class DocumentRepository
 		}
 
 		if ( !empty( $args['orderBy'] )  && !empty( $args['order'] ) ) {
-			$documents = $documents->orderBy( $args['orderBy'], $args['order'] );
+			// Resolve ordering against a known column list, never raw request input.
+			$order   = 'ASC' === strtoupper( (string) $args['order'] ) ? 'ASC' : 'DESC';
+			$orderBy = in_array( $args['orderBy'], self::ALLOWED_ORDER_BY, true ) ? $args['orderBy'] : 'modified_at';
+
+			$documents = $documents->orderBy( $orderBy, $order );
 		}
 
 		if ( !empty( $args['s'] ) ) {

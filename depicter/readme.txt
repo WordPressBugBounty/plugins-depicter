@@ -5,7 +5,7 @@ Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.9
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 4.8.0
+Stable tag: 4.8.1
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
@@ -91,6 +91,15 @@ To improve the user experience, Depicter may use the following 3rd party service
 15. Popup display rules – set smart conditions to show popups or notification bars based on user behavior and targeting.
 
 == Changelog ==
+
+###4.8.1
+- *Released: 2026-08-27*
+- **Improved**
+- Lead exports now normalize custom field names when building column headers, so unusual characters in a field name no longer break the export.
+- **Fixed**
+- Fixed a security vulnerability where a specially crafted form submission could be stored and later executed as part of a database query.
+- Fixed a security vulnerability that allowed the sort parameters on the Leads, Dashboard screens to be passed into the database.
+- Fixed an issue where images with "http" anywhere in their file path were mistaken for external URLs, so their resized versions were never generated.
 
 ###4.8.0
 - *Released: 2026-08-15*

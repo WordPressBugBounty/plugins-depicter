@@ -228,12 +228,9 @@ class LeadRepository
 		}
 
 		if( ! empty( $args['orderBy'] ) && ! empty( $args['order'] ) ){
-			// Check if we are sorting by a known column in the main lead table
-			if ( in_array( $args['orderBy'], $this->lead()->getTableColumns() ) ) {
-				$leads->orderBy( "{$leadTable}.{$args['orderBy']}", $args['order'] );
-			} else {
-				$leads->orderBy( $args['orderBy'], $args['order'] );
-			}
+			// Resolve ordering against known columns only, never raw request input.
+			list( $orderByColumn, $orderDirection ) = $this->resolveOrder( $args, $leadTable, [ 'fieldName', 'fieldValue' ] );
+			$leads->orderBy( $orderByColumn, $orderDirection );
 		}
 
 		$leads = $leads->groupBy("{$leadTable}.id");
@@ -363,10 +360,26 @@ class LeadRepository
 			return "l.{$column}";
 		}, $LeadTableColumns );
 
-		// prefix and add leadField columns for joint query
+		// prefix and add leadField columns for joint query.
+		// Field names come from public form submissions, so they are never interpolated
+		// into SQL: the compared value is bound and the alias is rebuilt from a safe
+		// character set.
+		$fieldAliases = [];
 		foreach( $leadFieldTableColumns as $leadFieldTableColumn ){
+			$alias = $this->fieldAlias( $leadFieldTableColumn );
+
+			// drop unusable or colliding aliases instead of emitting broken SQL
+			if( '' === $alias || isset( $fieldAliases[ $alias ] ) ){
+				continue;
+			}
+			$fieldAliases[ $alias ] = true;
+
 			// using sqlRaw to bypass 'tickSqlName' filter
-			$columns[] = new SqlRaw("MAX(IF(lf.name = '{$leadFieldTableColumn}', lf.value, NULL)) AS '{$leadFieldTableColumn}'");
+			$columns[] = new SqlRaw( sprintf(
+				"MAX(IF(lf.name = %s, lf.value, NULL)) AS `%s`",
+				$this->quote( $leadFieldTableColumn ),
+				$alias
+			) );
 		}
 
 		$leads = Lead::new()->select( $columns )
@@ -375,11 +388,82 @@ class LeadRepository
 		    ->where( "l.id", 'IN', $args['ids'] );
 
 		if( ! empty( $args['orderBy'] ) && ! empty( $args['order'] ) ){
-			$leads->orderBy( $args['orderBy'], $args['order'] );
+			// Resolve ordering against lead columns and the aliases actually emitted above.
+			list( $orderByColumn, $orderDirection ) = $this->resolveOrder( $args, 'l', array_keys( $fieldAliases ) );
+			$leads->orderBy( $orderByColumn, $orderDirection );
 		}
 
 		$leads = $leads->groupBy("l.id")->get();
 
 		return $leads ? $leads->toArray() : [];
 	}
+
+	/**
+	 * Quotes a value for safe inclusion in a raw SQL fragment.
+	 *
+	 * Mirrors TypeRocket\Database\Query::prepareValue(). The placeholder escape is
+	 * removed because the returned fragment is spliced into SQL that the query builder
+	 * runs itself, rather than being passed back through $wpdb::prepare().
+	 *
+	 * @param mixed $value
+	 *
+	 * @return string
+	 */
+	private function quote( $value ): string {
+		global $wpdb;
+
+		return $wpdb->remove_placeholder_escape( $wpdb->prepare( '%s', (string) $value ) );
+	}
+
+	/**
+	 * Builds a safe column alias out of an untrusted lead field name.
+	 *
+	 * Lead field names are supplied by visitors submitting a form, so only a known
+	 * safe character set is allowed through. An empty result means the name cannot be
+	 * represented as a column and should be skipped.
+	 *
+	 * @param mixed $name
+	 *
+	 * @return string
+	 */
+	private function fieldAlias( $name ): string {
+		$alias = preg_replace( '/[^\p{L}\p{N}_\- ]/u', '', (string) $name );
+
+		// preg_replace() returns null on malformed UTF-8, fall back to an ASCII only pass
+		if( null === $alias ){
+			$alias = preg_replace( '/[^A-Za-z0-9_\- ]/', '', (string) $name );
+		}
+
+		return trim( (string) $alias );
+	}
+
+	/**
+	 * Resolves order by / order arguments against a list of permitted columns.
+	 *
+	 * Anything unrecognised falls back to the lead ID, so request input never reaches
+	 * the ORDER BY clause verbatim.
+	 *
+	 * @param array  $args          Filter arguments
+	 * @param string $tableAlias    Table name or alias holding the lead columns
+	 * @param array  $extraAllowed  Additional select aliases that may be ordered by
+	 *
+	 * @return array  [ column, direction ]
+	 */
+	private function resolveOrder( array $args, string $tableAlias, array $extraAllowed = [] ): array {
+		$direction = 'ASC' === strtoupper( (string) ( $args['order'] ?? '' ) ) ? 'ASC' : 'DESC';
+		$orderBy   = (string) ( $args['orderBy'] ?? '' );
+
+		if( in_array( $orderBy, $this->lead()->getTableColumns(), true ) ){
+			return [ "{$tableAlias}.{$orderBy}", $direction ];
+		}
+
+		// aliases already use a safe character set, but may contain characters that
+		// tickSqlName() would strip, so quote them explicitly
+		if( in_array( $orderBy, $extraAllowed, true ) ){
+			return [ new SqlRaw( '`' . $orderBy . '`' ), $direction ];
+		}
+
+		return [ "{$tableAlias}.id", $direction ];
+	}
+
 }

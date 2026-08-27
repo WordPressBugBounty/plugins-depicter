@@ -8,6 +8,10 @@ use Depicter\Utility\Sanitize;
 class DocumentAnalyticsRepository
 {
 
+	private const ALLOWED_ORDER_BY = ['created_at', 'id', 'source_id', 'event_type'];
+	private const ALLOWED_ORDER    = ['ASC', 'DESC'];
+	private const ALLOWED_EVENT_TYPES = ['view', 'click', 'impression', 'submission'];
+
 	/**
 	 * @var DocumentAnalytics
 	 */
@@ -37,6 +41,10 @@ class DocumentAnalyticsRepository
 	 * @throws \Exception
 	 */
 	public function create( $sourceId, $eventType ) {
+		if ( ! in_array( $eventType, self::ALLOWED_EVENT_TYPES ) ) {
+			return false;
+		}
+
 		$ipAddress = \Depicter::geoLocate()->getIP();
 		$userSession = \Depicter::authorization()->getUserSession();
 		$userID = is_user_logged_in() ? get_current_user_id() : 0;
@@ -63,7 +71,7 @@ class DocumentAnalyticsRepository
 	public function getByDocumentId( $documentId, $args = [] ): array {
 		$query = $this->documentAnalytics()->where('source_id', $documentId);
 
-		if (!empty($args['event_type'])) {
+		if ( ! empty( $args['event_type'] ) && in_array( $args['event_type'], self::ALLOWED_EVENT_TYPES ) ) {
 			$query->where('event_type', $args['event_type']);
 		}
 
@@ -77,11 +85,9 @@ class DocumentAnalyticsRepository
 			$query->where('created_at', '<=', $args['dateEnd']);
 		}
 
-		if (!empty($args['orderBy']) && !empty($args['order'])) {
-			$query->orderBy($args['orderBy'], $args['order']);
-		} else {
-			$query->orderBy('created_at', 'DESC');
-		}
+		$orderBy = in_array( $args['orderBy'] ?? '', self::ALLOWED_ORDER_BY, true ) ? $args['orderBy'] : 'created_at';
+		$order = in_array( strtoupper( $args['order'] ?? '' ), self::ALLOWED_ORDER, true ) ? strtoupper($args['order']) : 'DESC';
+		$query->orderBy($orderBy, $order);
 
 		if (!empty($args['perPage'])) {
 			$page = $args['page'] ?? 1;
@@ -110,7 +116,7 @@ class DocumentAnalyticsRepository
 	public function getCount( $documentId, $eventType = '', $args = [] ): int {
 		$query = DocumentAnalytics::new()->where('source_id', $documentId);
 
-		if (!empty($eventType)) {
+		if (!empty($eventType) && in_array( $eventType, self::ALLOWED_EVENT_TYPES ) ) {
 			$query->where('event_type', $eventType);
 		}
 
