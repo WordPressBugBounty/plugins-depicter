@@ -178,7 +178,7 @@ class EditorAjaxController implements RestMethodsInterface
 
         if (!$document = Depicter::documentRepository()->findById($documentId)) {
             return Depicter::json(['errors' => ['Document ID not found.', $documentId]])
-                ->withHeader('X-Document-ID', $documentId)
+                ->withHeader('X-Document-ID', (string) $documentId)
                 ->withStatus(404);
         }
 
@@ -209,7 +209,7 @@ class EditorAjaxController implements RestMethodsInterface
 
         $hits['content'] = Depicter::document()->migrations()->apply($hits['content']);
 
-        return Depicter::json(['hits' => $hits])->withHeader('X-Document-ID', $documentId)->withStatus(200);
+        return Depicter::json(['hits' => $hits])->withHeader('X-Document-ID', (string) $documentId)->withStatus(200);
     }
 
     /**
@@ -229,7 +229,7 @@ class EditorAjaxController implements RestMethodsInterface
 
         if (!$document = Depicter::documentRepository()->findById($documentId)) {
             return Depicter::json(['errors' => ['Document ID not found.', $documentId]])
-                ->withHeader('X-Document-ID', $documentId)
+                ->withHeader('X-Document-ID', (string) $documentId)
                 ->withStatus(404);
         }
 
@@ -251,7 +251,7 @@ class EditorAjaxController implements RestMethodsInterface
             }
         }
 
-        return Depicter::json(['hits' => $hits])->withHeader('X-Document-ID', $documentId)->withStatus(200);
+        return Depicter::json(['hits' => $hits])->withHeader('X-Document-ID', (string) $documentId)->withStatus(200);
     }
 
     /**
@@ -373,7 +373,7 @@ class EditorAjaxController implements RestMethodsInterface
         } catch (Exception $exception) {
             return Depicter::json([
                 'errors' => [$exception->getMessage()]
-            ])->withHeader('X-Document-ID', $documentId)->withStatus(404);
+            ])->withHeader('X-Document-ID', (string) $documentId)->withStatus(404);
         }
 
         return Depicter::json($output);
@@ -420,7 +420,7 @@ class EditorAjaxController implements RestMethodsInterface
 
         } catch (Exception $exception) {
             return Depicter::json(['errors' => [$exception->getMessage()]])
-                ->withHeader('X-Document-ID', $documentId)
+                ->withHeader('X-Document-ID', (string) $documentId)
                 ->withStatus(404);
         }
     }

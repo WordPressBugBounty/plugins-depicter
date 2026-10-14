@@ -63,7 +63,7 @@ class RemoteAPIService
 		return [
 			'headers' => [
 				'user-agent'      => 'WordPress/'. $wp_version .'; '. get_home_url(),
-				'timeout'         => 30,
+				'timeout'         => "30",
 				'X-DEPICTER-CKEY' => \Depicter::auth()->getClientKey(),
 				'X-DEPICTER-VER'  => DEPICTER_VERSION,
 				'X-DEPICTER-TIER' => \Depicter::auth()->getTier(),

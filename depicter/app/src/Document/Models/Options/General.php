@@ -240,7 +240,7 @@ class General
 				                                         ($this->border->right->value  ?? 1) . ($this->border->right->unit  ?? "px") ." ".
 				                                         ($this->border->bottom->value ?? 1) . ($this->border->bottom->unit ?? "px") ." ".
 				                                         ($this->border->left->value   ?? 1) . ($this->border->left->unit   ?? "px");
-			} else {
+			} elseif (isset($this->border->top)) {
 				$styles[ 'default' ][ 'border-width' ] = ($this->border->top->value ?? 1) . ($this->border->top->unit ?? "px");
 
 			}

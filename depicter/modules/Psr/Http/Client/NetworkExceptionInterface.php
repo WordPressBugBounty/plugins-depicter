@@ -3,7 +3,6 @@
 namespace Depicter\Psr\Http\Client;
 
 use Depicter\Psr\Http\Message\RequestInterface;
-
 /**
  * Thrown when the request cannot be completed because of network issues.
  *

@@ -3,7 +3,6 @@
 namespace Depicter\Psr\Http\Client;
 
 use Depicter\Psr\Http\Message\RequestInterface;
-
 /**
  * Exception for when a request failed.
  *

@@ -35,8 +35,8 @@ class WPCronServiceProvider implements ServiceProviderInterface
 		add_action('wp_login', [$this, 'on_admin_login'], 10, 2);
 	}
 
-	public function on_admin_login($user_login, $user){
-		if (in_array('administrator', $user->roles)) {
+	public function on_admin_login($user_login, $user = null){
+		if ($user && in_array('administrator', $user->roles)) {
 
 			$this->validateActivation();
 			$this->reschedule_hook('depicter_validate_activation');

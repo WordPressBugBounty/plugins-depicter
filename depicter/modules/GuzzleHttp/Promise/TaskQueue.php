@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Depicter\GuzzleHttp\Promise;
 
 /**
@@ -17,9 +16,10 @@ namespace Depicter\GuzzleHttp\Promise;
  */
 class TaskQueue implements TaskQueueInterface
 {
-    private $enableShutdown = true;
-    private $queue = [];
-
+    use NonSerializableTrait;
+    private bool $enableShutdown = true;
+    /** @var list<callable(): void> */
+    private array $queue = [];
     public function __construct(bool $withShutdown = true)
     {
         if ($withShutdown) {
@@ -27,32 +27,31 @@ class TaskQueue implements TaskQueueInterface
                 if ($this->enableShutdown) {
                     // Only run the tasks if an E_ERROR didn't occur.
                     $err = error_get_last();
-                    if (!$err || ($err['type'] ^ E_ERROR)) {
+                    if (!$err || $err['type'] ^ E_ERROR) {
                         $this->run();
                     }
                 }
             });
         }
     }
-
     public function isEmpty(): bool
     {
         return !$this->queue;
     }
-
+    /**
+     * @param callable(): void $task
+     */
     public function add(callable $task): void
     {
         $this->queue[] = $task;
     }
-
     public function run(): void
     {
         while ($task = array_shift($this->queue)) {
-            /** @var callable $task */
+            /** @var callable(): void $task */
             $task();
         }
     }
-
     /**
      * The task queue will be run and exhausted by default when the process
      * exits IFF the exit is not the result of a PHP E_ERROR error.

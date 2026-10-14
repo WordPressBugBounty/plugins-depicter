@@ -5,7 +5,7 @@ Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.9
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 4.8.1
+Stable tag: 4.8.2
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
@@ -92,6 +92,16 @@ To improve the user experience, Depicter may use the following 3rd party service
 
 == Changelog ==
 
+###4.8.2
+- *Released: 2026-10-15*
+- **Improved**
+- Updated the bundled Guzzle HTTP library to version 8.2.
+- **Fixed**
+- Fixed a security vulnerability in file uploads by checking the real file type and extension instead of trusting the type sent by the browser.
+- Fixed a security vulnerability where SVG animation attributes could be used to inject `javascript:` links into rendered output.
+- Fixed a PHP error on the login screen when another plugin triggers the login action without passing the user.
+- Fixed a PHP warning when a document has no border width set.
+
 ###4.8.1
 - *Released: 2026-08-27*
 - **Improved**
@@ -100,6 +110,7 @@ To improve the user experience, Depicter may use the following 3rd party service
 - Fixed a security vulnerability where a specially crafted form submission could be stored and later executed as part of a database query.
 - Fixed a security vulnerability that allowed the sort parameters on the Leads, Dashboard screens to be passed into the database.
 - Fixed an issue where images with "http" anywhere in their file path were mistaken for external URLs, so their resized versions were never generated.
+- Fixed an issue where background videos did not show in preview mode.
 
 ###4.8.0
 - *Released: 2026-08-15*

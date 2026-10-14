@@ -1,9 +1,9 @@
 <?php
 
+declare (strict_types=1);
 namespace Depicter\GuzzleHttp;
 
 use Depicter\Psr\Http\Message\MessageInterface;
-
 interface BodySummarizerInterface
 {
     /**

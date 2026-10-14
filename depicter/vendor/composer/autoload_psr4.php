@@ -10,6 +10,7 @@ return array(
     'WPEmergeTestTools\\' => array($vendorDir . '/averta/wpemerge/tests/tools'),
     'WPEmergeAppCore\\' => array($vendorDir . '/averta/wpemerge-app-core/src'),
     'TypeRocket\\' => array($vendorDir . '/typerocket/core/src'),
+    'Symfony\\Polyfill\\Php82\\' => array($vendorDir . '/symfony/polyfill-php82'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Php73\\' => array($vendorDir . '/symfony/polyfill-php73'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),

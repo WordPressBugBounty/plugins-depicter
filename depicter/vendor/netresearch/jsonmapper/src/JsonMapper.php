@@ -351,7 +351,9 @@ class JsonMapper
             $refDeserializePostMethod = $rc->getMethod(
                 $this->postMappingMethod
             );
-            $refDeserializePostMethod->setAccessible(true);
+            if (\PHP_VERSION_ID < 80100) {
+                $refDeserializePostMethod->setAccessible(true);
+            }
             $refDeserializePostMethod->invoke(
                 $object, ...$this->postMappingMethodArguments
             );
@@ -694,7 +696,9 @@ class JsonMapper
         $object, $accessor, $value
     ) {
         if (!$accessor->isPublic() && $this->bIgnoreVisibility) {
-            $accessor->setAccessible(true);
+            if (\PHP_VERSION_ID < 80100) {
+                $accessor->setAccessible(true);
+            }
         }
         if ($accessor instanceof ReflectionProperty) {
             $accessor->setValue($object, $value);
@@ -754,7 +758,7 @@ class JsonMapper
      */
     protected function getMappedType($type, $jvalue = null)
     {
-        if (isset($this->classMap[$type])) {
+        if (isset($this->classMap[$type ?? ''])) {
             $target = $this->classMap[$type];
         } else if (is_string($type) && $type !== '' && $type[0] == '\\'
             && isset($this->classMap[substr($type, 1)])

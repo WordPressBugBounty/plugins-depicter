@@ -8,12 +8,14 @@ class Sanitize extends SanitizeBase {
 	public static function html( $input, $allowed_tags = null, $namespace = null, $auto_p = false ){
 		// A fix to allow empty data url for src in image tag
 		if( $namespace === 'depicter/output' ){
+			add_filter( 'wp_kses_uri_attributes', [ __CLASS__, 'enforceSvgUriAttributes' ], 20 );
 			add_filter( 'wp_kses_uri_attributes', [ __CLASS__, 'skipSrcEscapeTemporary' ], 25 );
 			add_filter( 'safe_style_css', [ __CLASS__, 'modifyAllowedCssAttributes' ]);
 			add_filter( 'safecss_filter_attr_allow_css', [ __CLASS__, 'checkAllowedCssValue' ], 10, 2);
 		}
 		$sanitized = parent::html( $input, $allowed_tags, $namespace, $auto_p );
 		if( $namespace === 'depicter/output' ){
+			remove_filter( 'wp_kses_uri_attributes', [ __CLASS__, 'enforceSvgUriAttributes' ], 20 );
 			remove_filter( 'wp_kses_uri_attributes', [ __CLASS__, 'skipSrcEscapeTemporary' ], 25 );
 			remove_filter( 'safe_style_css', [ __CLASS__, 'modifyAllowedCssAttributes' ]);
 			remove_filter( 'safecss_filter_attr_allow_css', [ __CLASS__, 'checkAllowedCssValue' ], 10, 2);
@@ -44,6 +46,23 @@ class Sanitize extends SanitizeBase {
 			'media' => true,
 		];
 		return $tags;
+	}
+
+	/**
+	 * Treat SMIL/SVG value attributes as URI attributes so wp_kses strips javascript: protocols.
+	 *
+	 * @param array $uriAttributes
+	 *
+	 * @return array
+	 */
+	public static function enforceSvgUriAttributes( $uriAttributes ) {
+		return array_values( array_unique( array_merge( (array) $uriAttributes, [
+			'to',
+			'from',
+			'values',
+			'by',
+			'xlink:href',
+		] ) ) );
 	}
 
 	/**
