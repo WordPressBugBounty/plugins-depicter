@@ -59,10 +59,11 @@ class RemoteAPIService
 		global $wp_version;
 
 		$token = \Depicter::cache('base')->get( 'access_token', '' );
+		$homeUrl = \Depicter::client()->getStableHomeUrl();
 
 		return [
 			'headers' => [
-				'user-agent'      => 'WordPress/'. $wp_version .'; '. get_home_url(),
+				'user-agent'      => 'WordPress/'. $wp_version .'; '. $homeUrl,
 				'timeout'         => "30",
 				'X-DEPICTER-CKEY' => \Depicter::auth()->getClientKey(),
 				'X-DEPICTER-VER'  => DEPICTER_VERSION,

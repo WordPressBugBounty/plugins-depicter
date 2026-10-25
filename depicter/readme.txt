@@ -5,7 +5,7 @@ Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.9
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 4.8.2
+Stable tag: 4.8.3
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
@@ -91,6 +91,12 @@ To improve the user experience, Depicter may use the following 3rd party service
 15. Popup display rules – set smart conditions to show popups or notification bars based on user behavior and targeting.
 
 == Changelog ==
+
+###4.8.3
+- *Released: 2026-10-24*
+- **Fixed**
+- Fixed a fatal error when browsing assets in the media library.
+- Fixed a fatal error when creating, renaming or opening a missing document from the dashboard.
 
 ###4.8.2
 - *Released: 2026-10-15*

@@ -64,7 +64,7 @@ class DashboardAjaxController {
 		return \Depicter::json([
 			'hits'    => $document
 		])->withHeader('X-Message', 'New document created successfully' )
-			->withHeader('X-Document-ID', $document->getID() )
+			->withHeader('X-Document-ID', (string) $document->getID() )
 			->withStatus(200);
 	}
 
@@ -134,7 +134,7 @@ class DashboardAjaxController {
 		if( ! $result ){
 			return \Depicter::json([
 				'errors' => ['Document does not exist.']
-			])->withHeader('X-Document-ID', $id)->withStatus(404);
+			])->withHeader('X-Document-ID', (string) $id)->withStatus(404);
 		}
 
 		return \Depicter::json([
@@ -175,7 +175,7 @@ class DashboardAjaxController {
 		if( ! $result ){
 			return \Depicter::json([
 				'errors' => ['Document does not exist.']
-			])->withHeader('X-Document-ID', $id)->withStatus(404);
+			])->withHeader('X-Document-ID', (string) $id)->withStatus(404);
 		}
 
 		do_action( 'depicter/dashboard/after/rename', $id, $newName );
@@ -218,7 +218,7 @@ class DashboardAjaxController {
 			if( ! $result ){
 				return \Depicter::json([
 					'errors' => ['Document does not exist.']
-				])->withHeader('X-Document-ID', $id)->withStatus(404);
+				])->withHeader('X-Document-ID', (string) $id)->withStatus(404);
 			}
 
 			return \Depicter::json([

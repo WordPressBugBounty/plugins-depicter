@@ -123,8 +123,8 @@ class MediaLibraryAjaxController
 		unset( $result['total'] );
 
 		return \Depicter::json( $result )
-			->withHeader('X-Total-Pages', $totalPages )
-			->withHeader('X-Total', $total )
+			->withHeader('X-Total-Pages', (string) $totalPages )
+			->withHeader('X-Total', (string) $total )
 			->withStatus(200 );
 	}
 

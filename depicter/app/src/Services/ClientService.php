@@ -16,6 +16,27 @@ class ClientService
 	}
 
 	/**
+	 * Stable site home URL for API User-Agent identity.
+	 *
+	 * Uses the raw WordPress `home` option (not language-filtered get_home_url())
+	 * so admin and cron always send the same string. Applies set_url_scheme() the
+	 * same way get_home_url() does, so http/https does not flip vs older plugin versions.
+	 *
+	 * @return string
+	 */
+	public function getStableHomeUrl() {
+		$home = get_option( 'home' );
+		if ( empty( $home ) ) {
+			$home = get_option( 'siteurl' );
+		}
+		if ( empty( $home ) ) {
+			return untrailingslashit( get_home_url() );
+		}
+
+		return untrailingslashit( set_url_scheme( $home ) );
+	}
+
+	/**
 	 * Register client info
 	 *
 	 * @return void
