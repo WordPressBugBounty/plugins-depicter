@@ -31,6 +31,17 @@ class MozartAutoloaderInit5bb044afbc33a1b9e9970d9c0a964aed
 
         $loader->register(true);
 
+        $filesToLoad = \Composer\Autoload\MozartStaticInit5bb044afbc33a1b9e9970d9c0a964aed::$files;
+        $requireFile = \Closure::bind(static function ($fileIdentifier, $file) {
+            if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier])) {
+                $GLOBALS['__composer_autoload_files'][$fileIdentifier] = true;
+
+                require $file;
+            }
+        }, null, null);
+        foreach ($filesToLoad as $fileIdentifier => $file) {
+            $requireFile($fileIdentifier, $file);
+        }
 
         return $loader;
     }

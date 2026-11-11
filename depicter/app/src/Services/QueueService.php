@@ -9,6 +9,11 @@ class QueueService
 {
     const CRON_HOOK = 'depicter/queue/cron';
 
+    /**
+     * Max number of attempts for a failed job before giving up
+     */
+    const MAX_ATTEMPTS = 3;
+
     public function __construct() {
         add_action( 'init', [ $this, 'schedule_queue_table' ] );
         add_filter( 'cron_schedules', [ $this, 'cron_schedules' ] );
@@ -30,7 +35,13 @@ class QueueService
         }
     }
     public function process() {
-        $jobs = \Depicter::queueJobsRepository()->job()->where('status', 'in', ['pending', 'failed'])->take(5)->get();
+        // skip the jobs which reached the max attempts, otherwise they block the queue forever
+        $jobs = \Depicter::queueJobsRepository()->job()
+            ->where('status', 'in', ['pending', 'failed'])
+            ->where('attempts', '<', self::MAX_ATTEMPTS)
+            ->orderBy('id', 'ASC')
+            ->take(5)
+            ->get();
         if ( ! $jobs ) {
             return;
         }
@@ -45,7 +56,7 @@ class QueueService
             $last_error = '';
             $payload = JSON::decode($job['payload'], true);
             if ( $job['queue'] == 'mailchimp' ) {
-                $response = \Depicter::integration()->mailchimp()->submitToMailchimp( $payload['lead_id'] );
+                $response = \Depicter::integration()->mailchimp()->submitToMailchimp( $payload['lead_id'] ?? 0 );
                 $success = $response['success'];
                 $last_error = $success ? '' : $response['error'];
             }

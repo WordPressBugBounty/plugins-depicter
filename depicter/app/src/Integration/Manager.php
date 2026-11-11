@@ -18,7 +18,9 @@ class Manager {
     }
 
     public function add_queue_job( $lead_id, $source_id, $content_id ) {
-        if ( false !== $config = $this->mailchimp()->getConfig( $source_id, $content_id ) ) {
+        // only queue the leads of documents which are connected to mailchimp
+        $config = $this->mailchimp()->getConfig( $source_id );
+        if ( ! empty( $config['apiKey'] ) ) {
             $payload = JSON::encode([
                 'lead_id' => $lead_id,
             ]);

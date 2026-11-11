@@ -244,7 +244,7 @@ final class CurlMultiHandler
             P\Utils::queue()->run();
             // Never null: assigned below before any wait can invoke this.
             /** @var Promise<ResponseInterface, mixed> $promise */
-            if ($easy->deferredSettled || !P\Is::pending($promise)) {
+            if ($easy->deferredSettled || !P\State::isPending($promise)) {
                 return;
             }
             // Neither path guarantees the transfer settled, and returning
@@ -618,7 +618,7 @@ final class CurlMultiHandler
                         $this->addHandleToMulti($id, $entry['easy']);
                     } catch (\Throwable $e) {
                         $rejection = $this->discardPendingRequest($id, $entry, $e);
-                        if (P\Is::pending($entry['deferred'])) {
+                        if (P\State::isPending($entry['deferred'])) {
                             $entry['deferred']->reject($rejection);
                         }
                     }
@@ -704,7 +704,7 @@ final class CurlMultiHandler
             // If there are no transfers, then sleep for the next delay,
             // unless ready queue work could change what is pending.
             if (!$this->active && $this->delays && $queue->isEmpty()) {
-                \usleep($this->timeToNext());
+                Clock::sleep($this->timeToNext());
             }
             $this->tick();
         }
@@ -729,7 +729,7 @@ final class CurlMultiHandler
             // If the transfer is delayed, then sleep until it is due, unless
             // ready queue work could cancel or replace it first.
             if (!$this->active && isset($this->delays[$id]) && $queue->isEmpty()) {
-                \usleep($this->timeToNext());
+                Clock::sleep($this->timeToNext());
             }
             $this->tickFor($id, $waitToken);
         }
@@ -819,7 +819,7 @@ final class CurlMultiHandler
         $this->deferredAdds = [];
         foreach ($entries as $id => $entry) {
             $this->deferredCancels[$id] = ['easy' => $entry['easy'], 'attached' => !empty($entry['attached'])];
-            if ($explicit && P\Is::pending($entry['deferred'])) {
+            if ($explicit && P\State::isPending($entry['deferred'])) {
                 $this->captureFailure($failure, function () use ($entry): void {
                     $entry['deferred']->reject(new HandlerClosedException('The cURL multi handler was closed before the transfer completed.', $entry['easy']->request));
                 });
@@ -878,7 +878,7 @@ final class CurlMultiHandler
                     $this->removeHandleFromMulti($id, $easy->handle);
                 });
             }
-            if ($reject && P\Is::pending($entry['deferred'])) {
+            if ($reject && P\State::isPending($entry['deferred'])) {
                 $this->captureFailure($failure, function () use ($entry): void {
                     $entry['deferred']->reject(new HandlerClosedException('The cURL multi handler was closed before the transfer completed.', $entry['easy']->request));
                 });
@@ -1005,7 +1005,7 @@ final class CurlMultiHandler
                 // throw. User code may have settled it directly; a settled
                 // promise must not abort the rest of the snapshot.
                 $rejection = $this->discardPendingRequest($id, $entry, $e);
-                if (P\Is::pending($entry['deferred'])) {
+                if (P\State::isPending($entry['deferred'])) {
                     $entry['deferred']->reject($rejection);
                 }
             }
@@ -1130,7 +1130,7 @@ final class CurlMultiHandler
         if ($displaced !== null) {
             // Never silently discard a tracked entry; settle it first.
             unset($this->handles[$id], $this->delays[$id], $this->deferredAdds[$id]);
-            if (P\Is::pending($displaced['deferred'])) {
+            if (P\State::isPending($displaced['deferred'])) {
                 $message = \sprintf('cURL multi handler transfer %d was displaced by another request that reused its native cURL handle ID.', $id);
                 $response = $displaced['easy']->response;
                 $failure = $response !== null ? new ResponseException($message, $displaced['easy']->request, $response) : new RequestException($message, $displaced['easy']->request);
@@ -1250,13 +1250,13 @@ final class CurlMultiHandler
                 try {
                     $result = CurlFactory::finish($this, $entry['easy'], $this->factory);
                 } catch (\Throwable $e) {
-                    if (P\Is::pending($entry['deferred'])) {
+                    if (P\State::isPending($entry['deferred'])) {
                         $entry['easy']->deferredSettled = true;
                         $entry['deferred']->reject($e);
                     }
                     continue;
                 }
-                if (P\Is::pending($entry['deferred'])) {
+                if (P\State::isPending($entry['deferred'])) {
                     $entry['easy']->deferredSettled = true;
                     $entry['deferred']->resolve($result);
                 }

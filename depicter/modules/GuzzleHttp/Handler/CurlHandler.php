@@ -66,7 +66,7 @@ final class CurlHandler
         $this->assertOpen();
         HostValidator::assertRequestHost($request);
         if (isset($options['delay'])) {
-            \usleep((int) ($options['delay'] * 1000));
+            Clock::sleep((int) ($options['delay'] * 1000));
         }
         // A Multiplexing::NONE request option holds unconditionally here:
         // the transfer runs alone during the blocking curl_exec(), and even

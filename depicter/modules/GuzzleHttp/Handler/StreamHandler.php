@@ -62,8 +62,6 @@ final class StreamHandler
      * handler never consults.
      */
     private const DEFAULT_IDLE_TIMEOUT_MS = 60000;
-    private array $lastHeaders = [];
-    private ?float $lastDeadline = null;
     private ?\Throwable $onStatsException = null;
     private string $transportSharingMode;
     private bool $connectionCapsConfigured = false;
@@ -123,7 +121,7 @@ final class StreamHandler
         $this->onStatsException = null;
         // Sleep if there is a delay specified.
         if (isset($options['delay'])) {
-            \usleep((int) ($options['delay'] * 1000));
+            Clock::sleep((int) ($options['delay'] * 1000));
         }
         $multiplex = $options['multiplex'] ?? null;
         // Multiplexing::NONE is trivially satisfied: the stream handler sends
@@ -161,7 +159,10 @@ final class StreamHandler
             if ($framing->contentLength === null && ($body !== '' || \in_array($request->getMethod(), ['PUT', 'POST'], true))) {
                 $request = $request->withHeader('Content-Length', (string) \strlen($body));
             }
-            return $this->createResponse($request, $options, $this->createStream($request, $options, $body), $startTime);
+            $deadline = null;
+            $stream = $this->createStream($request, $options, $body, $deadline);
+            $headers = \stream_get_meta_data($stream)['wrapper_data'];
+            return $this->createResponse($request, $options, $stream, \is_array($headers) ? $headers : [], $startTime, $deadline);
         } catch (\InvalidArgumentException $e) {
             throw $e;
         } catch (\Exception $e) {
@@ -292,13 +293,12 @@ final class StreamHandler
         #[\SensitiveParameter]
         array $options,
         $stream,
-        ?float $startTime
+        #[\SensitiveParameter]
+        array $hdrs,
+        ?float $startTime,
+        ?float $deadline
     ): PromiseInterface
     {
-        $hdrs = $this->lastHeaders;
-        $this->lastHeaders = [];
-        $deadline = $this->lastDeadline;
-        $this->lastDeadline = null;
         try {
             [$ver, $status, $reason, $headers] = HeaderProcessor::parseHeaders($hdrs);
         } catch (\Throwable $e) {
@@ -307,31 +307,42 @@ final class StreamHandler
         $canHaveBody = HeaderProcessor::responseCanHaveBody($request->getMethod(), $status);
         $framingFailure = null;
         $declaredLength = null;
+        $chunked = false;
         try {
             $declaredLength = HeaderProcessor::validateResponseFraming($request->getMethod(), $status, $headers);
+            $chunked = $canHaveBody && HeaderProcessor::parseTransferEncoding($headers);
             if (empty($options['stream'])) {
                 HeaderProcessor::assertContentLengthWithinPlatformLimit($declaredLength);
             }
         } catch (\RuntimeException $e) {
             $framingFailure = $e;
         }
-        if ($framingFailure === null) {
-            try {
-                $headers = $this->decodeChunkedResponse($headers, $stream, $canHaveBody);
-            } catch (\RuntimeException $e) {
-                $framingFailure = $e;
-            }
+        if ($chunked) {
+            HeaderProcessor::removeHeader('Transfer-Encoding', $headers);
+        } elseif (!$canHaveBody) {
+            $headers = self::removeChunkedTransferCoding($headers);
         }
         $streamFactory = self::requireStreamFactory($options[RequestOptions::STREAM_FACTORY] ?? new Psr7\HttpFactory());
         $responseFactory = self::requireResponseFactory($options[RequestOptions::RESPONSE_FACTORY] ?? new Psr7\HttpFactory());
         // Wrap the transport resource with the configured stream factory, and
-        // decorate buffered transfers with the deadline source before optional
-        // content decoding layers an InflateStream on top, so every read that
-        // pulls from the transport observes the deadline.
+        // decorate buffered transfers with the deadline source before framing
+        // and optional content decoding layer on top, so every read that pulls
+        // from the transport observes the deadline.
         $resource = $stream;
         $stream = $streamFactory->createStreamFromResource($stream);
         if ($framingFailure === null && $deadline !== null && empty($options['stream'])) {
             $stream = self::createDeadlineSource($stream, $resource, $deadline, $options);
+        }
+        if ($chunked || !empty($options['stream'])) {
+            $stream = new TransportStream($stream);
+        }
+        if ($chunked) {
+            $stream = new ChunkedBodyStream($stream);
+        } elseif (!empty($options['stream'])) {
+            $length = HeaderProcessor::contentLengthToInt($declaredLength);
+            if ($length !== null) {
+                $stream = new DeclaredLengthStream($stream, $length);
+            }
         }
         $encodedBody = null;
         if ($framingFailure === null) {
@@ -482,49 +493,32 @@ final class StreamHandler
         return $factory;
     }
     /**
-     * Applies the HTTP wrapper's normal chunked-response handling.
+     * Removes Transfer-Encoding values that start with chunked from a response
+     * that cannot have a body, as PHP's HTTP wrapper did.
      *
      * @param array<string, string[]> $headers
-     * @param resource                $stream
-     * @param bool                    $decodeBody Whether to attach the dechunk filter
      *
      * @return array<string, string[]>
-     *
-     * @throws \RuntimeException when the dechunk filter cannot be attached
      */
-    private function decodeChunkedResponse(array $headers, $stream, bool $decodeBody): array
+    private static function removeChunkedTransferCoding(array $headers): array
     {
-        $decodedHeaders = $headers;
-        $decode = false;
         foreach ($headers as $name => $values) {
             if (!Psr7\Utils::caselessEquals((string) $name, 'Transfer-Encoding')) {
                 continue;
             }
             $remaining = [];
             foreach ($values as $value) {
-                // Match PHP's legacy auto_decode prefix check so moving the
-                // filter does not change which responses are dechunked.
-                if (Psr7\Utils::caselessEquals(\substr($value, 0, 7), 'chunked')) {
-                    $decode = true;
-                } else {
+                if (!Psr7\Utils::caselessEquals(\substr($value, 0, 7), 'chunked')) {
                     $remaining[] = $value;
                 }
             }
             if ($remaining === []) {
-                unset($decodedHeaders[$name]);
+                unset($headers[$name]);
             } else {
-                $decodedHeaders[$name] = $remaining;
+                $headers[$name] = $remaining;
             }
         }
-        if (!$decode) {
-            return $headers;
-        }
-        if ($decodeBody) {
-            $this->createResource(static function () use ($stream) {
-                return \stream_filter_append($stream, 'dechunk', \STREAM_FILTER_READ);
-            });
-        }
-        return $decodedHeaders;
+        return $headers;
     }
     /**
      * @return array{0: StreamInterface, 1: array, 2: ?EncodedBodyStream}
@@ -548,7 +542,7 @@ final class StreamHandler
                         $encodedBody = new EncodedBodyStream($stream, $declaredLength);
                         $stream = $encodedBody;
                     }
-                    $stream = new Psr7\InflateStream($stream);
+                    $stream = new InflateBodyStream($stream, $encoding[0] === 'deflate');
                     $headers['x-encoded-content-encoding'] = $headers[$normalizedKeys['content-encoding']];
                     // Remove content-encoding header
                     unset($headers[$normalizedKeys['content-encoding']]);
@@ -583,7 +577,6 @@ final class StreamHandler
         try {
             // Buffered paths reject unrepresentable lengths before draining.
             $declaredLength = HeaderProcessor::contentLengthToInt($declaredResponseBodyLength);
-            $declaredLength = $declaredLength !== null && $declaredLength > 0 ? $declaredLength : null;
             $copyLimit = $encodedBody === null ? $declaredLength ?? -1 : -1;
             try {
                 $target = $this->createResponseSink($request, $response, $sink);
@@ -650,12 +643,11 @@ final class StreamHandler
     }
     /**
      * Decorates the transport stream so each buffered-body read observes the
-     * remaining wall-clock budget of the "timeout" request option, bounded
-     * by the "read_timeout" idle timeout when that is shorter. The transport
-     * is switched to non-blocking mode because filtered reads (chunked and
-     * compressed responses) otherwise block until a full buffer arrives,
-     * which would keep the deadline from being enforced between small pieces
-     * of data.
+     * remaining wall-clock budget of the "timeout" request option, bounded by
+     * the "read_timeout" idle timeout when that is shorter. The transport is
+     * switched to non-blocking mode because a blocking read waits for data up
+     * to the transport's own timeout, which would keep the deadline from being
+     * enforced while the server stalls.
      *
      * @param resource $resource
      */
@@ -720,7 +712,8 @@ final class StreamHandler
         RequestInterface $request,
         #[\SensitiveParameter]
         array $options,
-        string $body
+        string $body,
+        ?float &$deadline
     )
     {
         // Report a stream-open failure against the request passed here, not the
@@ -781,8 +774,8 @@ final class StreamHandler
             return \stream_context_create($context, $params);
         });
         try {
-            $resource = $this->createResource(function () use ($uri, $contextResource, $idleTimeout, $timeout) {
-                $this->lastDeadline = $timeout > 0 ? Clock::now() + $timeout / 1000 : null;
+            $resource = $this->createResource(function () use ($uri, $contextResource, $idleTimeout, $timeout, &$deadline) {
+                $deadline = $timeout > 0 ? Clock::now() + $timeout / 1000 : null;
                 // Blank the from ini setting for the transfer so ambient
                 // configuration cannot leak into a From header; the wrapper
                 // cannot omit the header, so a configured ini sends it empty.
@@ -794,11 +787,6 @@ final class StreamHandler
                         \ini_set('from', $iniFrom);
                     }
                 }
-                // PHP 8.5 deprecates the local $http_response_header variable.
-                if (function_exists('http_get_last_response_headers')) {
-                    $http_response_header = \http_get_last_response_headers();
-                }
-                $this->lastHeaders = $http_response_header ?? [];
                 if (false === $resource) {
                     return false;
                 }

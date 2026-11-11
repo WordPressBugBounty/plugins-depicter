@@ -91,8 +91,12 @@ final class CurlFactory implements CurlFactoryInterface
         95 => true,
     ];
     private const CURL_RESPONSE_TRANSFER_ERRORS = [
+        8 => true,
+        // CURLE_WEIRD_SERVER_REPLY
         18 => true,
         // CURLE_PARTIAL_FILE
+        23 => true,
+        // CURLE_WRITE_ERROR from libcurl's content decoders
         61 => true,
     ];
     private const CURL_CONNECT_TIMEOUT_ERRORS = ['Connection timed out', 'Connection timeout', 'Connection time-out', 'Resolving timed out', 'name lookup timed out', 'Proxy CONNECT aborted due to timeout', 'SSL connection timeout'];

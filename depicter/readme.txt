@@ -5,7 +5,7 @@ Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.9
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 4.8.3
+Stable tag: 4.8.4
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
@@ -91,6 +91,17 @@ To improve the user experience, Depicter may use the following 3rd party service
 15. Popup display rules – set smart conditions to show popups or notification bars based on user behavior and targeting.
 
 == Changelog ==
+
+###4.8.4
+- *Released: 2026-10-28*
+- **Improved**
+- Updated the bundled Guzzle HTTP library to version 8.3.1.
+- Deleting a document now also removes its analytics data.
+- Mailchimp: Contacts already in your audience are now updated instead of being rejected.
+- Mailchimp: Failed syncs now save the actual error returned by Mailchimp, which makes problems easier to find.
+- **Fixed**
+- Fixed an issue where form submissions were saved to Leads but not sent to Mailchimp.
+- Fixed an issue where emails were not sent to Mailchimp unless the form's email field was named "email".
 
 ###4.8.3
 - *Released: 2026-10-24*

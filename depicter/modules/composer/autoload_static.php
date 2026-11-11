@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class MozartStaticInit5bb044afbc33a1b9e9970d9c0a964aed
 {
+    public static $files = array (
+        '3cb28055f5555b8be7a03dd29027aad8' => __DIR__ . '/../../src/symfony/deprecation-contracts/function.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'D' =>
         array (
@@ -58,6 +62,8 @@ class MozartStaticInit5bb044afbc33a1b9e9970d9c0a964aed
         'Depicter\\GuzzleHttp\\Handler\\CurlFactory' => __DIR__ . '/../GuzzleHttp/Handler/CurlFactory.php',
         'Depicter\\GuzzleHttp\\Handler\\Clock' => __DIR__ . '/../GuzzleHttp/Handler/Clock.php',
         'Depicter\\GuzzleHttp\\Handler\\MockHandler' => __DIR__ . '/../GuzzleHttp/Handler/MockHandler.php',
+        'Depicter\\GuzzleHttp\\Handler\\TransportStream' => __DIR__ . '/../GuzzleHttp/Handler/TransportStream.php',
+        'Depicter\\GuzzleHttp\\Handler\\DeclaredLengthStream' => __DIR__ . '/../GuzzleHttp/Handler/DeclaredLengthStream.php',
         'Depicter\\GuzzleHttp\\Handler\\RequestFraming' => __DIR__ . '/../GuzzleHttp/Handler/RequestFraming.php',
         'Depicter\\GuzzleHttp\\Handler\\Proxy' => __DIR__ . '/../GuzzleHttp/Handler/Proxy.php',
         'Depicter\\GuzzleHttp\\Handler\\CurlVersion' => __DIR__ . '/../GuzzleHttp/Handler/CurlVersion.php',
@@ -65,9 +71,11 @@ class MozartStaticInit5bb044afbc33a1b9e9970d9c0a964aed
         'Depicter\\GuzzleHttp\\Handler\\CurlShareHandleState' => __DIR__ . '/../GuzzleHttp/Handler/CurlShareHandleState.php',
         'Depicter\\GuzzleHttp\\Handler\\TransferByteCounter' => __DIR__ . '/../GuzzleHttp/Handler/TransferByteCounter.php',
         'Depicter\\GuzzleHttp\\Handler\\DeadlineSourceStream' => __DIR__ . '/../GuzzleHttp/Handler/DeadlineSourceStream.php',
+        'Depicter\\GuzzleHttp\\Handler\\ChunkedBodyStream' => __DIR__ . '/../GuzzleHttp/Handler/ChunkedBodyStream.php',
         'Depicter\\GuzzleHttp\\Handler\\ProxyEnv' => __DIR__ . '/../GuzzleHttp/Handler/ProxyEnv.php',
         'Depicter\\GuzzleHttp\\Handler\\EasyHandle' => __DIR__ . '/../GuzzleHttp/Handler/EasyHandle.php',
         'Depicter\\GuzzleHttp\\Handler\\TlsVersion' => __DIR__ . '/../GuzzleHttp/Handler/TlsVersion.php',
+        'Depicter\\GuzzleHttp\\Handler\\InflateBodyStream' => __DIR__ . '/../GuzzleHttp/Handler/InflateBodyStream.php',
         'Depicter\\GuzzleHttp\\Handler\\StreamHandler' => __DIR__ . '/../GuzzleHttp/Handler/StreamHandler.php',
         'Depicter\\GuzzleHttp\\Cookie\\SessionCookieJar' => __DIR__ . '/../GuzzleHttp/Cookie/SessionCookieJar.php',
         'Depicter\\GuzzleHttp\\Cookie\\FileCookieJar' => __DIR__ . '/../GuzzleHttp/Cookie/FileCookieJar.php',
@@ -80,6 +88,7 @@ class MozartStaticInit5bb044afbc33a1b9e9970d9c0a964aed
         'Depicter\\GuzzleHttp\\Promise\\Create' => __DIR__ . '/../GuzzleHttp/Promise/Create.php',
         'Depicter\\GuzzleHttp\\Promise\\EachPromise' => __DIR__ . '/../GuzzleHttp/Promise/EachPromise.php',
         'Depicter\\GuzzleHttp\\Promise\\Promise' => __DIR__ . '/../GuzzleHttp/Promise/Promise.php',
+        'Depicter\\GuzzleHttp\\Promise\\State' => __DIR__ . '/../GuzzleHttp/Promise/State.php',
         'Depicter\\GuzzleHttp\\Promise\\Coroutine' => __DIR__ . '/../GuzzleHttp/Promise/Coroutine.php',
         'Depicter\\GuzzleHttp\\Promise\\PromisorInterface' => __DIR__ . '/../GuzzleHttp/Promise/PromisorInterface.php',
         'Depicter\\GuzzleHttp\\Promise\\PromiseInterface' => __DIR__ . '/../GuzzleHttp/Promise/PromiseInterface.php',
@@ -161,6 +170,7 @@ class MozartStaticInit5bb044afbc33a1b9e9970d9c0a964aed
         'Depicter\\GuzzleHttp\\Psr7\\UriNormalizer' => __DIR__ . '/../GuzzleHttp/Psr7/UriNormalizer.php',
         'Depicter\\GuzzleHttp\\Psr7\\ServerRequestGlobalsFactory' => __DIR__ . '/../GuzzleHttp/Psr7/ServerRequestGlobalsFactory.php',
         'Depicter\\GuzzleHttp\\Psr7\\Rfc9112' => __DIR__ . '/../GuzzleHttp/Psr7/Rfc9112.php',
+        'Depicter\\GuzzleHttp\\Psr7\\ReadFailureCapturingStream' => __DIR__ . '/../GuzzleHttp/Psr7/ReadFailureCapturingStream.php',
         'Depicter\\GuzzleHttp\\Psr7\\Request' => __DIR__ . '/../GuzzleHttp/Psr7/Request.php',
         'Depicter\\GuzzleHttp\\Psr7\\Rfc9110' => __DIR__ . '/../GuzzleHttp/Psr7/Rfc9110.php',
         'Depicter\\GuzzleHttp\\Psr7\\Header' => __DIR__ . '/../GuzzleHttp/Psr7/Header.php',

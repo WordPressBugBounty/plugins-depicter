@@ -18,7 +18,7 @@ class Migration extends BaseMigration {
 	/**
 	 * Current tables migration version
 	 */
-	const MIGRATION_VERSION = "0.4.9";
+	const MIGRATION_VERSION = "0.4.10";
 
 	/**
 	 * Prefix for version option name
@@ -78,7 +78,7 @@ class Migration extends BaseMigration {
 		$sql_create_table = "CREATE TABLE {$this->options} (
             id mediumint unsigned NOT NULL AUTO_INCREMENT,
             option_name varchar(191) NOT NULL DEFAULT '',
-            option_value text NOT NULL DEFAULT '',
+            option_value text NOT NULL,
             PRIMARY KEY  (id),
             UNIQUE KEY option_name (option_name)
         ) {$this->charset_collate()};\n";
@@ -99,7 +99,7 @@ class Migration extends BaseMigration {
             relation varchar(30) NOT NULL DEFAULT '',
             relation_id bigint(20) NOT NULL,
             meta_key varchar(30) NOT NULL DEFAULT '',
-            meta_value text NOT NULL DEFAULT '',
+            meta_value text NOT NULL,
             PRIMARY KEY  (id)
         ) {$this->charset_collate()};\n";
 
@@ -138,7 +138,7 @@ class Migration extends BaseMigration {
             lead_id bigint(20) unsigned NOT NULL,
 			name varchar(255) NOT NULL,
             type varchar(50) NOT NULL DEFAULT '',
-			value text NOT NULL DEFAULT '',
+			value text NOT NULL,
             created_at  datetime DEFAULT NULL,
 			updated_at  datetime DEFAULT NULL
         ) {$this->charset_collate()};\n";
@@ -185,11 +185,7 @@ class Migration extends BaseMigration {
 			created_at DATETIME NOT NULL,
 			PRIMARY KEY (id),
 			KEY idx_document_analytics_performance (source_id, event_type, created_at),
-			KEY idx_document_analytics_session (session_id, created_at),
-			CONSTRAINT fk_document_analytics_source
-            FOREIGN KEY (source_id)
-            REFERENCES {$this->documents} (id)
-            ON DELETE CASCADE
+			KEY idx_document_analytics_session (session_id, created_at)
 		) {$this->charset_collate()};\n";
 
 		$this->dbDelta($sql_create_table);

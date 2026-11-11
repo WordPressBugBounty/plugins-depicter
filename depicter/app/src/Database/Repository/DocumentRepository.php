@@ -542,7 +542,11 @@ class DocumentRepository
 				$revisionIDs = wp_list_pluck(  $revisions->toArray() , 'id' );
 				$this->document()->delete( $revisionIDs );
 			}
-			return $document->delete();
+			$deleted = $document->delete();
+			if ( $deleted ) {
+				Depicter::documentAnalyticsRepository()->deleteByDocumentId( $id );
+			}
+			return $deleted;
 		}
 		return false;
 	}
