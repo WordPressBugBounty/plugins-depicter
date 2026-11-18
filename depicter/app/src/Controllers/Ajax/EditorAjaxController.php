@@ -51,13 +51,21 @@ class EditorAjaxController implements RestMethodsInterface
         if (!empty($editor) && JSON::isJson($editor)) {
 
             if (defined('DISALLOW_UNFILTERED_HTML') && DISALLOW_UNFILTERED_HTML) {
-                $pattern = '/<script[^>]*?>.*?<\/script>/si';
-                // Replace script tags with an empty string
-                $editor = preg_replace($pattern, '', $editor);
 
-	            $pattern = '/<iframe[^>]*?>/si';
-	            // Replace iframe tags with an empty string
-	            $editor = preg_replace($pattern, '', $editor);
+                // Decode JSON before sanitization
+                $decodedEditor = JSON::decode($editor);
+                
+                // Sanitize decoded document values
+                $decodedEditor = Sanitize::editorData($decodedEditor);
+
+                // Encode sanitized document back to JSON
+                $editor = JSON::encode($decodedEditor);
+
+                if ($editor === false) {
+                    return Depicter::json([
+                        'errors' => [__('Unable to process editor data.', 'depicter')]
+                    ])->withStatus(400);
+                }
             }
 
             $properties['editor'] = $editor;

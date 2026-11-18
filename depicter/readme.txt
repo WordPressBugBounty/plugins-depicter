@@ -5,7 +5,7 @@ Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.9
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 4.8.4
+Stable tag: 4.8.5
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
@@ -92,8 +92,13 @@ To improve the user experience, Depicter may use the following 3rd party service
 
 == Changelog ==
 
+###4.8.5
+- *Released: 2026-11-18*
+- **Fixed**
+- Fixed a security vulnerability (CVE-2026-113471) where scripts could still be saved in a document on sites that disallow unfiltered HTML.
+
 ###4.8.4
-- *Released: 2026-10-28*
+- *Released: 2026-11-11*
 - **Improved**
 - Updated the bundled Guzzle HTTP library to version 8.3.1.
 - Deleting a document now also removes its analytics data.

@@ -129,4 +129,34 @@ class Sanitize extends SanitizeBase {
 		}
 		return $allowed;
 	}
+
+	/**
+	 * Sanitize data for editor input. This will recursively sanitize all strings in the data structure.
+	 * 
+	 * @param mixed $data The data to sanitize.
+	 * @return mixed The sanitized data.
+	 */
+	public static function editorData($data) {
+		if (is_object($data)) {
+			foreach ($data as $key => $value) {
+				$data->{$key} = self::editorData($value);
+			}
+
+			return $data;
+		}
+
+		if (is_array($data)) {
+			foreach ($data as $key => $value) {
+				$data[$key] = self::editorData($value);
+			}
+
+			return $data;
+		}
+
+		if (is_string($data)) {
+			return wp_kses_post($data);
+		}
+
+		return $data;
+	}
 }
