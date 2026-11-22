@@ -279,6 +279,10 @@ class Script
 	 */
 	public function generateCustomJSActionsScript( $document ) {
 		$script = '';
+		// custom js actions are raw javascript, skip them if unfiltered html is disallowed
+		if ( \Depicter\Utility\Sanitize::isUnfilteredHtmlDisallowed() ) {
+			return $script;
+		}
 		foreach ( $document->elements as $key => $element ) {
 			if ( ! empty( $element->actions ) ) {
 				foreach ( $element->actions as $actionKey => $action ) {

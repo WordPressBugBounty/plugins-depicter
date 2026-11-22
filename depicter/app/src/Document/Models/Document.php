@@ -5,7 +5,7 @@ namespace Depicter\Document\Models;
 use Averta\Core\Hydrate\HydratableInterface;
 use Averta\Core\Utility\Arr;
 use Averta\Core\Utility\Data;
-use Averta\WordPress\Utility\Sanitize;
+use Depicter\Utility\Sanitize;
 use Depicter\Document\CSS\Selector;
 use Depicter\Document\Models\Common\Animation;
 use Depicter\Document\Models\Options\Loading;
@@ -212,7 +212,14 @@ class Document implements HydratableInterface
 		$this->getSelectorAndCssList();
 		$this->renderSymbols();
 
-		return $this->html . $this->getInitScriptTag();
+		$markup = (string) $this->html;
+
+		// strip any script tag from document markup, the trusted init script is appended afterwards
+		if ( Sanitize::isUnfilteredHtmlDisallowed() ) {
+			$markup = Sanitize::documentMarkup( $markup );
+		}
+
+		return $markup . $this->getInitScriptTag();
 	}
 
 	/**

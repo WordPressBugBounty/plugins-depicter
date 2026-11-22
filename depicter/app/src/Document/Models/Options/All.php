@@ -221,7 +221,8 @@ class All
 	 */
 	public function getCallbacks( $sliderName = '' ) {
 		$script = '';
-		if ( !empty( $this->callbacks ) ) {
+		// callbacks are raw javascript, skip them if unfiltered html is disallowed
+		if ( !empty( $this->callbacks ) && ! \Depicter\Utility\Sanitize::isUnfilteredHtmlDisallowed() ) {
 			foreach ( $this->callbacks as $callback ) {
 				$callback->value = !empty( $sliderName ) ? str_replace( 'depicter.on', $sliderName . '.on', $callback->value ) : $callback->value;
 				$script .= "\n\t$callback->value";

@@ -3,6 +3,7 @@
 namespace Depicter\Document\Models\Elements;
 
 use Depicter\Html\Html;
+use Depicter\Utility\Sanitize;
 
 class WooSaleBadge extends Button {
 
@@ -15,7 +16,7 @@ class WooSaleBadge extends Button {
 			}
         }
 
-		$tag = $this->options->tag ?? 'p';
+		$tag = Sanitize::textTag( $this->options->tag ?? 'p' );
 
 		$args = $this->getDefaultAttributes();
 

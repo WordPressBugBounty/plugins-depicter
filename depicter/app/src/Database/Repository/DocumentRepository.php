@@ -7,6 +7,7 @@ use Depicter;
 use Depicter\Database\Entity\Document;
 use Depicter\Document\Helper\Helper;
 use Depicter\Exception\DocumentNotFoundException;
+use Depicter\Utility\Sanitize;
 use Exception;
 use TypeRocket\Database\Results;
 use TypeRocket\Models\Model;
@@ -202,6 +203,14 @@ class DocumentRepository
 			}
 			// Set revision editor data for document
 			$lastRevisionContent = \Depicter::document()->migrations()->apply( $lastRevision->content() );
+
+			// A revision may be saved before the content was sanitized
+			if ( ! current_user_can( 'unfiltered_html' ) && JSON::isJson( $lastRevisionContent ) ) {
+				$lastRevisionContent = Sanitize::editorJson( $lastRevisionContent, $parentDocument->content() );
+				if ( false === $lastRevisionContent ) {
+					throw new Exception( "Couldn't revert to the revision. Revision content is not valid." );
+				}
+			}
 			$parentDocument->save( ['content' => $lastRevisionContent ] );
 
 		} else {

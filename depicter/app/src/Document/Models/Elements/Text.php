@@ -4,12 +4,13 @@ namespace Depicter\Document\Models\Elements;
 use Averta\Core\Utility\Arr;
 use Depicter\Document\Models;
 use Depicter\Html\Html;
+use Depicter\Utility\Sanitize;
 
 class Text extends Models\Element
 {
 
 	public function render() {
-		$tag = $this->options->tag ?? 'p';
+		$tag = Sanitize::textTag( $this->options->tag ?? 'p' );
 
 		$args = $this->getDefaultAttributes();
 

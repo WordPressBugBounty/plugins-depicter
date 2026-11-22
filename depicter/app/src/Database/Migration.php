@@ -148,6 +148,8 @@ class Migration extends BaseMigration {
 
     public function create_table_queue_jobs() {
 
+        // status: pending, processing, failed, completed
+        // Note: no SQL comments in the column lines, dbDelta() copies them into its ALTER queries and breaks them
         $sql_create_table = "CREATE TABLE {$this->queue_jobs} (
             id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
             queue VARCHAR(50) NOT NULL DEFAULT 'default',
@@ -156,7 +158,7 @@ class Migration extends BaseMigration {
             reserved_at DATETIME DEFAULT NULL,
             available_at DATETIME NOT NULL,
             created_at DATETIME NOT NULL,
-            status VARCHAR(20) NOT NULL DEFAULT 'pending', -- pending, processing, failed, completed
+            status VARCHAR(20) NOT NULL DEFAULT 'pending',
             last_error TEXT DEFAULT NULL,
             PRIMARY KEY  (id),
             KEY status (status),

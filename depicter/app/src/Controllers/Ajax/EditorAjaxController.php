@@ -46,20 +46,18 @@ class EditorAjaxController implements RestMethodsInterface
         // fields to update
         $properties = [];
 
+        // Get document ID
+        $id = Sanitize::int($request->body('ID'));
+
         // Get editor data
         $editor = $request->body('editor');
         if (!empty($editor) && JSON::isJson($editor)) {
 
-            if (defined('DISALLOW_UNFILTERED_HTML') && DISALLOW_UNFILTERED_HTML) {
+            // DISALLOW_UNFILTERED_HTML also removes this capability, so both cases are covered
+            if (!current_user_can('unfiltered_html')) {
 
-                // Decode JSON before sanitization
-                $decodedEditor = JSON::decode($editor);
-                
-                // Sanitize decoded document values
-                $decodedEditor = Sanitize::editorData($decodedEditor);
-
-                // Encode sanitized document back to JSON
-                $editor = JSON::encode($decodedEditor);
+                // Sanitize document values and structure, keep the custom scripts which are already saved
+                $editor = Sanitize::editorJson($editor, $id ? Depicter::document()->getEditorRawData($id) : null);
 
                 if ($editor === false) {
                     return Depicter::json([
@@ -70,9 +68,6 @@ class EditorAjaxController implements RestMethodsInterface
 
             $properties['editor'] = $editor;
         }
-
-        // Get document ID
-        $id = Sanitize::int($request->body('ID'));
 
         if (empty($id)) {
             return Depicter::json(['errors' => ['Document "ID" is required.']])->withStatus(400);

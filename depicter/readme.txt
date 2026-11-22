@@ -5,7 +5,7 @@ Tags: slider, carousel slider, popup, post slider, slideshow
 Requires at least: 5.9
 Tested up to: 7.0
 Requires PHP: 7.4.0
-Stable tag: 4.8.5
+Stable tag: 4.8.6
 License: GPL-2.0-only
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Build Stunning Slider and Popup. Exit intent Popup, Image slider carousel, video slider carousel, post slider carousel, product slider, promote popup
@@ -91,6 +91,14 @@ To improve the user experience, Depicter may use the following 3rd party service
 15. Popup display rules – set smart conditions to show popups or notification bars based on user behavior and targeting.
 
 == Changelog ==
+
+###4.8.6
+- *Released: 2026-11-21*
+- **Fixed**
+- Fixed the rest of a security vulnerability (CVE-2026-113471): users who are not allowed to use unfiltered HTML can no longer add scripts to a document through the text tag option, callbacks or Custom JS actions.
+- Scripts in documents saved before this update, or restored from an older revision, are no longer output on sites that disallow unfiltered HTML.
+- **Note**
+- On sites that disallow unfiltered HTML, slider callbacks and Custom JS actions no longer run.
 
 ###4.8.5
 - *Released: 2026-11-18*
